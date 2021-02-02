@@ -22,7 +22,7 @@ object Runner {
     def getInputPath(range: Int): String={
         val ret = ""
         //TO-DO complete implementation
-        null
+        ret
     }
         
     /**
@@ -35,7 +35,7 @@ object Runner {
         val ret = Map[String,Int]()
 
         //TO-DO complete implimentation
-        ret
+         ret
     }
 }
 
