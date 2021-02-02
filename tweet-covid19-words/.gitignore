@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/scala,spark,vscode,metals,sbt,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=scala,spark,vscode,metals,sbt,dotenv
 
+test-data.json
+
 ### dotenv ###
 .env
 
