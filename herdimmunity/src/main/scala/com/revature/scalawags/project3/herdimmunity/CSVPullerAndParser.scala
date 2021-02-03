@@ -11,15 +11,18 @@ object CSVPullerAndParser  extends App{
 
     case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
 
-    def pullCDCCSV(): Array[AnalysisData]={
-        val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv?v=2021-02-01" !!
+    def pullCDCCSV(): Unit={
+        val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv" !!
         val writer = new PrintWriter("tmp.csv")
         writer.print(fileUrl)
         writer.close()
-        val file = scala.io.Source.fromFile("./tmp.csv").getLines()
+    }
+
+    def parseCDCCSV(file:String = "./tmp.csv"): AnalysisData={    
+        val testFile = scala.io.Source.fromFile(file).getLines()
         val dataModels = new ArrayBuffer[AnalysisData]()
         
-        for (line <- file){
+        for (line <- testFile){
             val splitLine = line.split(",")
             
             if (splitLine(0) == "USA"){    
@@ -44,7 +47,7 @@ object CSVPullerAndParser  extends App{
                 dataModels += analysis
             }  
         }
-        dataModels.toArray
+        dataModels.last
     }
 
     pullCDCCSV()
