@@ -1,3 +1,11 @@
+package econ
+import java.util.Calendar
+
+import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.functions.avg
+
+import scala.collection.mutable.ArrayBuffer
+
 /** Question8
   * Currently defunct, but meant to query:
   *     "first peak for each country in region and gdp"
@@ -152,7 +160,7 @@ def regionFirstPeak(
     val firstPeakTimeAvg: ArrayBuffer[Double] = ArrayBuffer()
     val firstPeakForCountry: ArrayBuffer[Double] = ArrayBuffer()
     var countryList: Array[String] = Array()
-    var peakTime: Double = 
+    var peakTime: Double = 0
     
     for (region <- regionList) {
       countryList = df

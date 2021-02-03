@@ -1,4 +1,4 @@
-package blue
+package econ
 
 import org.apache.spark.sql.functions.{max, sum}
 import org.apache.spark.sql.{DataFrame, SparkSession}

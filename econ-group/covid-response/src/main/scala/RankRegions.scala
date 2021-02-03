@@ -1,3 +1,4 @@
+package econ
 /** The RankRegions object uses methods to group and sort by some metric passed as an argument.
   */
 object RankRegions {
