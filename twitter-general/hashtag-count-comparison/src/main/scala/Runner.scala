@@ -59,6 +59,7 @@ object Runner {
     def filterToHashtags(df: DataFrame): DataFrame={
       
       //TO-DO complete implementation
+      //maybe lower rdd work then convert back to DataFrame
       null
     }
 
@@ -101,6 +102,9 @@ object Runner {
       * @return new DataFrame after operatoins on df
       */
     def reduceToCategories(df: DataFrame): DataFrame={
+
+      //TO-DO complete implementation
+      //groupBy(isCovid).count()
       null
     }
         
@@ -111,6 +115,9 @@ object Runner {
       * @param path path to the data warehouse of the s3 bucket
       */
     def output(df: DataFrame, path: String):Unit ={
+
+      //TO-DO complete implementation
+      //output df as a parquet? Yes probably.
 
     }
     
