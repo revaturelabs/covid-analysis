@@ -45,7 +45,5 @@ Once there, run the program with `sbt run`. This will automatically pull the lat
 
 ## Contributors
 
-* [Sundoo Park](https://github.com/spark131008)
 * [David Masterson](https://github.com/Shadow073180)
-* [Bryant Singh](https://github.com/brysingh76)
 * [Rastal](https://github.com/therastal)
