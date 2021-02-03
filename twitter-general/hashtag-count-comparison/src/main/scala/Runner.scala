@@ -69,7 +69,7 @@ object Runner {
       * @param df starting state of DataFrame
       * @return new DataFrame after opperations on df
       */
-    def reduceOnHashtags(df: DataFrame): DataFrame={
+    def groupByHashtags(df: DataFrame): DataFrame={
 
       //TO-DO complete implementation
       //groupBy(hashtags).count()
