@@ -135,6 +135,6 @@ spark-warehouse/
 *.code-workspace
 
 
-test-data.json
+test-data.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/scala,spark,vscode,metals,sbt,dotenv

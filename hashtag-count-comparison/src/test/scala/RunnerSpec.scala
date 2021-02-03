@@ -21,8 +21,8 @@ class RunnerSpec extends AnyFlatSpec with Matchers with MockFactory{
     Runner.getInputPath(2) shouldEqual "s3://covid-analysis-p3/twitter-general/data-lake/Jan_06-Pres/"
   }
 
-  "hashtagCountComparison case 0" should "return a map with Hashtags and corresponding counts" in {
-    assert(Runner.hashtagCountComparison("test-data.json").equals(testMap))
+  "readToDF case 0" should "return a DataFrame containint the input" in {
+    
   }
 
 
