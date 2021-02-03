@@ -9,3 +9,4 @@ Feb 03, 2021 2:47:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellat
 WARNING: Unmatched cancel notification for request id 1
 Feb 03, 2021 2:47:58 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTraceNotification
+[0m2021.02.03 14:48:28 INFO  shutting down Metals[0m
