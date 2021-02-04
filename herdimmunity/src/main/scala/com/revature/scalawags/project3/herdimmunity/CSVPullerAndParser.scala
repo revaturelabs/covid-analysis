@@ -1,15 +1,12 @@
 package com.revature.scalawags.project3.herdimmunity
 
-import sys.process._
-import scala.language.postfixOps
+import com.github.nscala_time.time.Imports._
 import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
-
-
+import scala.language.postfixOps
+import sys.process._
 
 object CSVPullerAndParser  extends App{
-
-    case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
 
     def pullCDCCSV(): Unit={
         val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv" !!
@@ -26,7 +23,7 @@ object CSVPullerAndParser  extends App{
             val splitLine = line.split(",")
             
             if (splitLine(0) == "USA"){    
-                var date = splitLine(3)
+                var date = splitLine(3).toDateTime
                 
                 var peopleVaccinated = splitLine(35)
                 if (peopleVaccinated == ""){peopleVaccinated = "0.0"}
