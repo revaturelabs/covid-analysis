@@ -17,8 +17,6 @@ object DataDownloader extends App{
     final val currentDate = now().format(dateFormat)
 
     val compositeIndexListFile = "./CompositeIndexList.csv"
-    val marketWatchURL = "https://www.marketwatch.com/investing/index/"
-
 
     for(i <- urlBuilder(compositeIndexListFile)){
         println(s"Region: ${i(0)}\n" +
