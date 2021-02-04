@@ -11,7 +11,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
   //create spark session and test DataFrame for the test suite
   val testSpark = SparkSession.builder().master("local").appName("Tester").getOrCreate()
   import testSpark.implicits._
-  val testDF = testSpark.read.format("text").load("test-data.txt")
+  val testDF = testSpark.read.format("text").load("test-data.txt").as[Runner.Tweet]
   val finalData = Array[Row](Row("Covid",1),(Row("Non-Covid",0)))
 
   
@@ -30,16 +30,30 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
 
   //tests for readToDF()
   "readToDF case 0" should "return a DataFrame containing the input from path" in {
-    val compDF = Runner.readToDF(testSpark,"test-data.txt")
+    val compDF = Runner.readToDS(testSpark,"test-data.txt")
 
-    assert(compDF.collect().equals(testDF.collect()))
+    assert(compDF.collect()===(testDF.collect()))
   }
 
-  //tests for manipulateDataFrame
-  "manipulateDataFrame case 0" should "return a dataframe with the expected values" in {
-    assert(Runner.manipulateDataFrame(testDF).collect().equals(finalData))
+  //tests for hasHashtag()
+  "hasHashtag()" should "return true if the input string contains a world starting with '#'" in {
+
   }
 
+  //tests for extractHashtags()
+  "extractHashtags()" should "return a new tweet containing just the hashtags" in {
+
+  }
+
+  //tests for markCovidRelated()
+  "markCovidRelated()" should "return a new tweet continging 'covid' when a hashtag is covid related" in {
+
+  }
+
+  "markCovidRelated()" should "return a new tweet containing 'non-covid' when a hashtag is not covid related" in {
+    
+  }
+  
 
   //tests for ouput
 

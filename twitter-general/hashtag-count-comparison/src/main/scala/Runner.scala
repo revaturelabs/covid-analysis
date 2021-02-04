@@ -1,48 +1,102 @@
 package HashtagCountComparison
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.{DataFrameReader,DataFrame}
+import org.apache.spark.sql.{DataFrameReader,DataFrame,Dataset}
 import javax.xml.crypto.Data
 
 
 
 
+
 object Runner {
+
+case class Tweet(text: String)
+  
     def main(args: Array[String]): Unit = {
 
+
+      if(args.length ==1){
         //set up spark session
-        val spark = SparkSession.builder().appName("HashtagCountComparison").getOrCreate()
+        val spark = SparkSession.builder().master("local").appName("HashtagCountComparison").getOrCreate()
         import spark.implicits._
+
+        
+        
         
         //get input path for s3
-        //read input into a dataframe/dataset
-        //val tweets = readToDF(spark,getInputPath(args(0).toInt))
+        //read input into a dataset
+        val tweets = spark.read.format("text").load(getInputPath(args(0).toInt)).as[Tweet]
         
         
 
         //filter input into hashtags
+        //val tweetsWithHashtags = tweets.filter(hasHashtag(_))
+        //val hashtags = extractHashtags(tweetsWithHashtags)
 
         //reduce on hashtags to get a count of each hashtag
+        //val hashtagCount = hashtags.groupBy("text").count().as[Tweet]
 
         //map hashtags to covid related or not covid related
+        //val hashtagCategories = hashtagCount.map(markCovidRelated)
 
         //reduce on categories to get number of non covid hashtags vs covid hashtags
     
         //output results to s3
+        spark.stop()
+      }else{
+        println("Usage: [mode] where mode is an integer from 0-2")
+      }
+        
     }
 
-    def readToDF(spark: SparkSession, path: String): DataFrame={
-      //TO-DO complete implementation
+    def readToDS(spark: SparkSession, path: String): Dataset[Tweet]={
+      // import spark.implicits._
+      // return spark.read.format("text").load(path).as[Tweet]
       null
-      //return spark.read.format("text").load(path)
     }
+
+    /**
+      * a function that returns true if a text string contains a word that starts with '#'
+      *
+      * @param text the text string to be parsed 
+      * @return true if text contains a word starting with '#' otherwise false
+      */
+    def hasHashtag(tweet: Tweet):Boolean={
+      false
+    }
+
+    /**
+      * a function that takes in a dataset of type tweet
+      * and returns a new dataset of type tweet where the text contains only the
+      * hashtags from the text of the input dataset
+      *
+      * @param dataset the input dataset
+      * @return a new dataset of type tweet which contains only the hashtags from the text of the
+      *         input dataset
+      */
+    def extractHashtags(dataset: Dataset[Tweet]): Dataset[Tweet]={
+      null
+    }
+    
+    /**
+      * a function that takes in a Tweet who's text contains
+      * only a hashtag, and replaces the text with "covid" or "non-covid"
+      * based on whether or not the hashtag is covid related or not
+      *
+      * @param tweet the input tweet
+      * @return a new tweet with the new text
+      */
+    def markCovidRelated(tweet: Tweet): Tweet={
+      null
+    }
+
+    
 
     def manipulateDataFrame(df: DataFrame): DataFrame={
 
       //TO DO complete implementation
       //TO-DO complete implementation
-      //filter input into hashtags
-
+      //filter tweet text into hashtags only
 
         //reduce on hashtags to get a count of each hashtag
 
@@ -70,6 +124,12 @@ object Runner {
       */
     def getInputPath(range: Int): String={
         var ret =""
+
+       range match {
+          case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+          case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+          case _ => ret = "no preset"
+        }
         ret
         
     }
