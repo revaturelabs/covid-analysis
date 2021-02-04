@@ -37,6 +37,30 @@ object Runner {
       //return spark.read.format("text").load(path)
     }
 
+    def manipulateDataFrame(df: DataFrame): DataFrame={
+
+      //TO DO complete implementation
+      //TO-DO complete implementation
+      //filter input into hashtags
+
+
+        //reduce on hashtags to get a count of each hashtag
+
+        //map hashtags to covid related or not covid related
+
+        //reduce on categories to get number of non covid hashtags vs covid hashtags
+      //maybe lower rdd work then convert back to DataFrame
+      //groupBy(hashtags).count()
+      //check if hashtag is covid related
+      //if it is, add it to the list of covid hashtags
+      //if it is not, add it to the list of non-covid hashtags
+      //return a dataset which contains 2 rows
+      //row 1 is covid hashtags and their count
+      //row 2 is non-covid hashtags and their count
+      //groupBy(isCovid).count()
+      null
+    }
+
     /**
       * a function that takes in an integer value and returns a string
       * of the s3 file path where the input is stored
@@ -45,63 +69,9 @@ object Runner {
       * @return returns a string of the s3 file path where the input is stored
       */
     def getInputPath(range: Int): String={
-        val ret = ""
-        //TO-DO complete implementation
+        var ret =""
         ret
-    }
-
-    /**
-      * a function that filters the tweet text to just it's hashtags
-      *
-      * @param df starting state of DataFrame
-      * @return new DataFrame after opperations on df
-      */
-    def filterToHashtags(df: DataFrame): DataFrame={
-      
-      //TO-DO complete implementation
-      null
-    }
-
-    /**
-      * a function to reduce all hashtags and count them
-      *
-      * @param df starting state of DataFrame
-      * @return new DataFrame after opperations on df
-      */
-    def reduceOnHashtags(df: DataFrame): DataFrame={
-
-      //TO-DO complete implementation
-      //groupBy(hashtags).count()
-      null
-    }
-
-    /**
-      * a function that maps hashtags to a category of covid related
-      * or non-covid related
-      *
-      * @param df starting state of DataFrame
-      * @return new DataFrame after opperations on df
-      */
-    def mapHashtags(df: DataFrame): DataFrame={
-      
-      //TO-DO complete implementation
-      //check if hashtag is covid related
-      //if it is, add it to the list of covid hashtags
-      //if it is not, add it to the list of non-covid hashtags
-      //return a dataset which contains 2 rows
-      //row 1 is covid hashtags and their count
-      //row 2 is non-covid hashtags and their count
-      null
-    }
-
-    /**
-      * a function that counts the number of hashtags in each category (covid vs non-covid)
-      *
-      * @param df starting state of DataFrame
-      * @return new DataFrame after operatoins on df
-      */
-    def reduceToCategories(df: DataFrame): DataFrame={
-      null
+        
     }
         
     /**
@@ -111,6 +81,9 @@ object Runner {
       * @param path path to the data warehouse of the s3 bucket
       */
     def output(df: DataFrame, path: String):Unit ={
+
+      //TO-DO complete implementation
+      //output df as a parquet? Yes probably.
 
     }
     
