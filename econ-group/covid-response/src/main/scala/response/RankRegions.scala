@@ -177,4 +177,53 @@ object RankRegions {
     }
     oneTimeMetric
   }
+
+  /** calculates GDP percent change in each region
+   * years used were 2019 & 2020
+   *
+   * @param spark spark session
+   * @param fullDS dataFrame from question 1('data') that has been grouped by region
+   *               with new population field added
+   *               NOTE: original dataFrame is the joined 'econDF' and 'casesDF'
+   * @param metric gdp metric
+   * @param percapita Boolean flag (*** NOT USED ANYWHERE)
+   */
+  def changeGDP(
+                 spark: SparkSession,
+                 fullDS: DataFrame,
+                 metric: String,
+                 percapita: Boolean
+               ): DataFrame = {
+    import spark.implicits._
+
+    val gdp_temp = fullDS
+      .select(
+        $"country",
+        $"region",
+        $"population",
+        $"$metric" as "gdp",
+        $"year"
+      )
+
+    val gdp_2020 = gdp_temp
+      .where($"year" === "2020")
+      .where($"gdp" =!= "NULL")
+      .drop("year")
+      .groupBy($"region", $"population")
+      .agg(functions.sum($"gdp") as "gdp_20")
+
+    val gdp_2019 = gdp_temp
+      .where($"year" === "2019")
+      .where($"gdp" =!= "NULL")
+      .drop("year")
+      .groupBy($"region", $"population")
+      .agg(functions.sum($"gdp") as "gdp_19")
+
+    val gdp = gdp_2019
+      .join(gdp_2020, "region")
+      .withColumn("delta_gdp", (($"gdp_20" - $"gdp_19") / $"gdp_20") * 100)
+      .drop("gdp_19", "gdp_20")
+
+    rankByMetric(spark, gdp, "delta_gdp", "avg")
+  }
 }
