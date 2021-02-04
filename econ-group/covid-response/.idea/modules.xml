@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covid-resonse.iml" filepath="$PROJECT_DIR$/.idea/modules/covid-resonse.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covid-resonse-build.iml" filepath="$PROJECT_DIR$/.idea/modules/covid-resonse-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covid-response.iml" filepath="$PROJECT_DIR$/.idea/modules/covid-response.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covid-response-build.iml" filepath="$PROJECT_DIR$/.idea/modules/covid-response-build.iml" />
     </modules>
   </component>
 </project>
