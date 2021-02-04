@@ -5,11 +5,10 @@ import scala.language.postfixOps
 import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
 
-
-
 object CSVPullerAndParser  extends App{
 
     case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
+
 
     def pullCDCCSV(): Unit={
         val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv" !!
