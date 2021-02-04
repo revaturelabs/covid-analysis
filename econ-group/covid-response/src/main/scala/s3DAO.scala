@@ -13,8 +13,8 @@ import org.apache.commons.io.IOUtils
 case class s3DAO (
       amazonS3Client: AmazonS3Client,
       var BUCKET_NAME: String,
-      COVID_SRC_PATH: String = "s3a://adam-king-848/data/daily_stats.tsv",
-      ECON_SRC_PATH: String = "s3a://adam-king-848/data/economic_data_2018-2021.tsv"
+      COVID_SRC_PATH: String = "s3://covid-analysis-p3/datalake/daily_stats.tsv",
+      ECON_SRC_PATH: String = "s3://covid-analysis-p3/datalake/economic_data_2018-2021.tsv"
     ) {
 
   def createNewBucket(bucketName: String): Unit = {

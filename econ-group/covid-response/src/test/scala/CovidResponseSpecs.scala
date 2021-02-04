@@ -1,9 +1,37 @@
-import org.apache.spark.sql.types._
-import org.apache.spark.sql.Row
-import org.apache.spark.sql.functions._
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
-import org.scalatest.funspec
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
+import org.scalatest.FunSpec
+
+trait SparkSessionTestWrapper {
+
+  lazy val spark: SparkSession = {
+    SparkSession
+      .builder()
+      .master("local")
+      .appName("spark session")
+      .config("spark.sql.shuffle.partitions", "1")
+      .getOrCreate()
+  }
+
+}
 
 class CovidResponseSpecs extends FunSpec with SparkSessionTestWrapper with DatasetComparer {
+
+  it("aliases a DataFrame") {
+    val srcDF = spark.read
+      .option("header", value = true)
+      .csv("test_dataset.csv")
+      .toDF("name", "agg_gdp", "agg_cases")
+
+    val resultDF = srcDF.select(col("name").alias("country"))
+
+    val expectedDF = spark.read
+      .option("header", value = true)
+      .csv("test_dataset.csv")
+      .toDF("country", "agg_gdp", "agg_cases")
+
+    assertSmallDatasetEquality(resultDF, expectedDF)
+  }
 
 }
