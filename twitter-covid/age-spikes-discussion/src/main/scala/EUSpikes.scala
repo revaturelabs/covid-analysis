@@ -13,7 +13,7 @@ object EUSpikes {
   }
 
   //group by year_week and sum(new_cases)
-  //result will have columns: year_week, age_group, sum(new_cases)
+  //result will have columns: year_week, sum(new_cases)
   def groupData(): DataFrame = {
 
   }
