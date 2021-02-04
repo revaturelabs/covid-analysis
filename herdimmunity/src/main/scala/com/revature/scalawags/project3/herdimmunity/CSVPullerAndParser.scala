@@ -1,9 +1,12 @@
 package com.revature.scalawags.project3.herdimmunity
 
-import sys.process._
-import scala.language.postfixOps
+import com.github.nscala_time.time.Imports._
 import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
+import scala.language.postfixOps
+import sys.process._
+
+
 
 
 
@@ -11,19 +14,22 @@ object CSVPullerAndParser  extends App{
 
     case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
 
-    def pullCDCCSV(): Array[AnalysisData]={
-        val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv?v=2021-02-01" !!
+    def pullCDCCSV(): Unit={
+        val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv" !!
         val writer = new PrintWriter("tmp.csv")
         writer.print(fileUrl)
         writer.close()
-        val file = scala.io.Source.fromFile("./tmp.csv").getLines()
+    }
+
+    def parseCDCCSV(file:String = "./tmp.csv"): AnalysisData={    
+        val testFile = scala.io.Source.fromFile(file).getLines()
         val dataModels = new ArrayBuffer[AnalysisData]()
         
-        for (line <- file){
+        for (line <- testFile){
             val splitLine = line.split(",")
             
             if (splitLine(0) == "USA"){    
-                var date = splitLine(3)
+                var date = splitLine(3).toDateTime
                 
                 var peopleVaccinated = splitLine(35)
                 if (peopleVaccinated == ""){peopleVaccinated = "0.0"}
@@ -44,7 +50,7 @@ object CSVPullerAndParser  extends App{
                 dataModels += analysis
             }  
         }
-        dataModels.toArray
+        dataModels.last
     }
 
     pullCDCCSV()
