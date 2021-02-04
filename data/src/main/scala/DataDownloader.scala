@@ -11,9 +11,7 @@ object DataDownloader{
     case class CompositeIndexOfCountry(region: String, nation: String, indexName: String, tickerSymbol: String, countryCode: String, dataSource: String)
 
     val startDate = "02/17/2020"
-    //val dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy")
-    //val currentDate = now().format(dateFormat)
-    val endDate = "02/02/2021"
+    val endDate = "02/03/2021"
 
     def main(args: Array[String]){
         val compositeIndexListFile = "./CompositeIndexList.csv"
@@ -23,9 +21,11 @@ object DataDownloader{
             writer.print(file)
             writer.close()
         }
+        urlBuilder(compositeIndexListFile)
     }
 
     def urlBuilder(compositeIndexListFile: String): Array[Array[String]] ={
+        import sys.process._
         val lines = Source.fromFile(compositeIndexListFile).getLines().toArray.drop(1)
         var arrayOfURLs = ArrayBuffer[Array[String]]()
 
@@ -38,11 +38,6 @@ object DataDownloader{
                         s"&downloadpartial=false&newdates=false&countrycode=${contentToCaseClass.countryCode.toLowerCase()}"
                         arrayOfURLs += Array(contentToCaseClass.region, contentToCaseClass.nation, completeURL)
             }
-            //else 
-            // if(contentToCaseClass.dataSource.equals("Private Source")){
-            //     val completeURL = s"https://drive.google.com/uc?export=download&id=${contentToCaseClass.tickerSymbol}"
-            //     arrayOfURLs += Array(contentToCaseClass.region, contentToCaseClass.nation, completeURL)
-            // }
         }
         return arrayOfURLs.toArray
     }
