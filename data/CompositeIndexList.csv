@@ -1,0 +1,58 @@
+Region,Nation,Index Name,Ticker Symbol,Country Code,Data Source
+South America,Brazil,BOVESPA Index,BVSP,BR,MarketWatch
+South America,Chile,IPSA Index,SPIPSA,CL,MarketWatch
+South America,Argentina,Argentina Merval Index,SPMERVAL,AR,MarketWatch
+South America,Colombia,FTSE All-World Colombia Index,I04795,XX,MarketWatch
+South America,Peru,MSCI Peru Index,960400,XX,MarketWatch
+South America,Bolivia,,,,Not Available
+South America,Venezuela,,,,Not Available
+South America,Uruguay,,,,Not Available
+South America,Paraguay,,,,Not Available
+Central America,El Salvador,,,,Not Available
+Central America,Costa Rica,,,,Not Available
+Central America,Guatemala,,,,Not Available
+Central America,Honduras,,,,Not Available
+Central America,Nicaragua,,,,Not Available
+Central America,Panama,,,,Not Available
+The Caribbean,Cuba,,,,Not Available
+The Caribbean,Haiti,,,,Not Available
+The Caribbean,Jamaica,,,,Not Available
+The Caribbean,Dominican Republic,,,,Not Available
+The Caribbean,Bahamas,,,,Not Available
+The Caribbean,Puerto Rico,,,,Not Available
+North America,US,NASDAQ Composite Index,COMP,,MarketWatch
+North America,Canada,S&P/TSX Composite Index,GSPTSE,CA,MarketWatch
+North America,Mexico,IPC Indice de Precios Y Cotizaciones,IPC,MX,MarketWatch
+Asia,China,Shanghai Composite Index,SHCOMP,CN,MarketWatch
+Asia,Korea,KOSPI Composite Index,180721,KR,MarketWatch
+Asia,The Philippines,PSEi Index,PSEI,PH,MarketWatch
+Asia,Japan,Nikkei 225,NIK,JP,MarketWatch
+Asia,Malaysia,FTSE Bursa Malaysia KLCI,FBMKLCI,MY,MarketWatch
+Asia,Indonesia,JSX Composite Index,JAKIDX,ID,MarketWatch
+Asia,India,S&P BSE Sensex Index,1,IN,MarketWatch
+Asia,Hong Kong,Hang Seng Index,HSI,HK,MarketWatch
+Asia,Israel,Tel Aviv 125 Index,TA100,XX,MarketWatch
+Europe,UK,FTSE 100 Index,UKX,UK,MarketWatch
+Europe,Turkey,BIST 100 Index,XU100,TR,MarketWatch
+Europe,Portugal,Dow Jones Portugal Index EUR,DGPTDOWA,XX,MarketWatch
+Europe,Norway,Oslo Exchange Benchmark Index_GI,186658,XX,MarketWatch
+Europe,Netherlands,Amsterdam AEX Index,AEX,NL,MarketWatch
+Europe,Germany,DAX,DAX,DX,MarketWatch
+Europe,France,CAC 40 Index,PX1,FR,MarketWatch
+Europe,Italy,Dow Jones Italy Titans 30 Index,DCITDOWA,XX,MarketWatch
+Europe,Russia,Russian Trading System (RTS) Index,RTS,RU,MarketWatch
+Europe,Czech Republic,FTSE All-World Czech Rep Index,I04778,XX,MarketWatch
+Africa,South Africa,Dow Jones South Africa Stock Index,DGZADOWA,XX,MarketWatch
+Africa,Egypt,Dow Jones EGX Egypt Titans 20 Index,DCEGDOWA,XX,MarketWatch
+Africa,CoteD’Ivoire,BRVM Composite,1hLmUWo-Uzbj2OwMXn9CbxG95kaHV-HRY,,Private Source
+Africa,Kenya,Kenya NSE 20,1bhsUkz8eO3v2S3Mv5BHBceFIUfGSXBwv,,Private Source
+Africa,Morocco,Moroccan All Shares,1hsJVWJ6cy_S2JkzaEseBSR82MHn91Bwq,,Private Source
+Africa,Nigeria,NSE All Share,1bg-PSMlVOkqa2WlaP6NGJ_ihdFv1nbXZ,,Private Source
+Africa,Tunis,Tunindex,135O8vojI1EGOkU85_NTdncXoT7o981bw,,Private Source
+Oceania,Australia,ASX All Ordinaries Index,XAO,AU,MarketWatch
+Oceania,New Zealand,FTSE All-World New Zealand Index,180975,XX,MarketWatch
+Oceania,Samoa,,,,Not Available
+Oceania,Fiji,,,,Not Available
+Oceania,Guam,,,,Not Available
+Oceania,Tonga,,,,Not Available
+Oceania,Papua New Guinea,,,,Not Available

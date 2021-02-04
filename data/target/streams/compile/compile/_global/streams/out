@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/data/src/main/scala/DataDownloader.scala:37:72: not found: value currentDate[0m
+[0m[[0m[31merror[0m] [0m[0m                        s"&startdate=${startDate}%2000:00:00&enddate=${currentDate}%2000:00:00&daterange=d30&frequency=p1d&csvdownload=true" +[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
