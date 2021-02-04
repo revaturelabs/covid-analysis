@@ -1,7 +1,6 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.scala:5:7: only traits and abstract classes can have declared but undefined members[0m
-[0m[[0m[31merror[0m] [0m[0m  val sumOfIndexCapBaseWeek: Double[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.scala:6:7: only traits and abstract classes can have declared but undefined members[0m
-[0m[[0m[31merror[0m] [0m[0m  val sumOfIndexCapNextWeek: Double[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+
+[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/DataDownloader.scala:36:13: not found: value dataSrouce[0m
+[0m[[0m[31merror[0m] [0m[0m            dataSrouce match{[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+

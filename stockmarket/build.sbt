@@ -1,7 +1,7 @@
 scalaVersion := "2.12.10"
 
-name := "hello-world"
-organization := "ch.epfl.scala"
+name := "stock_market_composit_index_change_calculator"
+organization := "com.revature"
 version := "1.0"
 
 libraryDependencies  ++= Seq(
