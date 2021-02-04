@@ -1,0 +1,13 @@
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(com.revature.scalawags.project3.stockmarket.CompositeIndexChangeCalculatorTest, org.scalatest.tools.Framework$$anon$1@c934826, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mCompositeIndexChangeCalculatorTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mWeekly Change[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return 20.00[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mRound At 2 Decimal Places[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return 12.35[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 287 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com.revature.scalawags.project3.stockmarket.CompositeIndexChangeCalculatorTest[0m
