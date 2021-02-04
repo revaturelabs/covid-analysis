@@ -39,9 +39,5 @@ object HerdImmunity {
       s"${date.year.get()}"
   }
 
-  def main(args: Array[String]) {
-    val date = DateTime.now()
-    val newDate = date + 56.days
-    println(prettyDate(newDate))
-  }
+  
 }

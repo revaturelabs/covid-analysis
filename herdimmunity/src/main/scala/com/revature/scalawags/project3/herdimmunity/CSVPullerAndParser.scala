@@ -10,9 +10,8 @@ import sys.process._
 
 
 
-object CSVPullerAndParser  extends App{
+object CSVPullerAndParser {
 
-    case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
 
     def pullCDCCSV(): Unit={
         val fileUrl= "curl https://covid.ourworldindata.org/data/owid-covid-data.csv" !!
@@ -33,25 +32,27 @@ object CSVPullerAndParser  extends App{
                 
                 var peopleVaccinated = splitLine(35)
                 if (peopleVaccinated == ""){peopleVaccinated = "0.0"}
-                var peopleVaccinatedToDouble = peopleVaccinated.toDouble
+                var peopleVaccinatedDouble = peopleVaccinated.toDouble
+                var peopleVaccinatedToInt = peopleVaccinatedDouble.toInt
                 
                 var peopleFullyVaccinated = splitLine(36)
                 if (peopleFullyVaccinated == ""){peopleFullyVaccinated = "0.0"}
-                var peopleFullyVaccinatedToDouble = peopleFullyVaccinated.toDouble
+                var peopleFullyVaccinatedDouble = peopleFullyVaccinated.toDouble
+                var peopleFullyVaccinatedToInt = peopleFullyVaccinatedDouble.toInt
                 
                 var newVaccinationsSmoothed = splitLine(38)
                 if (newVaccinationsSmoothed == ""){newVaccinationsSmoothed = "0.0"}
-                var newVaccinationsSmoothedToDouble = newVaccinationsSmoothed.toDouble
+                var newVaccinationsSmoothedDouble = newVaccinationsSmoothed.toDouble
+                var newVaccinationsSmoothedToInt = newVaccinationsSmoothedDouble.toInt
                 
                 var population = splitLine(44)
                 if (population == ""){population = "0.0"}
-                var poplulationToDouble = population.toDouble
-                val analysis = new AnalysisData(date,peopleVaccinatedToDouble,peopleFullyVaccinatedToDouble,newVaccinationsSmoothedToDouble,poplulationToDouble)
+                var populationDouble = population.toDouble
+                var poplulationToInt = populationDouble.toInt
+                val analysis = new AnalysisData(date,peopleVaccinatedToInt,peopleFullyVaccinatedToInt,newVaccinationsSmoothedToInt,poplulationToInt)
                 dataModels += analysis
             }  
         }
         dataModels.last
     }
-
-    pullCDCCSV()
 }
