@@ -33,7 +33,7 @@ object Main {
         val days = daysRemaining(analysis.population,analysis.peopleFullyVaccinated,analysis.newVaccinationsSmoothed)
         val dateString = prettyDate(exactDate(days))
         printResults(analysis,dateString)
-        "aws s3 sync ./output s3://covid-analysis-p3/datawarehouse/stockmarket-immunity/" !!
+        "aws s3 sync ./output s3://covid-analysis-p3/datawarehouse/herdimmunity/" !!
         
     }
 
