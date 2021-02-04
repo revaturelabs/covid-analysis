@@ -1,13 +1,16 @@
 package com.revature.scalawags.project3.herdimmunity
 
-import sys.process._
-import scala.language.postfixOps
+import com.github.nscala_time.time.Imports._
 import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
+import scala.language.postfixOps
+import sys.process._
 
-object CSVPullerAndParser  extends App{
 
-    case class AnalysisData(date: String, peopleVaccinated: Double, peopleFullyVaccinated: Double, newVaccinationsSmoothed: Double, population: Double)
+
+
+
+object CSVPullerAndParser {
 
 
     def pullCDCCSV(): Unit={
@@ -25,29 +28,31 @@ object CSVPullerAndParser  extends App{
             val splitLine = line.split(",")
             
             if (splitLine(0) == "USA"){    
-                var date = splitLine(3)
+                var date = splitLine(3).toDateTime
                 
                 var peopleVaccinated = splitLine(35)
                 if (peopleVaccinated == ""){peopleVaccinated = "0.0"}
-                var peopleVaccinatedToDouble = peopleVaccinated.toDouble
+                var peopleVaccinatedDouble = peopleVaccinated.toDouble
+                var peopleVaccinatedToInt = peopleVaccinatedDouble.toInt
                 
                 var peopleFullyVaccinated = splitLine(36)
                 if (peopleFullyVaccinated == ""){peopleFullyVaccinated = "0.0"}
-                var peopleFullyVaccinatedToDouble = peopleFullyVaccinated.toDouble
+                var peopleFullyVaccinatedDouble = peopleFullyVaccinated.toDouble
+                var peopleFullyVaccinatedToInt = peopleFullyVaccinatedDouble.toInt
                 
                 var newVaccinationsSmoothed = splitLine(38)
                 if (newVaccinationsSmoothed == ""){newVaccinationsSmoothed = "0.0"}
-                var newVaccinationsSmoothedToDouble = newVaccinationsSmoothed.toDouble
+                var newVaccinationsSmoothedDouble = newVaccinationsSmoothed.toDouble
+                var newVaccinationsSmoothedToInt = newVaccinationsSmoothedDouble.toInt
                 
                 var population = splitLine(44)
                 if (population == ""){population = "0.0"}
-                var poplulationToDouble = population.toDouble
-                val analysis = new AnalysisData(date,peopleVaccinatedToDouble,peopleFullyVaccinatedToDouble,newVaccinationsSmoothedToDouble,poplulationToDouble)
+                var populationDouble = population.toDouble
+                var poplulationToInt = populationDouble.toInt
+                val analysis = new AnalysisData(date,peopleVaccinatedToInt,peopleFullyVaccinatedToInt,newVaccinationsSmoothedToInt,poplulationToInt)
                 dataModels += analysis
             }  
         }
         dataModels.last
     }
-
-    pullCDCCSV()
 }
