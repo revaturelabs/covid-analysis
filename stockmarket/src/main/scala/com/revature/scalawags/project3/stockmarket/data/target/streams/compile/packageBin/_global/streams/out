@@ -1,0 +1,21 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/data_2.12-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/data/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

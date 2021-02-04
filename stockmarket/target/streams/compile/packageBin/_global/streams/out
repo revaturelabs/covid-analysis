@@ -1,0 +1,97 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/stock_market_composit_index_change_calculator_2.12-1.0.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data 2[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data 2[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
