@@ -1,6 +1,7 @@
 package covidAndGDP
 
 import org.apache.spark.sql.SparkSession
+import utilites.{DataFrameBuilder, s3DAO}
 
 /** Question: Is there a significant relationship between a Region’s cumulative GDP and Infection Rate per capita?
  * queries:
@@ -21,7 +22,8 @@ object CorrelateInfectionGDP {
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
-    spark.sparkContext.setLogLevel("INFO")
+
+    spark.sparkContext.setLogLevel("WARN")
 
     val df = dfb.build(spark, econPath, covidPath)
 
