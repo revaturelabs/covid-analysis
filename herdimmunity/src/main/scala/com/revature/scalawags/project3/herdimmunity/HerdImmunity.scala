@@ -3,6 +3,7 @@ package com.revature.scalawags.project3.herdimmunity
 import com.github.nscala_time.time.Imports._
 
 object HerdImmunity {
+  // The user story for this module assumes 99% effectiveness for the vaccine.
   val VaccinationEfficacy = .99
   
   /** Returns the number of days until reaching herd immunity, based on total 
@@ -37,7 +38,5 @@ object HerdImmunity {
   def prettyDate(date: DateTime): String = {
     s"${date.dayOfWeek.text}, ${date.monthOfYear.text} ${date.dayOfMonth.get()}, " +
       s"${date.year.get()}"
-  }
-
-  
+  } 
 }
