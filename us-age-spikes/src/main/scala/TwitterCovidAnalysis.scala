@@ -1,7 +1,7 @@
 object TwitterCovidAnalysis {
 
     /**
-      * 
+      * Simple function to read data from s3 bucket.
       *
       * @param spark
       * @param pathForS3
@@ -11,7 +11,8 @@ object TwitterCovidAnalysis {
     }
 
     /**
-      * 
+      * Groups by age groups.
+      * Returns DF of age groups and infection counts.
       *
       * @param df
       */
@@ -20,8 +21,8 @@ object TwitterCovidAnalysis {
     }
 
     /**
-      * 
-      *
+      * Groups by day with highest spike. 
+      * Returned columns: Date, infection rate (age 5-30), and Twitter Volume. 
       * @param df
       */
     def ageTwitterVolume(df: DataFrame): DataFrame={
