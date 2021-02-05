@@ -1,4 +1,5 @@
 package covidAndGDP
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
@@ -14,6 +15,11 @@ import scala.collection.mutable.ArrayBuffer
   */
 case class Results() {
 
+
+  def dayInYear(date: String, firstOfYear: Long = 1577865600000L): Int ={
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    ((dateFormat.parse(date).getTime - firstOfYear)/86400000).toInt
+  }
   /** regionCorrelation
     * uses Spark SQL with S3 buckets partitioned by region to find out the peak case timetable
     *  for each region and correlates that metric to the GDP of said region
@@ -98,7 +104,7 @@ case class Results() {
           .select($"date")
           .collect()
           .map(_.get(0).toString)
-          .map(DateFunc.dayInYear(_).toDouble)
+          .map(dayInYear(_).toDouble)
 
           //if statement adds average GDP data to the gdp metric array if the date and cases are higher than 0
           // 0 correlating to the start of the pandemic onwards in both date and number of cases
@@ -185,7 +191,7 @@ def regionFirstPeak(
           .select($"date")
           .collect()
           .map(_.get(0).toString)
-          .map(DateFunc.dayInYear(_).toDouble)
+          .map(dayInYear(_).toDouble)
         peakTime = StatFunc.firstMajorPeak(tempDates, tempCases, 7, 10, 5)._1
         if (peakTime != -1) {
           firstPeakForCountry.append(peakTime)
