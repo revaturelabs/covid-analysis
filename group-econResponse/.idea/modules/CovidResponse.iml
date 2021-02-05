@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../CovidResponse/src/main/scala" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../CovidResponse/src/test/scala" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../CovidResponse/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../CovidResponse/src/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../CovidResponse/target" />
     </content>
     <orderEntry type="inheritedJdk" />

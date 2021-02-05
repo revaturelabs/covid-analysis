@@ -1,8 +1,10 @@
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.col
 import org.scalatest.funspec.AnyFunSpec
 
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
+
+import response.RankRegions
 trait SparkSessionTestWrapper {
 
   lazy val spark: SparkSession = {
@@ -18,7 +20,7 @@ trait SparkSessionTestWrapper {
 
 class CovidResponseSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
 
-  it("aliases a DataFrame") {
+  it("aliases a DataFrame as general test for basic spark functionality") {
     val srcDF = spark.read
       .option("header", value = true)
       .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
@@ -34,4 +36,17 @@ class CovidResponseSpecs extends AnyFunSpec with SparkSessionTestWrapper with Da
     assertSmallDatasetEquality(resultDF, expectedDF)
   }
 
+  it("calculates GDP percent change in each region") {
+    val spark = SparkSession.builder()
+      .master("local[*]")
+      .getOrCreate()
+
+    val srcDF = spark.read
+      .option("header", value = true)
+      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
+      .toDF("name", "agg_gdp", "agg_cases")
+
+    val res = RankRegions.changeGDP(spark, srcDF, "avg", percapita = true)
+
+  }
 }
