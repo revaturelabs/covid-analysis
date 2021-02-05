@@ -21,14 +21,14 @@ class CovidResponseSpecs extends AnyFunSpec with SparkSessionTestWrapper with Da
   it("aliases a DataFrame") {
     val srcDF = spark.read
       .option("header", value = true)
-      .csv("test_dataset.csv")
+      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
       .toDF("name", "agg_gdp", "agg_cases")
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
     val expectedDF = spark.read
       .option("header", value = true)
-      .csv("test_dataset.csv")
+      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
       .toDF("country", "agg_gdp", "agg_cases")
 
     assertSmallDatasetEquality(resultDF, expectedDF)
