@@ -1,7 +1,7 @@
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
-import org.scalatest.FunSpec
+import org.scalatest.funspec.AnyFunSpec
 
 trait SparkSessionTestWrapper {
 
@@ -16,7 +16,7 @@ trait SparkSessionTestWrapper {
 
 }
 
-class CovidResponseSpecs extends FunSpec with SparkSessionTestWrapper with DatasetComparer {
+class CovidResponseSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
 
   it("aliases a DataFrame") {
     val srcDF = spark.read

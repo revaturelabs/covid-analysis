@@ -1,14 +1,14 @@
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
-import org.scalatest.FunSpec
+import org.scalatest.funspec.AnyFunSpec
 
 trait SparkSessionTestWrapper {
 
   lazy val spark: SparkSession = {
     SparkSession
       .builder()
-      .master("local")
+      .master("local[*]")
       .appName("spark session")
       .config("spark.sql.shuffle.partitions", "1")
       .getOrCreate()
@@ -16,7 +16,7 @@ trait SparkSessionTestWrapper {
 
 }
 
-class CovidResponseSpecs extends FunSpec with SparkSessionTestWrapper with DatasetComparer {
+class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
 
   it("aliases a DataFrame") {
     val srcDF = spark.read

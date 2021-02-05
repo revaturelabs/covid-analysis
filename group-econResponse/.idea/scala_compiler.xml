@@ -4,19 +4,6 @@
     <profile name="sbt 1" modules="covid-resonse">
       <option name="postfixOps" value="true" />
     </profile>
-    <profile name="sbt 2" modules="CovidResponse,covid-response,econ-response,global" />
-    <profile name="sbt 3" modules="CorrelateInfectionGDP,Utilities,econ-group">
-      <option name="postfixOps" value="true" />
-      <option name="implicitConversions" value="true" />
-      <option name="higherKinds" value="true" />
-      <option name="existentials" value="true" />
-      <option name="deprecationWarnings" value="true" />
-      <option name="uncheckedWarnings" value="true" />
-      <option name="featureWarnings" value="true" />
-      <parameters>
-        <parameter value="-encoding" />
-        <parameter value="utf8" />
-      </parameters>
-    </profile>
+    <profile name="sbt 2" modules="CorrelateInfectionGDP,CovidResponse,Utilities,covid-response,econ-group,econ-response,global" />
   </component>
 </project>

@@ -55,7 +55,7 @@ lazy val dependencies =
   new {
     val aws = "com.amazonaws" % "aws-java-sdk" % "1.3.32"
     val spark = "org.apache.spark" %% "spark-sql" % "3.0.1"
-    val scalaTest = "org.scalatest" %% "scalatest" % "3.2.2" % "test"
+    val scalaTest = "org.scalatest" %% "scalatest-funspec" % "3.2.2" % "test"
     val mrPowers = "com.github.mrpowers" %% "spark-fast-tests" % "0.21.3" % "test"
     val logCore = "org.apache.logging.log4j" % "log4j-core" % "2.13.0" % Runtime
     val logScala =  "org.apache.logging.log4j" %% "log4j-api-scala" % "12.0"
