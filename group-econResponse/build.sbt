@@ -4,7 +4,6 @@ ThisBuild / version := "1.0"
 ThisBuild / organization := "com.revatureData.econGroup"
 ThisBuild / scalaVersion := "2.12.13"
 
-
 lazy val global = project
   .in(file("."))
   .aggregate(
