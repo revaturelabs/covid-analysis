@@ -22,6 +22,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest
   *
   */
 object InfectionRates {
+	
 	// Class variables
 	private val Africa = Array(
 		"Algeria", "Angola",
@@ -121,8 +122,6 @@ object InfectionRates {
 	  */
 	def main(args: Array[String]): Unit = {
 
-		//If we do arguments then logic goes here
-
 		// Declaring spark session at global scope
 		val spark = SparkSession.builder()
 			.appName("Infection-Rates")
@@ -132,19 +131,22 @@ object InfectionRates {
 		// Setting up spark
 		spark.sparkContext.setLogLevel("ERROR")
 
+		// Configuration to be able to use AWS s3a
 		spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+
 		// Set up S3 with secret and access key with spark
-      	spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-      	spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
 
 		import spark.implicits._
+		println()
 
 		// Creates the json for today and yesterday data
 		createJsonFile( "today.json", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false" )
 		createJsonFile( "yesterday.json", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false" )
 
 		// Creates the tables in temp view
-        createTodayTable(spark)
+    createTodayTable(spark)
 		createYesterdayTable( spark )
 
 		// Percentage of Regions with increasing COVID-19 Infection rate
@@ -158,10 +160,10 @@ object InfectionRates {
 	}
 
 	/** Grabs json object from the url and writes it to a file, and then uploads the file to S3 datalake
-	 *
-	 * @param fileName Name of the file one wants to write to.
-	 * @param url Url of the where the json should be pulled from.
-	 */
+	  *
+	  * @param fileName Name of the file one wants to write to.
+	  * @param url Url of the where the json should be pulled from.
+	  */
 	def createJsonFile(fileName: String, url: String):Unit = {
 		// Gets the json data from the url
 		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
@@ -173,16 +175,17 @@ object InfectionRates {
 		// Write the json to the file
 		jsonWriter.write(jsonData)
 
-		// Upload file to S3 datalake
+		// Build S3 client 
 		val credentials = new BasicAWSCredentials(sys.env("AWS_ACCESS_KEY_ID"), sys.env("AWS_SECRET_ACCESS_KEY"))
 		val client = AmazonS3ClientBuilder
-            .standard()
+      .standard()
 			.withCredentials(new AWSStaticCredentialsProvider(credentials))
 			.withRegion("us-east-1")
-            .build();
+      .build();
 
+		// Upload file to S3 datalake
 		client.putObject(
-			s"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
+			"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
 			json.getName(),
 			json
 		)
@@ -198,9 +201,6 @@ object InfectionRates {
 	  */
 	def createTodayTable(spark: SparkSession):Unit = {
 		import spark.implicits._
-
-		// Reads in a JSON from S3
-		//val todayJson = spark.read.option("true", "multiline").json("s3a://adam-king-848/data/today.json")
 
 		// Reads in a local json file
 		val todayJson = spark.read.json("datalake/InfectionRates/today.json")
@@ -228,12 +228,8 @@ object InfectionRates {
 	def createYesterdayTable(spark: SparkSession):Unit = {
 		import spark.implicits._
 
-		// Reads in a JSON from S3
-		//val yesterdayTemp = spark.read.option("true", "multiline").json("s3a://adam-king-848/data/yesterday.json")
-
 		// Reads in a local json file
 		val yesterdayTemp = spark.read.json("datalake/InfectionRates/yesterday.json")
-
 
 		// Makes a DataFrame with a schema for columns
 		val yesterday = yesterdayTemp.withColumn("Region",when($"country".isin(Africa: _*), "Africa")
@@ -250,17 +246,6 @@ object InfectionRates {
 		yesterday.createOrReplaceTempView("yesterday")
 	}
 
-	/** Prints the time the application ran at
-	 *
-	 */
-	def printsTime():Unit = {
-		val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-		val x = LocalDateTime.now().format(formatter)
-
-		println(s"Stats as of: ${x}")
-		println("================================")
-		println()
-	}
 
 
 	/**
@@ -270,16 +255,21 @@ object InfectionRates {
 	  * @param region String that specifies the region for this query
 	  */
 	def getRegionInfectionRate(spark: SparkSession, region : String): DataFrame = {
-
-        spark.sql(s"""
-			Select first(yesterday.Region) As Region,
-				bround(avg((((today.todayCases/today.population)*1000000) - ((yesterday.todayCases/yesterday.population)*1000000)) / yesterday.casesPerOneMillion * 100), 2) AS Infection_Rate_Change
-			FROM yesterday
-			INNER JOIN today
-			ON today.country=yesterday.country
-			WHERE yesterday.Region='$region'
-        """)
+		// The sql query for the infection rate change of one specific region
+    spark.sql(
+			s"""
+				Select first(yesterday.Region) As Region,
+					bround(avg((((today.todayCases/today.population)*1000000) - ((yesterday.todayCases/yesterday.population)*1000000)) / yesterday.casesPerOneMillion * 100), 2) AS Infection_Rate_Change
+				FROM yesterday
+				INNER JOIN today
+				ON today.country=yesterday.country
+				WHERE yesterday.Region='$region'
+      """
+		)
+	
 	}
+
+
 
 	/**
 	  * Calculates Regional Infection Rate Changes
@@ -287,8 +277,11 @@ object InfectionRates {
 	  * @param spark SparkContext for this application
 	  */
 	def covidRegionalInfectionRate(spark: SparkSession):Unit = {
-        import spark.implicits._
+    import spark.implicits._
+
 		println("Regions and their change in Infection Rate")
+
+		// Setting the DataFrames for each region
 		val dfAfrica = getRegionInfectionRate(spark, "Africa")
 		val dfAsia = getRegionInfectionRate(spark, "Asia")
 		val dfCaribbean = getRegionInfectionRate(spark, "Caribbean")
@@ -298,7 +291,7 @@ object InfectionRates {
 		val dfOceania = getRegionInfectionRate(spark, "Oceania")
 		val dfSouthAmerica = getRegionInfectionRate(spark, "South America")
 
-
+		//Combine the DataFrames
 		val regions = dfAfrica.union(dfAsia)
 			.union(dfCaribbean)
 			.union(dfCentralAmerica)
@@ -306,20 +299,24 @@ object InfectionRates {
 			.union(dfNorthAmerica)
 			.union(dfOceania)
 			.union(dfSouthAmerica)
-
-		regions
 			.sort(desc("Infection_Rate_Change"))
-			.show()
+
+		// Print the infection rate change for all regions
+		regions.show()
+			
+		// Upload region info to S3 bucket
+		regions.coalesce(1).write.mode("overwrite").option("header","true").csv("s3a://covid-analysis-p3/datawarehouse/infection-mortality/RegionalInfectionRates/Infection_Rate_Change")
 	}
 
 
+
 	/** Builds and shows the results of a SQL query with parameters coming in from the function below
-	 *
-	 * @param spark SparkContext for this application
-	 * @param todayArg Arg string for specific query
-	 * @param resName Result string for specific query
-	 * @param orderByArg Order by string for specific query
-	 */
+	  *
+	  * @param spark SparkContext for this application
+	  * @param todayArg Arg string for specific query
+	  * @param resName Result string for specific query
+	  * @param orderByArg Order by string for specific query
+	  */
 	def buildAndShowQuery(spark: SparkSession, todayArg: String, resName: String, orderByArg: String, filename: String) : Unit = {
 		val query = spark.sql(
 			s"""
@@ -332,12 +329,16 @@ object InfectionRates {
 				LIMIT 1
 			"""
 		)
-		//query.show(false)
+
+		// Write to the CLI
+		query.show()
+
+		// Write to the AWS s3 bucket
 		query.coalesce(1).write.mode("overwrite").option("header","true").csv(s"s3a://covid-analysis-p3/datawarehouse/infection-mortality/RegionalInfectionRates/$filename")
-		//regionTotalDF.write.mode("overwrite").option("header","true").csv(datawarehouseFilePath + "/")
 	}
 
 
+	
 	/** Queries and prints several sets of data based on a countries infection rates.
 	  *
 	  * @param spark SparkContext for this application
@@ -345,9 +346,9 @@ object InfectionRates {
 	def covidCountryInfectionRate(spark: SparkSession):Unit = {
 		import spark.implicits._
 
-		// Percentage of Countries with Increasing Infection Rate
 		println("Percentage of countries with a rising infection rate")
-		//val risingRatesTemp = buildAndShowQuery(spark, "todayCases", "Infection_Rate_Change", "", "")
+
+		// Joins the tables today and yesterday then does a calcuation to get the differece in stats
 		val query = spark.sql(
 			"""
 				SELECT today.country AS Country,
@@ -359,31 +360,34 @@ object InfectionRates {
 		).filter($"Infection_Rate_Change" > 0)
 		.select(bround((count("Infection_Rate_Change") / 218) * 100, 2) as "Percentage of Countries w/Rising Infection Rate")
 		
-		//query.show()
-		query.coalesce(1).write.mode("overwrite").option("header","true").csv("s3a://covid-analysis-p3/datawarehouse/infection-mortality/RegionalInfectionRates/percentCountriesRisingInfectionRate.csv")
+		// Write to the CLI
+		query.show()
+
+		// Write to the AWS s3 bucket
+		query.coalesce(1).write.mode("overwrite").option("header","true").csv("s3a://covid-analysis-p3/datawarehouse/infection-mortality/RegionalInfectionRates/percentCountriesRisingInfectionRate")
 
 		// Most increase in infection rate per capita
 		println("Country with the LARGEST increase in Infection Rate")
-		buildAndShowQuery(spark, "todayCases", "Infection_Rate_Change", "ORDER BY Infection_Rate_Change DESC", "largestIncreaseInfectionRate.csv")
+		buildAndShowQuery(spark, "todayCases", "Infection_Rate_Change", "ORDER BY Infection_Rate_Change DESC", "largestIncreaseInfectionRate")
 
 		// Least increase in infection rate per capita
 		println("Country with the SMALLEST increase and/or LARGEST decrease in Infection Rate")
-		buildAndShowQuery(spark, "todayCases", "Infection_Rate_Change", "ORDER BY Infection_Rate_Change ASC NULLS LAST", "smallestIncreaseInfectionRate.csv")
+		buildAndShowQuery(spark, "todayCases", "Infection_Rate_Change", "ORDER BY Infection_Rate_Change ASC NULLS LAST", "smallestIncreaseInfectionRate")
 
 		// Most increase in fatality rate per capita
 		println("Country with the LARGEST increase in Fatality Rate")
-		buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change DESC", "largestIncreseFatalityRate.csv")
+		buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change DESC", "largestIncreseFatalityRate")
 
 		// Least increase in fatality rate per capita
 		println("Country with the SMALLEST increase and/or LARGEST decrease in Fatality Rate")
-        buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change ASC NULLS LAST", "smallestIncreaseFatalityRate.csv")
+    buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change ASC NULLS LAST", "smallestIncreaseFatalityRate")
         
 		// Most increase in recovery rate per capita
 		println("Country with the LARGEST increase in Recovery Rate")
-		buildAndShowQuery(spark, "todayRecovered", "Recovery_Rate_Change", "ORDER BY Recovery_Rate_Change DESC", "largestIncreaseRecoveryRate.csv")
+		buildAndShowQuery(spark, "todayRecovered", "Recovery_Rate_Change", "ORDER BY Recovery_Rate_Change DESC", "largestIncreaseRecoveryRate")
 
 		// Least increase in recovery rate per capita
 		println("Country with the SMALLEST increase and/or LARGEST decrease in Recovery Rate")
-		buildAndShowQuery(spark, "todayRecovered", "Recovery_Rate_Change", "ORDER BY Recovery_Rate_Change ASC NULLS LAST", "smallestIncreaseRecoveryRate.csv")
+		buildAndShowQuery(spark, "todayRecovered", "Recovery_Rate_Change", "ORDER BY Recovery_Rate_Change ASC NULLS LAST", "smallestIncreaseRecoveryRate")
 	}
 }

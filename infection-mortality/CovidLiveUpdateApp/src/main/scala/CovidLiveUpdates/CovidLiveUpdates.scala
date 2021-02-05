@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions._
 
+/**
+  * 
+  */
 object CovidLiveUpdates {
 
   /** Process regional data from files that are updated every 10 minutes.
@@ -40,6 +43,7 @@ object CovidLiveUpdates {
       datalakeFilePath = "s3a://covid-analysis-p3/datalake/infection-mortality/"
       datawarehouseFilePath = "s3a://covid-analysis-p3/datawarehouse/infection-mortality/"
 
+      // Configured needed for AWS s3a
       spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
       // Set up S3 with secret and access key with spark
@@ -72,17 +76,17 @@ object CovidLiveUpdates {
     val oceaniaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/oceania.json")
     val southAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/south_america.json")
 
-    //Creates the DFs for the Regions
-    val africaDF = settingRegionalDF(spark, africaTemp, "Africa")
-    val asiaDF = settingRegionalDF(spark, asiaTemp, "Asia")
-    val caribbeanDF = settingRegionalDF(spark, caribbeanTemp, "Caribbean")
-    val centralAmericaDF = settingRegionalDF(spark, centralAmericaTemp, "Central America")
-    val europeDF = settingRegionalDF(spark, europeTemp, "Europe")
-    val northAmericaDF = settingRegionalDF(spark, northAmericaTemp, "North America")
-    val oceaniaDF = settingRegionalDF(spark, oceaniaTemp, "Oceania")
-    val southAmericaDF = settingRegionalDF(spark, southAmericaTemp, "South America")
+    // Creates the DFs for the Regions
+    val africaDF = regionalTotal(spark, africaTemp, "Africa")
+    val asiaDF = regionalTotal(spark, asiaTemp, "Asia")
+    val caribbeanDF = regionalTotal(spark, caribbeanTemp, "Caribbean")
+    val centralAmericaDF = regionalTotal(spark, centralAmericaTemp, "Central America")
+    val europeDF = regionalTotal(spark, europeTemp, "Europe")
+    val northAmericaDF = regionalTotal(spark, northAmericaTemp, "North America")
+    val oceaniaDF = regionalTotal(spark, oceaniaTemp, "Oceania")
+    val southAmericaDF = regionalTotal(spark, southAmericaTemp, "South America")
 
-    //Union to combine all regional DataFrames into global DataFrame
+    // Union to combine all regional DataFrames into global DataFrame
     val regionsDF = africaDF.union(asiaDF)
       .union(caribbeanDF)
       .union(centralAmericaDF)
@@ -95,18 +99,29 @@ object CovidLiveUpdates {
     // Process the DF into a single Region
     val regionTotalDF = dataProcessing(spark, regionsDF)
 
-    // Write to path link using datawarehouse
-    regionTotalDF.coalesce(1).write.mode("overwrite").option("header","true").csv(datawarehouseFilePath + "/CovidLiveUpdateApp")
+    // Write to CLI
+    regionTotalDF.show()
+
+    // Write to path link using datawarehouse totals
+    regionTotalDF.coalesce(1).write.mode("overwrite").option("header","true").csv(datawarehouseFilePath + "/CovidLiveUpdateApp/total")
 
     // Closes the spark session
     spark.close()
   }
 
-  def settingRegionalDF(spark: SparkSession, jsonTemp: DataFrame, regional: String ):DataFrame = {
 
-    //Spark SQL to select proper columns from each DF and save as new DF
+
+  /** Creates and returns a dataframe after it calculates it's countries in it's regions.
+    *
+    * @param spark SparkSession for this application.
+    * @param jsonTemp DataFrame of the region with all the countries in the region.
+    * @param regional String specifying the region it is coming from.
+    */
+  def regionalTotal(spark: SparkSession, jsonTemp: DataFrame, regional: String ):DataFrame = {
+
+    // Spark SQL to select proper columns from each DF and save as new DF
     jsonTemp.select(
-      lit(regional).as("Region"),
+      lit( regional ).as("Region"),
       sum("cases") as "Total Cases",
       sum("todayCases") as "Today's Cases",
       bround(sum("todayCases") / sum("cases") * 100, 2) as "Cases Percent Change",
@@ -119,9 +134,12 @@ object CovidLiveUpdates {
     )
   }
 
+
+
   /** Processes data and performs union to create single regions DataFrame.
     *
     * @param spark SparkSession for this application.
+    * @param regionsDF DataFrame used to find total values
     */
   def dataProcessing(spark: SparkSession, regionsDF: DataFrame ):DataFrame = {
 
@@ -139,14 +157,8 @@ object CovidLiveUpdates {
       bround(avg("Recoveries Percent Change"), 2)
     )
 
-    //Adds totals to the bottom and 
-    val regionTotalDF = regionsDF.union(totals)
-    //shows database=
-    regionTotalDF.show()
-
-    //returns total
-    regionTotalDF
-
+    //Adds totals to the bottom and returns the DataFrame
+    regionsDF.union(totals)
   }
 
 }
