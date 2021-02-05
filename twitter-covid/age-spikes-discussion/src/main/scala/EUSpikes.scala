@@ -7,7 +7,7 @@ object EUSpikes {
 
   }
   //read to dataframe from s3 bucket
-  def pullData(spark: SparkSession): DataFrame = {
+  def pullData(spark: SparkSession): Unit = {
 //    spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
     spark.sparkContext.hadoopConfiguration.set("fs.s3a.endpoint", "s3.amazonaws.com")
     // Set up S3 with secret and access key with spark
