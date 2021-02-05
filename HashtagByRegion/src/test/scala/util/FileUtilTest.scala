@@ -17,6 +17,13 @@ class FileUtilTest extends AnyFlatSpec {
   // Test that the resulting DataFrame contains a row for each of the 5 tweets in the json file.
   "Get DataFrame from JSON" should "return a DataFrame that has 5 rows" in {
     assert(FileUtil.getDataFrameFromJson(spark, jsonPath).count == 5)
+    
+  }
+
+  // Test that the resulting DataFrame's first row has an id of 1212470713338286081
+  it should "return a DataFrame in which the first row has an id of 1212470713338286081" in {
+    val df = FileUtil.getDataFrameFromJson(spark, jsonPath)
+    assert(df.first.getAs[Long]("id") == 1212470713338286081L)
     spark.stop()
   }
 }
