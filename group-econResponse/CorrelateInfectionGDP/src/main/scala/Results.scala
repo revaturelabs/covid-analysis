@@ -50,7 +50,7 @@ case class Results() {
 
     // This for loop gets the GDP data for each region and country within those regions and outputs the data to
     // the console as a formatted string using the StatFunc class
-    for (region <- (0 to regionNames.length - 1)) {
+    for (region <- regionNames.indices) {
       var gdp = ArrayBuffer[Double]()
       var peak = ArrayBuffer[Double]()
       val specificRegion = regionNames(region)
@@ -71,7 +71,7 @@ case class Results() {
       //    .map(_.get(0).toString)
       //    .collect()
       // Get the first peak for each country in region and gdp
-      for (country <- 0 to regionCountries.length - 1) {
+      for (country <- regionCountries.indices) {
         val regionCountry = regionCountries(country)
         val countryDF = spark
           .sql(

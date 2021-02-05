@@ -16,7 +16,7 @@ object CorrelateInfectionGDP {
   def main(args: Array[String]): Unit = {
     val db = s3DAO()
     val result = Results()
-    val dfb = DataFrameBuilder()
+    val dfb = new DataFrameBuilder()
     val (covidPath, econPath) = (db.getCovidPath, db.getEconPath)
 
     val spark = SparkSession.builder()

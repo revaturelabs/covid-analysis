@@ -1,64 +1,127 @@
 package utilites
 
-import org.apache.spark.sql.functions.{explode, when}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.functions.{col, explode}
+import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
 
-case class DataFrameBuilder() {
+/** this object filters/joins dataFrames together
+ * based on specific columns that are established in the input DF's
+ */
+class DataFrameBuilder {
 
-  def build(spark: SparkSession, econPath: String, casePath: String): DataFrame = {
-    val regionDF = spark.read.json("s3a://adam-king-848/data/regionDict.json")
-
-    val econRawDF = spark.read.option("delimiter", "\t").option("header", value = true).csv(econPath)
-    val caseRawDF = spark.read.option("delimiter", "\t").option("header", value = true).csv(casePath)
-
-    val caseRegionDF = caseJoin(spark, regionDF, caseRawDF)
-    val econRegionDF = econJoin(spark, regionDF, econRawDF)
-    val fullDF = joinCaseEcon(spark, caseRegionDF, econRegionDF)
-
-    fullDF
-  }
-
-  private def caseJoin(spark: SparkSession, regionDF: DataFrame, caseDF: DataFrame): DataFrame = {
+  def build(
+             spark: SparkSession,
+             econPath: String,
+             casePath: String
+           ): DataFrame = {
     import spark.implicits._
 
-    val regionDict = regionDF
-      .select($"name", explode($"countries") as "country2")
+    // val regionDF = spark.read.json("s3a://adam-king-848/data/regionDict.json")
+    val regionDF = spark.read.json("src/test/scala/testData/regionDict")
 
-    caseDF
-      .select($"date", $"country", $"total_cases", $"total_cases_per_million", $"new_cases", $"new_cases_per_million")
-      .join(regionDict, $"country" === $"country2")
-      .drop($"country2")
-      .withColumn("new_cases", when($"new_cases" === "NULL", 0).otherwise($"new_cases"))
-      .withColumn("total_cases", when($"total_cases" === "NULL", 0).otherwise($"total_cases"))
-      .withColumn("new_cases_per_million", when($"new_cases_per_million" === "NULL", 0).otherwise($"new_cases_per_million"))
-      .withColumn("total_cases_per_million", when($"total_cases_per_million" === "NULL", 0).otherwise($"total_cases_per_million"))
-      .filter($"date" =!= "null")
-      .sort($"date" desc_nulls_first)
+    val dailyCasesSchema = Encoders.product[CountryStats].schema
+    val rawDailyCasesData = spark.read
+      .format("csv")
+      //.option("delimiter", "\t")
+      .option("header", "true")
+      .schema(dailyCasesSchema)
+      .load(casePath)
+      .as[CountryStats] //case class for daily cases by country dataset
+      .toDF()
+
+    val economicsDataSchema = Encoders.product[EconomicsData].schema
+    val rawEconomicsData = spark.read
+      .format("csv")
+      //.option("delimiter", "\t")
+      .option("header", "true")
+      .schema(economicsDataSchema)
+      .load(econPath)
+      .as[EconomicsData] //case class for economy data by country dataset
+      .toDF()
+
+    val dailyCases = initDailyCasesDF(spark, rawDailyCasesData, regionDF)
+    val economicsData = initEconomicsDF(spark, rawEconomicsData, regionDF)
+
+    val fullDataDF = dailyCases.join(economicsData, Seq("country", "region"))
+    fullDataDF
   }
 
-  private def econJoin(spark: SparkSession, regionDF: DataFrame, econDF: DataFrame): DataFrame = {
+  /** returns a new dataFrame with an appended Region
+   * column that maps each 'country' in dF to it's region
+   *
+   * @param spark    spark session
+   * @param regionDF json that contain a map of region- > countries
+   * @param dF       dataFrame to append region
+   * @return
+   */
+  def addRegion(
+                 spark: SparkSession,
+                 regionDF: DataFrame,
+                 dF: DataFrame
+               ): DataFrame = {
     import spark.implicits._
 
-    val regionDict = regionDF
-      .select($"name", explode($"countries") as "country")
-      .select($"name" as "region", $"country" as "country2")
-
-    econDF
-      .join(regionDict, $"name" === $"country2")
-      .select($"year", $"region", $"name" as "country", $"gdp_currentPrices" as "current_prices_gdp", $"gdp_perCap_currentPrices" as "gdp_per_capita")
-      .drop($"country2")
+    val tempRegion = regionDF
+      .select($"name" as "region", explode($"countries") as "country")
+    //Specify the join column as an array type or string to avoid duplicate columns
+    val newDF = dF.join(tempRegion, Seq("country"))
+    newDF
   }
 
+  /** filters a dataFrame by sequence of column names provided
+   * and replaces null values in numeric columns with 0
+   *
+   * @param spark spark session
+   * @param dF    dataFrame to be filtered
+   * @param cols  sequence of column names to filter
+   * @return filtered dataFrame
+   */
+  def filterColumns(
+                     spark: SparkSession,
+                     dF: DataFrame,
+                     cols: Seq[String]
+                   ): DataFrame = {
+    val newDF = dF.select(cols.map(col): _*)
+    newDF.na.fill(0) // replace null with 0
+  }
 
-  private def joinCaseEcon(spark: SparkSession, caseDF: DataFrame, econDF: DataFrame): DataFrame = {
-    econDF.createOrReplaceTempView("econDFTemp")
-    caseDF.createOrReplaceTempView("caseDFTemp")
-    val caseEconDF = spark.sql(
-      "SELECT e.year, e.region, c.country, e.current_prices_gdp, e.gdp_per_capita, c.total_cases, c.new_cases, c.new_cases_per_million, c.total_cases_per_million,c.date " +
-        " FROM econDFTemp e JOIN caseDFTemp c " +
-        "ON e.country == c.country " +
-        "ORDER BY region, gdp_per_capita")
+  def initDailyCasesDF(
+                        spark: SparkSession,
+                        rawCasesDF: DataFrame,
+                        regionDF: DataFrame
+                      ): DataFrame = {
+    val tempDF = filterColumns(
+      spark,
+      rawCasesDF,
+      Seq(
+        "date",
+        "country",
+        "total_cases",
+        "total_cases_per_million",
+        "new_cases",
+        "new_cases_per_million"
+      )
+    ).na.drop(Seq("date", "country")) // drop rows w/ a null date or country
+    addRegion(spark, regionDF, tempDF)
+  }
 
-    caseEconDF
+  def initEconomicsDF(
+                       spark: SparkSession,
+                       rawEconDF: DataFrame,
+                       regionDF: DataFrame
+                     ): DataFrame = {
+    val tempDF = filterColumns(
+      spark,
+      rawEconDF,
+      Seq(
+        "name",
+        "year",
+        "gdp_currentPrices_usd",
+        "gdp_perCap_currentPrices_usd",
+        "population"
+      )
+    )
+      .withColumnRenamed("name", "country") //rename 'name' field to 'country'
+      .filter(col("year") === 2020) //only include annual gdp data from 2020
+    addRegion(spark, regionDF, tempDF)
   }
 }
