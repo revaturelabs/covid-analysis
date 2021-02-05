@@ -1,6 +1,7 @@
 package response
 
-import utilities._
+import utilites.{DataFrameBuilder, s3DAO}
+
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{max, sum}
 
@@ -30,7 +31,7 @@ object CovidResponse {
    */
   def main(args: Array[String]): Unit = {
     val db = s3DAO()
-    val dfb = DataFrameBuilder()
+    val dfb = new DataFrameBuilder
     val (covidPath, econPath) = (db.getCovidPath, db.getEconPath)
 
     val spark = SparkSession.builder()
