@@ -1,7 +1,7 @@
 package TweetCovid19Percentage
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.{DataFrameReader,DataFrame}
+import org.apache.spark.sql.{DataFrameReader,DataFrame,Row,SparkSession}
 import org.scalatest.flatspec.AnyFlatSpec
 
 /**
@@ -10,21 +10,27 @@ import org.scalatest.flatspec.AnyFlatSpec
   */
 class RunnerSpec extends AnyFlatSpec{
     // Grab the Spark Session object, set the app Name option, EMR will handle the rest of the config
-    val spark = SparkSession.builder().appName("TweetCovid19Percentage").getOrCreate()
+    val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
     // TODO: Learn more about spark implicits because you know nothing atm 
     import spark.implicits._
     // The path to the input test data file
-    val testFilePath = "/test-data.txt"
-    // A test DataFrame for comparison to DataFrame returned by reader function
-    val testDF = spark.read.format("text").load("test-data.txt")
+    val testFilePath = "test-data.txt"
+    // A test DataSet for comparison to DataSet returned by reader function
+    val testDS = spark.read.text(testFilePath).as[Runner.Tweet]
     // Some test strings for testing the covid related terms matching function
     val testString1 = "Testing"
     val testString2 = "Covid"
 
     // The ReadInputFileToDF function should parse the input data into a DataFrame for processing
     // The DataFrame should have a single column with values being the text of the individual tweets
-    "ReadInputFileToDF case 0" should "return a DataFrame containing the input test data" in {
-        assert(Runner.ReadInputFileToDF(testFilePath, spark).collect().equals(testDF.collect()))
+    "ReadInputFileToDS case 0" should "return a DataFrame containing the input test data" in {
+        assert(Runner.ReadInputFileToDS(testFilePath, spark).collect().equals(testDS.collect()))
+    }
+
+    // The ReadInputFileToDF function should parse the input data into a DataFrame for processing
+    // The DataFrame should have a single column with values being the text of the individual tweets
+    "ReadInputFileToDS case 1" should "return a DataFrame containing the input test data" in {
+        assert(Runner.ReadInputFileToDS(testFilePath, spark).collect().equals(testDS.collect()))
     }
 
     // The input test data contains half covid related and half non-covid related tweets

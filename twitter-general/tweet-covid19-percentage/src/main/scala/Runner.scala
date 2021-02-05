@@ -1,18 +1,18 @@
 package TweetCovid19Percentage
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.{DataFrameReader,DataFrame}
+import org.apache.spark.sql.{DataFrameReader,DataFrame,Row,Dataset}
 
 object Runner {
     // A case class to hold the tweet text data for data set
-    case class Tweet(text: String)
+    case class Tweet(value: String)
     
     def main(args: Array[String]): Unit = {
         // Grab the Spark Session object, set the app Name option, EMR will handle the rest of the config
-        val spark = SparkSession.builder().appName("TweetCovid19Percentage").getOrCreate()
+        val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
         // TODO: Learn more about spark implicits because you know nothing atm 
         import spark.implicits._
         // TODO: Hardcode for now, replace with s3 at some point
-        val filePath = "/test-data.txt"
+        val filePath = "test-data.txt"
         // Calculate the Percentage of Covid related Tweets from the input data file
         tweetCovid19Percentage(filePath, spark)
         spark.stop()
@@ -27,7 +27,7 @@ object Runner {
     def tweetCovid19Percentage(path: String, spark: SparkSession): Int = {
         import spark.implicits._
         // Grab the data from the input file and store in a dataframe
-        val tweetDataFrame = ReadInputFileToDF(path, spark) 
+        val tweetDataFrame = ReadInputFileToDS(path, spark) 
         // TODO: Read in list of covid related words
         // Im thinking this will be a dataframe, could be a DataSet of type Tweet
         // TODO: Call a function that will read in the lexicon of covid words
@@ -43,13 +43,11 @@ object Runner {
       * @param path The path to the input data file
       * @return A dataframe containing the text of a tweet in each row
       */
-    def ReadInputFileToDF(path: String, spark: SparkSession): DataFrame = {
+    def ReadInputFileToDS(path: String, spark: SparkSession): Dataset[Tweet] = {
         import spark.implicits._
-        //TODO implement dataframe read
-        val tweetDataFrame = spark.read
-            .option("inferSchema", "true")
-            .textFile(path).cache().toDF()
-        return tweetDataFrame
+        val tweetDataSet = spark.read.text(path).as[Tweet]
+        tweetDataSet.show()
+        return tweetDataSet
     }
 
     /**
