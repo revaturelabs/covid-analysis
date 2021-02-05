@@ -10,7 +10,9 @@ import javax.xml.crypto.Data
 
 object Runner {
 
-case class Tweet(text: String)
+  case class Tweets(text: String)
+
+  case class Hashtag(hashtag: String)
   
     def main(args: Array[String]): Unit = {
 
@@ -25,23 +27,21 @@ case class Tweet(text: String)
         
         //get input path for s3
         //read input into a dataset
-        val tweets = spark.read.format("text").load(getInputPath(args(0).toInt)).as[Tweet]
+        //val tweets = spark.read.format("text").load(getInputPath(args(0).toInt)).as[Tweets]
         
-        
-
-        //filter input into hashtags
-        //val tweetsWithHashtags = tweets.filter(hasHashtag(_))
-        //val hashtags = extractHashtags(tweetsWithHashtags)
-
-        //reduce on hashtags to get a count of each hashtag
-        //val hashtagCount = hashtags.groupBy("text").count().as[Tweet]
+        //split input on words, filter out hashtags and put all hashtags into new dataset
+        //of type Hashtag
+        //val hashtags = makeHashtagDS(tweets)
 
         //map hashtags to covid related or not covid related
-        //val hashtagCategories = hashtagCount.map(markCovidRelated)
+        //val hashtagCategories = hashtags.map(markCovidRelated)
 
         //reduce on categories to get number of non covid hashtags vs covid hashtags
+        //val categoryCount = hashtagCategories.groupBy("hashtag").count()
     
         //output results to s3
+
+                    
         spark.stop()
       }else{
         println("Usage: [mode] where mode is an integer from 0-2")
@@ -49,71 +49,42 @@ case class Tweet(text: String)
         
     }
 
-    def readToDS(spark: SparkSession, path: String): Dataset[Tweet]={
+    def readToDS(spark: SparkSession, path: String): Dataset[Tweets]={
       // import spark.implicits._
-      // return spark.read.format("text").load(path).as[Tweet]
+      // return spark.read.format("text").load(path).as[Tweets]
       null
     }
 
-    /**
-      * a function that returns true if a text string contains a word that starts with '#'
-      *
-      * @param text the text string to be parsed 
-      * @return true if text contains a word starting with '#' otherwise false
-      */
-    def hasHashtag(tweet: Tweet):Boolean={
-      false
-    }
-
-    /**
-      * a function that takes in a dataset of type tweet
-      * and returns a new dataset of type tweet where the text contains only the
-      * hashtags from the text of the input dataset
-      *
-      * @param dataset the input dataset
-      * @return a new dataset of type tweet which contains only the hashtags from the text of the
-      *         input dataset
-      */
-    def extractHashtags(dataset: Dataset[Tweet]): Dataset[Tweet]={
+    def makeHashtagDS(ds: Dataset[Tweets]): Dataset[Hashtag]={
       null
+      // val hashtags = ds
+      //   .select(explode(split("text", "\\W+")).alias("word"))
+      //   .filter("word" =!= "")
+      //   .filter("word".startsWith("#")).as[Hashtag]
     }
     
     /**
-      * a function that takes in a Tweet who's text contains
-      * only a hashtag, and replaces the text with "covid" or "non-covid"
-      * based on whether or not the hashtag is covid related or not
+      * a function that takes in a hashtag, check to see if it is covid related,
+      * and replaces the text of the hashtag with 'covid' or 'non-covid'
+      * depending on the result
       *
-      * @param tweet the input tweet
+      * @param Hashtag the input hashtag
       * @return a new tweet with the new text
       */
-    def markCovidRelated(tweet: Tweet): Tweet={
+    def markCovidRelated(hashtag: Hashtag): Hashtag={
       null
     }
 
-    
-
-    def manipulateDataFrame(df: DataFrame): DataFrame={
-
-      //TO DO complete implementation
-      //TO-DO complete implementation
-      //filter tweet text into hashtags only
-
-        //reduce on hashtags to get a count of each hashtag
-
-        //map hashtags to covid related or not covid related
-
-        //reduce on categories to get number of non covid hashtags vs covid hashtags
-      //maybe lower rdd work then convert back to DataFrame
-      //groupBy(hashtags).count()
-      //check if hashtag is covid related
-      //if it is, add it to the list of covid hashtags
-      //if it is not, add it to the list of non-covid hashtags
-      //return a dataset which contains 2 rows
-      //row 1 is covid hashtags and their count
-      //row 2 is non-covid hashtags and their count
-      //groupBy(isCovid).count()
-      null
-    }
+        /**
+          * a helper function for mackCovidRelated that takes in a string
+          * and determines if the hashtag is covid related or not
+          *
+          * @param hashtag
+          * @return
+          */
+        def isCovidRelated(hashtag: String): Boolean={
+          false
+        }
 
     /**
       * a function that takes in an integer value and returns a string
@@ -125,11 +96,11 @@ case class Tweet(text: String)
     def getInputPath(range: Int): String={
         var ret =""
 
-       range match {
-          case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
-          case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
-          case _ => ret = "no preset"
-        }
+      //  range match {
+      //     case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+      //     case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+      //     case _ => ret = "no preset"
+      //   }
         ret
         
     }
