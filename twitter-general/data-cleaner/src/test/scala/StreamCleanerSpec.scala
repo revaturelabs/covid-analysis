@@ -11,6 +11,5 @@ class StreamCleanerSpec extends AnyFlatSpec {
 
     "StreamCleaner" should "return the number of lines in the file it outputs" in {
         assert(StreamCleaner.clean("test-data", spark) == 9)
-        Thread.sleep(5000)
     }
 }
