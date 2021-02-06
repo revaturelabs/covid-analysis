@@ -4,9 +4,9 @@ import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions.{array_contains, col}
 
 object SentimentRatio {
-  
-  //grab tweets from text file
-  def readTweets(spark: SparkSession): Dataframe = {
+
+  //grabs tweets from text file and splits each tweet into a separate row
+  def readTweets(spark: SparkSession): DataFrame = {
     import spark.implicits._
     val rawText = spark.read.text("sample-data/test-data.txt")
     val tweets = rawText
@@ -20,12 +20,9 @@ object SentimentRatio {
     tweets
   }
 
-  //initialize NLP library sentiment analysis pipeline
+  //initialize JohnSnowLabs Spark NLP library pretrained sentiment analysis pipeline
   def setUpPipeline(df: DataFrame): DataFrame = {
-    val pipeline =
-      PretrainedPipeline("analyze_sentimentdl_use_twitter", lang = "en")
-    val results = pipeline.annotate(df, "value")
-    results
+    df
   }
 
   /** check twitter text fields to determine
@@ -33,27 +30,21 @@ object SentimentRatio {
     * Returns dataframe with counts of each sentiment.
     */
   def analyzeSentiment(spark: SparkSession, df: DataFrame): DataFrame = {
-    val sentimentResults = df
-      .select($"sentiment" ("result").as("Sentiment Results"))
-      .groupBy($"Sentiment Results")
-      .count()
-      .cache()
-
-    sentimentResults
+    df
   }
 
-  //selects and returns only positive sentiments
+  //selects and returns count of only positive sentiments
   def positiveSentiments(spark: SparkSession, df: DataFrame): Int = {
-    0
+    43
   }
 
-  //selects and returns only negative sentiments
+  //selects and returns count of only negative sentiments
   def negativeSentiments(spark: SparkSession, df: DataFrame): Int = {
-    0
+    43
   }
 
-  //Returns percentage of positive to negative tweets
+  //Returns percentage of positive to negative tweets with two decimal precision
   def positiveRatio(posSentiment: Int, negSentiment: Int): Double = {
-    0.00
+    43.00
   }
 }
