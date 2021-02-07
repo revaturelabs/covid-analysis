@@ -1,6 +1,7 @@
 package main
 
 import org.apache.spark.sql.SparkSession
+import scribe.file._
 
 import hashtagByRegion.HashtagByRegion
 import util.FileUtil
@@ -11,6 +12,15 @@ import util.FileUtil
   */
 object Main {
   def main(args: Array[String]) = {
+
+    // Log Spark info to logs/app/
+    scribe.Logger.root
+      .clearHandlers()
+      .clearModifiers()
+      .withHandler(writer = FileWriter(
+        "logs" / "app" / ("app-" % year % "-" % month % "-" % day % ".log")
+      ))
+      .replace()
 
     // jsonPath currently points to test data
     ////// After an EMR cluster has been established, update path to "s3a://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data.json" //////////
