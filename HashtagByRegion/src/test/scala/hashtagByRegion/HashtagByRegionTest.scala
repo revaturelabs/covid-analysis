@@ -3,10 +3,20 @@ package hashtagByRegion
 import org.scalatest.flatspec.AnyFlatSpec
 import org.apache.spark.sql.SparkSession
 import scala.collection.mutable.WrappedArray
+import scribe.file._
 
 import util.FileUtil
 
-class HashtagByRegionSpec extends AnyFlatSpec {
+class HashtagByRegionTest extends AnyFlatSpec {
+
+  // Log Spark info to logs/test/
+  scribe.Logger.root
+    .clearHandlers()
+    .clearModifiers()
+    .withHandler(writer = FileWriter(
+      "logs" / "test" / ("app-" % year % "-" % month % "-" % day % ".log")
+    ))
+   .replace()
   
   val spark = SparkSession
     .builder()
@@ -15,7 +25,7 @@ class HashtagByRegionSpec extends AnyFlatSpec {
     .getOrCreate()
 
   // DF_Test.json is a small sample json file that contains data for 5 tweets.
-  val jsonPath = "DF_Test.json"
+  val jsonPath = "src/test/resources/DF_Test.json"
 
   val DF = FileUtil.getDataFrameFromJson(spark, jsonPath)
 
@@ -25,9 +35,8 @@ class HashtagByRegionSpec extends AnyFlatSpec {
   }
 
   // Test that the resulting DataFrame first row contains the hastag "china"
-  it should "return a DataFrame in which the first row contains the hashtag \"China\"" in {
+  it should "return a DataFrame in which the first row contains the hashtag \"china\"" in {
     val testDF = HashtagByRegion.generateDF(spark, DF)
     assert(testDF.first().getAs[WrappedArray[String]]("Hashtags").mkString == "china")
   }
-
 }
