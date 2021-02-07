@@ -97,7 +97,7 @@ object HashtagByRegion {
     * @param df Base DataFrame
     * @return New DataFrame that contains only the hashtag data
     */
-  private def generateDF(spark: SparkSession, df: DataFrame): DataFrame = {
+  def generateDF(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     val hashtagDF = df
       // Filter out tweets that do not contain location data.
