@@ -12,7 +12,7 @@ class FileUtilTest extends AnyFlatSpec {
       .getOrCreate()
 
   // DF_Test.json is a small sample json file that contains data for 5 tweets.
-  val jsonPath = "DF_Test.json"
+  val jsonPath = "src/test/resources/DF_Test.json"
 
   // Test that the resulting DataFrame contains a row for each of the 5 tweets in the json file.
   "getDataFrameFromJson" should "return a DataFrame that has 5 rows" in {

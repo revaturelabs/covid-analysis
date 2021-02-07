@@ -15,7 +15,7 @@ class HashtagByRegionSpec extends AnyFlatSpec {
     .getOrCreate()
 
   // DF_Test.json is a small sample json file that contains data for 5 tweets.
-  val jsonPath = "DF_Test.json"
+  val jsonPath = "src/test/resources/DF_Test.json"
 
   val DF = FileUtil.getDataFrameFromJson(spark, jsonPath)
 
