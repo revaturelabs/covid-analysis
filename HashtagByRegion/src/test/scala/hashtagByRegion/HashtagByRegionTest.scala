@@ -3,10 +3,20 @@ package hashtagByRegion
 import org.scalatest.flatspec.AnyFlatSpec
 import org.apache.spark.sql.SparkSession
 import scala.collection.mutable.WrappedArray
+import scribe.file._
 
 import util.FileUtil
 
-class HashtagByRegionSpec extends AnyFlatSpec {
+class HashtagByRegionTest extends AnyFlatSpec {
+
+  // Log Spark info to logs/test/
+  scribe.Logger.root
+    .clearHandlers()
+    .clearModifiers()
+    .withHandler(writer = FileWriter(
+      "logs" / "test" / ("app-" % year % "-" % month % "-" % day % ".log")
+    ))
+   .replace()
   
   val spark = SparkSession
     .builder()
@@ -29,5 +39,4 @@ class HashtagByRegionSpec extends AnyFlatSpec {
     val testDF = HashtagByRegion.generateDF(spark, DF)
     assert(testDF.first().getAs[WrappedArray[String]]("Hashtags").mkString == "china")
   }
-
 }
