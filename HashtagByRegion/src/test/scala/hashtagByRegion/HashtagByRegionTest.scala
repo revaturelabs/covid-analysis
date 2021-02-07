@@ -35,7 +35,7 @@ class HashtagByRegionTest extends AnyFlatSpec {
   }
 
   // Test that the resulting DataFrame first row contains the hastag "china"
-  it should "return a DataFrame in which the first row contains the hashtag \"China\"" in {
+  it should "return a DataFrame in which the first row contains the hashtag \"china\"" in {
     val testDF = HashtagByRegion.generateDF(spark, DF)
     assert(testDF.first().getAs[WrappedArray[String]]("Hashtags").mkString == "china")
   }
