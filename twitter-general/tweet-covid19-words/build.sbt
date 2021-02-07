@@ -5,7 +5,7 @@ version := "1"
 scalaVersion := "2.12.12"
 
 artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
-  artifact.name + "_" + sv.binary + "-" + "3.0.1" + "_" + module.revision + "." + artifact.extension
+  "twitter-general-word-count." + artifact.extension
 }
 
 libraryDependencies ++= Seq(
