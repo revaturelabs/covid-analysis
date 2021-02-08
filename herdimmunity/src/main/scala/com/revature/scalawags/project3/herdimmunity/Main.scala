@@ -43,8 +43,7 @@ object Main {
         sys.exit()
     }
     val dateString = prettyDate(exactDate(days))
-    println(dateString)
-    // printResults(analysis,dateString)
-    // "aws s3 sync ./output s3://covid-analysis-p3/datawarehouse/herdimmunity/" !!      
+    printResults(analysis,dateString)
+    "aws s3 sync ./output s3://covid-analysis-p3/datawarehouse/herdimmunity/" !!      
   }
 }
