@@ -1,5 +1,6 @@
 package TweetCovid19Percentage
 
+import org.apache.log4j._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Row,SparkSession}
 import org.scalatest.flatspec.AnyFlatSpec
@@ -9,6 +10,8 @@ import org.scalatest.flatspec.AnyFlatSpec
   * in the Runner.scala class
   */
 class RunnerSpec extends AnyFlatSpec{
+    // Set the log level to only print errors
+    Logger.getLogger("org").setLevel(Level.ERROR)
     // Grab the Spark Session object, set the app Name option, EMR will handle the rest of the config
     val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
     // TODO: Learn more about spark implicits because you know nothing atm 
