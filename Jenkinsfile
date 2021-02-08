@@ -4,22 +4,18 @@
 
 pipeline {
     // Required, tells us what machine should be running this build.
-    agent {
-        docker { image "mozilla/docker-sbt" }
-    }
+    agent any
 
     // Define our pipeline into stages
     stages {
         stage("Lint") {
             steps {
                 echo "this is linting."
-                sbt help
             }
         }
         stage("Test") {
             steps {
                 echo "this is a test."
-                sbt test
             }
         }
 
@@ -29,5 +25,22 @@ pipeline {
                 sbt compile
             }
         }
+    }
+
+    post {
+        always {
+            echo "This will always be invoked."
+        }
+
+        // If the build passes
+        success {
+            echo "This will only run when the build passes."
+        }
+
+        failure {
+            echo "This build failed. Ping the slack channel."
+        }
+
+        // Unstable, Changed, Always
     }
 }
