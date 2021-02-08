@@ -29,7 +29,7 @@ object Main {
     val spark = SparkSession
       .builder()
       .appName("Hashtag-By-Region")
-      .master("local[4]")
+      .master("local[*]")
       .getOrCreate()
 
 

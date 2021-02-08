@@ -1,6 +1,6 @@
 name := "HashtagByRegion"
-
 version := "0.1"
+scalaVersion := "2.12.13"
 
 libraryDependencies  ++= Seq(
   "org.apache.spark" %% "spark-sql" % "3.0.1",
@@ -11,7 +11,8 @@ libraryDependencies  ++= Seq(
   "com.outr" %% "scribe-file" % "3.3.1"
 )
 
-scalaVersion := "2.12.13"
+parallelExecution in Test := false
+testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-fDW", "logs/test/test_results.log", "-oO")
 
 assemblyMergeStrategy in assembly := {
  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
