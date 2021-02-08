@@ -8,13 +8,12 @@ import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
  */
 class DataFrameBuilder {
   def build(spark: SparkSession, fileNames: Map[String, String], db: s3DAO): DataFrame = {
-    import spark.implicits._
-
-    //Callback function used here to create and return a spark dataframe after download from s3.
-    val callBack = (downloadPath: String) => spark.read.json(downloadPath)
-
     val dailyCasesSchema = Encoders.product[CountryStats].schema
     val economySchema = Encoders.product[EconomicsData].schema
+
+    //Callback function used here to create and return a spark dataframe after download from s3.
+    val regionCB = (downloadPath: String) => spark.read.json(downloadPath)
+
     val covidCB = (downloadPath: String) => {
       spark.read
         .option("delimiter", "\t")
@@ -33,15 +32,10 @@ class DataFrameBuilder {
     }
 
     //Download dataframe from s3.
-    val regionDF = db.loadDFFromBucket(fileNames("regionSrc"), callBack)
+    val regionDF = db.loadDFFromBucket(fileNames("regionSrc"), regionCB)
 
-//    val covidRDD = db.getTsvRdd(fileNames("covidSrc")).toDF().rdd
-//    val rawCovidDF = covidRDD.toDF(Util.getCovidSchema:_*).as[CountryStats].toDF()
     val rawCovidDF = db.loadDFFromBucket(fileNames("covidSrc"), covidCB)
 
-//    val econRDD = db.getTsvRdd(fileNames("econSrc")).toDF()
-//    econRDD.explain()
-//    val rawEconDF = econData.toDF(Util.getCovidSchema:_*).as[EconomicsData].toDF()
     val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
 
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
@@ -69,8 +63,7 @@ class DataFrameBuilder {
     val tempRegion = regionDF
       .select($"name" as "region", explode($"countries") as "country")
     //Specify the join column as an array type or string to avoid duplicate columns
-    val newDF = dF.join(tempRegion, Seq("country"))
-    newDF
+    dF.join(tempRegion, Seq("country"))
   }
 
   /** filters a dataFrame by sequence of column names provided
@@ -86,9 +79,8 @@ class DataFrameBuilder {
                      dF: DataFrame,
                      cols: Seq[String]
                    ): DataFrame = {
-    val newDF = dF.select(cols.map(col): _*).cache()
-    newDF.na.fill(0).show(120) // replace null with 0
-    newDF
+    val newDF = dF.select(cols.map(col): _*)
+    newDF.na.fill(0) // replace null with 0
   }
 
   def initDailyCasesDF(

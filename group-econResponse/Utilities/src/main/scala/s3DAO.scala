@@ -64,10 +64,6 @@ case class s3DAO (
 
     cb(DOWNLOAD_PATH + filesName)
   }
-
-//  def setDirectoryPath(key: String, value: String): Unit = this.dirPaths += (key -> value)
-//
-//  def setDirectoryPath(sources: Map[String, String]): Unit = this.dirPaths ++= dirPaths
 }
 
 object s3DAO {
