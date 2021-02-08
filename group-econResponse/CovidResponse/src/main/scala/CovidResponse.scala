@@ -20,10 +20,10 @@ import org.apache.spark.sql.functions.{max, sum}
  */
 
 object CovidResponse {
-  /** initialSolution
-   * Takes in the dataframe that reflects the case and economic data output from DataFrameManipulator
+  /** Main
+   * Creates the needed dataframe with DataFrameBuilder
    * Outputs the data as formatted tables in the console as well as outputs the formatted data to dataframes in Spark.
-   * The DataFrameManipulator prepares raw data from two source files by selecting various, needed columns and renaming
+   * The DataFrameBuilder prepares raw data from two source files by selecting various, needed columns and renaming
    * a few. The two tables are then joined with the joinCaseEcon method. The resulting dataframe is passed in this
    * methods signature.  The RankRegions class uses methods to group and sort by some metric passed as an argument.
    * This is used just prior to displaying results.
