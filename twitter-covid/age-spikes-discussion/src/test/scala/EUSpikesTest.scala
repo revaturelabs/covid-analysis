@@ -11,22 +11,24 @@ class EUSpikesTest extends AnyFlatSpec {
     spark.sparkContext.setLogLevel("WARN")
 
   "Dataframe" should "not be empty" in {
-    val df = pullData(spark)
+    val df = pullEUData(spark)
     assert(df.count() > 0)
   }
 
   "Dataframe" should "not have age_groups 80+" in {
-    val df = pullData(spark)
+    val df = pullEUData(spark)
     val filteredDf = filterAgeGroups(spark, df)
-    assert(df.filter(df("age_group") === "80+yr").count() == 0)
+    assert(filteredDf.filter(filteredDf("age_group") === "80+yr").count() == 0)
   }
 
   "Dataframe" should "have 2 columns" in {
     import spark.implicits._
-    val df = pullData(spark)
+    val df = pullEUData(spark)
     val filteredDf = filterAgeGroups(spark, df)
     val groupedDf = groupData(spark, filteredDf)
-    assert(groupedDf.columns.size == 2)
+//    println(groupedDf.columns)
+//    assert(groupedDf.columns.size == 2)
+    assert(groupedDf.count() == groupedDf.distinct().count())
   }
 
 }
