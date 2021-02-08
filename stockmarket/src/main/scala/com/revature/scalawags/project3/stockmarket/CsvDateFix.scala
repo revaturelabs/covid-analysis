@@ -26,7 +26,7 @@ object CsvDateFix {
   /** Reads from a csv with improper date formatting and overwrites it with
     * proper formatting. 
     */
-  def formatCsv(path: String): Unit = {
+  def formatCsv(path: String): Boolean = {
     val file = new File(path)
     val reader = CSVReader
       .open(file)
@@ -36,15 +36,15 @@ object CsvDateFix {
     // these methods can correct.
     if (reader.length < 2 || reader(1).length != 7) {
       println(s"File path specified doesn't have appropriate data to convert. " +
-        s"Aborting program.")
-      sys.exit()
+        s"Aborting formatting of $path.")
+      return false
     }
     stringToDate(reader(1)(0)) match {
       case Some(value) => ()
       case None =>
         println(s"Cannot parse value ${reader(1)(0)} into proper format. " +
-          s"Aborting program.")
-        sys.exit()
+          s"Aborting formatting of $path.")
+        return false
     }
 
     // Convert date field to proper formatting.
@@ -56,6 +56,8 @@ object CsvDateFix {
     val writer = CSVWriter.open(file)
     writer.writeAll(all)
     writer.close()
+
+    true
   }  
 
   /** Returns a string with the `MM/dd/yyyy` format from one with the
