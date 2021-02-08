@@ -25,7 +25,7 @@ object CorrelateInfectionGDP {
 
     spark.sparkContext.setLogLevel("WARN")
 
-    val df = dfb.build(spark, econPath, covidPath)
+    val df = dfb.build(db = )
 
     result.regionalCorrelation(spark, df)
 

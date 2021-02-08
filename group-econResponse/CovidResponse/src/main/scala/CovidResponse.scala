@@ -31,48 +31,57 @@ object CovidResponse {
    */
   def main(args: Array[String]): Unit = {
     val db = s3DAO()
+    val fileNames = Map(
+      "covidSrc" -> "economic_data_2018-2021.tsv",
+      "regionSrc" -> "region_dictionary.json",
+      "econSrc" -> "daily_covid_stats.tsv"
+    )
     val dfb = new DataFrameBuilder
-    val (covidPath, econPath) = (db.getCovidPath, db.getEconPath)
+
 
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
     spark.sparkContext.setLogLevel("INFO")
 
-    val df = dfb.build(spark, econPath, covidPath)
+    val data = dfb.build(spark, fileNames, db)
 
     import spark.implicits._
-    val data = df
+      data
       .withColumn("population", $"total_cases" / $"total_cases_per_million")
       .groupBy("region", "country")
       .agg(max($"population") as "population")
       .groupBy("region")
       .agg(sum($"population") as "population")
 
-    println("\nAverage New Cases per Day in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "new_cases").show()
+    data.show(40)
 
-    println("\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)")
-    RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").show()
+//    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
 
-    println("\nAverage New Cases per Million People per Day in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").show()
-
-    println("\nTotal Cases in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "total_cases", "max").show()
-
-    println("\nTotal Cases per Million People in Each Region (normalized before region grouping)")
-    RankRegions.rankByMetricLow(spark, data, "total_cases_per_million", "max").show()
-
-    println("\nTotal Cases per Million People in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").show()
-
-    println("\nAverage GDP Percent Change in Each Region")
-    RankRegions.changeGDP(spark, data, "current_prices_gdp", percapita = false).show()
-
-    println("\nAverage GDP per Capita Percent Change in Each Region")
-    RankRegions.changeGDP(spark, data, "gdp_per_capita", percapita = false).show()
-
-    // TODO: Write file to some output folder.
+//    println("\nAverage New Cases per Day in Each Region")
+//    RankRegions.rankByMetricLow(spark, data, "new_cases").show()
+//
+//    println("\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)")
+//    RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").show()
+//
+//    println("\nAverage New Cases per Million People per Day in Each Region")
+//    RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").show()
+//
+//    println("\nTotal Cases in Each Region")
+//    RankRegions.rankByMetricLow(spark, data, "total_cases", "max").show()
+//
+//    println("\nTotal Cases per Million People in Each Region (normalized before region grouping)")
+//    RankRegions.rankByMetricLow(spark, data, "total_cases_per_million", "max").show()
+//
+//    println("\nTotal Cases per Million People in Each Region")
+//    RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").show()
+//
+//    println("\nAverage GDP Percent Change in Each Region")
+//    RankRegions.changeGDP(spark, data, "current_prices_gdp", percapita = false).show()
+//
+//    println("\nAverage GDP per Capita Percent Change in Each Region")
+//    RankRegions.changeGDP(spark, data, "gdp_per_capita", percapita = false).show()
+//
+//    // TODO: Write file to some output folder.
   }
 }

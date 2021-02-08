@@ -7,39 +7,45 @@ import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
  * based on specific columns that are established in the input DF's
  */
 class DataFrameBuilder {
-
-  def build(
-             spark: SparkSession,
-             econPath: String,
-             casePath: String
-           ): DataFrame = {
+  def build(spark: SparkSession, fileNames: Map[String, String], db: s3DAO): DataFrame = {
     import spark.implicits._
 
-    // val regionDF = spark.read.json("s3a://adam-king-848/data/regionDict.json")
-    val regionDF = spark.read.json("src/test/scala/testData/regionDict")
+    //Callback function used here to create and return a spark dataframe after download from s3.
+    val callBack = (downloadPath: String) => spark.read.json(downloadPath)
 
     val dailyCasesSchema = Encoders.product[CountryStats].schema
-    val rawDailyCasesData = spark.read
-      .format("csv")
-      //.option("delimiter", "\t")
-      .option("header", "true")
-      .schema(dailyCasesSchema)
-      .load(casePath)
-      .as[CountryStats] //case class for daily cases by country dataset
-      .toDF()
+    val economySchema = Encoders.product[EconomicsData].schema
+    val covidCB = (downloadPath: String) => {
+      spark.read
+        .option("delimiter", "\t")
+        .option("header", "true")
+        .format("csv")
+        .schema(dailyCasesSchema)
+        .csv(downloadPath)
+    }
+    val econCB = (downloadPath: String) => {
+      spark.read
+        .option("delimiter", "\t")
+        .option("header", "true")
+        .format("csv")
+        .schema(economySchema)
+        .csv(downloadPath)
+    }
 
-    val economicsDataSchema = Encoders.product[EconomicsData].schema
-    val rawEconomicsData = spark.read
-      .format("csv")
-      //.option("delimiter", "\t")
-      .option("header", "true")
-      .schema(economicsDataSchema)
-      .load(econPath)
-      .as[EconomicsData] //case class for economy data by country dataset
-      .toDF()
+    //Download dataframe from s3.
+    val regionDF = db.loadDFFromBucket(fileNames("regionSrc"), callBack)
 
-    val dailyCases = initDailyCasesDF(spark, rawDailyCasesData, regionDF)
-    val economicsData = initEconomicsDF(spark, rawEconomicsData, regionDF)
+//    val covidRDD = db.getTsvRdd(fileNames("covidSrc")).toDF().rdd
+//    val rawCovidDF = covidRDD.toDF(Util.getCovidSchema:_*).as[CountryStats].toDF()
+    val rawCovidDF = db.loadDFFromBucket(fileNames("covidSrc"), covidCB)
+
+//    val econRDD = db.getTsvRdd(fileNames("econSrc")).toDF()
+//    econRDD.explain()
+//    val rawEconDF = econData.toDF(Util.getCovidSchema:_*).as[EconomicsData].toDF()
+    val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
+
+    val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
+    val economicsData = initEconDF(spark, rawEconDF, regionDF)
 
     val fullDataDF = dailyCases.join(economicsData, Seq("country", "region"))
     fullDataDF
@@ -80,8 +86,9 @@ class DataFrameBuilder {
                      dF: DataFrame,
                      cols: Seq[String]
                    ): DataFrame = {
-    val newDF = dF.select(cols.map(col): _*)
-    newDF.na.fill(0) // replace null with 0
+    val newDF = dF.select(cols.map(col): _*).cache()
+    newDF.na.fill(0).show(120) // replace null with 0
+    newDF
   }
 
   def initDailyCasesDF(
@@ -104,11 +111,11 @@ class DataFrameBuilder {
     addRegion(spark, regionDF, tempDF)
   }
 
-  def initEconomicsDF(
-                       spark: SparkSession,
-                       rawEconDF: DataFrame,
-                       regionDF: DataFrame
-                     ): DataFrame = {
+  def initEconDF(
+               spark: SparkSession,
+               rawEconDF: DataFrame,
+               regionDF: DataFrame
+             ): DataFrame = {
     val tempDF = filterColumns(
       spark,
       rawEconDF,
@@ -121,7 +128,8 @@ class DataFrameBuilder {
       )
     )
       .withColumnRenamed("name", "country") //rename 'name' field to 'country'
-      .filter(col("year") === 2020) //only include annual gdp data from 2020
+      .filter(col("year") === 2020).cache() //only include annual gdp data from 2020
+    tempDF.show(40)
     addRegion(spark, regionDF, tempDF)
   }
 }

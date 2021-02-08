@@ -7,6 +7,7 @@ ThisBuild / scalaVersion := "2.12.13"
 
 lazy val global = project
   .in(file("."))
+  .settings(settings)
   .aggregate(
     Utilities,
     CovidResponse,
@@ -17,6 +18,7 @@ lazy val Utilities = project
   .settings(
     name := "Utilities",
     assemblyJarName in assembly := name.value + ".jar",
+    settings,
     libraryDependencies ++= sharedDependencies ++ Seq(
       dependencies.aws
     )
@@ -26,6 +28,7 @@ lazy val CovidResponse = project
   .settings(
     name := "CovidResponse",
     assemblyJarName in assembly := name.value + ".jar",
+    settings,
     libraryDependencies ++= sharedDependencies ++ Seq(
       dependencies.logCore,
       dependencies.logScala
@@ -37,6 +40,7 @@ lazy val CorrelateInfectionGDP = project
   .settings(
     name := "CorrelateInfectionGDP",
     assemblyJarName in assembly := name.value + ".jar",
+    settings,
     libraryDependencies ++= sharedDependencies ++ Seq(
       dependencies.logCore,
       dependencies.logScala
@@ -62,3 +66,17 @@ lazy val dependencies =
     val breezeViz = "org.scalanlp" %% "breeze-viz" % "1.1"
     val breeze = "org.scalanlp" %% "breeze" % "1.1"
   }
+
+lazy val settings = Seq(scalacOptions ++= compilerOptions)
+
+lazy val compilerOptions = Seq(
+  "-unchecked",
+  "-feature",
+  "-language:existentials",
+  "-language:higherKinds",
+  "-language:implicitConversions",
+  "-language:postfixOps",
+  "-deprecation",
+  "-encoding",
+  "utf8"
+)
