@@ -64,7 +64,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
     * tests makeHashtagDS on an input with multiple hashtags
     */
   "makeHashtagDS" should "return a Dataset[Hashtag]" in {
-    val hashtagDS = Runner.makeHashtagDS(testDS)
+    val hashtagDS = Runner.makeHashtagDS(testDS,testSpark)
 
     assert(hashtagDS.collect()===testHashtagDS.collect())
   }
@@ -73,7 +73,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
     * tests makeHashtagDS on an input with no hashtags
     */
   "makeHashtagDS" should "return an empty Dataset[Hashtag] when there are no hashtags in the input" in {
-    val hashtagDS = Runner.makeHashtagDS(noHashtagsDS)
+    val hashtagDS = Runner.makeHashtagDS(noHashtagsDS,testSpark)
 
     assert(hashtagDS.isEmpty)
   }
@@ -84,7 +84,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
     * tests markCovidRelated on a covid related hashtag as input
     */
   "markCovidRelated()" should "return a new tweet continging 'covid' when a hashtag is covid related" in {
-    val ht = Runner.markCovidRelated(covidHashtag)
+    val ht = Runner.markCovidRelated(covidHashtag,true)
 
     assert(ht.hashtag.equals("covid"))
   }
@@ -93,7 +93,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
     * tests markCovidRelated on a non-covid related hashtag as input
     */
   "markCovidRelated()" should "return a new tweet containing 'non-covid' when a hashtag is not covid related" in {
-    val ht = Runner.markCovidRelated(nonCovidHashtag)
+    val ht = Runner.markCovidRelated(nonCovidHashtag,false)
 
     assert(ht.hashtag.equals("non-covid"))
   }

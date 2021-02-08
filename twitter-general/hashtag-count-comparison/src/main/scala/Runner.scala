@@ -2,15 +2,15 @@ package HashtagCountComparison
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Dataset}
+import org.apache.spark.sql.functions._
 import javax.xml.crypto.Data
-
 
 
 
 
 object Runner {
 
-  case class Tweets(text: String)
+  case class Tweets(value: String)
 
   case class Hashtag(hashtag: String)
   
@@ -49,30 +49,55 @@ object Runner {
         
     }
 
+  
+    /**
+      * a function for reading in 
+      *
+      * @param spark the spark session for reading in the data
+      * @param path the path to pass to the load function of the spark session
+      * @return
+      */
     def readToDS(spark: SparkSession, path: String): Dataset[Tweets]={
-      // import spark.implicits._
-      // return spark.read.format("text").load(path).as[Tweets]
-      null
+      import spark.implicits._
+      return spark.read.format("text").load(path).as[Tweets]
     }
 
-    def makeHashtagDS(ds: Dataset[Tweets]): Dataset[Hashtag]={
-      null
-      // val hashtags = ds
-      //   .select(explode(split("text", "\\W+")).alias("word"))
-      //   .filter("word" =!= "")
-      //   .filter("word".startsWith("#")).as[Hashtag]
+    /**
+      * a function that takes in a Dataset[Tweets] and parses it into a new
+      * Dataset[Hashtag] which contains the hashtags from the Tweets in the input
+      * dataset
+      *
+      * @param ds the input dataset
+      * @return a new 
+      */
+    def makeHashtagDS(ds: Dataset[Tweets], spark: SparkSession): Dataset[Hashtag]={
+
+      import spark.implicits._
+
+      val hashtags = ds
+        .select(explode(split(col("value"), "\\W+"))).alias("word")
+        .filter(col("word") =!= "")
+        .filter($"word".startsWith("#")).as[Hashtag]
+
+        hashtags
     }
     
     /**
       * a function that takes in a hashtag, check to see if it is covid related,
-      * and replaces the text of the hashtag with 'covid' or 'non-covid'
+      * and returns a new hashtag with 'covid' or 'non-covid' as the hashtag field
       * depending on the result
       *
       * @param Hashtag the input hashtag
       * @return a new tweet with the new text
       */
-    def markCovidRelated(hashtag: Hashtag): Hashtag={
-      null
+    def markCovidRelated(hashtag: Hashtag, condition: Boolean): Hashtag={
+
+      if(condition){
+          Hashtag("covid")
+      }else{
+          Hashtag("non-covid")
+      }
+
     }
 
         /**
@@ -83,7 +108,8 @@ object Runner {
           * @return
           */
         def isCovidRelated(hashtag: String): Boolean={
-          false
+          val h = hashtag.drop(1)
+          Terms.getCovidTerms.contains(h.toLowerCase())
         }
 
     /**
@@ -96,11 +122,11 @@ object Runner {
     def getInputPath(range: Int): String={
         var ret =""
 
-      //  range match {
-      //     case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
-      //     case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
-      //     case _ => ret = "no preset"
-      //   }
+       range match {
+          case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+          case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+          case _ => ret = "no preset"
+        }
         ret
         
     }
