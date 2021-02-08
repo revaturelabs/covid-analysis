@@ -35,8 +35,29 @@ object Runner {
         // by the IsCovidRelatedText function
         val covidFlags = tweetDataSet.map(x => IsCovidRelatedText(x.value))
         //covidFlags.show()
-        return 0
+        return CalculatePercentage(covidFlags)
     }
+    
+    /**
+      * A function that takes a Dataset containing the boolean values returned from
+      * the IsCovidRelatedText function, filters the true values, calculates the
+      * percentage and returns it as an integer
+      * @param resultsDataSet the results of IsCovidRelatedText (Dataset[Boolean])
+      * @return The calculated percentage of true values in the results set as integer
+      */
+    def CalculatePercentage(resultsDataSet:Dataset[Boolean]):Integer = {
+        // Store the total count of result values
+        val totalCount = resultsDataSet.collect().length
+        // Filter the true values into a new Dataset
+        val countingTruesDS = resultsDataSet.filter(x => x.equals(true))
+        // Count the true values
+        val trueCount = countingTruesDS.collect().length
+        // Calculate the percentage using doubles, then cast back to Integer
+        val thePercentage = (trueCount.toDouble/totalCount.toDouble)*100
+        println("Calculated.." + thePercentage)
+        return thePercentage.toInt
+    }
+
     /**
       * A function that takes a string filepath and parses the data from the file,
       * returns a data frame with each row as the text of a tweet
@@ -45,7 +66,7 @@ object Runner {
       */
     def ReadInputFileToDS(path: String, spark: SparkSession): Dataset[Tweet] = {
         import spark.implicits._
-        val tweetDataSet = spark.read.text(path).as[Tweet]
+        val tweetDataSet = spark.read.text(path).as[Tweet].cache()
         //tweetDataSet.show()
         return tweetDataSet
     }
