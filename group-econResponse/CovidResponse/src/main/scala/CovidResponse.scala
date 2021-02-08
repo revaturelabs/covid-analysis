@@ -44,7 +44,6 @@ object CovidResponse {
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
-    spark.sparkContext.setLogLevel("INFO")
 
     val data = dfb.build(spark, fileNames, db)
 
@@ -55,8 +54,6 @@ object CovidResponse {
       .agg(max($"population") as "population")
       .groupBy("region")
       .agg(sum($"population") as "population")
-
-//    data.show(40)
 
     db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
 
