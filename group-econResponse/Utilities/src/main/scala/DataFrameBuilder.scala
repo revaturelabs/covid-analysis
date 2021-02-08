@@ -1,6 +1,7 @@
 package utilites
 
 import org.apache.spark.sql.functions.{col, explode}
+import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
 
 /** this object filters/joins dataFrames together
@@ -8,34 +9,17 @@ import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
  */
 class DataFrameBuilder {
   def build(spark: SparkSession, fileNames: Map[String, String], db: s3DAO): DataFrame = {
-    val dailyCasesSchema = Encoders.product[CountryStats].schema
-    val economySchema = Encoders.product[EconomicsData].schema
+    val covidSchema = Encoders.product[CountryStats].schema
+    val econSchema = Encoders.product[EconomicsData].schema
 
     //Callback function used here to create and return a spark dataframe after download from s3.
     val regionCB = (downloadPath: String) => spark.read.json(downloadPath)
-
-    val covidCB = (downloadPath: String) => {
-      spark.read
-        .option("delimiter", "\t")
-        .option("header", "true")
-        .format("csv")
-        .schema(dailyCasesSchema)
-        .csv(downloadPath)
-    }
-    val econCB = (downloadPath: String) => {
-      spark.read
-        .option("delimiter", "\t")
-        .option("header", "true")
-        .format("csv")
-        .schema(economySchema)
-        .csv(downloadPath)
-    }
+    val covidCB = getCallbackFn(spark, covidSchema)()
+    val econCB = getCallbackFn(spark, econSchema)()
 
     //Download dataframe from s3.
     val regionDF = db.loadDFFromBucket(fileNames("regionSrc"), regionCB)
-
     val rawCovidDF = db.loadDFFromBucket(fileNames("covidSrc"), covidCB)
-
     val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
 
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
@@ -45,6 +29,23 @@ class DataFrameBuilder {
     fullDataDF
   }
 
+/** returns a function that can be used as a callback
+ * this callback fn will be used in the DAO to build a spark dataframe when tsv is loaded from s3.
+ *
+ * @param spark    spark session
+ * @param schema    schema used in df construction
+ * @return callback function
+*/
+  def getCallbackFn(spark: SparkSession, schema: StructType): () => String => DataFrame = () =>  {
+    downloadPath: String => {
+      spark.read
+        .option("delimiter", "\t")
+        .option("header", "true")
+        .format("csv")
+        .schema(schema)
+        .csv(downloadPath)
+    }
+  }
   /** returns a new dataFrame with an appended Region
    * column that maps each 'country' in dF to it's region
    *

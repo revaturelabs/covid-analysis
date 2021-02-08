@@ -6,9 +6,7 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.{AmazonClientException, AmazonServiceException}
 import org.apache.commons.io.IOUtils
-import org.apache.spark.sql.{DataFrame, SparkSession}
-
-import scala.collection.mutable.ArrayBuffer
+import org.apache.spark.sql.DataFrame
 
 case class s3DAO (
    amazonS3Client: AmazonS3Client,
@@ -18,26 +16,23 @@ case class s3DAO (
    DOWNLOAD_PATH: String = "CovidResponse/src/main/resources/"
    ) {
 
+  // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
+  def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
+    val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
+    val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
+    val file = new FileOutputStream(DOWNLOAD_PATH + filesName)
+    file.write(bytes)
+
+    cb(DOWNLOAD_PATH + filesName)
+  }
+
+  //copy files to s3.
   def uploadFile(file: File, fileName: String): Unit = {
     try {
       amazonS3Client.putObject(BUCKET_NAME, fileName, file)
     } catch {
       case e: AmazonClientException => System.err.println("Exception: " + e.toString)
     }
-  }
-
-  def getTsvRdd(fileName: String, hasHeader: Boolean = true): List[List[String]] = {
-    var list = ArrayBuffer[List[String]]()
-
-    val s3Object = amazonS3Client.getObject(BUCKET_NAME, fileName)
-    val reader = new BufferedReader(new InputStreamReader(s3Object.getObjectContent))
-    var line = reader.readLine
-    while (reader.readLine != null) {
-      list += line.split("\t").map(_.trim).toList
-      line = reader.readLine
-    }
-    println(list.toString())
-    if (hasHeader) list.toList.tail else list.toList
   }
 
   // download file and console out each line
@@ -53,16 +48,6 @@ case class s3DAO (
     } catch {
       case e: AmazonClientException => System.err.println("Exception: " + e.toString)
     }
-  }
-
-  // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
-  def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
-      val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
-      val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
-      val file = new FileOutputStream(DOWNLOAD_PATH + filesName)
-      file.write(bytes)
-
-    cb(DOWNLOAD_PATH + filesName)
   }
 }
 

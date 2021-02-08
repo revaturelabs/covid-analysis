@@ -84,12 +84,3 @@ case class CountryStats(
    tests_units: String = null,
    stringency_index: Double = 0
 )
-
-object Util {
-  def getCovidSchema: Seq[String] =
-       Seq("DATE", "COUNTRY", "TOTAL_CASES", "NEW_CASES", "NEW_CASES_SMOOTHED", "TOTAL_DEATHS", "NEW_DEATHS", "NEW_DEATHS_SMOOTHED", "TOTAL_CASES_PER_MILLION", "NEW_CASES_PER_MILLION", "NEW_CASES_SMOOTHED_PER_MILLION", "TOTAL_DEATHS_PER_MILLION", "NEW_DEATHS_PER_MILLION12", "NEW_DEATHS_PER_MILLION13", "REPRODUCTION_RATE", "ICU_PATIENTS", "ICU_PATIENTS_PER_MILLION", "HOSP_PATIENTS", "HOSP_PATIENTS_PER_MILLION", "WEEKLY_ICU_ADMISSIONS", "WEEKLY_ICU_ADMISSIONS_PER_MILLION", "WEEKLY_HOSP_ADMISSIONS", "WEEKLY_HOSP_ADMISSIONS_PER_MILLION", "TOTAL_TESTS", "NEW_TESTS", "NEW_TESTS_SMOOTHED", "TOTAL_TESTS_PER_THOUSAND", "NEW_TESTS_SMOOTHED_PER_THOUSAND", "TESTS_PER_CASE", "POSITIVE_RATE", "TESTS_UNITS", "STRINGENCY_INDEX")
-
-  def getEconSchema: Seq[String] =
-      Seq("name", "year", "gdp_constPrices", "gdp_constPrices_delta", "gdp_currentPrices", "gdp_currentPrices_usd", "gdp_currentPrices_ppp", "gdp_deflator", "gdp_perCap_constPrices", "gdp_perCap_constPrices_ppp", "gdp_perCap_currentPrices", "gdp_perCap_currentPrices_usd", "gdp_perCap_currentPrices_ppp", "output_gap_pGDP", "gdp_ppp_frac_of_total_world", "implied_ppp", "total_investment", "gross_national_savings", "inflation_avgConsumerPrices", "inflation_avgConsumerPrices_delta", "inflation_eopConsumerPrices", "inflation_eopConsumerPrices_delta", "six_month_LIBOR", "vol_imports_goods_and_services_delta", "vol_imports_goods_delta", "vol_exports_goods_and_services_delta", "vol_exports_goods_delta", "unemployment_rate", "employed_persons", "population", "government_revenue_currency", "government_revenue_percent", "government_total_expenditure_currency", "government_total_expenditure_percent", "government_net_lb_currency", "government_net_lb_percent", "government_structural_balance_currency", "government_structural_balance_percent_pGDP", "government_primary_net_lb_currency", "government_primary_net_lb_percent", "government_net_debt_currency", "government_net_debt_percent", "government_gross_debt_currency", "government_gross_debt_percent", "gdp_of_fiscal_year", "current_account_balance_usd", "current_account_balance_percentGDP")
-
-}
