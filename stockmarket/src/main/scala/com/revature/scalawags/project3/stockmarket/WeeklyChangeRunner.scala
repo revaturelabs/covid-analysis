@@ -22,13 +22,15 @@ object WeeklyChangeRunner{
         import spark.implicits._
 
         val africaDF = dataFrameByRegion(spark, "Africa")
+        //dataColumnFormating function is only needed for Africa region
         val dateFormatDF = dateColumnFormating(africaDF)
-        //dateFormatDF.show(1800, false)
+        val sumDFforAfrica = sumOfOpenPrice(dateFormatDF)
+        sumDFforAfrica.show(1800, false)
 
 
-        // val asiaDF = dataFrameByRegion(spark, "Asia")
-        // val sumDF = sumOfOpenPrice(asiaDF)
-        // sumDF.show(2000, false)
+        val asiaDF = dataFrameByRegion(spark, "Asia")
+        val sumDFforAsia = sumOfOpenPrice(asiaDF)
+        sumDFforAsia.show(1800, false)
     }
 
     def dataFrameByRegion(spark: SparkSession, region: String): DataFrame = {
@@ -48,24 +50,14 @@ object WeeklyChangeRunner{
         return sumDF
     }
 
-    def dateColumnFormating(df: DataFrame){
-        val wordDateFormat = df.withColumn("Word_Date", to_date(col("Date"), "MMM dd, yyyy")).select(col("Word_Date"), col("Open"))
-        // val dataFormat2 = df.withColumn("New Date", date_format(to_date(col("Date"), "MM/dd/yyyy"), "MM/dd/yyyy")).select("New Date", "Open")
-        //wordDateFormat.printSchema
-        //return wordDateFormat1
+    def dateColumnFormating(df: DataFrame): DataFrame ={
+        val wordDateFormat = df.withColumn("Date", to_date(col("Date"), "MMM dd, yyyy")).select(col("Date"), col("Open"))
+        val dropNullDF = wordDateFormat.na.drop()
 
-        val numDataFormat = df.withColumn("Num_Date", to_date(col("Date"), "MM/dd/yyyy")).select(col("Date"), col("Open"))
-        //numDataFormat.printSchema
-        return numDataFormats
+        val numDataFormat = df.withColumn("Date", to_date(col("Date"), "MM/dd/yyyy")).select(col("Date"), col("Open"))
+        val dropNullDF1 = numDataFormat.na.drop()
 
-        // val date_f1 = dateFormat1.as("df_form1")
-        // val date_f2 = dataFormat2.as("df_form2")
-
-        // val joined_df = date_f1.join(
-        // date_f2
-        // , col("df_form1.New Date") === col("df_form2.New Date")
-        // , "outer")
-        // joined_df.show(2000, false)
-
+        val unionDF = dropNullDF.union(dropNullDF1)
+        return unionDF
     }
 }

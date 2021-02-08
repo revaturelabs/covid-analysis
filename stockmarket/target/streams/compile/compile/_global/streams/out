@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner.scala:57:107: value $ is not a member of StringContext[0m
-[0m[[0m[31merror[0m] [0m[0m        val numDataFormat = df.withColumn("Date", to_date(col("Date"), "MM/dd/yyyy")).select(col("Date"), $"Open")[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner.scala:52:36: value withColumn is not a member of org.apache.spark.sql.DataFrameNaFunctions[0m
+[0m[[0m[31merror[0m] [0m[0m        val wordDateFormat = df.na.withColumn("Word_Date", to_date(col("Date"), "MMM dd, yyyy")).select(col("Word_Date"), col("Open")).drop()[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
