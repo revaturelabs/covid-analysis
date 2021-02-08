@@ -1,10 +1,12 @@
 package com.revature.scalawags.project3.herdimmunity
 
-import com.github.nscala_time.time.Imports._
 import java.io.PrintWriter
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.postfixOps
 import sys.process._
+
+import com.github.nscala_time.time.Imports._
 
 object CSVPullerAndParser {
 

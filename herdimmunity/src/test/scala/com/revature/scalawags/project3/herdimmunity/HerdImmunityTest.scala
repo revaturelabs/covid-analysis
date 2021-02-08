@@ -5,21 +5,20 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class HerdImmunityTest extends AnyFlatSpec {
 
-  val dataDate = "2021-02-01".toDateTime
-  val totalPopulation = 10000
-  val vaccinatedPopulation = 2000
-  val dailyAdministered = 40
+  val data = AnalysisData(
+    date = "2021-02-01".toDateTime,
+    peopleVaccinated = 6000,
+    peopleFullyVaccinated = 2000,
+    newVaccinationsSmoothed = 40,
+    population = 10000
+  )
 
   "Days Remaining" should "return 190" in {
-    assert(HerdImmunity.daysRemaining(
-      totalPopulation,
-      vaccinatedPopulation,
-      dailyAdministered
-    ) == 190)
+    assert(HerdImmunity.daysRemaining(data).getOrElse(0) == 190)
   }
 
   "Exact Date" should "return August 10, 2021 (as DateTime object)" in {
-    assert(HerdImmunity.exactDate(190, dataDate) == "2021-8-10".toDateTime)
+    assert(HerdImmunity.exactDate(190, data.date) == "2021-8-10".toDateTime)
   }
 
   "Pretty Date" should "return 'Tuesday, August 10, 2021'" in {
