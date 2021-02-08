@@ -1,0 +1,3 @@
+sbt package && 
+docker cp ./target/scala-2.12/stock_market_composit_index_change_calculator_2.12-1.0.jar spark-master:/stock_market_composit_index_change_calculator.jar && 
+docker exec spark-master bash -c "./spark/bin/spark-submit --class "com.revature.scalawags.project3.stockmarket.WeeklyChangeRunner" --master local[4] /stock_market_composit_index_change_calculator.jar"

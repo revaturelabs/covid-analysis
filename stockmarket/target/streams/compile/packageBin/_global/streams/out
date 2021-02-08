@@ -10,12 +10,92 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 23.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 23.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 21.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 21.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 23.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 23.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 21.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 21.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 18.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 18.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 18.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 18.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 9.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 9.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 22.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 22.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 20.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 20.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 22.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 22.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 20.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 20.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 19.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 19.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 24.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 24.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 19.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 19.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 15.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 15.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 17.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 17.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 15.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 15.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 17.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 17.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 8.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 11.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 11.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 13.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 13.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 11.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 11.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 13.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 13.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data 2[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data 2[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 14.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 14.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 16.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 16.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 9.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 14.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 14.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 16.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 16.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry$ 2.class[0m
@@ -92,6 +172,20 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$delayedInit$body 7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/data/DataDownloader$CompositeIndexOfCountry 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 10.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 10.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 12.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 12.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/CompositeIndexChangeCalculator$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 10.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner$ 10.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 12.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/target/scala-2.12/classes/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner 12.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
