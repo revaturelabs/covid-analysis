@@ -12,7 +12,7 @@ class DataFrameBuilder {
     val covidSchema = Encoders.product[CountryStats].schema
     val econSchema = Encoders.product[EconomicsData].schema
 
-    //Callback function used here to create and return a spark dataframe after download from s3.
+    //Callback functions used here to create and return a spark dataframe after download from s3.
     val regionCB = (downloadPath: String) => spark.read.json(downloadPath)
     val covidCB = getCallbackFn(spark, covidSchema)()
     val econCB = getCallbackFn(spark, econSchema)()
@@ -23,7 +23,8 @@ class DataFrameBuilder {
     val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
 
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
-    val economicsData = initEconDF(spark, rawEconDF, regionDF)
+    val economicsData = initEconDF(spark, rawEconDF, regionDF).cache()
+    economicsData.show()
 
     val fullDataDF = dailyCases.join(economicsData, Seq("country", "region"))
     fullDataDF
@@ -46,6 +47,7 @@ class DataFrameBuilder {
         .csv(downloadPath)
     }
   }
+
   /** returns a new dataFrame with an appended Region
    * column that maps each 'country' in dF to it's region
    *
@@ -122,7 +124,6 @@ class DataFrameBuilder {
     )
       .withColumnRenamed("name", "country") //rename 'name' field to 'country'
       .filter(col("year") === 2020).cache() //only include annual gdp data from 2020
-    tempDF.show(40)
     addRegion(spark, regionDF, tempDF)
   }
 }

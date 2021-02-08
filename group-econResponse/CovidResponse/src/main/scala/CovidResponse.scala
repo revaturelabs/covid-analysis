@@ -1,7 +1,7 @@
 package response
 
+import org.apache.log4j.{Level, Logger}
 import utilites.{DataFrameBuilder, s3DAO}
-
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{max, sum}
 
@@ -30,14 +30,16 @@ object CovidResponse {
    *
    */
   def main(args: Array[String]): Unit = {
-    val db = s3DAO()
-    val fileNames = Map(
-      "covidSrc" -> "economic_data_2018-2021.tsv",
-      "regionSrc" -> "region_dictionary.json",
-      "econSrc" -> "daily_covid_stats.tsv"
-    )
-    val dfb = new DataFrameBuilder
+    // Set the log level to only print errors
+    Logger.getLogger("org").setLevel(Level.WARN)
 
+    val db = s3DAO()
+    val dfb = new DataFrameBuilder
+    val fileNames = Map(
+      "covidSrc" -> "daily_covid_stats.tsv",
+      "regionSrc" -> "region_dictionary.json",
+      "econSrc" -> "economic_data_2018-2021.tsv"
+    )
 
     val spark = SparkSession.builder()
       .master("local[*]")
