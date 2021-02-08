@@ -18,17 +18,19 @@ class RunnerSpec extends AnyFlatSpec{
     // A test DataSet for comparison to DataSet returned by reader function
     val testDS = spark.read.text(testFilePath).as[Runner.Tweet]
     // Some test strings for testing the covid related terms matching function
-    val testString1 = "Testing"
-    val testString2 = "Covid"
+    val testString1 = "Testing basic string"
+    val testString2 = "A string containing a Covid match"
+    val testString3 = "Pandemic-induced Netflix fugue?"
+    val testString4 = "breaking down #COVID!"
 
-    // The ReadInputFileToDF function should parse the input data into a DataFrame for processing
-    // The DataFrame should have a single column with values being the text of the individual tweets
+    // The ReadInputFileToDS function should parse the input data into a DataFrame for processing
+    // The DataSet should have a single column with values being the text of the individual tweets
     "ReadInputFileToDS case 0" should "return a DataFrame containing the input test data" in {
         assert(Runner.ReadInputFileToDS(testFilePath, spark).collect().equals(testDS.collect()))
     }
 
-    // The ReadInputFileToDF function should parse the input data into a DataFrame for processing
-    // The DataFrame should have a single column with values being the text of the individual tweets
+    // The ReadInputFileToDS function should parse the input data into a DataFrame for processing
+    // The DataSet should have a single column with values being the text of the individual tweets
     "ReadInputFileToDS case 1" should "return a DataFrame containing the input test data" in {
         assert(Runner.ReadInputFileToDS(testFilePath, spark).collect().equals(testDS.collect()))
     }
@@ -51,4 +53,15 @@ class RunnerSpec extends AnyFlatSpec{
         assert(Runner.IsCovidRelatedText(testString2) == true)
     }
     
+    // The IsCovidRelatedText function takes a tweet text string as input and loops through
+    // the list of Covid terms. The test string here is a covid term so it should return true
+    "IsCovidRelatedText case 2" should "return true for input test string 3 (english covid single word with no space)" in {
+        assert(Runner.IsCovidRelatedText(testString3) == true)
+    }
+
+    // The IsCovidRelatedText function takes a tweet text string as input and loops through
+    // the list of Covid terms. The test string here is a covid term so it should return true
+    "IsCovidRelatedText case 3" should "return true for input test string 4 (english covid single word with hashtag/punctuation)" in {
+        assert(Runner.IsCovidRelatedText(testString3) == true)
+    }
 }

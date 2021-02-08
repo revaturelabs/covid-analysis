@@ -1,4 +1,5 @@
 package TweetCovid19Percentage
+import org.apache.log4j._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Row,Dataset}
 
@@ -7,6 +8,8 @@ object Runner {
     case class Tweet(value: String)
     
     def main(args: Array[String]): Unit = {
+        // Set the log level to only print errors
+        Logger.getLogger("org").setLevel(Level.ERROR)
         // Grab the Spark Session object, set the app Name option, EMR will handle the rest of the config
         val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
         // TODO: Learn more about spark implicits because you know nothing atm 
@@ -26,15 +29,12 @@ object Runner {
       */
     def tweetCovid19Percentage(path: String, spark: SparkSession): Int = {
         import spark.implicits._
-        // Grab the data from the input file and store in a dataframe
-        val tweetDataFrame = ReadInputFileToDS(path, spark) 
-        // TODO: Read in list of covid related words
-        // Im thinking this will be a dataframe, could be a DataSet of type Tweet
-        // TODO: Call a function that will read in the lexicon of covid words
-        // May be able to use the previous groups, not sure if I will need a DF for comparison
-        // TODO: Loop through dataframe and send each text to the comparison function
-        // Thinking this can just be a .map with the function call on a dataset
-        // Call function to take results however they are stored and aggregate over to calculate percentage
+        // Grab the data from the input file and store in a dataset
+        val tweetDataSet = ReadInputFileToDS(path, spark) 
+        // Create a new dataset by mapping the text values to the boolean values returned 
+        // by the IsCovidRelatedText function
+        val covidFlags = tweetDataSet.map(x => IsCovidRelatedText(x.value))
+        //covidFlags.show()
         return 0
     }
     /**
@@ -46,7 +46,7 @@ object Runner {
     def ReadInputFileToDS(path: String, spark: SparkSession): Dataset[Tweet] = {
         import spark.implicits._
         val tweetDataSet = spark.read.text(path).as[Tweet]
-        tweetDataSet.show()
+        //tweetDataSet.show()
         return tweetDataSet
     }
 
@@ -57,8 +57,18 @@ object Runner {
       * @return True if any matches to covid words in the tweet, false if none
       */
     def IsCovidRelatedText(text: String): Boolean = {
-        // TODO: Implement comparison of input text with lexicon, not sure of data structures involved yet
-        // Return true at the first match to avoid further processing
+        // Grab the list of covid terms
+        val termsList = CovidTermsList.getTermsList
+        // Loop through the whole list, convert each to lowercase,
+        // Test to see if the tweet text contains each word, converting 
+        // text to lowercase as well to match strings in any case
+        for(i <- termsList){
+            if(text.toLowerCase.contains(i.toLowerCase())){
+                return true
+            }
+        }
         return false
     }
+
+
 }
