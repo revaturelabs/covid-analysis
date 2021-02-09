@@ -13,7 +13,7 @@ Functions to calculate the estimated date the U.S. population reaches herd immun
 
 ## Features
 
-* Pulls COVID dataset from https://covid.ourworldindata.org/data/owid-covid-data.csv and parses latest U.S. vaccination data from the set.
+* Pulls [Our World in Data](https://github.com/owid/covid-19-data/tree/master/public/data)'s COVID-19 dataset from https://covid.ourworldindata.org/data/owid-covid-data.csv and parses latest U.S. vaccination data from the set.
 * Calculates estimated number of days remaining until the U.S. population reaches herd immunity with respect to COVID-19.
 * Converts estimated number of days into date format.
 
