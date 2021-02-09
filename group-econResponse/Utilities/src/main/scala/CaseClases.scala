@@ -2,7 +2,7 @@ package utilites
 
 case class EconomicsData(
   name: String,
-  year: Int,
+  year: Double,
   gdp_constPrices: Long = 0,
   gdp_constPrices_delta: Double = 0,
   gdp_currentPrices: Double = 0,
@@ -52,13 +52,13 @@ case class EconomicsData(
 )
 
 case class CountryStats(
-   country: String = null,
    date: String,
-   total_cases: Int = 0,
-   new_cases: Int = 0,
+   country: String = null,
+   total_cases: Double = 0,
+   new_cases: Double = 0,
    new_cases_smoothed: Double = 0,
-   total_deaths: Int = 0,
-   new_deaths: Int = 0,
+   total_deaths: Double = 0,
+   new_deaths: Double = 0,
    new_deaths_smoothed: Double = 0,
    total_cases_per_million: Double = 0,
    new_cases_per_million: Double = 0,
@@ -67,14 +67,14 @@ case class CountryStats(
    new_deaths_per_million: Double = 0,
    new_deaths_smoothed_per_million: Double = 0,
    reproduction_rate: Double = 0,
-   icu_patients: Int = 0,
+   icu_patients: Double = 0,
    icu_patients_per_million: Double = 0,
-   hosp_patients: Int = 0,
+   hosp_patients: Double = 0,
    hosp_patients_per_million: Double = 0,
-   weekly_hosp_admissions: Int = 0,
+   weekly_hosp_admissions: Double = 0,
    weekly_hosp_admissions_per_million: Double = 0,
-   total_tests: Int = 0,
-   new_tests: Int = 0,
+   total_tests: Double = 0,
+   new_tests: Double = 0,
    total_tests_per_thousand: Double = 0,
    new_tests_per_thousand: Double = 0,
    new_tests_smoothed: Double = 0,
@@ -84,3 +84,11 @@ case class CountryStats(
    tests_units: String = null,
    stringency_index: Double = 0
 )
+
+object util {
+  def recast(): Seq[String] = Seq(
+    "year",
+    "total_cases",
+    "new_cases"
+  )
+}

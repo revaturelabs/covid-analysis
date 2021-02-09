@@ -44,18 +44,21 @@ object CovidResponse {
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
+    import spark.implicits._
 
+    //Get full dataframe.
     val data = dfb.build(spark, fileNames, db)
 
-    import spark.implicits._
       data
       .withColumn("population", $"total_cases" / $"total_cases_per_million")
       .groupBy("region", "country")
       .agg(max($"population") as "population")
       .groupBy("region")
       .agg(sum($"population") as "population")
+      .cache()
 
-    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
+    data.show(120)
+//    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
 
     println("\nAverage New Cases per Day in Each Region")
     RankRegions.rankByMetricLow(spark, data, "new_cases").show()

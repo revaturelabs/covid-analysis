@@ -1,14 +1,26 @@
 package utilites
 
 import org.apache.spark.sql.functions.{col, explode}
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.types.{IntegerType, StructType}
 import org.apache.spark.sql.{DataFrame, Encoders, SparkSession}
 
-/** this object filters/joins dataFrames together
- * based on specific columns that are established in the input DF's
+/** this object acquires needed dataframes from AWS s3.
+ * It then filters, joins dataFrames together with the specific columns needed for
+ * application consumption elsewhere in the project.
  */
 class DataFrameBuilder {
+/** Interfaces with the dao class to download three full datafromes from s3.
+ * Prepares data with schema where needed.
+ * It then filters & joins dataFrames together with specific columns needed for application consumption.
+ * Returns full dataframe.
+ *
+ * @param spark   Spark Session
+ * @param fileNames  Data object with key value pairs for needed file names on s3
+ * @param db   Data access object for interfacing with AWS s3
+ * @return full dataframe
+ * */
   def build(spark: SparkSession, fileNames: Map[String, String], db: s3DAO): DataFrame = {
+    //Build structype schemas from case classes.
     val covidSchema = Encoders.product[CountryStats].schema
     val econSchema = Encoders.product[EconomicsData].schema
 
@@ -22,16 +34,19 @@ class DataFrameBuilder {
     val rawCovidDF = db.loadDFFromBucket(fileNames("covidSrc"), covidCB)
     val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
 
+    //Combine with regional df and process for application consumption.
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
     val economicsData = initEconDF(spark, rawEconDF, regionDF).cache()
-    economicsData.show()
+    val fullDF = dailyCases
+      .join(economicsData, Seq("country", "region"))
+      .cache()
 
-    val fullDataDF = dailyCases.join(economicsData, Seq("country", "region"))
-    fullDataDF
+
+    fullDF
   }
 
 /** returns a function that can be used as a callback
- * this callback fn will be used in the DAO to build a spark dataframe when tsv is loaded from s3.
+ * this callback fn will be used in the DAO to build a spark dataframe when tsv is loaded from s3
  *
  * @param spark    spark session
  * @param schema    schema used in df construction
@@ -44,8 +59,23 @@ class DataFrameBuilder {
         .option("header", "true")
         .format("csv")
         .schema(schema)
-        .csv(downloadPath)
+        .csv(downloadPath)toDF()
     }
+  }
+
+  /** Recast a couple columns from double to int
+   * Encoding for csv cast Int to Null so we read in as double
+   * And here, we recast them to ints.
+   *
+   * @param df    spark dataframe
+   * @return spark dataframe
+   */
+  def recastToInt(df: DataFrame): DataFrame = {
+    Seq("year", "total_cases", "new_cases")
+      .map(col => df.withColumn("tmp",
+        df(s"$col").cast(IntegerType)).drop(s"$col").
+        withColumnRenamed("tmp", s"$col"))
+    df
   }
 
   /** returns a new dataFrame with an appended Region
@@ -123,7 +153,7 @@ class DataFrameBuilder {
       )
     )
       .withColumnRenamed("name", "country") //rename 'name' field to 'country'
-      .filter(col("year") === 2020).cache() //only include annual gdp data from 2020
+      .filter(col("year") === 2020) //only include annual gdp data from 2020
     addRegion(spark, regionDF, tempDF)
   }
 }
