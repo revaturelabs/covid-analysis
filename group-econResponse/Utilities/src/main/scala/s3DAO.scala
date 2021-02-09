@@ -13,17 +13,17 @@ case class s3DAO (
    BUCKET_NAME: String = "covid-analysis-p3",
    DATA_LAKE: String = "datalake/infection-gdp/",
    DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
-   DOWNLOAD_PATH: String = "CovidResponse/src/main/resources/"
+   var downloadPath: String = _
    ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
   def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
-    val file = new FileOutputStream(DOWNLOAD_PATH + filesName)
+    val file = new FileOutputStream(downloadPath + filesName)
     file.write(bytes)
 
-    cb(DOWNLOAD_PATH + filesName)
+    cb(downloadPath + filesName)
   }
 
   //copy files to s3.
@@ -49,6 +49,8 @@ case class s3DAO (
       case e: AmazonClientException => System.err.println("Exception: " + e.toString)
     }
   }
+
+  def setDownloadPath(dlPath: String): Unit = this.downloadPath = dlPath
 }
 
 object s3DAO {

@@ -35,6 +35,7 @@ object CovidResponse {
 
     val db = s3DAO()
     val dfb = new DataFrameBuilder
+    db.setDownloadPath("CovidResponse/src/main/resources/")
     val fileNames = Map(
       "covidSrc" -> "daily_covid_stats.tsv",
       "regionSrc" -> "region_dictionary.json",
