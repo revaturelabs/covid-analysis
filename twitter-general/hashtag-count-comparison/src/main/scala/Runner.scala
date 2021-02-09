@@ -4,6 +4,8 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Dataset}
 import org.apache.spark.sql.functions._
 import javax.xml.crypto.Data
+import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.Path
 
 
 
@@ -17,29 +19,32 @@ object Runner {
     def main(args: Array[String]): Unit = {
 
 
+
       if(args.length ==1){
         //set up spark session
         val spark = SparkSession.builder().master("local").appName("HashtagCountComparison").getOrCreate()
         import spark.implicits._
-
+        
         
         
         
         //get input path for s3
         //read input into a dataset
-        //val tweets = spark.read.format("text").load(getInputPath(args(0).toInt)).as[Tweets]
+        val tweets = readToDS(spark, getInputPath(args(0).toInt))
+
         
         //split input on words, filter out hashtags and put all hashtags into new dataset
         //of type Hashtag
-        //val hashtags = makeHashtagDS(tweets)
+        val hashtags = makeHashtagDS(tweets,spark)
 
         //map hashtags to covid related or not covid related
-        //val hashtagCategories = hashtags.map(markCovidRelated)
+        val hashtagCategories = hashtags.map(markCovidRelated(_,isCovidRelated(x$1.hashtag)))
 
         //reduce on categories to get number of non covid hashtags vs covid hashtags
-        //val categoryCount = hashtagCategories.groupBy("hashtag").count()
+        val categoryCount = hashtagCategories.groupBy("hashtag").count()
     
         //output results to s3
+        categoryCount.show()
 
                     
         spark.stop()
@@ -59,7 +64,7 @@ object Runner {
       */
     def readToDS(spark: SparkSession, path: String): Dataset[Tweets]={
       import spark.implicits._
-      return spark.read.format("text").load(path).as[Tweets]
+      return spark.read.text(path).as[Tweets]
     }
 
     /**
@@ -75,9 +80,10 @@ object Runner {
       import spark.implicits._
 
       val hashtags = ds
-        .select(explode(split(col("value"), "\\W+"))).alias("word")
-        .filter(col("word") =!= "")
-        .filter($"word".startsWith("#")).as[Hashtag]
+        .withColumn("hashtag",explode(split($"value", " "))).as("hashtag")
+        .filter($"hashtag" =!= "")
+        .filter($"hashtag".startsWith("#")).as[Hashtag]
+        hashtags.printSchema()
 
         hashtags
     }
@@ -123,8 +129,10 @@ object Runner {
         var ret =""
 
        range match {
-          case 0 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
-          case 1 => ret = "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+          case 0 => ret = "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+          case 1 => ret = "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+          case 2 => ret = "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/"
+          case 3 => ret = "s3a://covid-analysis-p3/datalake/twitter-general/test-data/*"
           case _ => ret = "no preset"
         }
         ret
