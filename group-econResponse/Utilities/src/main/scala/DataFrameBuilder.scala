@@ -37,12 +37,9 @@ class DataFrameBuilder {
     //Combine with regional df and process for application consumption.
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
     val economicsData = initEconDF(spark, rawEconDF, regionDF).cache()
-    val fullDF = dailyCases
-      .join(economicsData, Seq("country", "region"))
-      .cache()
+    val fullDF = dailyCases.join(economicsData, Seq("country", "region"))
 
-
-    fullDF
+    castToInt(fullDF)
   }
 
 /** returns a function that can be used as a callback
@@ -96,6 +93,7 @@ class DataFrameBuilder {
 
     val tempRegion = regionDF
       .select($"name" as "region", explode($"countries") as "country")
+      .na.drop(Seq("region"))
     //Specify the join column as an array type or string to avoid duplicate columns
     dF.join(tempRegion, Seq("country"))
   }

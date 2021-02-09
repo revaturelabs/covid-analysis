@@ -93,6 +93,8 @@ object RankRegions {
       op: String = "avg"
   ): DataFrame = {
     import spark.implicits._
+    println("here!")
+    fullDS.show()
     var oneTimeMetric: DataFrame = spark.emptyDataFrame
     op match {
       case "avg" => {
@@ -114,7 +116,7 @@ object RankRegions {
       }
       // no idea what this hot mess is doing/suppose to do
       // returns max? sum???
-      case "max" => {
+      case "max" =>
         oneTimeMetric = fullDS
           .select($"region", $"date", $"country", functions.col(metric))
           .distinct()
@@ -123,7 +125,6 @@ object RankRegions {
           .groupBy("region")
           .agg(functions.sum(s"$metric") as s"$metric")
           .sort(functions.col(metric))
-      }
       case "pop" => {
         fullDS.select($"region", $"population").distinct().show()
         oneTimeMetric = fullDS
@@ -201,20 +202,18 @@ object RankRegions {
         $"country",
         $"region",
         $"population",
-        $"$metric" as "gdp",
+        functions.col(metric) as "gdp",
         $"year"
-      )
+      ).cache()
 
     val gdp_2020 = gdp_temp
-      .where($"year" === "2020")
-      .where($"gdp" =!= "NULL")
+      .where($"year" === 2020)
       .drop("year")
       .groupBy($"region", $"population")
       .agg(functions.sum($"gdp") as "gdp_20")
 
     val gdp_2019 = gdp_temp
-      .where($"year" === "2019")
-      .where($"gdp" =!= "NULL")
+//      .where($"year" === 2019)
       .drop("year")
       .groupBy($"region", $"population")
       .agg(functions.sum($"gdp") as "gdp_19")
@@ -224,6 +223,6 @@ object RankRegions {
       .withColumn("delta_gdp", (($"gdp_20" - $"gdp_19") / $"gdp_20") * 100)
       .drop("gdp_19", "gdp_20")
 
-    rankByMetric(spark, gdp, "delta_gdp", "avg")
+    rankByMetric(spark, gdp, "delta_gdp")
   }
 }

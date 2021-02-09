@@ -47,7 +47,7 @@ object CovidResponse {
     import spark.implicits._
 
     //Get full dataframe.
-    val data = dfb.build(spark, fileNames, db)
+    val data = dfb.build(spark, fileNames, db).cache()
 
       data
       .withColumn("population", $"total_cases" / $"total_cases_per_million")
@@ -55,10 +55,9 @@ object CovidResponse {
       .agg(max($"population") as "population")
       .groupBy("region")
       .agg(sum($"population") as "population")
-      .cache()
 
     data.show(120)
-//    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
+    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
 
     println("\nAverage New Cases per Day in Each Region")
     RankRegions.rankByMetricLow(spark, data, "new_cases").show()
@@ -79,10 +78,10 @@ object CovidResponse {
     RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").show()
 
     println("\nAverage GDP Percent Change in Each Region")
-    RankRegions.changeGDP(spark, data, "current_prices_gdp", percapita = false).show()
+    RankRegions.changeGDP(spark, data, "gdp_currentPrices_usd", percapita = false).show()
 
     println("\nAverage GDP per Capita Percent Change in Each Region")
-    RankRegions.changeGDP(spark, data, "gdp_per_capita", percapita = false).show()
+    RankRegions.changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false).show()
 
 //    // TODO: Write file to some output folder.
   }
