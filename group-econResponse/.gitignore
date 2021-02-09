@@ -202,6 +202,10 @@ project/plugins/project/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+metals.sbt
+settings.json
+.scalafmt.conf
+build.properties
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -233,3 +237,6 @@ $RECYCLE.BIN/
 CovidResponse/src/main/resources/region_dictionary.json
 CovidResponse/src/main/resources/daily_covid_stats.tsv
 CovidResponse/src/main/resources/economic_data_2018-2021.tsv
+CovidResponse/src/test/resources/dailyCasesTestData.csv
+CovidResponse/src/test/resources/gdpTestData.csv
+CovidResponse/src/test/resources/regionDict
