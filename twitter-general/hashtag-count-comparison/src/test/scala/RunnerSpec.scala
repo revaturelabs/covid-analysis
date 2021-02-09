@@ -31,15 +31,15 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
   
   //Tests for getInputPath()
     "getInputPath case 0" should "return the path to s3" in {
-    Runner.getInputPath(0) shouldEqual "s3://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+    Runner.getInputPath(0) shouldEqual "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
   }
 
   "getInputPath case 1" should "return the path to s3" in {
-    Runner.getInputPath(1) shouldEqual "s3://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+    Runner.getInputPath(1) shouldEqual "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
   }
 
   "getInputPath case 2" should "return the path to s3" in {
-    Runner.getInputPath(2) shouldEqual "s3://covid-analysis-p3/twitter-general/data-lake/Jan_06-Pres/"
+    Runner.getInputPath(2) shouldEqual "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/"
   }
 
   //tests for readToDF()
@@ -50,13 +50,6 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
     val compDF = Runner.readToDS(testSpark,"test-data.txt")
 
     assert(compDF.collect()===(testDS.collect()))
-  }
-
-  /**
-    * tests readtoDS on an invalid file path input
-    */
-  "readToDF " should "throw a FileNotFoundException if the path is invalid" in {
-    assertThrows[FileNotFoundException](Runner.readToDS(testSpark,"junk file path"))
   }
 
   //tests for makeHashtagDS()
