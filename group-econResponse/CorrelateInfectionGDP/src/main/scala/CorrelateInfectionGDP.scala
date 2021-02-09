@@ -1,8 +1,12 @@
 package covidAndGDP
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Row, SparkSession}
 import utilites.{DataFrameBuilder, s3DAO}
+import org.apache.spark.ml
+import org.apache.spark.ml.linalg.Vectors
+import org.apache.spark.mllib.stat.Statistics
+import org.apache.spark.mllib.stat.test.ChiSqTestResult
 
 /** Question: Is there a significant relationship between a Region’s cumulative GDP and Infection Rate per capita?
  * queries:
@@ -32,7 +36,7 @@ object CorrelateInfectionGDP {
       .master("local[*]")
       .getOrCreate()
 
-    val df = dfb.build(spark, fileNames, db).cache()
+    val df = dfb.build(spark, fileNames, db)
     df.createOrReplaceTempView("correlation")
 
     val correlateDF = spark.sql(
@@ -41,17 +45,23 @@ object CorrelateInfectionGDP {
         |SUM(gdp_perCap_currentPrices_usd) as cumulative_gdp,
         |region
         |FROM correlation
-        |WHERE region!="Caribbean"
         |GROUP BY region"""
         .stripMargin)
       .cache()
 
     println("\nRegional infection rates and cumulative GDP:")
     correlateDF.show()
-    
+
     println("\nPearson Correlation Coefficient:")
     val pearsonCorrelation: Double = correlateDF.stat.corr("infection_rate", "cumulative_gdp")
     println(pearsonCorrelation)
+
+//    val corrRDD = correlateDF.rdd
+//    val infectionVector = correlateDF.select("infection_rate").rdd.map { case Row(v: Vector[Double]) => v }
+//    val gdpVector = correlateDF.select("cumulative_gdp").rdd.map { case Row(v: Vector[Double]) => v }
+//
+//    val chiSqTestResult = Statistics.chiSqTest()
+
 
     spark.catalog.dropTempView("correlation")
     // TODO: call hypothesis test method when implemented
