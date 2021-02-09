@@ -13,7 +13,7 @@ case class s3DAO (
    BUCKET_NAME: String = "covid-analysis-p3",
    DATA_LAKE: String = "datalake/infection-gdp/",
    DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
-   var downloadPath: String = _
+   var downloadPath: String = ""
    ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.

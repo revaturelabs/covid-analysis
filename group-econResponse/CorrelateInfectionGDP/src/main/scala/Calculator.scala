@@ -13,7 +13,7 @@ import scala.collection.mutable.ArrayBuffer
   * using spark SQL on S3 buckets
   * 
   */
-case class Results() {
+case class Calculator() {
 
 
   def dayInYear(date: String, firstOfYear: Long = 1577865600000L): Int ={

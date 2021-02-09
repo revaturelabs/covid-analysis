@@ -4,7 +4,7 @@ import org.scalatest.funspec.AnyFunSpec
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
 
-import covidAndGDP.{StatFunc, Results}
+import covidAndGDP.{StatFunc, Calculator}
 
 trait SparkSessionTestWrapper {
 
@@ -45,7 +45,7 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
 
   }
   it("calculates the hypothesis testing for ") {
-    val res = Results().hypoTest(1.1234d, 5.6789d)
+    val res = Calculator().hypoTest(1.1234d, 5.6789d)
 
     assert(res == 1.0d)
   }

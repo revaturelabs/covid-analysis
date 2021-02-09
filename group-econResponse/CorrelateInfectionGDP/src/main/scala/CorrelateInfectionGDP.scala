@@ -1,5 +1,6 @@
 package covidAndGDP
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import utilites.{DataFrameBuilder, s3DAO}
 
@@ -13,23 +14,48 @@ import utilites.{DataFrameBuilder, s3DAO}
  */
 object CorrelateInfectionGDP {
 
-  def main(args: Array[String]): Unit = {
-    val db = s3DAO()
-    val result = Results()
-    val dfb = new DataFrameBuilder()
-    val (covidPath, econPath) = (db.getCovidPath, db.getEconPath)
 
+  def main(args: Array[String]): Unit = {
+    // Set the log level to only print errors
+    Logger.getLogger("org").setLevel(Level.WARN)
+
+    val db = s3DAO()
+    val dfb = new DataFrameBuilder
+    val calc = new Calculator
+    db.setDownloadPath("CorrelateInfectionGDP/src/main/resources")
+    val fileNames = Map(
+      "covidSrc" -> "daily_covid_stats.tsv",
+      "regionSrc" -> "region_dictionary.json",
+      "econSrc" -> "economic_data_2018-2021.tsv"
+    )
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
 
-    spark.sparkContext.setLogLevel("WARN")
+    val df = dfb.build(spark, fileNames, db).cache()
+    df.createOrReplaceTempView("correlation")
+    df.show(55)
 
-    val df = dfb.build(db = )
+    val correlateDF = spark.sql(
+      """
+        |SELECT AVG(total_cases_per_million) as infection_rate,
+        |SUM(gdp_perCap_currentPrices_usd) as cumulative_gdp,
+        |region
+        |FROM correlation
+        |GROUP BY region"""
+        .stripMargin)
+      .cache()
 
-    result.regionalCorrelation(spark, df)
+    println("\nRegional infection rates and cumulative GDP:")
+    correlateDF.show()
 
+//    calc.regionalCorrelation(spark, df)
+    println("\nPearson Correlation Coefficient:")
+    val pearsonCorrelation: Double = correlateDF.stat.corr("infection_rate", "cumulative_gdp")
+    
+
+    spark.catalog.dropTempView("correlation")
     // TODO: call hypothesis test method when implemented
-    result.hypoTest(1.0d, 2.25d)
+//    calc.hypoTest(1.0d, 2.25d)
   }
 }

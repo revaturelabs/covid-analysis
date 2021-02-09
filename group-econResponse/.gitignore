@@ -234,9 +234,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/scala,java,sbt,metals,vscode,intellij,maven,macos,windows,bloop
-CovidResponse/src/main/resources/region_dictionary.json
-CovidResponse/src/main/resources/daily_covid_stats.tsv
-CovidResponse/src/main/resources/economic_data_2018-2021.tsv
-CovidResponse/src/test/resources/dailyCasesTestData.csv
-CovidResponse/src/test/resources/gdpTestData.csv
-CovidResponse/src/test/resources/regionDict
+*region_dictionary.json
+*daily_covid_stats.tsv
+*economic_data_2018-2021.tsv
+*dailyCasesTestData.csv
+*gdpTestData.csv
+*regionDict
