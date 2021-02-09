@@ -11,7 +11,7 @@ import org.apache.spark.sql.{DataFrame, Dataset, Column}
 import org.apache.spark.sql.expressions._
 
 
-object WeeklyChangeRunner{
+object DailyChangeRunner{
     def main(args: Array[String]): Unit = {
         Logger.getLogger("org").setLevel(Level.ERROR)
 
