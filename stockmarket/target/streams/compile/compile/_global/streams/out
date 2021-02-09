@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/WeeklyChangeRunner.scala:70:26: not found: value Window[0m
-[0m[[0m[31merror[0m] [0m[0m        val windowSpec = Window.orderBy(col("Date").desc)[0m
-[0m[[0m[31merror[0m] [0m[0m                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/main/scala/com/revature/scalawags/project3/stockmarket/DailyChangeRunner.scala:71:34: not found: value diffDF[0m
+[0m[[0m[31merror[0m] [0m[0m        val percentageChangeDF = diffDF.withColumn("Percentage_Change", (lag(s"${region} Index", 1).over(windowSpec) - col(s"${region} Index")) / col(s"${region} Index") * 100)[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

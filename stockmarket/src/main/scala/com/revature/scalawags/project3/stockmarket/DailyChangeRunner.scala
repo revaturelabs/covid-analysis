@@ -23,11 +23,11 @@ object DailyChangeRunner{
         import spark.implicits._
 
         dailyChangeRunnerByRegion(spark, "Africa").show(800, false)
-        // dailyChangeRunnerByRegion(spark, "Asia").show(800, false)
-        // dailyChangeRunnerByRegion(spark, "Europe").show(800, false)
-        // dailyChangeRunnerByRegion(spark, "South America").show(800, false)
-        // dailyChangeRunnerByRegion(spark, "North America").show(800, false)
-        // dailyChangeRunnerByRegion(spark, "Oceania").show(800, false)
+        dailyChangeRunnerByRegion(spark, "Asia").show(800, false)
+        dailyChangeRunnerByRegion(spark, "Europe").show(800, false)
+        dailyChangeRunnerByRegion(spark, "South America").show(800, false)
+        dailyChangeRunnerByRegion(spark, "North America").show(800, false)
+        dailyChangeRunnerByRegion(spark, "Oceania").show(800, false)
 
     }
 
@@ -68,10 +68,10 @@ object DailyChangeRunner{
         import spark.implicits._
 
         val windowSpec = Window.orderBy(col("Date"))
-        df.withColumn("Daily_Comp_Diff", col(s"${region} Index") - when((lag(s"${region} Index", 1)
-            .over(windowSpec)).isNull, 0)
-            .otherwise(lag(s"${region} Index", 1)
-            .over(windowSpec)))
+        val percentageChangeDF = df.withColumn("Percentage_Change", (lag(s"${region} Index", 1).over(windowSpec) - col(s"${region} Index")) / col(s"${region} Index") * 100)
+        val roundUpto2Decimal = percentageChangeDF.select(col("Date"), col(s"${region} Index"), round(col("Percentage_Change"), 2).as("Percentage_Change"))
+
+        return roundUpto2Decimal
     }
 
     def dailyChangeRunnerByRegion(spark: SparkSession, region: String): DataFrame ={
