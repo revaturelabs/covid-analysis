@@ -50,15 +50,15 @@ object StreamCleaner {
         // Grabs all files for the specified day (this was run locally)
         // YOU WILL NEED TO MODIFY THIS PATH TO POINT TO THE LOCATION OF YOUR HOURLY STREAM FILES
         val input = spark.read
-        //.text(s"C:/Users/Cody/Desktop/Revature Training Stuff/scalawags-group-5/twitter-stream/HourlyResults/*$dayModified*") // For running locally
-        .text(s"unit-test-data/stream-test/*$dayModified*") //For unit testing
+        .text(s"C:/Users/Cody/Desktop/Revature Training Stuff/scalawags-group-5/twitter-stream/HourlyResults/*$dayModified*") // For running locally
+        //.text(s"unit-test-data/stream-test/*$dayModified*") //For unit testing
         
         // Filters out Tweets to only contain the "text" field, as this was the only thing that was needed for twitter-general's analyses
         // These filtered lines are written as a json file in the test-output directory
         // This output it quite large so it has been .gitignored
         val tweets = input.select(explode(split(col("value"), "--tweet-text")))
             .filter(x => x.mkString.startsWith("-start--:"))
-            .map(x => x.mkString.replace("-start--", "\"text\"")).cache
+            .map(x => x.mkString.replace("-start--:", "\"text\":\"") + "\"").cache
 
         // Writes the output to the "test-output-stream" folder
         tweets.coalesce(1).write.mode(("overwrite")).text(s"test-output-stream")

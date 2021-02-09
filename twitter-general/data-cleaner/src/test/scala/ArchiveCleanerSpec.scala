@@ -10,6 +10,5 @@ class ArchiveCleanerSpec extends AnyFlatSpec {
 
     "ArchiveCleaner" should "return the number of lines in the file it outputs" in {
         assert(ArchiveCleaner.clean("test-data", spark) == 9)
-        Thread.sleep(5000)
     }
 }
