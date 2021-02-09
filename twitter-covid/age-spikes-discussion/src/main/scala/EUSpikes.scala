@@ -2,6 +2,12 @@ import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 
 object EUSpikes {
 
+  def processData(spark: SparkSession): Unit = {
+    val twitter = processTwitterData(spark)
+    val eu = processEUData(spark)
+    twitter.join(eu, twitter("week") === eu(""))
+  }
+
   def processEUData(spark: SparkSession): DataFrame = {
     val df = pullEUData(spark)
     groupData(spark, filterAgeGroups(spark, df))
@@ -43,6 +49,12 @@ object EUSpikes {
     df
   }
 
+  def processTwitterData(spark: SparkSession): DataFrame = {
+    val df = pullTwitterDataDevelopment(spark)
+    val dfWeeks = groupByWeeks(spark, df)
+    dfWeeks
+  }
+
   def pullTwitterData(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").option("sep", "\t").csv("s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv").cache()
     df.show(100)
@@ -54,5 +66,15 @@ object EUSpikes {
     df.show()
     df.printSchema()
     df
+  }
+
+  def groupByWeeks(spark: SparkSession, df: DataFrame): DataFrame = {
+    import spark.implicits._
+    import org.apache.spark.sql.functions._
+    spark.conf.set("spark.sql.legacy.timeParserPolicy","LEGACY")
+    val dfWithWeek = df.withColumn("input_date", to_date($"date")).withColumn("week", date_format($"date", "w"))
+    dfWithWeek.orderBy(desc("date")).show()
+    dfWithWeek.printSchema()
+    dfWithWeek
   }
 }
