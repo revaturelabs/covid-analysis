@@ -68,7 +68,8 @@ object DailyChangeRunner{
         import spark.implicits._
 
         val windowSpec = Window.orderBy(col("Date"))
-        val percentageChangeDF = df.withColumn("Percentage_Change", (lag(s"${region} Index", 1).over(windowSpec) - col(s"${region} Index")) / col(s"${region} Index") * 100)
+        val dailyDifferenceDF = df.withColumn("Daily_Diff", col(s"${region} Index") - lag(col(s"${region} Index"), 1).over(windowSpec))
+        val percentageChangeDF = dailyDifferenceDF.withColumn("Percentage_Change", col("Daily_Diff") / lag(col(s"${region} Index"), 1).over(windowSpec) * 100)
         val roundUpto2Decimal = percentageChangeDF.select(col("Date"), col(s"${region} Index"), round(col("Percentage_Change"), 2).as("Percentage_Change"))
 
         return roundUpto2Decimal
