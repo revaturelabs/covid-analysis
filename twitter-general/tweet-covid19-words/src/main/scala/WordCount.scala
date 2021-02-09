@@ -9,6 +9,7 @@ import org.apache.hadoop.fs.FileSystem
 import org.apache.hadoop.fs.Path
 import scala.collection.immutable.ListMap
 import org.apache.spark.sql.Row
+import org.apache.spark.sql.Dataset
 
 object WordCount {
 
@@ -55,6 +56,7 @@ object WordCount {
         val path = range match {
             case "1" => "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/*"
             case "2" => "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/*"
+            case "3" => "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/*"
             case "test-s3" => "s3a://covid-analysis-p3/datalake/twitter-general/test-data/*"
             case _ => "test-data.txt"
         }
@@ -94,7 +96,8 @@ object WordCount {
         // Match case that will be used to decide what the name of the file should be.
         val fileName = range match {
             case "1" => "WordCountResults-Dec_11-Dec_25"
-            case "2" => "WordCountResults-Dec_26-Jan-05"
+            case "2" => "WordCountResults-Dec_26-Jan_05"
+            case "3" => "WordCountResults-Feb_03-Feb_14"
             case "test-s3" => "S3ConnectionTestResults"
             case _ => "WordCountResults-TestData"
         }
@@ -104,8 +107,14 @@ object WordCount {
         val file = fs.globStatus(new Path("Results/part*"))(0).getPath().getName()
         fs.rename(new Path("Results/" + file), new Path(s"Results/$fileName.csv"))
 
-        // Sends our renamed results file to S3.
-        val sendToS3 = s"aws s3 mv Results/$fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+        // // Sends our renamed results file to S3 (for local use).
+        // val sendToS3 = s"aws s3 mv Results/$fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+        // sendToS3.!
+
+        // Sends our renamed results file to S3 from Hadoop.
+        val sendToLocal = s"hdfs dfs -get Results/$fileName.csv $fileName.csv"
+        val sendToS3 = s"aws s3 mv $fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+        sendToLocal.!
         sendToS3.!
 
         // Returns our results array for unit testing.
