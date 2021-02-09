@@ -34,7 +34,6 @@ object CorrelateInfectionGDP {
 
     val df = dfb.build(spark, fileNames, db).cache()
     df.createOrReplaceTempView("correlation")
-    df.show(55)
 
     val correlateDF = spark.sql(
       """
@@ -42,17 +41,17 @@ object CorrelateInfectionGDP {
         |SUM(gdp_perCap_currentPrices_usd) as cumulative_gdp,
         |region
         |FROM correlation
+        |WHERE region!="Caribbean"
         |GROUP BY region"""
         .stripMargin)
       .cache()
 
     println("\nRegional infection rates and cumulative GDP:")
     correlateDF.show()
-
-//    calc.regionalCorrelation(spark, df)
+    
     println("\nPearson Correlation Coefficient:")
     val pearsonCorrelation: Double = correlateDF.stat.corr("infection_rate", "cumulative_gdp")
-    
+    println(pearsonCorrelation)
 
     spark.catalog.dropTempView("correlation")
     // TODO: call hypothesis test method when implemented
