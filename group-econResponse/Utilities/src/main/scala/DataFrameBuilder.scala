@@ -70,12 +70,13 @@ class DataFrameBuilder {
    * @param df    spark dataframe
    * @return spark dataframe
    */
-  def recastToInt(df: DataFrame): DataFrame = {
-    Seq("year", "total_cases", "new_cases")
-      .map(col => df.withColumn("tmp",
-        df(s"$col").cast(IntegerType)).drop(s"$col").
-        withColumnRenamed("tmp", s"$col"))
-    df
+  def castToInt(df: DataFrame): DataFrame = {
+    df.withColumn("tmp", df("year").cast(IntegerType)).drop("year")
+      .withColumnRenamed("tmp", "year")
+      .withColumn("tmp", df("new_cases").cast(IntegerType)).drop("new_cases")
+      .withColumnRenamed("tmp", "new_cases")
+      .withColumn("tmp", df("total_cases").cast(IntegerType)).drop("total_cases")
+      .withColumnRenamed("tmp", "total_cases")
   }
 
   /** returns a new dataFrame with an appended Region
