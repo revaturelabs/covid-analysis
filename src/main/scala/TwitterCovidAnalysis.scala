@@ -1,5 +1,6 @@
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 
 object TwitterCovidAnalysis {
 
@@ -9,17 +10,30 @@ object TwitterCovidAnalysis {
     * @param path
     */
   def readToDF(spark: SparkSession, path: String): DataFrame = {
-    spark.read.csv(path).cache
+    spark.read
+      .format("csv")
+      .option("delimiter", ",")
+      .option("quote", "")
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .load(path)
+      .cache
   }
 
+  /**Groups dataframe by day
+   * 
+   * @param df
+   */  
   def groupByDate(df: DataFrame): DataFrame = {
-    df.show(3,false)
-    // df.groupBy("Specimen Collection Date")
-    // .count()
-    df
+    val spark = SparkSession.builder().getOrCreate()
+    import spark.implicits._ 
+    df.select("Specimen Collection Date", "New Confirmed Cases")
+      .groupBy("Specimen Collection Date")
+      .sum("New Confirmed Cases")
+      .orderBy($"Specimen Collection Date".asc)
   }
 
-  /** Groups by age groups.
+  /** Groups dataframe by age groups.
     * Returns DF of age groups and infection counts.
     *
     * @param df

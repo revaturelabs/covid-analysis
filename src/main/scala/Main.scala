@@ -13,7 +13,7 @@ object Main {
 
     val path = setUpConnection(spark)
 
-    TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show(30,false)
+    TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
     spark.stop
   }
 
@@ -26,7 +26,7 @@ object Main {
   }
 
   /** Set up AWS connection
-    *
+    * Must have AWS Access Key ID and AWS Secret Access Key
     * @param spark
     * @return path - aws connection path as a string
     */
