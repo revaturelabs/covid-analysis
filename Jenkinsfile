@@ -19,6 +19,7 @@ pipeline {
 
                 cd infection-mortality/CovidLiveUpdateApp
                 sbt compile
+                sbt test
                 cd ../..
             }
         }
@@ -26,9 +27,9 @@ pipeline {
             steps {
                 echo "this is a test."
 
-                cd infection-mortality/CovidLiveUpdateApp
-                sbt test
-                cd ../..
+                // cd infection-mortality/CovidLiveUpdateApp
+                // sbt test
+                // cd ../..
             }
         }
     }
