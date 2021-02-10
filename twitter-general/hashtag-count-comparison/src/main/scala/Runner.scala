@@ -1,4 +1,4 @@
-package HashtagCountComparison
+
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Dataset}
@@ -6,6 +6,11 @@ import org.apache.spark.sql.functions._
 import javax.xml.crypto.Data
 import org.apache.hadoop.fs.FileSystem
 import org.apache.hadoop.fs.Path
+import java.io.File
+import java.io.PrintWriter
+import java.io.FileOutputStream
+import java.io.FileInputStream
+import scala.sys.process._
 
 
 
@@ -22,7 +27,7 @@ object Runner {
 
       if(args.length ==1){
         //set up spark session
-        val spark = SparkSession.builder().master("local").appName("HashtagCountComparison").getOrCreate()
+        val spark = SparkSession.builder().master("yarn").appName("HashtagCountComparison").getOrCreate()
         import spark.implicits._
         
         
@@ -41,11 +46,16 @@ object Runner {
         val hashtagCategories = hashtags.map(markCovidRelated(_,isCovidRelated(x$1.hashtag)))
 
         //reduce on categories to get number of non covid hashtags vs covid hashtags
-        val categoryCount = hashtagCategories.groupBy("hashtag").count()
-    
-        //output results to s3
+        val categoryCount = hashtagCategories.groupBy("hashtag").count().sort(desc("count")).cache()
         categoryCount.show()
 
+        //save locally
+        outputLocal(categoryCount)
+        //rename file
+        findAndRename(spark,getFileName(args(0).toInt))
+        //output to s3
+        outputS3(getFileName(args(0).toInt))
+        
                     
         spark.stop()
       }else{
@@ -145,12 +155,64 @@ object Runner {
       * @param df DataFrame to be saved in s3
       * @param path path to the data warehouse of the s3 bucket
       */
-    def output(df: DataFrame, path: String):Unit ={
+    def outputLocal(df: DataFrame):Unit ={
 
-      //TO-DO complete implementation
-      //output df as a parquet? Yes probably.
+      df.coalesce(1).write.mode("overwrite").option("header", "true").csv("Results")
 
+    }
+
+    /**
+      * a function that takes in a file name and output the file to the s3 bucket
+      * 
+      *
+      * @param fileName
+      */
+    def outputS3(fileName: String): Unit ={
+
+      //this block is for local testing
+      // val sendToS3 = s"aws s3 mv Results/$fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/hashtag-count-comparison/$fileName.csv"
+      //   sendToS3.!
+
+      //this block is for running on the cluster
+        val sendToLocal = s"hdfs dfs -get Results/$fileName.csv $fileName.csv"
+        val sendToS3 = s"aws s3 mv $fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/hashtag-count-comparison/$fileName.csv"
+        sendToLocal.!
+        sendToS3.!
+    }
+
+    /**
+      * a function that returns a string of the correct output file name
+      * based in the mode in which the program is running, similar to getInputPath()
+      *
+      * @param range a number between 0 and 3 which designates the mode the program is running in
+      *             and determins the name of the output file
+      * @return a String that is the specified name of the output file
+      */
+    def getFileName(range: Int): String={
+      val fileName = range match {
+            case 0 => "HashtagCountResults-Dec_11-Dec_25"
+            case 1 => "HashtagCountResults-Dec_26-Jan_05"
+            case 2 => "HashtagCountResults-Feb_03-Feb_14"
+            case 3 => "S3ConnectionTestResults"
+            case _ => "WordCountResults-TestData"
+        }
+        fileName
+    }
+
+
+    /**
+      * A function that finds the output file in HDFS and renames it
+      *
+      * @param spark our spark session
+      * @param fileName a String which the output file should be renamed to
+      */
+    def findAndRename(spark: SparkSession, fileName: String): Unit={
+      //initialize file system
+        val fs = FileSystem.get(spark.sparkContext.hadoopConfiguration)
+      //retrieve the file from HDFS
+        val file = fs.globStatus(new Path("Results/part*"))(0).getPath().getName()
+      //rename that file
+        fs.rename(new Path("Results/" + file), new Path(s"Results/$fileName.csv"))
     }
     
 }
-
