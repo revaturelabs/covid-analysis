@@ -22,13 +22,13 @@ object DailyChangeRunner{
 
         import spark.implicits._
 
-        dailyChangeRunnerByRegion(spark, "Africa").show(800, false)
-        dailyChangeRunnerByRegion(spark, "Asia").show(800, false)
-        dailyChangeRunnerByRegion(spark, "Europe").show(800, false)
-        dailyChangeRunnerByRegion(spark, "South America").show(800, false)
-        dailyChangeRunnerByRegion(spark, "North America").show(800, false)
-        dailyChangeRunnerByRegion(spark, "Oceania").show(800, false)
-
+        // dailyChangeRunnerByRegion(spark, "Africa").show(10, false)
+        // dailyChangeRunnerByRegion(spark, "Asia").show(800, false)
+        // dailyChangeRunnerByRegion(spark, "Europe").show(800, false)
+        // dailyChangeRunnerByRegion(spark, "South America").show(800, false)
+        // dailyChangeRunnerByRegion(spark, "North America").show(800, false)
+        // dailyChangeRunnerByRegion(spark, "Oceania").show(800, false)
+        spark.stop()
     }
 
     def dataFrameByRegion(spark: SparkSession, region: String): DataFrame = {
@@ -36,8 +36,7 @@ object DailyChangeRunner{
         .read
         .option("inferSchema", "true")
         .option("header", "true")
-        .csv(s"/datalake/datalake/${region}_*.csv").cache()
-
+        .csv(s"../data/datalake/${region}_*.csv").cache()
         return regionDF
     }
 

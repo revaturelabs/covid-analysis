@@ -1,13 +1,23 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(com.revature.scalawags.project3.stockmarket.CompositeIndexChangeCalculatorTest, org.scalatest.tools.Framework$$anon$1@c934826, false, [SuiteSelector])[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mCompositeIndexChangeCalculatorTest:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mWeekly Change[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return 20.00[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mRound At 2 Decimal Places[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return 12.35[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 287 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(com.revature.scalawags.project3.stockmarket.DailyChangeRunnerTest, org.scalatest.tools.Framework$$anon$1@495eec71, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mDailyChangeRunnerTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdatalake[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should not be empty[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdataFrameByRegion[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return a nonempty dataframe[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdateColumnFormating[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should cause different date strings to end as a Date with africa data[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdateColumnFormating[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should cause different date strings to end as a Date with all data[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32msumOfOpenPrice[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should remove duplicate rows in the Date column[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdailyChangeCalculator[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should calculate daily percentage change in a Region Index column[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdailyChangeRunnerByRegion[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should not crash[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 24 seconds, 797 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 7[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 7, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com.revature.scalawags.project3.stockmarket.CompositeIndexChangeCalculatorTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com.revature.scalawags.project3.stockmarket.DailyChangeRunnerTest[0m

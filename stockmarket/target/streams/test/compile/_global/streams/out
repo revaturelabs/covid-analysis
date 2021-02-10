@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/spark/Documents/Project3_herd_stock/covid-analysis-1/stockmarket/src/test/scala/com/revature/scalawags/project3/stockmarket/DailyChangeRunnerTest.scala:51:114: value get is not a member of Array[org.apache.spark.sql.Row][0m
+[0m[[0m[31merror[0m] [0m[0m        assert(DailyChangeRunner.dailyChangeCalculator(spark, df, "Africa").select($"Percentage_Change").take(3).get(2)(0) == 0.96)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
