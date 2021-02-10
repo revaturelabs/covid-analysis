@@ -21,11 +21,11 @@ class CovidLiveUpdateTest extends AnyFlatSpec {
   //Create data resources
 
   "africaTemp" should "read a json" in {
-    val africaTemp = spark.read.json("datalake/CovidLiveUpdate/africa.json")
+    val africaTemp = spark.read.json("src/test/resources/africaTest.json")
   }
 
   "africaTemp" should "be queryable" in {
-    val africaTemp = spark.read.json("datalake/CovidLiveUpdate/africa.json")
+    val africaTemp = spark.read.json("src/test/resources/africaTest.json")
     val africa = africaTemp.select(
             lit("Africa").as("Region"),
             sum("cases") as "Total Cases",
