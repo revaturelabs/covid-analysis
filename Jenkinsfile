@@ -27,9 +27,7 @@ pipeline {
             steps {
                 echo "this is a test."
 
-                // cd infection-mortality/CovidLiveUpdateApp
-                // sbt test
-                // cd ../..
+               
             }
         }
     }
