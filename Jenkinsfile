@@ -15,14 +15,14 @@ pipeline {
         }
         stage("Compile") {
             steps {
-                sh 'echo "this is a build."'
+                echo "this is a build."
 
-                sh '''
-                    cd infection-mortality/CovidLiveUpdateApp
-                    sbt compile
-                    sbt test
-                    cd ../..
-                '''
+                
+                cd infection-mortality/CovidLiveUpdateApp
+                sbt compile
+                sbt test
+                cd ../..
+                
             }
         }
         stage("Test") {
