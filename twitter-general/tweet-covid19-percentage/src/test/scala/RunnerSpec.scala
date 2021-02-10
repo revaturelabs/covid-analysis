@@ -101,6 +101,6 @@ class RunnerSpec extends AnyFlatSpec{
     // The IsCovidRelatedText function takes a tweet text string as input and loops through
     // the list of Covid terms. The test string here is a covid term so it should return true
     "IsCovidRelatedText case 3" should "return true for input test string 4 (english covid single word with hashtag/punctuation)" in {
-        assert(Runner.IsCovidRelatedText(testString3) == true)
+        assert(Runner.IsCovidRelatedText(testString4) == true)
     }
 }

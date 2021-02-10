@@ -14,8 +14,14 @@ object Runner {
         val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
         // TODO: Learn more about spark implicits because you know nothing atm 
         import spark.implicits._
+
+        // Adds some jars necessary for our application to run as a thin jar on a Spark cluster.
+        spark.sparkContext.addJar("https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.4/hadoop-aws-2.7.4.jar")
+        spark.sparkContext.addJar("https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar")
+        
         // TODO: Hardcode for now, replace with s3 at some point
-        val filePath = "test-data.txt"
+        //val filePath = "test-data.txt"
+        val filePath = SelectInputDataPath(0)
         // Calculate the Percentage of Covid related Tweets from the input data file
         tweetCovid19Percentage(filePath, spark)
         spark.stop()
@@ -67,8 +73,24 @@ object Runner {
     def ReadInputFileToDS(path: String, spark: SparkSession): Dataset[Tweet] = {
         import spark.implicits._
         val tweetDataSet = spark.read.text(path).as[Tweet].cache()
-        //tweetDataSet.show()
+        tweetDataSet.show()
         return tweetDataSet
+    }
+
+    /**
+      * A function to select the S3 input path for input data range indicated by the integer parameter
+      * @param dataRangePrefixSelection an Integer mapped to input datasets
+      * @return the full S3 file path to the chosen input dataset
+      */
+    def SelectInputDataPath(dataRangePrefixSelection: Int): String = {
+        var fullS3Path = ""
+        dataRangePrefixSelection match {
+          case 0 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
+          case 1 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
+          case 2 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/"
+          case _ => "Not a valid input data range"
+        }
+        return fullS3Path
     }
 
     /**
