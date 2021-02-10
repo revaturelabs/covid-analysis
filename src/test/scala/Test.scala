@@ -24,7 +24,7 @@ class Test extends AnyFlatSpec {
     }
 
     "ageGroupsInfectionRate" should "return 2 columns" in {
-        assert(TwitterCovidAnalysis.ageGroupsInfectionRate(df).columns.size== 2)
+        assert(TwitterCovidAnalysis.ageGroupsInfectionCount(df).columns.size== 2)
     }
 
     "ageTwitterVolume" should "return 2 columns" in {

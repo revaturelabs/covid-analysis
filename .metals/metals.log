@@ -17012,3 +17012,528 @@ No more data in the client stdin, exiting...
 No more data in the client stdin, exiting...
 No more data in the server stdin, exiting...
 No more data in the server stdin, exiting...
+[0m2021.02.10 09:24:11 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\covid-analysis-1' for client vscode 1.53.0.[0m
+[0m2021.02.10 09:24:12 INFO  time: initialize in 0.62s[0m
+[0m2021.02.10 09:24:13 INFO  Attempting to connect to the build server...[0m
+[0m2021.02.10 09:24:13 INFO  skipping build import with status 'Installed'[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 26613'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:26613...
+The server is listening for incoming connections at tcp://127.0.0.1:26613...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.10 09:24:16 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.10 09:24:16 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 27864'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:27864...
+The server is listening for incoming connections at tcp://127.0.0.1:27864...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.10 09:24:18 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.10 09:24:18 INFO  time: connected to build server in 5.48s[0m
+[0m2021.02.10 09:24:18 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.10 09:24:20 INFO  time: imported build in 1.47s[0m
+[0m2021.02.10 09:24:21 INFO  no build target: using presentation compiler with only scala-library[0m
+[0m2021.02.10 09:24:25 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.10 09:24:41 INFO  time: indexed workspace in 21s[0m
+[0m2021.02.10 09:24:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:10 INFO  time: compiled covid-analysis-1 in 24s[0m
+[0m2021.02.10 09:25:16 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:21 INFO  time: compiled covid-analysis-1 in 4.69s[0m
+[0m2021.02.10 09:25:23 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:26 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:26 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:26 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:26 INFO  time: compiled covid-analysis-1 in 2.86s[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:27 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:28 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:28 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:28 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:29 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:29 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:29 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:29 INFO  time: compiled covid-analysis-1 in 1.08s[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:35 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:36 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:36 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:36 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:36 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:36 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:38 INFO  time: compiled covid-analysis-1 in 2.13s[0m
+[0m2021.02.10 09:25:43 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:43 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:25:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:43 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:25:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:43 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:43 INFO  time: compiled covid-analysis-1 in 0.84s[0m
+[0m2021.02.10 09:25:43 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:25:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:43 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:44 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:25:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:25:44 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:25:53 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:54 INFO  time: compiled covid-analysis-1 in 1.53s[0m
+[0m2021.02.10 09:25:57 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:25:59 INFO  time: compiled covid-analysis-1 in 1.71s[0m
+[0m2021.02.10 09:26:01 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  time: compiled covid-analysis-1 in 0.51s[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:01 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:02 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /*
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:03 INFO  time: compiled covid-analysis-1 in 0.61s[0m
+[0m2021.02.10 09:26:04 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:04 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:05 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  time: compiled covid-analysis-1 in 0.68s[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:06 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:07 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:07 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:08 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:08 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:07 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:07 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:26:08 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**  
+  ^[0m
+[0m2021.02.10 09:26:08 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:52:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:04 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:04 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:04 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:04 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:04 INFO  time: compiled covid-analysis-1 in 0.59s[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:13 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:53:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:14 INFO  time: compiled covid-analysis-1 in 0.53s[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:15 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:16 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:16 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:55:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:17 INFO  time: compiled covid-analysis-1 in 0.52s[0m
+[0m2021.02.10 09:29:18 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:18 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:19 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:19 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:19 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:19 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  time: compiled covid-analysis-1 in 0.52s[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:24:3: stale bloop error: unclosed comment
+  /**
+  ^[0m
+[0m2021.02.10 09:29:20 INFO  C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala:56:3: stale bloop error: Missing closing brace `}' assumed here
+}
+  ^[0m
+[0m2021.02.10 09:29:22 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:24 INFO  time: compiled covid-analysis-1 in 1.71s[0m
+[0m2021.02.10 09:29:37 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:39 INFO  time: compiled covid-analysis-1 in 1.73s[0m
+[0m2021.02.10 09:29:41 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:42 INFO  time: compiled covid-analysis-1 in 1.51s[0m
+[0m2021.02.10 09:29:44 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:46 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+[0m2021.02.10 09:29:48 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:50 INFO  time: compiled covid-analysis-1 in 1.66s[0m
+[0m2021.02.10 09:29:52 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:54 INFO  time: compiled covid-analysis-1 in 1.78s[0m
+[0m2021.02.10 09:29:56 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:29:58 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+[0m2021.02.10 09:30:05 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:30:07 INFO  time: compiled covid-analysis-1 in 1.67s[0m
+[0m2021.02.10 09:30:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:30:14 INFO  time: compiled covid-analysis-1 in 1.36s[0m
+[0m2021.02.10 09:36:17 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 09:36:25 INFO  time: compiled covid-analysis-1 in 7.99s[0m
+Feb 10, 2021 9:36:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification

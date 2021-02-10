@@ -20,13 +20,13 @@ object TwitterCovidAnalysis {
       .cache
   }
 
-  /**Groups dataframe by day
-   * 
-   * @param df
-   */  
+  /** Groups dataframe by day.
+    *
+    * @param df
+    */
   def groupByDate(df: DataFrame): DataFrame = {
     val spark = SparkSession.builder().getOrCreate()
-    import spark.implicits._ 
+    import spark.implicits._
     df.select("Specimen Collection Date", "New Confirmed Cases")
       .groupBy("Specimen Collection Date")
       .sum("New Confirmed Cases")
@@ -38,9 +38,13 @@ object TwitterCovidAnalysis {
     *
     * @param df
     */
-  def ageGroupsInfectionRate(df: DataFrame): DataFrame = {
-    // TO DO
-    df
+  def ageGroupsInfectionCount(df: DataFrame): DataFrame = {
+    val spark = SparkSession.builder().getOrCreate()
+    import spark.implicits._
+    df.select("Age Group", "New Confirmed Cases")
+      .groupBy("Age Group")
+      .sum("New Confirmed Cases")
+      .orderBy($"Age Group".asc)
   }
 
   /** Groups by day with highest spike.

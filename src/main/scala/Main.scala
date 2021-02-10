@@ -13,7 +13,8 @@ object Main {
 
     val path = setUpConnection(spark)
 
-    TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
+    // TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
+    TwitterCovidAnalysis.ageGroupsInfectionCount(TwitterCovidAnalysis.readToDF(spark, path)).show()
     spark.stop
   }
 
