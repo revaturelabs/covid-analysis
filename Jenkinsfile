@@ -17,7 +17,6 @@ pipeline {
             steps {
                 echo "this is a build."
 
-                
                 cd infection-mortality/CovidLiveUpdateApp
                 sbt compile
                 sbt test
