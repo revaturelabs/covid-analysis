@@ -24,6 +24,7 @@ object Runner {
         val filePath = SelectInputDataPath(0)
         // Calculate the Percentage of Covid related Tweets from the input data file
         tweetCovid19Percentage(filePath, spark)
+        // End the Spark instance for propriety
         spark.stop()
     }
 
@@ -60,20 +61,25 @@ object Runner {
         val trueCount = countingTruesDS.collect().length
         // Calculate the percentage using doubles, then cast back to Integer
         val thePercentage = (trueCount.toDouble/totalCount.toDouble)*100
+        // Print line for debugging
         println("Calculated.." + thePercentage)
         return thePercentage.toInt
     }
 
     /**
       * A function that takes a string filepath and parses the data from the file,
-      * returns a data frame with each row as the text of a tweet
+      * returns a DataSet with each row as the text of a tweet
       * @param path The path to the input data file
-      * @return A dataframe containing the text of a tweet in each row
+      * @return A DataSet containing the text of a tweet in each row
       */
     def ReadInputFileToDS(path: String, spark: SparkSession): Dataset[Tweet] = {
+        // Must import within scope for any file I/O calls
         import spark.implicits._
+        // Grab the file from the parameter passed path and cache it since we will be working with it
         val tweetDataSet = spark.read.text(path).as[Tweet].cache()
+        // Print line for debugging
         tweetDataSet.show()
+        // Return the DataSet of tweets
         return tweetDataSet
     }
 
