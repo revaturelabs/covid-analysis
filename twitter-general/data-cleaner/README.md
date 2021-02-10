@@ -1,4 +1,4 @@
-# Data Cleaner 
+# DATA CLEANER
 ## Project Description
 This directory contains the methods used to format out twitter data, for both archived and streamed in data. You will notice many empty folders here, and this is because they contained gigabytes worth of data when run locally. These were files that were pushed to S3 after they were created here. As such, these files were not pushed to github.
 
@@ -33,9 +33,7 @@ This directory contains the methods used to format out twitter data, for both ar
 
 ## Requirements
 - [JDK version 8 or 11](https://adoptopenjdk.net/).
-
 - [Scala and SBT](https://www.scala-lang.org/download/2.12.8.html).
-
 - [Spark](https://spark.apache.org/downloads.html)
 
 ## Usage
@@ -44,13 +42,13 @@ This directory contains the methods used to format out twitter data, for both ar
 ```bash
 git clone https://github.com/891-MehrabRahman-CovidAnalysis/covid-analysis-1.git
 ```
-3. Open your desired shell of choice, navigate to the downloaded "covid-analysis-1/twitter-general-data-cleaner" folder.
+3. Open your desired shell of choice, navigate to the downloaded "../covid-analysis-1/twitter-general/data-cleaner" folder.
 4. For archive data: 
     - Download a day's worth of data from [archive.org](https://archive.org/details/twitterstream?and[]=year%3A%222020%22&and[]=year%3A%222021%22) and extract the .zip file **to a folder given a name matching your downloaded file. THIS IS IMPORTANT. For example, the file "twitter-stream-2021-01-05.zip" must be extracted to a folder named "01-05"** Do not worry about extracting the inner .bz2 files; Spark can handle this for us.
-    - Replace "C:/Users/Cody/Desktop/extracts/" on line 47 of ArchiveCleaner.scala with the path to your extracted directory
-    - Type sbt "run [mm-dd]" (example: sbt "run 02-03") to grab all data from your extracted directory, filter out everything except tweet text, and combine the data into a single text file. Results should pop up in cleanedFiles directory matching your input (i.e. mm-dd.txt).
+    - Replace "C:/Users/Cody/Desktop/extracts/" on line 41 of ArchiveCleaner.scala with the path to your extracted directory
+    - Type sbt "run [mm-dd]" (example: sbt "run 02-03") to grab all data from your extracted directory, filter out everything except tweet text, and combine the data into a single text file. Results should pop up in cleanedArchiveFiles directory matching your input (i.e. mm-dd.txt).
 5. For streaming data:
-    - Set up your own stream, using the twitter-stream-example-files as your guide. R
-    - Replace "C:/Users/Cody/Desktop/Revature Training Stuff/scalawags-group-5/twitter-stream/HourlyResults/" on line 59 of StreamCleaner.scala with the path to your hourly streaming files.
-    - Type sbt "run [mm-dd]" (example: sbt "run 02-03") to grab all hourly data from the specified day, merge it all into a single file, and format it be uniform on every line. Results should pop up in cleanedFiles directory matching your input (i.e. mm-dd.txt).
+    - Set up your own stream, using the twitter-stream-example-files as your guide.
+    - Replace "C:/Users/Cody/Desktop/Revature Training Stuff/scalawags-group-5/twitter-stream/HourlyResults/" on line 53 of StreamCleaner.scala with the path to your hourly streaming files.
+    - Type sbt "run [mm-dd]" (example: sbt "run 02-03") to grab all hourly data from the specified day, merge it all into a single file, and format it be uniform on every line. Results should pop up in cleanedStreamFiles directory matching your input (i.e. mm-dd.txt).
 

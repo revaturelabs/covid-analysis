@@ -1,3 +1,5 @@
+// Contains terms that will be used to identify Covid Tweets
+// and then be omitted from the Word count results.
 object Terms {
 
   def getCovidTerms: Set[String] = {
@@ -8,6 +10,9 @@ object Terms {
     otherTerms
   }
 
+  // Will be first used to identify Covid Tweets.
+  // Then, once the non covid related Tweets have been filtered out,
+  // These words will also be omitted from or word count results.
   private val covidTerms = Set(
     "Coronavirusmexico",
     "新冠病毒",
@@ -447,52 +452,70 @@ object Terms {
     "yomequedoencasa",
     "ModiKiBaatMano"
   )
+
+  // These words will be omitted from our word count results.
   private val otherTerms = Set(
-    "to",
+    "https",
     "you",
     "your",
     "the",
-    "a",
-    "of",
     "and",
     "that",
-    "it",
-    "in",
-    "is",
     "for",
-    "on",
     "are",
     "if",
     "can",
-    "be",
-    "as",
     "have",
     "with",
     "this",
-    "is",
-    "or",
     "but",
     "they",
     "will",
     "what",
-    "at",
-    "my",
-    "rt",
-    "do",
     "not",
-    "an",
     "them",
     "from",
     "how",
     "there",
-    "so",
-    "by",
     "there",
     "when",
     "than",
     "also",
     "was",
-    "any"
+    "any", 
+    "text",
+    "has",
+    "been",
+    "her",
+    "him",
+    "she",
+    "shown",
+    "never",
+    "must",
+    "our",
+    "best",
+    "down", 
+    "after", 
+    "est",
+    "use",
+    "one",
+    "like",
+    "their",
+    "out",
+    "now",
+    "con",
+    "del",
+    "get",
+    "las",
+    "para",
+    "los",
+    "who",
+    "just",
+    "had",
+    "new",
+    "por",
+    "all",
+    "que",
   )
 
 }
