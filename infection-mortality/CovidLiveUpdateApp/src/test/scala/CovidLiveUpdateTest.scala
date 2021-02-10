@@ -1,6 +1,5 @@
-package covid_live_updates
+package covid_live_update
 
-import CovidLiveUpdates._
 import java.io.ByteArrayOutputStream
 import org.scalatest.flatspec.AnyFlatSpec
 import org.apache.spark.sql.functions._
@@ -19,16 +18,25 @@ class CovidLiveUpdateTest extends AnyFlatSpec {
   spark.sparkContext.setLogLevel("ERROR")
   import spark.implicits._
 
-  "africaTemp" should "read a json" in {
-    val africaTemp = spark.read.json( "datalake/CovidLiveUpdate/africa.json" )
-  }
+  //Create data resources
 
-  "africaTemp" should "be able to reach the bucket" in {
-    val africaTemp = spark.read.json( "s3a://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdates/africa.json" )
+  "africaTemp" should "read a json" in {
+    val africaTemp = spark.read.json("datalake/CovidLiveUpdate/africa.json")
   }
 
   "africaTemp" should "be queryable" in {
-    val africaTemp = spark.read.json( "s3a://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdates/africa.json" )
-    val africaDF = CovidLiveUpdates.settingRegionalDF(spark, africaTemp, "Africa")
+    val africaTemp = spark.read.json("datalake/CovidLiveUpdate/africa.json")
+    val africa = africaTemp.select(
+            lit("Africa").as("Region"),
+            sum("cases") as "Total Cases",
+            sum("todayCases") as "Today's Cases",
+            bround(sum("todayCases") / sum("cases") * 100, 2) as "Cases Percent Change",
+            sum("deaths") as "Total Deaths",
+            sum("todayDeaths") as "Today's Deaths",
+            bround(sum("todayDeaths") / sum("deaths") * 100, 2) as "Death Percent Change",
+            sum("recovered") as "Total Recoveries",
+            sum("todayRecovered") as "Today's Recoveries",
+            bround(sum("todayRecovered") / sum("recovered") * 100, 2) as "Recoveries Percent Change"
+        )
   }
 }
