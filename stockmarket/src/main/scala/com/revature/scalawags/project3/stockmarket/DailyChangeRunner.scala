@@ -36,7 +36,7 @@ object DailyChangeRunner{
         .read
         .option("inferSchema", "true")
         .option("header", "true")
-        .csv(s"../data/datalake/${region}_*.csv").cache()
+        .csv(s"../stockmarket-data/datalake/${region}_*.csv").cache()
         return regionDF
     }
 
