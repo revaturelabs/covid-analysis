@@ -22,7 +22,6 @@ class CovidLiveUpdateTest extends AnyFlatSpec {
 
   "africaTemp" should "read a json" in {
     val africaTemp = spark.read.json("src/test/resources/africaTest.json")
-    assert(false)
   }
 
   "africaTemp" should "be queryable" in {
