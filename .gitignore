@@ -267,39 +267,39 @@ spark-warehouse/
 # End of https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
 
 ### DataLake ###
-./data/dtalake/Africa_CoteD’Ivoire_CompositeIndex.csv
-./data/dtalake/Africa_Egypt_CompositeIndex.csv
-./data/dtalake/Africa_Kenya_CompositeIndex.csv
-./data/dtalake/Africa_Morocco_CompositeIndex.csv
-./data/dtalake/Africa_Nigeria_CompositeIndex.csv
-./data/dtalake/Africa_South Africa_CompositeIndex.csv
-./data/dtalake/Africa_Tunis_CompositeIndex.csv
-./data/dtalake/Asia_China_CompositeIndex.csv
-./data/dtalake/Asia_Hong Kong_CompositeIndex.csv
-./data/dtalake/Asia_India_CompositeIndex.csv
-./data/dtalake/Asia_Indonesia_CompositeIndex.csv
-./data/dtalake/Asia_Israel_CompositeIndex.csv
-./data/dtalake/Asia_Japan_CompositeIndex.csv
-./data/dtalake/Asia_Korea_CompositeIndex.csv
-./data/dtalake/Asia_Malaysia_CompositeIndex.csv
-./data/dtalake/Asia_The Philippines_CompositeIndex.csv
-./data/dtalake/Europe_Czech Republic_CompositeIndex.csv
-./data/dtalake/Europe_France_CompositeIndex.csv
-./data/dtalake/Europe_Germany_CompositeIndex.csv
-./data/dtalake/Europe_Italy_CompositeIndex.csv
-./data/dtalake/Europe_Netherlands_CompositeIndex.csv
-./data/dtalake/Europe_Norway_CompositeIndex.csv
-./data/dtalake/Europe_Portugal_CompositeIndex.csv
-./data/dtalake/Europe_Russia_CompositeIndex.csv
-./data/dtalake/Europe_Turkey_CompositeIndex.csv
-./data/dtalake/Europe_UK_CompositeIndex.csv
-./data/dtalake/North America_Canada_CompositeIndex.csv
-./data/dtalake/North America_Mexico_CompositeIndex.csv
-./data/dtalake/North America_US_CompositeIndex.csv
-./data/dtalake/Oceania_Australia_CompositeIndex.csv
-./data/dtalake/Oceania_New Zealand_CompositeIndex.csv
-./data/dtalake/South America_Argentina_CompositeIndex.csv
-./data/dtalake/South America_Brazil_CompositeIndex.csv
-./data/dtalake/South America_Chile_CompositeIndex.csv
-./data/dtalake/South America_Colombia_CompositeIndex.csv
-./data/dtalake/South America_Peru_CompositeIndex.csv
+./data/datalake/Africa_CoteD’Ivoire_CompositeIndex.csv
+./data/datalake/Africa_Egypt_CompositeIndex.csv
+./data/datalake/Africa_Kenya_CompositeIndex.csv
+./data/datalake/Africa_Morocco_CompositeIndex.csv
+./data/datalake/Africa_Nigeria_CompositeIndex.csv
+./data/datalake/Africa_South Africa_CompositeIndex.csv
+./data/datalake/Africa_Tunis_CompositeIndex.csv
+./data/datalake/Asia_China_CompositeIndex.csv
+./data/datalake/Asia_Hong Kong_CompositeIndex.csv
+./data/datalake/Asia_India_CompositeIndex.csv
+./data/datalake/Asia_Indonesia_CompositeIndex.csv
+./data/datalake/Asia_Israel_CompositeIndex.csv
+./data/datalake/Asia_Japan_CompositeIndex.csv
+./data/datalake/Asia_Korea_CompositeIndex.csv
+./data/datalake/Asia_Malaysia_CompositeIndex.csv
+./data/datalake/Asia_The Philippines_CompositeIndex.csv
+./data/datalake/Europe_Czech Republic_CompositeIndex.csv
+./data/datalake/Europe_France_CompositeIndex.csv
+./data/datalake/Europe_Germany_CompositeIndex.csv
+./data/datalake/Europe_Italy_CompositeIndex.csv
+./data/datalake/Europe_Netherlands_CompositeIndex.csv
+./data/datalake/Europe_Norway_CompositeIndex.csv
+./data/datalake/Europe_Portugal_CompositeIndex.csv
+./data/datalake/Europe_Russia_CompositeIndex.csv
+./data/datalake/Europe_Turkey_CompositeIndex.csv
+./data/datalake/Europe_UK_CompositeIndex.csv
+./data/datalake/North America_Canada_CompositeIndex.csv
+./data/datalake/North America_Mexico_CompositeIndex.csv
+./data/datalake/North America_US_CompositeIndex.csv
+./data/datalake/Oceania_Australia_CompositeIndex.csv
+./data/datalake/Oceania_New Zealand_CompositeIndex.csv
+./data/datalake/South America_Argentina_CompositeIndex.csv
+./data/datalake/South America_Brazil_CompositeIndex.csv
+./data/datalake/South America_Chile_CompositeIndex.csv
+./data/datalake/South America_Colombia_CompositeIndex.csv
+./data/datalake/South America_Peru_CompositeIndex.csv
