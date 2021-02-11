@@ -135,9 +135,9 @@ object InfectionRates {
 		// Configuration to be able to use AWS s3a
 		spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
-		// Set up S3 with secret and access key with spark
-		spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-		spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+		// Set up S3 with secret and access key with spark - this is automatically done by the spark context (only do if trying to access different accounts)
+		// spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+		// spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
 
 		import spark.implicits._
 		println()
@@ -165,10 +165,11 @@ object InfectionRates {
 	  * @param fileName Name of the file one wants to write to.
 	  * @param url Url of the where the json should be pulled from.
 	  */
-	def createJsonFile(fileName: String, url: String):Unit = {
+	def createJsonFile(spark: SparkSession, fileName: String, url: String):Unit = {
+		import spark.implicits._
 		// Gets the json data from the url
 		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
-
+		val json2 = spark.read.json(jsonData)
 		// Make the json
 		val json = new File( s"datalake/InfectionRates/${fileName}" )
 		val jsonWriter = new FileWriter(json)
@@ -177,22 +178,22 @@ object InfectionRates {
 		jsonWriter.write(jsonData)
 
     // Puts the file onto AWS s3. No reason to copy file from local to s3 and then use local json file.
-		// Build S3 client 
-		// val credentials = new BasicAWSCredentials(sys.env("AWS_ACCESS_KEY_ID"), sys.env("AWS_SECRET_ACCESS_KEY"))
-		// val client = AmazonS3ClientBuilder
-	  // .standard()
-		// 	.withCredentials(new AWSStaticCredentialsProvider(credentials))
-		// 	.withRegion("us-east-1")
-	  // .build();
+		Build S3 client 
+		val credentials = new BasicAWSCredentials(sys.env("AWS_ACCESS_KEY_ID"), sys.env("AWS_SECRET_ACCESS_KEY"))
+		val client = AmazonS3ClientBuilder
+	  	.standard()
+			.withCredentials(new AWSStaticCredentialsProvider(credentials))
+			.withRegion("us-east-1")
+	  	.build();
 
-		// // Upload file to S3 datalake
-		// client.putObject(
-		// 	"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
-		// 	json.getName(),
-		// 	json
-		// )
+		// Upload file to S3 datalake
+		client.putObject(
+			"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
+			json2.getName(),
+			json2
+		)
 
-		// Close the writer
+		Close the writer
 		jsonWriter.close()
 	}
 
@@ -203,6 +204,15 @@ object InfectionRates {
 	  */
 	def createTodayTable(spark: SparkSession, file_path: String):Unit = {
 		import spark.implicits._
+
+		//Check if running on cluster!
+		// if(spark.sparkContext.isLocal){
+		// 	// Sends our renamed results file to S3 from Hadoop.
+		// 	val sendToLocal = s"hdfs dfs -get ${file_path}today.json today.json"
+		// 	val sendToS3 = s"aws s3 mv $fileName.json s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+		// 	sendToLocal.!
+		// 	sendToS3.!
+		// }
 
 		// Reads in a local json file
 		val todayJson = spark.read.json( file_path + "today.json")

@@ -32,11 +32,11 @@ object CovidLiveUpdate {
       datalakeFilePath = "datalake/"
       datawarehouseFilePath = "datawarehouse/"
     
-    // AWS Access and secret key as environment variables
-    } else if(!sys.env.contains("AWS_ACCESS_KEY_ID") || !sys.env.contains("AWS_SECRET_ACCESS_KEY")){
-      System.err.println("EXPECTED 2 ENVIRONMENT VARIABLES: AWS Access Key and AWS Secret Key")
-      spark.close()
-      System.exit(1)
+    // Check AWS Access and secret key as environment variables
+    // } else if(!sys.env.contains("AWS_ACCESS_KEY_ID") || !sys.env.contains("AWS_SECRET_ACCESS_KEY")){
+    //   System.err.println("EXPECTED 2 ENVIRONMENT VARIABLES: AWS Access Key and AWS Secret Key")
+    //   spark.close()
+    //   System.exit(1)
     
     } else {
       // File path for datalake and datawarehouse to grab or put
@@ -47,8 +47,8 @@ object CovidLiveUpdate {
       spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
       // Set up S3 with secret and access key with spark
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+      // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+      // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
     }
     
     // Set log level for sbt shell

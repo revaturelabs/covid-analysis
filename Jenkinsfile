@@ -9,7 +9,9 @@ pipeline {
     // Define our pipeline into stages
     stages {
 
-        stage("Compile infection-mortality/CovidLiveUpdateApp") {
+        //Infection-mortality group
+        //CovidLiveUpdateApp Compile and Test
+        stage("Compile infection-mortality CovidLiveUpdateApp") {
             steps {
                 echo "Compile CovidLiveUpdateApp"
 
@@ -21,7 +23,7 @@ pipeline {
             }
         }
         
-        stage("Test infection-mortality/CovidLiveUpdateApp") {
+        stage("Test infection-mortality CovidLiveUpdateApp") {
             steps {
                 echo "Test CovidLiveUpdateApp"
 
@@ -33,6 +35,7 @@ pipeline {
             }
         }
 
+        //RegionalInfectionRates Compile and Test
         stage("Compile infection-mortality/RegionalInfectionRates") {
             steps {
                 echo "Compile RegionalInfectionRates"
@@ -56,9 +59,85 @@ pipeline {
                 '''
             }
         }
+
+        //twitter-covid Group
+        //age-spikes-discussion Compile and Test
+        stage("Compile twitter-covid age-spikes-discussion") {
+            steps {
+                echo "Compile age-spikes-discussion"
+
+                sh '''
+                    cd twitter-covid/age-spikes-discussion
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+
+        stage("Test twitter-covid age-spikes-discussion") {
+            steps {
+                echo "Test age-spikes-discussion"
+
+                sh '''
+                    cd twitter-covid/age-spikes-discussion
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
+
+        //HashtagByRegion
+        stage("Compile twitter-covid HashtagByRegion") {
+            steps {
+                echo "Compile HashtagByRegion"
+
+                sh '''
+                    cd twitter-covid/HashtagByRegion
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+
+        stage("Test twitter-covid HashtagByRegion") {
+            steps {
+                echo "Test HashtagByRegion"
+
+                sh '''
+                    cd twitter-covid/HashtagByRegion
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
+
+        //
+        stage("Compile twitter-covid RelatedHashtags") {
+            steps {
+                echo "Compile RelatedHashtags"
+
+                sh '''
+                    cd twitter-covid/RelatedHashtags
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+
+        stage("Test twitter-covid RelatedHashtags") {
+            steps {
+                echo "Test RelatedHashtags"
+
+                sh '''
+                    cd twitter-covid/RelatedHashtags
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
     }
 
-    // 
+    // After action of testing
     post {
         always {
             echo "This will always be invoked."
