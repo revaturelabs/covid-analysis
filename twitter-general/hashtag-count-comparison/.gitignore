@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=metals,sbt,scala,spark
 
 ### Metals ###
+.metals/metals.log
+.metals/metals.h2.db
 .metals/
 .bloop/
 project/**/metals.sbt

@@ -195,7 +195,7 @@ object Runner {
             case 2 => "HashtagCountResults-Feb_03-Feb_14"
             case 3 => "S3ConnectionTestResults"
             case _ => "WordCountResults-TestData"
-        }
+      }
         fileName
     }
 
