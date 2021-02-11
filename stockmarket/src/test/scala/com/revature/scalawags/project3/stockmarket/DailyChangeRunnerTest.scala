@@ -19,7 +19,7 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
 
     // We need our data source to contain data
     "datalake" should "not be empty" in {
-        val datalakeDir =  new File("../data/datalake")
+        val datalakeDir =  new File("../stockmarket-data/datalake")
         assert(datalakeDir.isDirectory() && datalakeDir.list().length > 0)
     }
 

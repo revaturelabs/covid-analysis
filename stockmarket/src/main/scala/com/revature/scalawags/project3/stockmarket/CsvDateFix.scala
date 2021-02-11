@@ -16,8 +16,8 @@ import com.github.tototoshi.csv._
   * Example:
   *
   * ```
-  * CsvDateFix.formatCsv("data/datalake/Africa_Kenya_CompositeIndex.csv")
-  * CsvDateFix.formatCsv("data/datalake/Africa_Nigeria_CompositeIndex.csv")
+  * CsvDateFix.formatCsv("stockmarket-data/datalake/Africa_Kenya_CompositeIndex.csv")
+  * CsvDateFix.formatCsv("dstockmarket-ata/datalake/Africa_Nigeria_CompositeIndex.csv")
   * ```
   *
   * Each file will be overwritten in place with properly formatted data.
