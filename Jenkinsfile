@@ -17,10 +17,10 @@ pipeline {
             steps {
                 echo "this is a build."
 
-                cd infection-mortality/CovidLiveUpdateApp
+                cd 'infection-mortality/CovidLiveUpdateApp'
                 sh 'sbt compile'
                 sh 'sbt test'
-                cd ../..
+                cd '../..'
                 
             }
         }
