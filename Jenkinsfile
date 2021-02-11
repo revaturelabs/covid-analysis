@@ -8,25 +8,27 @@ pipeline {
 
     // Define our pipeline into stages
     stages {
-        stage("Lint") {
-            steps {
-                echo "this is linting."
-            }
-        }
-        stage("Compile") {
-            steps {
-                echo "this is a build."
 
-                cd 'infection-mortality/CovidLiveUpdateApp'
-                sh 'sbt compile'
-                sh 'sbt test'
-                cd '../..'
-                
+        stage("Compile infection-mortality/CovidLiveUpdateApp") {
+            steps {
+                echo "Compile CovidLiveUpdateApp"
+
+                sh '''
+                    cd infection-mortality/CovidLiveUpdateApp
+                    sbt compile
+                    cd ../..
+                '''
             }
         }
-        stage("Test") {
+        stage("Test infection-mortality/CovidLiveUpdateApp") {
             steps {
-                echo "this is a test."
+                echo "Test CovidLiveUpdateApp"
+
+                sh '''
+                    cd infection-mortality/CovidLiveUpdateApp
+                    sbt test
+                    cd ../..
+                '''
             }
         }
     }
