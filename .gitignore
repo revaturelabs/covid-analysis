@@ -264,8 +264,6 @@ spark-warehouse/
 !.vscode/extensions.json
 *.code-workspace
 
-# End of https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
-
 ### DataLake ###
 ./data/datalake/Africa_CoteD’Ivoire_CompositeIndex.csv
 ./data/datalake/Africa_Egypt_CompositeIndex.csv
@@ -303,3 +301,5 @@ spark-warehouse/
 ./data/datalake/South America_Chile_CompositeIndex.csv
 ./data/datalake/South America_Colombia_CompositeIndex.csv
 ./data/datalake/South America_Peru_CompositeIndex.csv
+
+# End of https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
