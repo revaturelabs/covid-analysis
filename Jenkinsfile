@@ -31,8 +31,31 @@ pipeline {
                 '''
             }
         }
+        stage("Compile infection-mortality/CovidLiveUpdateApp") {
+            steps {
+                echo "Compile CovidLiveUpdateApp"
+
+                sh '''
+                    cd infection-mortality/RegionalInfectionRates
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+        stage("Test infection-mortality/RegionalInfectionRates") {
+            steps {
+                echo "Test CovidLiveUpdateApp"
+
+                sh '''
+                    cd infection-mortality/RegionalInfectionRates
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
     }
 
+    // 
     post {
         always {
             echo "This will always be invoked."
