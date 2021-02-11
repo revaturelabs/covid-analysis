@@ -27,7 +27,7 @@ object Runner {
 
       if(args.length ==1){
         //set up spark session
-        val spark = SparkSession.builder().master("yarn").appName("HashtagCountComparison").getOrCreate()
+        val spark = SparkSession.builder().master("local").appName("HashtagCountComparison").getOrCreate()
         import spark.implicits._
         
         
@@ -109,9 +109,9 @@ object Runner {
     def markCovidRelated(hashtag: Hashtag, condition: Boolean): Hashtag={
 
       if(condition){
-          Hashtag("covid")
+          Hashtag("covid hashtags")
       }else{
-          Hashtag("non-covid")
+          hashtag
       }
 
     }

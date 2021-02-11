@@ -79,7 +79,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
   "markCovidRelated()" should "return a new tweet continging 'covid' when a hashtag is covid related" in {
     val ht = Runner.markCovidRelated(covidHashtag,true)
 
-    assert(ht.hashtag.equals("covid"))
+    assert(ht.hashtag.equals("covid hashtags"))
   }
 
   /**
@@ -88,7 +88,7 @@ class RunnerSpec extends AnyFlatSpec with Matchers{
   "markCovidRelated()" should "return a new tweet containing 'non-covid' when a hashtag is not covid related" in {
     val ht = Runner.markCovidRelated(nonCovidHashtag,false)
 
-    assert(ht.hashtag.equals("non-covid"))
+    assert(ht.hashtag.equals(nonCovidHashtag.hashtag))
   }
 
   //tests for isCovidRelated()
