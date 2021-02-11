@@ -20,6 +20,7 @@ pipeline {
                 '''
             }
         }
+        
         stage("Test infection-mortality/CovidLiveUpdateApp") {
             steps {
                 echo "Test CovidLiveUpdateApp"
@@ -31,9 +32,10 @@ pipeline {
                 '''
             }
         }
-        stage("Compile infection-mortality/CovidLiveUpdateApp") {
+
+        stage("Compile infection-mortality/RegionalInfectionRates") {
             steps {
-                echo "Compile CovidLiveUpdateApp"
+                echo "Compile RegionalInfectionRates"
 
                 sh '''
                     cd infection-mortality/RegionalInfectionRates
@@ -42,9 +44,10 @@ pipeline {
                 '''
             }
         }
+
         stage("Test infection-mortality/RegionalInfectionRates") {
             steps {
-                echo "Test CovidLiveUpdateApp"
+                echo "Test RegionalInfectionRates"
 
                 sh '''
                     cd infection-mortality/RegionalInfectionRates
