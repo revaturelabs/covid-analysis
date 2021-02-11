@@ -18,8 +18,8 @@ pipeline {
                 echo "this is a build."
 
                 cd infection-mortality/CovidLiveUpdateApp
-                sbt compile
-                sbt test
+                sh 'sbt compile'
+                sh 'sbt test'
                 cd ../..
                 
             }
