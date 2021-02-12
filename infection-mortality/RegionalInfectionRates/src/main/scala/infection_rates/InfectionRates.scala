@@ -142,13 +142,17 @@ object InfectionRates {
 		import spark.implicits._
 		println()
 
+		// Grab json and create table
+		createJsonTable( spark, "today", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false")
+		createJsonTable( spark, "yesterday", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false")
+
 		// Creates the json for today and yesterday data
-		createJsonFile( "today.json", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false" )
-		createJsonFile( "yesterday.json", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false" )
+		//createJsonFile( spark, "today.json", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false" )
+		//createJsonFile( spark, "yesterday.json", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false" )
 
 		// Creates the tables in temp view
-		createTodayTable(spark, "datalake/InfectionRates/")
-		createYesterdayTable( spark, "datalake/InfectionRates/" )
+		//createTodayTable(spark, "datalake/InfectionRates/")
+		//createYesterdayTable( spark, "datalake/InfectionRates/" )
 
 		// Percentage of Regions with increasing COVID-19 Infection rate
 		covidRegionalInfectionRate( spark )
@@ -160,6 +164,29 @@ object InfectionRates {
 		spark.stop()
 	}
 
+	def createJsonTable(spark: SparkSession, table: String, url: String):Unit = {
+		import spark.implicits._
+
+		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
+
+    // Reads in a local json file
+		val jsonDF = spark.read.json( Seq(jsonData).toDS )
+
+		// Makes a DataFrame with a schema for columns
+		val regionalDF = jsonDF.withColumn("Region",when($"country".isin(Africa: _*), "Africa")
+			.when($"country".isin(Asia: _*), "Asia")
+			.when($"country".isin(Europe: _*), "Europe")
+			.when($"country".isin(Caribbean: _*), "Caribbean")
+			.when($"country".isin(Central_America: _*), "Central America")
+			.when($"country".isin(South_America: _*), "South America")
+			.when($"country".isin(North_America: _*), "North America")
+			.when($"country".isin(Oceania: _*), "Oceania")
+		)
+
+		// Creates the regional table
+		regionalDF.createOrReplaceTempView( table )
+	}
+
 	/** Grabs json object from the url and writes it to a file, and then uploads the file to S3 datalake
 	  *
 	  * @param fileName Name of the file one wants to write to.
@@ -167,9 +194,11 @@ object InfectionRates {
 	  */
 	def createJsonFile(spark: SparkSession, fileName: String, url: String):Unit = {
 		import spark.implicits._
+		
 		// Gets the json data from the url
 		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
 		val json2 = spark.read.json(jsonData)
+
 		// Make the json
 		val json = new File( s"datalake/InfectionRates/${fileName}" )
 		val jsonWriter = new FileWriter(json)
@@ -177,8 +206,8 @@ object InfectionRates {
 		// Write the json to the file
 		jsonWriter.write(jsonData)
 
-    // Puts the file onto AWS s3. No reason to copy file from local to s3 and then use local json file.
-		Build S3 client 
+    	// Puts the file onto AWS s3. No reason to copy file from local to s3 and then use local json file.
+		// Build S3 client 
 		val credentials = new BasicAWSCredentials(sys.env("AWS_ACCESS_KEY_ID"), sys.env("AWS_SECRET_ACCESS_KEY"))
 		val client = AmazonS3ClientBuilder
 	  	.standard()
@@ -186,14 +215,15 @@ object InfectionRates {
 			.withRegion("us-east-1")
 	  	.build();
 
+		json2.write.parquet("jsontoS3.parquet")
 		// Upload file to S3 datalake
 		client.putObject(
 			"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
-			json2.getName(),
-			json2
+			fileName,
+			new File("./jsontoS3.parquet")
 		)
 
-		Close the writer
+		// Close the writer
 		jsonWriter.close()
 	}
 
@@ -202,16 +232,18 @@ object InfectionRates {
 	  *
 	  * @param spark SparkContext for this application
 	  */
-	def createTodayTable(spark: SparkSession, file_path: String):Unit = {
+	def createTodayTable(spark: SparkSession, file_path_passed: String):Unit = {
 		import spark.implicits._
+		var file_path = file_path_passed
 
 		//Check if running on cluster!
-		// if(spark.sparkContext.isLocal){
+		// if(!spark.sparkContext.isLocal){
 		// 	// Sends our renamed results file to S3 from Hadoop.
 		// 	val sendToLocal = s"hdfs dfs -get ${file_path}today.json today.json"
-		// 	val sendToS3 = s"aws s3 mv $fileName.json s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+		// 	//val sendToS3 = s"aws s3 mv $fileName.json s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
 		// 	sendToLocal.!
-		// 	sendToS3.!
+		// 	//sendToS3.!
+		// 	file_path = ""
 		// }
 
 		// Reads in a local json file
@@ -268,7 +300,7 @@ object InfectionRates {
 	  */
 	def getRegionInfectionRate(spark: SparkSession, region : String): DataFrame = {
 		// The sql query for the infection rate change of one specific region
-	spark.sql(
+	  spark.sql(
 			s"""
 				Select first(yesterday.Region) As Region,
 					bround(avg((((today.todayCases/today.population)*1000000) - ((yesterday.todayCases/yesterday.population)*1000000)) / yesterday.casesPerOneMillion * 100), 2) AS Infection_Rate_Change

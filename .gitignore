@@ -1,11 +1,9 @@
-# Created by https://www.toptal.com/developers/gitignore/api/sbt,metals,scala,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=sbt,metals,scala,windows
+# Created by https://www.toptal.com/developers/gitignore?templates=sbt,metals,scala,windows,bloop,intellij,vscode
+# Edit at https://www.toptal.com/developers/gitignore?templates=sbt,metals,scala,windows,bloop,intellij,vscode
+
 
 ### Metals ###
 .metals/
-
-# Created by https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
-# Edit at https://www.toptal.com/developers/gitignore?templates=metals,scala,spark,sbt,bloop,intellij,vscode
 
 ### Bloop ###
 .bloop/
