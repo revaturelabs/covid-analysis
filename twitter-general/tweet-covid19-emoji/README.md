@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This application reads in twitter data from the S3 bucket and analyses the covid vs non-covid related hashtags
+This application reads in twitter data from the S3 bucket and analyses the frequency of covid vs non-covid related emojis
 
 ## Technologies Used
 
