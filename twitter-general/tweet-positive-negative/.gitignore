@@ -4,3 +4,6 @@ target/
 project/metals.sbt
 .metals/
 .vscode/
+lib/
+.jvmopts
+/resultsTesting
