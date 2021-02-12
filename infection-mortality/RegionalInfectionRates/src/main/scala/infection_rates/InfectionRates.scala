@@ -105,15 +105,16 @@ object InfectionRates {
 		"Peru", "Suriname", "Uruguay", "Venezuela"
 	)
 
-	private val Oceania = Array("American Samoa",
-		"Australia", "Christmas Island", "Cocos (Keeling) Islands",
-		"Cook Islands", "Federated States of Micronesia", "Fiji",
-		"French Polynesia", "Guam", "Kiribati", "Marshall Islands",
-		"Nauru", "New Caledonia", "New Zealand",
-		"Niue", "Northern Mariana Islands", "Palau",
-		"Papua New Guinea", "Pitcairn Islands",
-		"Samoa", "Solomon Islands", "Tokelau", "Tonga",
-		"Tuvalu", "Vanuatu", "Wallis and Futuna"
+	private val Oceania = Array(
+    "American Samoa", "Australia", "Christmas Island", 
+    "Cocos (Keeling) Islands", "Cook Islands", 
+    "Federated States of Micronesia", "Fiji", "French Polynesia", 
+    "Guam", "Kiribati", "Marshall Islands",
+		"Nauru", "New Caledonia", "New Zealand", "Niue", "Northern Mariana Islands", 
+    "Palau", "Papua New Guinea", "Pitcairn Islands",
+		"Samoa", "Solomon Islands", 
+    "Tokelau", "Tonga", "Tuvalu", 
+    "Vanuatu", "Wallis and Futuna"
 	)
 
 	/** Sets up the spark session, json data, and runs the analysis.
@@ -134,20 +135,24 @@ object InfectionRates {
 		// Configuration to be able to use AWS s3a
 		spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
-		// Set up S3 with secret and access key with spark
-    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+		// Set up S3 with secret and access key with spark - this is automatically done by the spark context (only do if trying to access different accounts)
+		// spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+		// spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
 
 		import spark.implicits._
 		println()
 
+		// Grab json and create table
+		createJsonTable( spark, "today", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false")
+		createJsonTable( spark, "yesterday", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false")
+
 		// Creates the json for today and yesterday data
-		createJsonFile( "today.json", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false" )
-		createJsonFile( "yesterday.json", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false" )
+		//createJsonFile( spark, "today.json", "https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false" )
+		//createJsonFile( spark, "yesterday.json", "https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false" )
 
 		// Creates the tables in temp view
-    createTodayTable(spark)
-		createYesterdayTable( spark )
+		//createTodayTable(spark, "datalake/InfectionRates/")
+		//createYesterdayTable( spark, "datalake/InfectionRates/" )
 
 		// Percentage of Regions with increasing COVID-19 Infection rate
 		covidRegionalInfectionRate( spark )
@@ -159,14 +164,40 @@ object InfectionRates {
 		spark.stop()
 	}
 
+	def createJsonTable(spark: SparkSession, table: String, url: String):Unit = {
+		import spark.implicits._
+
+		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
+
+    // Reads in a local json file
+		val jsonDF = spark.read.json( Seq(jsonData).toDS )
+
+		// Makes a DataFrame with a schema for columns
+		val regionalDF = jsonDF.withColumn("Region",when($"country".isin(Africa: _*), "Africa")
+			.when($"country".isin(Asia: _*), "Asia")
+			.when($"country".isin(Europe: _*), "Europe")
+			.when($"country".isin(Caribbean: _*), "Caribbean")
+			.when($"country".isin(Central_America: _*), "Central America")
+			.when($"country".isin(South_America: _*), "South America")
+			.when($"country".isin(North_America: _*), "North America")
+			.when($"country".isin(Oceania: _*), "Oceania")
+		)
+
+		// Creates the regional table
+		regionalDF.createOrReplaceTempView( table )
+	}
+
 	/** Grabs json object from the url and writes it to a file, and then uploads the file to S3 datalake
 	  *
 	  * @param fileName Name of the file one wants to write to.
 	  * @param url Url of the where the json should be pulled from.
 	  */
-	def createJsonFile(fileName: String, url: String):Unit = {
+	def createJsonFile(spark: SparkSession, fileName: String, url: String):Unit = {
+		import spark.implicits._
+		
 		// Gets the json data from the url
 		val jsonData = Jsoup.connect( url ).ignoreContentType( true ).execute.body
+		val json2 = spark.read.json(jsonData)
 
 		// Make the json
 		val json = new File( s"datalake/InfectionRates/${fileName}" )
@@ -175,35 +206,39 @@ object InfectionRates {
 		// Write the json to the file
 		jsonWriter.write(jsonData)
 
+    	// Puts the file onto AWS s3. No reason to copy file from local to s3 and then use local json file.
 		// Build S3 client 
 		val credentials = new BasicAWSCredentials(sys.env("AWS_ACCESS_KEY_ID"), sys.env("AWS_SECRET_ACCESS_KEY"))
 		val client = AmazonS3ClientBuilder
-      .standard()
+	  	.standard()
 			.withCredentials(new AWSStaticCredentialsProvider(credentials))
 			.withRegion("us-east-1")
-      .build();
+	  	.build();
 
+		json2.write.parquet("jsontoS3.parquet")
 		// Upload file to S3 datalake
 		client.putObject(
 			"covid-analysis-p3/datalake/infection-mortality/RegionalInfectionRates",
-			json.getName(),
-			json
+			fileName,
+			new File("./jsontoS3.parquet")
 		)
 
 		// Close the writer
 		jsonWriter.close()
-    }
+	}
 
 	/** Reads in the JSON from S3 - https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false
 	  * Provides a temp view for todays disease info to be used later
 	  *
 	  * @param spark SparkContext for this application
 	  */
-	def createTodayTable(spark: SparkSession):Unit = {
+	def createTodayTable(spark: SparkSession, file_path_passed: String):Unit = {
 		import spark.implicits._
+		var file_path = file_path_passed
+
 
 		// Reads in a local json file
-		val todayJson = spark.read.json("datalake/InfectionRates/today.json")
+		val todayJson = spark.read.json( file_path + "today.json")
 
 		// Makes a DataFrame with a schema for columns
 		val today = todayJson.withColumn("Region",when($"country".isin(Africa: _*), "Africa")
@@ -225,11 +260,11 @@ object InfectionRates {
 	  *
 	  * @param spark SparkContext for this application
 	  */
-	def createYesterdayTable(spark: SparkSession):Unit = {
+	def createYesterdayTable(spark: SparkSession, file_path: String):Unit = {
 		import spark.implicits._
 
 		// Reads in a local json file
-		val yesterdayTemp = spark.read.json("datalake/InfectionRates/yesterday.json")
+		val yesterdayTemp = spark.read.json( file_path + "yesterday.json")
 
 		// Makes a DataFrame with a schema for columns
 		val yesterday = yesterdayTemp.withColumn("Region",when($"country".isin(Africa: _*), "Africa")
@@ -256,7 +291,7 @@ object InfectionRates {
 	  */
 	def getRegionInfectionRate(spark: SparkSession, region : String): DataFrame = {
 		// The sql query for the infection rate change of one specific region
-    spark.sql(
+	  spark.sql(
 			s"""
 				Select first(yesterday.Region) As Region,
 					bround(avg((((today.todayCases/today.population)*1000000) - ((yesterday.todayCases/yesterday.population)*1000000)) / yesterday.casesPerOneMillion * 100), 2) AS Infection_Rate_Change
@@ -264,7 +299,7 @@ object InfectionRates {
 				INNER JOIN today
 				ON today.country=yesterday.country
 				WHERE yesterday.Region='$region'
-      """
+			"""
 		)
 	
 	}
@@ -277,7 +312,7 @@ object InfectionRates {
 	  * @param spark SparkContext for this application
 	  */
 	def covidRegionalInfectionRate(spark: SparkSession):Unit = {
-    import spark.implicits._
+	import spark.implicits._
 
 		println("Regions and their change in Infection Rate")
 
@@ -380,8 +415,8 @@ object InfectionRates {
 
 		// Least increase in fatality rate per capita
 		println("Country with the SMALLEST increase and/or LARGEST decrease in Fatality Rate")
-    buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change ASC NULLS LAST", "smallestIncreaseFatalityRate")
-        
+		buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change ASC NULLS LAST", "smallestIncreaseFatalityRate")
+		
 		// Most increase in recovery rate per capita
 		println("Country with the LARGEST increase in Recovery Rate")
 		buildAndShowQuery(spark, "todayRecovered", "Recovery_Rate_Change", "ORDER BY Recovery_Rate_Change DESC", "largestIncreaseRecoveryRate")
