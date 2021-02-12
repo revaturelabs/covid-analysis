@@ -236,15 +236,6 @@ object InfectionRates {
 		import spark.implicits._
 		var file_path = file_path_passed
 
-		//Check if running on cluster!
-		// if(!spark.sparkContext.isLocal){
-		// 	// Sends our renamed results file to S3 from Hadoop.
-		// 	val sendToLocal = s"hdfs dfs -get ${file_path}today.json today.json"
-		// 	//val sendToS3 = s"aws s3 mv $fileName.json s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
-		// 	sendToLocal.!
-		// 	//sendToS3.!
-		// 	file_path = ""
-		// }
 
 		// Reads in a local json file
 		val todayJson = spark.read.json( file_path + "today.json")
