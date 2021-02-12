@@ -1,5 +1,7 @@
 # Twitter-general Emoji-Count
 
+# MUST UPDATE FILEPATH IN UTILITIES.SCALA @ line: 68 BEFORE RUNNING
+
 ## Project Description
 
 This application reads in twitter data from the S3 bucket and analyses the frequency of covid vs non-covid related emojis
