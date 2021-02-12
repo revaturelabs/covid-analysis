@@ -86,7 +86,7 @@ pipeline {
             }
         }
 
-        //HashtagByRegion
+        //HashtagByRegion Compile and Test
         stage("Compile twitter-covid HashtagByRegion") {
             steps {
                 echo "Compile HashtagByRegion"
@@ -111,30 +111,30 @@ pipeline {
             }
         }
 
-        //
-        stage("Compile twitter-covid RelatedHashtags") {
-            steps {
-                echo "Compile RelatedHashtags"
+        //RelatedHashtags Compile and Test
+        // stage("Compile twitter-covid RelatedHashtags") {
+        //     steps {
+        //         echo "Compile RelatedHashtags"
 
-                sh '''
-                    cd twitter-covid/RelatedHashtags
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/RelatedHashtags
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
-        stage("Test twitter-covid RelatedHashtags") {
-            steps {
-                echo "Test RelatedHashtags"
+        // stage("Test twitter-covid RelatedHashtags") {
+        //     steps {
+        //         echo "Test RelatedHashtags"
 
-                sh '''
-                    cd twitter-covid/RelatedHashtags
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/RelatedHashtags
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
     }
 
     // After action of testing
