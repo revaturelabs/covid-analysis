@@ -8,10 +8,24 @@ import util.FileUtil
 
 
 /**
-  * QUESTION 7: What are the hashtags used to describe COVID-19 by Region (e.g. #covid, #COVID-19, #Coronavirus, #NovelCoronavirus)?
+  * PURPLE TEAM QUESTION 7: What are the hashtags used to describe COVID-19 by Region (e.g. #covid, #COVID-19, #Coronavirus, #NovelCoronavirus)?
   */
 object Main {
   def main(args: Array[String]) = {
+
+    ////// Update path to point to you dataset of tweets (json) //////////
+    val jsonPath = "s3://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data2.json"
+
+    val spark = SparkSession
+      .builder()
+      .appName("Hashtag-By-Region")
+      .master("yarn")               // Change "yarn" to "local[*]" if running locally
+      .getOrCreate()
+
+    // Load in AWS credientials from environment, uncomment these lines if running locally
+    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
     // Log Spark info to logs/app/
     scribe.Logger.root
@@ -21,22 +35,6 @@ object Main {
         "logs" / "app" / ("app-" % year % "-" % month % "-" % day % ".log")
       ))
       .replace()
-
-    // jsonPath currently points to test data
-    ////// After an EMR cluster has been established, update path to "s3a://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data.json" //////////
-    val jsonPath = "s3a://covid-analysis-p3/datalake/twitter-covid/test_twitter_data.json"
-
-    val spark = SparkSession
-      .builder()
-      .appName("Hashtag-By-Region")
-      .master("local[*]")
-      .getOrCreate()
-
-
-    // Load in AWS credientials from environment
-    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
-    spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
     // twitterDF is the base DataFrame created from the contents of an input json file.
     val twitterDF = FileUtil.getDataFrameFromJson(spark, jsonPath)
@@ -50,6 +48,6 @@ object Main {
       HashtagByRegion.getHashtagsByRegion(spark, twitterDF, region)
     }
 
-    spark.stop()
+    spark.stop
   }
 }
