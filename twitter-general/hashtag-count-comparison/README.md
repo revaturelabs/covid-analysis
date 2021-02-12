@@ -1,5 +1,4 @@
-# Group 4's Project 2 repo
-###### Jeroen Wolfe, Andrew Pepin, Rastal
+# Twitter-general Hashtag-Count-Comparison
 
 ## Project Description
 
@@ -16,19 +15,17 @@ This application reads in twitter data from the S3 bucket and analyses the covid
 
 ## Features
 
-List of features ready and TODOs for future development
 * Collects tweet text from the S3 bucket, extracts the hashtags from all the tweets, groups the covid related hashtags together, sorts all hashtags by count, and ouptuts the results to the console and a csv file in S3
 
 ## Getting Started
    
 
 * set AWS access keys as environment variables
-* 
 
 ## Usage
 
 * general Usage
-    * On local use `sbt "run [mode]"`
+    * must be run with comandline argument `[mode]`
     * mode is a number between 0-3
         * 0 runs the application on tweet data in the date range `12/11/2020 - 12/25/2020`
         * 1 runs the application on tweet data in the date range `12/26/2020 - 01/05/2021`
