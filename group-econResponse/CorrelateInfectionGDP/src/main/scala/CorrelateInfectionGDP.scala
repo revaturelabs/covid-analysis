@@ -36,25 +36,25 @@ object CorrelateInfectionGDP {
       .master("local[*]")
       .getOrCreate()
 
-    val df = dfb.build(spark, fileNames, db)
+    val df = dfb.build(spark, fileNames, db).cache()
     df.createOrReplaceTempView("correlation")
 
-    val correlateDF = spark.sql(
-      """
-        |SELECT AVG(total_cases_per_million) as infection_rate,
-        |SUM(gdp_perCap_currentPrices_usd) as cumulative_gdp,
-        |region
-        |FROM correlation
-        |GROUP BY region"""
-        .stripMargin)
-      .cache()
+//    val correlateDF = spark.sql(
+//      """
+//        |SELECT AVG(total_cases_per_million) as infection_rate,
+//        |SUM(gdp_perCap_currentPrices_usd) as cumulative_gdp,
+//        |region
+//        |FROM correlation
+//        |GROUP BY region"""
+//        .stripMargin)
+//
+//
+//    println("\nRegional infection rates and cumulative GDP:")
+//    correlateDF.show()
 
-    println("\nRegional infection rates and cumulative GDP:")
-    correlateDF.show()
-
-    println("\nPearson Correlation Coefficient:")
-    val pearsonCorrelation: Double = correlateDF.stat.corr("infection_rate", "cumulative_gdp")
-    println(pearsonCorrelation)
+//    println("\nPearson Correlation Coefficient:")
+//    val pearsonCorrelation: Double = correlateDF.stat.corr("infection_rate", "cumulative_gdp")
+//    println(pearsonCorrelation)
 
 //    val corrRDD = correlateDF.rdd
 //    val infectionVector = correlateDF.select("infection_rate").rdd.map { case Row(v: Vector[Double]) => v }
@@ -62,6 +62,7 @@ object CorrelateInfectionGDP {
 //
 //    val chiSqTestResult = Statistics.chiSqTest()
 
+calc.regionFirstPeak(spark, df, "CorrelateInfectionGDP/src/main/resources")
 
     spark.catalog.dropTempView("correlation")
     // TODO: call hypothesis test method when implemented
