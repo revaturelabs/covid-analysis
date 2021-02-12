@@ -13,7 +13,7 @@ import utilites.{DataFrameBuilder, s3DAO}
 object FirstRegionalPeaks {
 
   def main(args: Array[String]): Unit = {
-    // Set the log level to only print errors
+    // Set the log level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
     val db = s3DAO()
