@@ -1,4 +1,4 @@
-# Twitter-general Hashtag-Count-Comparison
+# Twitter-general Emoji-Count
 
 ## Project Description
 
