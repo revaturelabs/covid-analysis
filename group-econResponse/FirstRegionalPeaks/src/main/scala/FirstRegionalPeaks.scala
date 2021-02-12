@@ -35,8 +35,6 @@ object FirstRegionalPeaks {
     calc.regionalFirstPeak(spark, df)
 
     spark.catalog.dropTempView("correlation")
-    // TODO: call hypothesis test method when implemented
-    //    calc.hypoTest(1.0d, 2.25d)
     spark.stop()
   }
 }
