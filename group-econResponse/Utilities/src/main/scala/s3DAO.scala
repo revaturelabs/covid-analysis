@@ -20,10 +20,10 @@ case class s3DAO (
   def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
-    val file = new FileOutputStream(downloadPath + filesName)
+    val file = new FileOutputStream(s"$downloadPath/$filesName")
     file.write(bytes)
 
-    cb(downloadPath + filesName)
+    cb(s"$downloadPath/$filesName")
   }
 
   //copy files to s3.

@@ -1,9 +1,8 @@
-package covidAndGDP
+package firstRegionPeaks
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import org.apache.spark.sql.functions.avg
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -14,119 +13,66 @@ import scala.collection.mutable.ArrayBuffer
   * 
   */
 case class Calculator() {
+  /**
+   * Gives the first peak that satisfies the inputs and allows for ignoring noise
+   * @param xArray the independent data series
+   * @param yArray the dependent data series
+   * @param neighbors number of data points to evaluate after a potential peak
+   * @param percentDifference percentage to filter out noise where noise is difference between peak and avg value of neighbors
+   * @param minCasePercent floor to start evaluating values with respect to maximum value percentage
+   * @return a first peak coordinate that satisfies conditions
+   */
+  def firstMajorPeak(xArray: Array[Double], yArray: Array[Double], neighbors: Int, percentDifference: Double, minCasePercent: Double): (Double, Double) ={
+    var avgSum: Double = 0.0
+    var sum: Double = 0.0
+    var minDifference: Double = 0.0
+    val minCase = minCasePercent*.01*yArray.max
+    val start = yArray.indexWhere(_ > minCase)
+    if (start != -1) {
+      for(i <- start until xArray.length - neighbors){
+        sum = 0.0
+        for(neighbor <- 1 to neighbors){
+          sum += yArray(i + neighbor)
+        }
+        avgSum = sum/neighbors
+        minDifference = .01*percentDifference*yArray(i)
+        if(yArray(i) - avgSum > minDifference){
+          return (xArray(i),yArray(i))
+        }
+      }
+    }
+    (-1, yArray(0))
+  }
 
+  /**
+   * The correlation between two series of data ~1 = positive correlation,
+   * ~0 = no correlation, ~-1 = -negative correlationcovidAndGDP
+   * @param xArray the independent data series
+   * @param yArray the dependent data series
+   * @return the correlation number as a double
+   */
+  def correlation(xArray: Array[Double], yArray: Array[Double]):Double={
+    var r = 0.0
+    var x = 0.0
+    var y = 0.0
+    var x_2 = 0.0
+    var y_2 = 0.0
+    var xy = 0.0
+    val n = xArray.length
+    for(i <- xArray.indices){
+      x += xArray(i)
+      y += yArray(i)
+      x_2 += (xArray(i)*xArray(i))
+      y_2 += (yArray(i)*yArray(i))
+      xy += (xArray(i)*yArray(i))
+    }
+    r = (n*xy - (x*y))/(math.sqrt(n*x_2 - (x*x)) * math.sqrt(n*y_2 - (y*y)))
+    r
+  }
 
   def dayInYear(date: String, firstOfYear: Long = 1577865600000L): Int ={
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
     ((dateFormat.parse(date).getTime - firstOfYear)/86400000).toInt
-  }
-  /** regionCorrelation
-    * uses Spark SQL with S3 buckets partitioned by region to find out the peak case timetable
-    *  for each region and correlates that metric to the GDP of said region
-    *
-    * @param spark - The spark session
-    * @param df - the dataframe that will contain the data formatted in this function
-    * 
-    * TODO: change this to GDP vs Value of First Infection Rate Spike {TODO brought over from original file}
-    */
-  def regionalCorrelation(spark: SparkSession, df: DataFrame): Unit = {
-    import spark.implicits._
-    val now = Calendar.getInstance()
-    val time = now.getTimeInMillis
-    val tableName = s"dfOptimize$time"
-    df.write
-      .mode("overwrite")
-      .partitionBy("region")
-      .bucketBy(40, "country")
-      .saveAsTable(tableName)
-
-    //regionNames is an array of strings which are the names of each region mapped from a Spark RDD
-    val regionNames = spark
-      .sql(s"SELECT DISTINCT region FROM $tableName ORDER BY region")
-      .rdd
-      .map(_.get(0).toString)
-      .collect()
-
-    //the commented code below is the same regionNames declaration above meant for dataframes
-    //val regionNames = df.select("region")
-    // .sort("region")
-    // .distinct()
-    // .rdd.map(_.get(0).toString)
-    // .collect()
-
-    // This for loop gets the GDP data for each region and country within those regions and outputs the data to
-    // the console as a formatted string using the StatFunc class
-    for (region <- regionNames.indices) {
-      var gdp = ArrayBuffer[Double]()
-      var peak = ArrayBuffer[Double]()
-      val specificRegion = regionNames(region)
-
-      val regionCountries = spark
-        .sql(s"SELECT DISTINCT country, region FROM $tableName WHERE region = '$specificRegion' ")
-        .rdd
-        .map(_.get(0).toString)
-        .collect()
-
-      // This code commented below does the same declaration as above, but takes in the dataframe
-      // directly instead of querying Spark.
-      // Luckily this allows us to choose whether or not to use spark SQL queries in our data pulls
-      // val regionCountries = df.select("country")
-      //    .filter($"region" === regionNames(region))
-      //    .distinct()
-      //    .rdd
-      //    .map(_.get(0).toString)
-      //    .collect()
-      // Get the first peak for each country in region and gdp
-      for (country <- regionCountries.indices) {
-        val regionCountry = regionCountries(country)
-        val countryDF = spark
-          .sql(
-            s"SELECT DISTINCT date, new_cases_per_million, gdp_per_capita FROM $tableName WHERE country = '$regionCountry'" +
-              s" AND date != 'NULL' " +
-              s" AND year = '2020'" +
-              s" AND gdp_per_capita != 'NULL'" +
-              s" ORDER BY date"
-          )
-          .cache()
-        //val countryDF = df.select($"date",$"gdp_per_capita",$"new_cases_per_million")
-        //  .where($"country" === regionCountries(country))
-        //  .filter($"date" =!= "NULL" && $"year" === "2020" && $"gdp_per_capita" =!= "NULL")
-        //  .sort("date")
-        //  .distinct()
-
-        //used in the if statement below, temporary metric arrays of doubles that gets the number of cases per
-        // million as well as the dates after the pandemic started 
-        val tempCases = countryDF
-          .select($"new_cases_per_million")
-          .collect()
-          .map(_.get(0).toString.toDouble)
-        val tempDates = countryDF
-          .select($"date")
-          .collect()
-          .map(_.get(0).toString)
-          .map(dayInYear(_).toDouble)
-
-          //if statement adds average GDP data to the gdp metric array if the date and cases are higher than 0
-          // 0 correlating to the start of the pandemic onwards in both date and number of cases
-        if (tempDates.length > 0 && tempCases.length > 0) {
-          peak += StatFunc.firstMajorPeak(tempDates, tempCases, 7, 10, 5)._2
-          val tempGDP = countryDF.select($"gdp_per_capita")
-          val avgGDP = tempGDP
-            .select(avg($"gdp_per_capita"))
-            .collect()
-            .map(_.get(0).toString.toDouble)
-          gdp += avgGDP(0)
-        }
-      }
-      // Give correlation for each region
-      println(
-        s"Region ${regionNames(region)}'s GDP - First Major Peak New Cases Value Correlation: ${StatFunc
-          .correlation(gdp.toArray, peak.toArray)}"
-      )
-    }
-    // Table is dropped at the end of the function. I'm not sure why but it's likely because the table is not
-    // needed outside of the analysis.
-    spark.sql(s"DROP TABLE IF EXISTS $tableName")
   }
 
 /** regionFirstPeak
@@ -135,15 +81,10 @@ case class Calculator() {
   *
   * @param spark - the spark session
   * @param df - the dataframe that the data will be loaded into
-  * @param resultpath - the path that the result will be stored in {UNUSED - ?}
   * 
   * FIXME: refactor this function to either not include resultpath as a parameter, or find a use for it
   */
-def regionFirstPeak(
-      spark: SparkSession,
-      df: DataFrame,
-      resultpath: String
-  ): Unit = {
+def regionalFirstPeak(spark: SparkSession, df: DataFrame): Unit = {
     import spark.implicits._
     val now = Calendar.getInstance()
     val time = now.getTimeInMillis
@@ -179,8 +120,11 @@ def regionFirstPeak(
       for (country <- countryList) {
         tempFrame = spark
           .sql(
-            s"SELECT DISTINCT country, date, new_cases FROM $tableName WHERE country = '$country' AND date != 'NULL' "
-          )
+          s"""SELECT DISTINCT country, date, new_cases
+            |FROM $tableName
+            |WHERE country = '$country'
+            |AND date != 'NULL'
+            |""".stripMargin)
           .sort($"date")
           .cache()
         tempCases = tempFrame
@@ -192,7 +136,7 @@ def regionFirstPeak(
           .collect()
           .map(_.get(0).toString)
           .map(dayInYear(_).toDouble)
-        peakTime = StatFunc.firstMajorPeak(tempDates, tempCases, 7, 10, 5)._1
+        peakTime = firstMajorPeak(tempDates, tempCases, 7, 10, 5)._1
         if (peakTime != -1) {
           firstPeakForCountry.append(peakTime)
           //          println(s"${country}, ${firstPeakForCountry.last}")
@@ -202,23 +146,10 @@ def regionFirstPeak(
         firstPeakForCountry.sum / firstPeakForCountry.length
       )
       println(
-        s"$region Average Days to First Major Peak: ${firstPeakTimeAvg.last}"
+        s"$region Average time before first major peak: ${firstPeakTimeAvg.last} (days)"
       )
       firstPeakForCountry.clear()
     }
-
-    //          val firstPeakTable: ArrayBuffer[(String, Double)] = ArrayBuffer()
-    //          for (ii <- 0 to regionList.length-1){
-    //            firstPeakTable.append((regionList(ii), firstPeakTimeAvg(ii)))
-    //          }
-    //          println("")
-    //          for (ii <- 0 to regionList.length-1){
-    //            println(s"${firstPeakTable(ii)._1}, ${firstPeakTable(ii)._2}}" )
-    //          }
     spark.sql(s"DROP TABLE IF EXISTS $tableName")
   }
-
-  // TODO: Implement the hypothesis test
-  def hypoTest(dub: Double, anDub: Double ): Double  = {105.24d}
-
 }

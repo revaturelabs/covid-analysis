@@ -49,6 +49,18 @@ lazy val CorrelateInfectionGDP = project
   )
   .dependsOn(Utilities)
 
+lazy val FirstRegionalPeaks = project
+  .settings(
+    name := "FirstRegionalPeaks",
+    assemblyJarName in assembly := name.value + ".jar",
+    settings,
+    libraryDependencies ++= sharedDependencies ++ Seq(
+      dependencies.logCore,
+      dependencies.logScala,
+    )
+  )
+  .dependsOn(Utilities)
+
 // Dependencies
 lazy val sharedDependencies = Seq(
   dependencies.spark,

@@ -5,7 +5,7 @@
       <option name="postfixOps" value="true" />
     </profile>
     <profile name="sbt 2" modules="covid-response,econ-response,global" />
-    <profile name="sbt 3" modules="CorrelateInfectionGDP,CovidResponse,Utilities,econ-group">
+    <profile name="sbt 3" modules="CorrelateInfectionGDP,CovidResponse,FirstRegionalPeaks,Utilities,econ-group">
       <option name="postfixOps" value="true" />
       <option name="implicitConversions" value="true" />
       <option name="higherKinds" value="true" />

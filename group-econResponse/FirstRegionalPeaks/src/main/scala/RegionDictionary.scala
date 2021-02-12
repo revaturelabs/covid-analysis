@@ -1,5 +1,22 @@
 // Object handling Region/Country data
 object RegionDictionary {
+
+  // Takes a country input and returns its corresponding region
+  def reverseMapSearch(country: String): String = {
+    regionMap.foreach(region =>
+      if (region._2.contains(country)) {
+        return region._1
+      }
+    )
+    // Otherwise, return failure
+    "Country Not Found"
+  }
+
+  // Returns the list of regions
+  def getRegionList: List[String] = {
+    regionMap.keys.toList
+  }
+
   // Map of Regions to Countries contained (as a list)
   private val regionMap = Map(
     "Africa" ->
@@ -258,18 +275,4 @@ object RegionDictionary {
         "Venezuela"
       )
   )
-
-  // Takes a country input and returns its corresponding region
-  def reverseMapSearch(country: String): String = {
-    regionMap.foreach(region =>
-      if (region._2.contains(country)) { return region._1 }
-    )
-	// Otherwise, return failure
-    "Country Not Found"
-  }
-
-  // Returns the list of regions
-  def getRegionList: List[String] = {
-    regionMap.keys.toList
-  }
 }
