@@ -4,12 +4,10 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import utilites.{DataFrameBuilder, s3DAO}
 
-/** Question: Is there a significant relationship between a Region’s cumulative GDP and Infection Rate per capita?
+/** Question: What is the average amount of time it took for each region to reach its first peak in infection rate
+ * per capita?
  * queries:
- * uses Spark SQL and Spark ML with S3 buckets partitioned by region to query datasets and calculate the Pearson
- * Correlation Coefficient.
- *
- * Uses Spark ML to preform hypothesis testing on any conclusion drawn from the coefficient value.
+ * uses Spark SQL for analytics with S3 buckets partitioned by region to query datasets and calculate the time elapsed.
  *
  */
 object FirstRegionalPeaks {
