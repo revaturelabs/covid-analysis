@@ -12,5 +12,5 @@ libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % "3.2.2",
   "org.scalatest" %% "scalatest" % "3.2.2" % "test",
   "com.amazonaws" % "aws-java-sdk" % "1.7.4",
-  "org.apache.hadoop" % "hadoop-aws" % "3.2.0"
+  "org.apache.hadoop" % "hadoop-aws" % "2.7.1"
 )
