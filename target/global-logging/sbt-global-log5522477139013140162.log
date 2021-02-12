@@ -1,9 +1,0 @@
-[0m[[0m[0mdebug[0m] [0m[0m> Exec(q, Some(ef50175a-a95d-48b7-9b62-6f9f6d170f1e), Some(CommandSource(console0)))[0m
-[0m[[0m[31merror[0m] [0m[0mNot a valid command: q[0m
-[0m[[0m[31merror[0m] [0m[0mNot a valid project ID: q[0m
-[0m[[0m[31merror[0m] [0m[0mExpected ':'[0m
-[0m[[0m[31merror[0m] [0m[0mNot a valid key: q[0m
-[0m[[0m[31merror[0m] [0m[0mq[0m
-[0m[[0m[31merror[0m] [0m[0m ^[0m
-[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
-[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m
