@@ -2,6 +2,8 @@ package TweetCovid19Percentage
 import org.apache.log4j._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.{DataFrameReader,DataFrame,Row,Dataset}
+import scala.sys.process._
+import java.io.PrintWriter
 
 object Runner {
     // A case class to hold the tweet text data for data set
@@ -9,23 +11,50 @@ object Runner {
     
     def main(args: Array[String]): Unit = {
         // Set the log level to only print errors
-        Logger.getLogger("org").setLevel(Level.ERROR)
+        // Uncomment for local run to filter out the excessive barrage of logging output from Spark
+        //Logger.getLogger("org").setLevel(Level.ERROR)
+
         // Grab the Spark Session object, set the app Name option, EMR will handle the rest of the config
-        val spark = SparkSession.builder().master("local").appName("TweetCovid19Percentage").getOrCreate()
-        // TODO: Learn more about spark implicits because you know nothing atm 
+        val spark = SparkSession.builder().master("yarn").appName("TweetCovid19Percentage").getOrCreate()
+        // TODO: Learn more about spark implicits because you know very little
         import spark.implicits._
 
         // Adds some jars necessary for our application to run as a thin jar on a Spark cluster.
-        spark.sparkContext.addJar("https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.4/hadoop-aws-2.7.4.jar")
-        spark.sparkContext.addJar("https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar")
+        //spark.sparkContext.addJar("https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.4/hadoop-aws-2.7.4.jar")
+        //spark.sparkContext.addJar("https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar")
         
-        // TODO: Hardcode for now, replace with s3 at some point
         //val filePath = "test-data.txt"
-        val filePath = SelectInputDataPath(0)
+        // Selecting the input data filepath on S3 based on the user supplied CL parameter
+        val filePath = SelectInputDataPath(args(0).toInt)
         // Calculate the Percentage of Covid related Tweets from the input data file
         tweetCovid19Percentage(filePath, spark)
+
+        // Save the results of processing the user defined input data set (CL parameter) to AWS S3
+        SaveToS3(args(0).toInt)
         // End the Spark instance for propriety
         spark.stop()
+    }
+
+    def SaveToS3(dataRangePrefixSelection: Int): Unit = {
+      val fileName = dataRangePrefixSelection match {
+          case 0 => "CovidPercentResults-Dec_11-Dec_25"
+          case 1 => "CovidPercentResults-Dec_26-Jan_05"
+          case 2 => "CovidPercentResults-Feb_03-Feb_14"
+          case 3 => "S3ConnectionTestResults"
+          case _ => "S3ConnectionTestResults"
+      }
+
+      // This line will be executed in the terminal(.!) it uses the AWS CLI tool
+      // to move the local file to S3 and rename it. Uncomment for running locally
+      //val sendToS3 = s"aws s3 mv Results.csv s3://covid-analysis-p3/datawarehouse/twitter-general/Covid19Percentage/$fileName.csv"
+        //sendToS3.!
+
+        // Sends our renamed results file to S3 from Hadoop.
+        // Uncomment for running on the EMR cluster
+        val sendToLocal = s"hdfs dfs -get Results.csv Results.csv"
+        val sendToS3 = s"aws s3 mv Results.csv s3://covid-analysis-p3/datawarehouse/twitter-general/covid19-percent/$fileName.csv"
+        sendToLocal.!
+        sendToS3.!
     }
 
     /**
@@ -52,17 +81,27 @@ object Runner {
       * @param resultsDataSet the results of IsCovidRelatedText (Dataset[Boolean])
       * @return The calculated percentage of true values in the results set as integer
       */
-    def CalculatePercentage(resultsDataSet:Dataset[Boolean]):Integer = {
+    def CalculatePercentage(resultsDataSet:Dataset[Boolean]):Int = {
+        // Print line for debugging
+        println("Starting CalculatePercentage function...")
         // Store the total count of result values
-        val totalCount = resultsDataSet.collect().length
+        val totalCount = resultsDataSet.count()
         // Filter the true values into a new Dataset
         val countingTruesDS = resultsDataSet.filter(x => x.equals(true))
         // Count the true values
-        val trueCount = countingTruesDS.collect().length
+        val trueCount = countingTruesDS.count()
         // Calculate the percentage using doubles, then cast back to Integer
         val thePercentage = (trueCount.toDouble/totalCount.toDouble)*100
+
         // Print line for debugging
         println("Calculated.." + thePercentage)
+
+        // Create a CSV file for the results output
+        val writer = new PrintWriter("Results.csv")
+        writer.print("Covid,Non-Covid\n")
+        writer.print(thePercentage.toString() + "," + (100-thePercentage).toString())
+        writer.close()
+
         return thePercentage.toInt
     }
 
@@ -84,16 +123,18 @@ object Runner {
     }
 
     /**
-      * A function to select the S3 input path for input data range indicated by the integer parameter
+      * A function that uses pattern matching to select the S3 input path for input 
+      * data range indicated by the integer parameter
       * @param dataRangePrefixSelection an Integer mapped to input datasets
       * @return the full S3 file path to the chosen input dataset
       */
     def SelectInputDataPath(dataRangePrefixSelection: Int): String = {
         var fullS3Path = ""
         dataRangePrefixSelection match {
-          case 0 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/"
-          case 1 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/"
-          case 2 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/"
+          case 0 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/*"
+          case 1 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/dec_26-jan_05/*"
+          case 2 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/feb_03-feb_14/02-03.txt"
+          case 3 => fullS3Path = "s3a://covid-analysis-p3/datalake/twitter-general/test-data/*"
           case _ => "Not a valid input data range"
         }
         return fullS3Path
