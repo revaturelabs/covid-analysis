@@ -3,61 +3,86 @@ package emojis
 import com.vdurmont.emoji._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SparkSession
+import scala.collection.JavaConverters._
+
+import java.io._
 
 import scala.collection.Map
 
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+import scala.sys.process._
+import java.io.File
+import java.io.PrintWriter
+import java.io.FileOutputStream
+import java.io.FileInputStream
+import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.Path
+import scala.collection.immutable.ListMap
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.Dataset
+
 class Utilities()
-
-
-/**
-  * TODO: 
-  * Process all lines of text at once, instead of running individual emojiCount functions on each line respectively.
-  * All the counts need to be stored in a single collection, right now I'm getting an independent collection for each line.
-  * Currently several half-finished methods, one that processes data the right way but gets the wrong results
-  * One that processes data the wrong way but gets the right results.
-  */
 
 object Utilities {
 
-  //Function for counting emojis in a text file. Consider splitting this into several smaller functions for readability. 
-  def tweetcovid19emoji(path: String): Map[String, Int] = {
+  // case class TweetText(value: String)
+  case class TweetText(value: String)
+
+  //Function for counting emojis in a text file. Consider splitting this into several smaller functions for readability.
+  def tweetcovid19emoji(range: String): Map[String, Int] = {
 
     //Create Spark session and context for processing data.
     val spark = SparkSession
-      .builder()
+      .builder
       .appName("Twitter-Emoji-Analysis")
-      .master("local[1]")
+      .master("local[4]")
       .getOrCreate()
     val sc = spark.sparkContext
     sc.setLogLevel("OFF")
 
+    //Everything below this is legacy code that actually works. 
+
     //Read input from text file, count emojis in it, and store as a Map in an RDD
-    // val map = sc.textFile("test-data.txt")
-    //     .flatMap(line => line.split(" "))
-    //     .map(word => (word,1))
+    val map = sc
+      .textFile("testdata/*")
+      //Extract all emojis from each line of the file, and store in a Scala list instead of Java list.
+      .flatMap(line => EmojiParser.extractEmojis(line).asScala)
+      //map each emoji to a value of 1 per instance found.
+      .map(emoji => (emoji, 1))
 
+    //Consolidate each individual emoji count into one row and 'count' the number of instances
+    var emojiCounts = map.reduceByKey(_ + _)
 
-    val lines = sc.textFile("test-data.txt")
-
-    for(line <- lines) {
-      println("Testing EmojiParser: " + EmojiParser.extractEmojis(line))
-    }
-    println("Testing sc output: " + lines)
-    
-    //Convert the RDD into a map
-    // val emojiCounts = map.reduceByKey(_ + _).collectAsMap()
+    val emojiCountMap = emojiCounts.collectAsMap()
+    //Testing purposes: Collect and print the map of counts.
+    emojiCounts.foreach(println)
 
     //Kill the Spark Context.
     sc.stop()
 
-    val emojiCounts = Map("test" -> 7)
-    //Return the map containing results from the RDD. 
-    return emojiCounts
+    //Return the map containing results from the RDD.
+    return emojiCountMap
   }
 
-
-  //Function to print contents of a map, for testing purposes. 
+  //Function to print contents of a map, for testing purposes.
   def printMap(counter: Map[String, Int]): Unit = {
     for ((key, value) <- counter) printf("%s: %d\n", key, value)
+  }
+
+  def writeOutputToCSV(outputMap: Map[String, Int]) = {
+
+    val outputFileName = "emojiCountOutput.csv"
+    val printwriter    = new PrintWriter(new File(outputFileName))
+
+    //Write column headers to csv output file
+    printwriter.append("Emoji,Count\n")
+
+    //Format the map of emoji's and their counts into a csv string and write to output file.
+    for ((key, value) <- outputMap) {
+      val csvEntry = (key + "," + value + "\n")
+      printwriter.append(csvEntry)
+    }
+    printwriter.close()
   }
 }
