@@ -1,4 +1,5 @@
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.StructType
 
@@ -14,11 +15,12 @@ object Main {
     val path = setUpConnection(spark)
 
     // TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
-    TwitterCovidAnalysis.ageGroupsInfectionCount(TwitterCovidAnalysis.readToDF(spark, path)).show()
+    // TwitterCovidAnalysis.ageGroupsInfectionCount(TwitterCovidAnalysis.readToDF(spark, path)).show()
+    TwitterCovidAnalysis.readTwitterToDF(spark).show(20)
     spark.stop
   }
 
-  /** Set up Local connection
+  /** Uses dataset from datalake directory instead of AWS
     * 
     * @return location of datalake directory
     */

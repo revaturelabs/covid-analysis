@@ -17537,3 +17537,487 @@ Starting thread that pumps server stdout and redirects it to the client stdout..
 [0m2021.02.10 09:36:25 INFO  time: compiled covid-analysis-1 in 7.99s[0m
 Feb 10, 2021 9:36:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTraceNotification
+Feb 10, 2021 10:20:27 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 242
+[0m2021.02.10 10:20:44 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:20:50 INFO  time: compiled covid-analysis-1 in 6.74s[0m
+[0m2021.02.10 10:21:02 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:21:05 INFO  time: compiled covid-analysis-1 in 3.34s[0m
+Feb 10, 2021 10:21:08 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 287
+Feb 10, 2021 10:21:09 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 292
+Feb 10, 2021 10:21:09 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 290
+Feb 10, 2021 10:21:09 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 295
+Feb 10, 2021 10:21:09 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 297
+[0m2021.02.10 10:21:09 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:21:11 INFO  time: compiled covid-analysis-1 in 1.91s[0m
+[0m2021.02.10 10:21:27 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:21:30 INFO  time: compiled covid-analysis-1 in 2.77s[0m
+[0m2021.02.10 10:21:32 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:21:37 INFO  time: compiled covid-analysis-1 in 4.22s[0m
+[0m2021.02.10 10:21:45 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:21:46 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.10 10:21:46 INFO  time: compiled covid-analysis-1 in 1.49s[0m
+Feb 10, 2021 10:22:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 369
+Feb 10, 2021 10:22:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 379
+Feb 10, 2021 10:22:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 380
+[0m2021.02.10 10:22:48 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:22:52 INFO  time: compiled covid-analysis-1 in 4.49s[0m
+[0m2021.02.10 10:22:57 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:23:00 INFO  time: compiled covid-analysis-1 in 3.3s[0m
+[0m2021.02.10 10:23:07 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:23:12 INFO  time: compiled covid-analysis-1 in 5.43s[0m
+Feb 10, 2021 10:23:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 408
+[0m2021.02.10 10:23:42 INFO  compiling covid-analysis-1 (1 scala source)[0m
+Feb 10, 2021 10:23:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 423
+[0m2021.02.10 10:23:44 INFO  time: compiled covid-analysis-1 in 1.81s[0m
+[0m2021.02.10 10:24:11 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:24:13 INFO  time: compiled covid-analysis-1 in 2.2s[0m
+[0m2021.02.10 10:24:16 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:24:17 INFO  time: compiled covid-analysis-1 in 1.75s[0m
+Feb 10, 2021 10:24:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 483
+Feb 10, 2021 10:24:33 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 494
+[0m2021.02.10 10:24:39 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:24:40 INFO  time: compiled covid-analysis-1 in 1.62s[0m
+Feb 10, 2021 10:24:40 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 515
+[0m2021.02.10 10:24:45 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:24:47 INFO  time: compiled covid-analysis-1 in 1.52s[0m
+[0m2021.02.10 10:24:54 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:24:58 INFO  time: compiled covid-analysis-1 in 3.44s[0m
+Feb 10, 2021 10:25:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 552
+Feb 10, 2021 10:25:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 553
+Feb 10, 2021 10:25:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 554
+Feb 10, 2021 10:25:08 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 561
+[0m2021.02.10 10:28:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:28:14 INFO  time: compiled covid-analysis-1 in 1.54s[0m
+[0m2021.02.10 10:28:16 INFO  compiling covid-analysis-1 (1 scala source)[0m
+Feb 10, 2021 10:28:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 597
+[0m2021.02.10 10:28:20 INFO  time: compiled covid-analysis-1 in 3.4s[0m
+[0m2021.02.10 10:28:30 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:28:32 INFO  time: compiled covid-analysis-1 in 2.21s[0m
+[0m2021.02.10 10:28:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:28:48 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.10 10:28:48 INFO  time: compiled covid-analysis-1 in 2.29s[0m
+Feb 10, 2021 10:28:51 AM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Feb 10, 2021 10:28:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 651
+[0m2021.02.10 10:28:56 INFO  compiling covid-analysis-1 (1 scala source)[0m
+Feb 10, 2021 10:28:57 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 670
+Feb 10, 2021 10:28:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 677
+[0m2021.02.10 10:28:59 INFO  time: compiled covid-analysis-1 in 2.87s[0m
+[0m2021.02.10 10:29:01 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.10 10:29:01 INFO  time: compiled covid-analysis-1-test in 0.97s[0m
+[0m2021.02.10 10:29:13 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.10 10:29:17 INFO  time: compiled covid-analysis-1-test in 4.07s[0m
+Feb 10, 2021 10:30:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 721
+[0m2021.02.10 10:30:17 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:30:19 INFO  time: compiled covid-analysis-1 in 1.93s[0m
+Feb 10, 2021 10:32:20 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 739
+Feb 10, 2021 10:32:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 746
+Feb 10, 2021 10:32:40 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 752
+[0m2021.02.10 10:33:00 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 10:33:08 INFO  time: compiled covid-analysis-1 in 8.61s[0m
+[0m2021.02.10 11:38:19 INFO  compiling covid-analysis-1 (1 scala source)[0m
+Feb 10, 2021 11:38:22 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 819
+[0m2021.02.10 11:38:26 INFO  time: compiled covid-analysis-1 in 6.33s[0m
+[0m2021.02.10 11:38:29 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:38:31 INFO  time: compiled covid-analysis-1 in 2.73s[0m
+[0m2021.02.10 11:38:50 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:38:52 INFO  time: compiled covid-analysis-1 in 2.17s[0m
+[0m2021.02.10 11:38:55 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:38:57 INFO  time: compiled covid-analysis-1 in 2.06s[0m
+[0m2021.02.10 11:39:05 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:08 INFO  time: compiled covid-analysis-1 in 3.06s[0m
+[0m2021.02.10 11:39:10 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:20 INFO  time: compiled covid-analysis-1 in 9.75s[0m
+[0m2021.02.10 11:39:22 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:24 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+[0m2021.02.10 11:39:32 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:34 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+[0m2021.02.10 11:39:38 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:40 INFO  time: compiled covid-analysis-1 in 1.71s[0m
+[0m2021.02.10 11:39:43 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:39:45 INFO  time: compiled covid-analysis-1 in 2.23s[0m
+[0m2021.02.10 11:40:10 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:40:12 INFO  time: compiled covid-analysis-1 in 2.37s[0m
+[0m2021.02.10 11:42:57 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:43:00 INFO  time: compiled covid-analysis-1 in 2.91s[0m
+[0m2021.02.10 11:43:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:43:03 INFO  time: compiled covid-analysis-1 in 0.67s[0m
+[0m2021.02.10 11:43:09 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:43:11 INFO  time: compiled covid-analysis-1 in 1.21s[0m
+[0m2021.02.10 11:43:15 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:43:17 INFO  time: compiled covid-analysis-1 in 2.45s[0m
+[0m2021.02.10 11:43:55 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:44:05 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.10 11:44:05 INFO  time: compiled covid-analysis-1 in 10s[0m
+[0m2021.02.10 11:44:34 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:44:37 INFO  time: compiled covid-analysis-1 in 3.34s[0m
+[0m2021.02.10 11:45:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:45:04 INFO  time: compiled covid-analysis-1 in 1.4s[0m
+Feb 10, 2021 11:45:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1131
+Feb 10, 2021 11:45:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1132
+Feb 10, 2021 11:45:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1137
+[0m2021.02.10 11:48:35 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:48:39 INFO  time: compiled covid-analysis-1 in 3.4s[0m
+[0m2021.02.10 11:49:35 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:49:37 INFO  time: compiled covid-analysis-1 in 1.89s[0m
+[0m2021.02.10 11:50:50 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:50:52 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.10 11:50:52 INFO  time: compiled covid-analysis-1 in 2.42s[0m
+[0m2021.02.10 11:51:06 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:08 INFO  time: compiled covid-analysis-1 in 1.59s[0m
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1254
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1255
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1259
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1256
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1258
+Feb 10, 2021 11:51:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1260
+[0m2021.02.10 11:51:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:12 INFO  time: compiled covid-analysis-1 in 0.53s[0m
+[0m2021.02.10 11:51:15 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:15 INFO  time: compiled covid-analysis-1 in 0.62s[0m
+[0m2021.02.10 11:51:19 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:21 INFO  time: compiled covid-analysis-1 in 1.79s[0m
+[0m2021.02.10 11:51:30 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:31 INFO  time: compiled covid-analysis-1 in 1.69s[0m
+[0m2021.02.10 11:51:33 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:36 INFO  time: compiled covid-analysis-1 in 2.26s[0m
+[0m2021.02.10 11:51:38 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 11:51:41 INFO  time: compiled covid-analysis-1 in 2.91s[0m
+[0m2021.02.10 13:36:54 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:36:56 INFO  time: compiled covid-analysis-1 in 2.01s[0m
+[0m2021.02.10 13:37:00 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:37:05 INFO  time: compiled covid-analysis-1 in 5.39s[0m
+[0m2021.02.10 13:37:11 INFO  compiling covid-analysis-1 (1 scala source)[0m
+Feb 10, 2021 1:37:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1416
+Feb 10, 2021 1:37:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1417
+Feb 10, 2021 1:37:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1419
+Feb 10, 2021 1:37:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1418
+Feb 10, 2021 1:37:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1420
+[0m2021.02.10 13:37:21 INFO  time: compiled covid-analysis-1 in 10s[0m
+[0m2021.02.10 13:37:41 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:37:44 INFO  time: compiled covid-analysis-1 in 2.74s[0m
+[0m2021.02.10 13:37:44 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-X_P_I1kbQcWmNOaHx98XtA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.10 13:37:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:37:52 INFO  time: compiled covid-analysis-1 in 6.15s[0m
+[0m2021.02.10 13:38:04 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:38:07 INFO  time: compiled covid-analysis-1 in 2.5s[0m
+[0m2021.02.10 13:38:11 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:38:13 INFO  time: compiled covid-analysis-1 in 1.62s[0m
+[0m2021.02.10 13:40:49 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 13:40:58 INFO  time: compiled covid-analysis-1 in 7.98s[0m
+[0m2021.02.10 14:36:28 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:36:32 INFO  time: compiled covid-analysis-1 in 3.92s[0m
+[0m2021.02.10 14:36:37 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:36:37 INFO  time: compiled covid-analysis-1 in 0.97s[0m
+[0m2021.02.10 14:36:41 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:36:42 INFO  time: compiled covid-analysis-1 in 1.25s[0m
+[0m2021.02.10 14:36:55 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:36:55 INFO  time: compiled covid-analysis-1 in 0.71s[0m
+[0m2021.02.10 14:36:58 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:37:01 INFO  time: compiled covid-analysis-1 in 3.14s[0m
+[0m2021.02.10 14:37:05 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:37:05 INFO  time: compiled covid-analysis-1 in 0.6s[0m
+[0m2021.02.10 14:37:08 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:37:09 INFO  time: compiled covid-analysis-1 in 1.17s[0m
+[0m2021.02.10 14:37:41 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:37:41 INFO  time: compiled covid-analysis-1 in 0.67s[0m
+[0m2021.02.10 14:37:44 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:37:45 INFO  time: compiled covid-analysis-1 in 1.6s[0m
+Feb 10, 2021 2:37:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1653
+Feb 10, 2021 2:37:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1655
+Feb 10, 2021 2:37:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1657
+[0m2021.02.10 14:38:05 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:38:09 INFO  time: compiled covid-analysis-1 in 4.18s[0m
+Feb 10, 2021 2:38:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1694
+Feb 10, 2021 2:38:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1698
+[0m2021.02.10 14:38:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:38:14 INFO  time: compiled covid-analysis-1 in 1.87s[0m
+[0m2021.02.10 14:39:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:39:14 INFO  time: compiled covid-analysis-1 in 1.91s[0m
+Feb 10, 2021 2:39:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1756
+[0m2021.02.10 14:39:27 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 14:39:29 INFO  time: compiled covid-analysis-1 in 2.49s[0m
+[0m2021.02.10 15:13:42 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 15:13:42 INFO  time: compiled covid-analysis-1 in 1s[0m
+[0m2021.02.10 15:13:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 15:13:48 INFO  time: compiled covid-analysis-1 in 2.6s[0m
+[0m2021.02.10 15:13:53 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 15:13:57 INFO  time: compiled covid-analysis-1 in 3.71s[0m
+[0m2021.02.10 17:38:53 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.10 17:39:02 INFO  time: compiled covid-analysis-1 in 8.5s[0m
+[0m2021.02.10 18:47:30 INFO  shutting down Metals[0m
+[0m2021.02.10 18:47:30 INFO  Shut down connection with build server.[0m
+[0m2021.02.10 18:47:30 INFO  Shut down connection with build server.[0m
+No more data in the server stdin, exiting...
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.11 23:05:09 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\covid-analysis-1' for client vscode 1.53.2.[0m
+[0m2021.02.11 23:05:10 INFO  time: initialize in 0.86s[0m
+[0m2021.02.11 23:05:10 INFO  Attempting to connect to the build server...[0m
+[0m2021.02.11 23:05:11 INFO  skipping build import with status 'Installed'[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 24714'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from 'c:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop'...
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1.json'
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1-test.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'covid-analysis-1', 'covid-analysis-1-test'
+[0m[32m[D][0m Loading previous analysis for 'covid-analysis-1' from 'C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\target\streams\compile\bloopAnalysisOut\_global\streams\inc_compile_2.12.zip'.
+[0m[32m[D][0m Loading previous analysis for 'covid-analysis-1-test' from 'C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\target\streams\test\bloopAnalysisOut\_global\streams\inc_compile_2.12.zip'.
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:24714...
+The server is listening for incoming connections at tcp://127.0.0.1:24714...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.11 23:05:15 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.11 23:05:15 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 28950'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:28950...
+The server is listening for incoming connections at tcp://127.0.0.1:28950...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.11 23:05:18 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.11 23:05:18 INFO  time: connected to build server in 8.14s[0m
+[0m2021.02.11 23:05:18 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.11 23:05:20 INFO  time: imported build in 1.21s[0m
+[0m2021.02.11 23:05:20 INFO  no build target: using presentation compiler with only scala-library[0m
+[0m2021.02.11 23:05:24 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\src\main\scala\Main.scala[0m
+[0m2021.02.11 23:05:25 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-A53MRSSSQqWuw8D5xvEZxA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-A53MRSSSQqWuw8D5xvEZxA==\META-INF\semanticdb\src\main\scala\TwitterCovidAnalysis.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.11 23:05:42 INFO  time: indexed workspace in 21s[0m
+[0m2021.02.11 23:08:20 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.11 23:08:34 INFO  time: compiled covid-analysis-1-test in 14s[0m
+Feb 11, 2021 11:38:45 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 36
+[0m2021.02.12 08:48:15 INFO  shutting down Metals[0m
+[0m2021.02.12 08:48:15 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.12 08:48:15 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.12 10:34:31 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\covid-analysis-1' for client vscode 1.53.2.[0m
+[0m2021.02.12 10:34:32 INFO  time: initialize in 0.68s[0m
+[0m2021.02.12 10:34:32 INFO  Attempting to connect to the build server...[0m
+[0m2021.02.12 10:34:33 INFO  skipping build import with status 'Installed'[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 25118'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:25118...
+The server is listening for incoming connections at tcp://127.0.0.1:25118...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:34:35 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:34:35 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 32474'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:32474...
+The server is listening for incoming connections at tcp://127.0.0.1:32474...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:34:37 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:34:37 INFO  time: connected to build server in 4.93s[0m
+[0m2021.02.12 10:34:37 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.12 10:34:37 INFO  time: imported build in 0.92s[0m
+[0m2021.02.12 10:34:39 INFO  no build target: using presentation compiler with only scala-library[0m
+Feb 12, 2021 10:34:55 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+[0m2021.02.12 10:35:12 INFO  time: indexed workspace in 34s[0m
+[0m2021.02.12 10:36:38 INFO  shutting down Metals[0m
+[0m2021.02.12 10:36:38 INFO  Shut down connection with build server.[0m
+[0m2021.02.12 10:36:38 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
