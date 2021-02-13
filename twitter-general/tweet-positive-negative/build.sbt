@@ -26,3 +26,8 @@ dependencyOverrides ++= {
     "com.fasterxml.jackson.core" % "jackson-databind" % "2.8.1",
   )
 }
+
+assemblyMergeStrategy in assembly := {
+ case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+ case x => MergeStrategy.first
+}
