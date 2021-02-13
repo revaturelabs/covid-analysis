@@ -15,10 +15,8 @@ libraryDependencies ++= Seq(
   "org.apache.logging.log4j" % "log4j-core" % "2.13.0" % Runtime,
   //for s3
   "org.apache.hadoop" % "hadoop-aws" % "3.2.0",
-  //https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
   "com.amazonaws" % "aws-java-sdk-bundle" % "1.11.375",
   "org.apache.hadoop" % "hadoop-hdfs" % "3.2.0",
-  // https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common
   "org.apache.hadoop" % "hadoop-common" % "3.2.0"
 )
 
