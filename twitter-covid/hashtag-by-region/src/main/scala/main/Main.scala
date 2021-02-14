@@ -14,7 +14,7 @@ object Main {
   def main(args: Array[String]) = {
 
     ////// Update path to point to you dataset of tweets (json) //////////
-    val jsonPath = "s3://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data2.json"
+    val jsonPath = "s3://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data.json"
 
     val spark = SparkSession
       .builder()
