@@ -1,11 +1,10 @@
 package countryBorders
 
 import org.apache.log4j.{Level, Logger}
-import utilites.{DataFrameBuilder, s3DAO}
-import org.apache.spark.sql.{DataFrame, SparkSession, functions}
-import org.apache.spark.sql.functions.{asc, col, desc, max, round, explode}
-import org.apache.spark.SparkConf
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.IntegerType
+import org.apache.spark.sql.{DataFrame, SparkSession, functions}
+import utilites.s3DAO
 
 
 /** Question: Is there a significant relationship between a Region’s cumulative GDP and Infection Rate per capita?
@@ -23,7 +22,6 @@ object CountryBorders {
     Logger.getLogger("org").setLevel(Level.WARN)
 
     val db = s3DAO()
-    val dfb = new DataFrameBuilder
     val covidSrcFile = "daily_covid_stats.tsv"
     val countySrcFile = "countries_general_stats.tsv"
     db.setDownloadPath("CountryBorders/src/main/resources")
