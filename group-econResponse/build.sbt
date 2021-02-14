@@ -11,7 +11,9 @@ lazy val global = project
   .aggregate(
     Utilities,
     CovidResponse,
-    CorrelateInfectionGDP
+    CorrelateInfectionGDP,
+    FirstRegionalPeaks,
+    CountryBorders
   )
 
 lazy val Utilities = project
@@ -52,6 +54,18 @@ lazy val CorrelateInfectionGDP = project
 lazy val FirstRegionalPeaks = project
   .settings(
     name := "FirstRegionalPeaks",
+    assemblyJarName in assembly := name.value + ".jar",
+    settings,
+    libraryDependencies ++= sharedDependencies ++ Seq(
+      dependencies.logCore,
+      dependencies.logScala,
+    )
+  )
+  .dependsOn(Utilities)
+
+lazy val CountryBorders = project
+  .settings(
+    name := "CountryBorders",
     assemblyJarName in assembly := name.value + ".jar",
     settings,
     libraryDependencies ++= sharedDependencies ++ Seq(
