@@ -339,44 +339,44 @@ pipeline {
         //     }
         // }
         //Twitter-General/data-cleaner Package
-        stage("Package Twitter-General/data-cleaner") {
-            steps {
-                echo "Package data-cleaner"
+        // stage("Package Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Package data-cleaner"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
-        //Twitter-General/hashtag-count-comparison Compile
-        stage("Compile Twitter-General/hashtag-count-comparison") {
-            steps {
-                echo "Compile hashtag-count-comparison"
+        // //Twitter-General/hashtag-count-comparison Compile
+        // stage("Compile Twitter-General/hashtag-count-comparison") {
+        //     steps {
+        //         echo "Compile hashtag-count-comparison"
 
-                sh '''
-                    cd twitter-general/hashtag-count-comparison
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/hashtag-count-comparison Test
-        stage("Test Twitter-General/hashtag-count-comparison") {
-            steps {
-                echo "Test hashtag-count-comparison"
+        //         sh '''
+        //             cd twitter-general/hashtag-count-comparison
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/hashtag-count-comparison Test
+        // stage("Test Twitter-General/hashtag-count-comparison") {
+        //     steps {
+        //         echo "Test hashtag-count-comparison"
 
-                sh '''
-                    cd twitter-general/hashtag-count-comparison
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-general/hashtag-count-comparison
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         //Twitter-General/hashtag-count-comparison Package
         stage("Package Twitter-General/hashtag-count-comparison") {
             steps {
