@@ -2,7 +2,7 @@ package countryBorders
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.IntegerType
+import org.apache.spark.sql.types.{IntegerType, StructType}
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 import utilites.s3DAO
 
@@ -15,6 +15,15 @@ import utilites.s3DAO
  * associated with this question.
  */
 object CountryBorders {
+  def getCallbackFn(spark: SparkSession, filePath: String, delimiter: String = ","): () => String => DataFrame = () => {
+    filePath: String => {
+      spark.read
+        .option("delimiter", delimiter)
+        .option("header", "true")
+        .format("csv")
+        .csv(filePath) toDF ()
+    }
+  }
 
   def main(args: Array[String]): Unit = {
     // Set the log level to only print errors
@@ -22,7 +31,7 @@ object CountryBorders {
 
     val db = s3DAO()
     val covidSrcFile = "daily_covid_stats.tsv"
-    val countySrcFile = "owid-covid-data.csv"
+    val countrySrcFile = "owid-covid-data.csv"
     db.setDownloadPath("CountryBorders/src/main/resources")
 
     val spark = SparkSession.builder()
@@ -31,22 +40,10 @@ object CountryBorders {
     spark.sparkContext.setLogLevel("WARN")
 
     import spark.implicits._
-    val covidCallbackFn = (downloadPath: String) => {
-      spark.read
-        .format("csv")
-        .option("inferSchema", "true")
-        .option("header", "true")
-        .csv(downloadPath)
-    }
-    val countryCallbackFn = (downloadPath: String) => {
-      spark.read
-        .option("delimiter", "\t")
-        .option("inferSchema", "true")
-        .option("header", "true")
-        .format("csv")
-        .csv(downloadPath)
-    }
-    val country_stats = db.loadDFFromBucket(countySrcFile, covidCallbackFn)
+    val countryCallbackFn = getCallbackFn(spark, countrySrcFile, delimiter = "\t")()
+    val covidCallbackFn = getCallbackFn(spark, covidSrcFile)()
+
+    val country_stats = db.loadDFFromBucket(countrySrcFile, covidCallbackFn)
     val country_data = db.loadDFFromBucket(covidSrcFile, countryCallbackFn)
 
     val country_pop = country_stats.select($"location".as("COUNTRY"), col("POPULATION").cast(IntegerType))
