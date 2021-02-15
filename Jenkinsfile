@@ -392,42 +392,42 @@ pipeline {
 
 
 
-        // //Twitter-General/tweet-covid19-emoji Compile
-        // stage("Compile Twitter-General/tweet-covid19-emoji") {
-        //     steps {
-        //         echo "Compile tweet-covid19-emoji"
+        //Twitter-General/tweet-covid19-emoji Compile
+        stage("Compile Twitter-General/tweet-covid19-emoji") {
+            steps {
+                echo "Compile tweet-covid19-emoji"
 
-        //         sh '''
-        //             cd twitter-general/tweet-covid19-emoji
-        //             sbt compile
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //Twitter-General/tweet-covid19-emoji Test
-        // stage("Test Twitter-General/tweet-covid19-emoji") {
-        //     steps {
-        //         echo "Test tweet-covid19-emoji"
+                sh '''
+                    cd twitter-general/tweet-covid19-emoji
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+        //Twitter-General/tweet-covid19-emoji Test
+        stage("Test Twitter-General/tweet-covid19-emoji") {
+            steps {
+                echo "Test tweet-covid19-emoji"
 
-        //         sh '''
-        //             cd twitter-general/tweet-covid19-emoji
-        //             sbt test
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //Twitter-General/tweet-covid19-emoji Assembly
-        // stage("Assembly Twitter-General/tweet-covid19-emoji") {
-        //     steps {
-        //         echo "Assembly tweet-covid19-emoji"
+                sh '''
+                    cd twitter-general/tweet-covid19-emoji
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
+        //Twitter-General/tweet-covid19-emoji Assembly
+        stage("Assembly Twitter-General/tweet-covid19-emoji") {
+            steps {
+                echo "Assembly tweet-covid19-emoji"
 
-        //         sh '''
-        //             cd twitter-general/tweet-covid19-emoji
-        //             sbt assembly
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd twitter-general/tweet-covid19-emoji
+                    sbt assembly
+                    cd ../..
+                '''
+            }
+        }
 
 
 
