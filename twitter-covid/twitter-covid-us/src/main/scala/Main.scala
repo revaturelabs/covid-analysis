@@ -14,8 +14,9 @@ object Main {
     import spark.implicits._
 
     val path = setUpConnection(spark)
+    val localPath = setUpConnection()
     val twitterDF = TwitterCovidAnalysis.readTwitterToDF(spark)
-    val usDF = TwitterCovidAnalysis.readToDF(spark, path)
+    val usDF = TwitterCovidAnalysis.readToDF(spark, localPath)
     
     // TwitterCovidAnalysis.groupByDate(usDF).show(335)
     // TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
@@ -29,7 +30,8 @@ object Main {
     * @return location of datalake directory
     */
   def setUpConnection(): String = {
-    return "/datalake/COVID-19_Cases_Summarized_by_Age_Group.csv"
+    //      twitter-covid\twitter-covid-us\datalake\COVID-19_Cases_Summarized_by_Age_Group.csv
+    return "datalake/COVID-19_Cases_Summarized_by_Age_Group.csv"
   }
 
   /** Set up AWS connection

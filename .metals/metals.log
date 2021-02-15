@@ -18680,3 +18680,316 @@ Feb 14, 2021 7:50:20 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notif
 INFO: Unsupported notification method: $/setTraceNotification
 Feb 14, 2021 8:01:05 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTraceNotification
+[0m2021.02.14 20:16:33 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/Main.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\Main.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.currentDocument(SyntheticsDecorationProvider.scala:243)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.publishSynthetics(SyntheticsDecorationProvider.scala:66)
+	at scala.meta.internal.metals.MetalsLanguageServer.didFocus(MetalsLanguageServer.scala:949)
+	at sun.reflect.GeneratedMethodAccessor18.invoke(null)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:16:33 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/Main.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\Main.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.metals.CodeLensProvider.findLenses(CodeLensProvider.scala:21)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$2(MetalsLanguageServer.scala:1408)
+	at scala.meta.internal.metals.TimerProvider.timedThunk(TimerProvider.scala:25)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$1(MetalsLanguageServer.scala:1406)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:16:47 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\Main.scala[0m
+[0m2021.02.14 20:16:48 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.14 20:17:05 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/TwitterCovidAnalysis.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.currentDocument(SyntheticsDecorationProvider.scala:243)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.publishSynthetics(SyntheticsDecorationProvider.scala:66)
+	at scala.meta.internal.metals.MetalsLanguageServer.didFocus(MetalsLanguageServer.scala:949)
+	at sun.reflect.GeneratedMethodAccessor18.invoke(null)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:17:05 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/TwitterCovidAnalysis.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.metals.CodeLensProvider.findLenses(CodeLensProvider.scala:21)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$2(MetalsLanguageServer.scala:1408)
+	at scala.meta.internal.metals.TimerProvider.timedThunk(TimerProvider.scala:25)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$1(MetalsLanguageServer.scala:1406)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:17:11 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/TwitterCovidAnalysis.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.currentDocument(SyntheticsDecorationProvider.scala:243)
+	at scala.meta.internal.decorations.SyntheticsDecorationProvider.publishSynthetics(SyntheticsDecorationProvider.scala:66)
+	at scala.meta.internal.metals.MetalsLanguageServer.didFocus(MetalsLanguageServer.scala:949)
+	at sun.reflect.GeneratedMethodAccessor18.invoke(null)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:17:12 ERROR text document: file:///c:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/src/main/scala/TwitterCovidAnalysis.scala
+java.nio.file.NoSuchFileException: c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\src\main\scala\TwitterCovidAnalysis.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.mtags.Semanticdbs$.loadResolvedTextDocument(Semanticdbs.scala:67)
+	at scala.meta.internal.mtags.Semanticdbs$.loadTextDocument(Semanticdbs.scala:49)
+	at scala.meta.internal.metals.FileSystemSemanticdbs.textDocument(FileSystemSemanticdbs.scala:48)
+	at scala.meta.internal.metals.AggregateSemanticdbs.loop$1(AggregateSemanticdbs.scala:30)
+	at scala.meta.internal.metals.AggregateSemanticdbs.textDocument(AggregateSemanticdbs.scala:36)
+	at scala.meta.internal.metals.CodeLensProvider.findLenses(CodeLensProvider.scala:21)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$2(MetalsLanguageServer.scala:1408)
+	at scala.meta.internal.metals.TimerProvider.timedThunk(TimerProvider.scala:25)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeLens$1(MetalsLanguageServer.scala:1406)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.14 20:17:47 INFO  shutting down Metals[0m
+[0m2021.02.14 20:17:47 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.14 20:17:47 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.14 20:18:10 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1' for client vscode 1.53.2.[0m
+[0m2021.02.14 20:18:11 INFO  time: initialize in 0.61s[0m
+[0m2021.02.14 20:18:12 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 15507'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:15507...
+The server is listening for incoming connections at tcp://127.0.0.1:15507...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.14 20:18:15 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.14 20:18:15 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 19339'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:19339...
+The server is listening for incoming connections at tcp://127.0.0.1:19339...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.14 20:18:17 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.14 20:18:17 INFO  time: connected to build server in 4.88s[0m
+[0m2021.02.14 20:18:17 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.14 20:18:18 INFO  time: imported build in 1.06s[0m
+[0m2021.02.14 20:18:19 INFO  no build target: using presentation compiler with only scala-library[0m
+[0m2021.02.14 20:18:22 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\Main.scala[0m
+[0m2021.02.14 20:18:22 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+Feb 14, 2021 8:18:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4
+Feb 14, 2021 8:18:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+[0m2021.02.14 20:18:22 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+Feb 14, 2021 8:18:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11
+[0m2021.02.14 20:18:23 INFO  running 'C:\Program Files\Java\jdk1.8.0_271\bin\java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar C:\Users\Michael\AppData\Local\Temp\metals233738579431565771\sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.02.14 20:18:28 INFO  [info] welcome to sbt 1.4.4 (Oracle Corporation Java 1.8.0_271)[0m
+[0m2021.02.14 20:18:33 INFO  [info] loading global plugins from C:\Users\Michael\.sbt\1.0\plugins[0m
+[0m2021.02.14 20:18:40 INFO  [info] loading settings for project covid-analysis-1-build-build from metals.sbt ...[0m
+[0m2021.02.14 20:18:40 INFO  [info] loading project definition from C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project\project[0m
+[0m2021.02.14 20:18:43 INFO  time: indexed workspace in 25s[0m
+[0m2021.02.14 20:18:43 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.14 20:18:43 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\Main.scala[0m
+[0m2021.02.14 20:18:45 INFO  [info] loading settings for project covid-analysis-1-build from metals.sbt ...[0m
+[0m2021.02.14 20:18:45 INFO  [info] loading project definition from C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project[0m
+[0m2021.02.14 20:18:52 INFO  [success] Generated .bloop\covid-analysis-1-build.json[0m
+[0m2021.02.14 20:18:52 INFO  [success] Total time: 6 s, completed Feb 14, 2021 8:18:52 PM[0m
+[0m2021.02.14 20:18:52 INFO  [info] set current project to covid-analysis-1 (in build file:/C:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/)[0m
+[0m2021.02.14 20:18:54 INFO  [success] Generated .bloop\covid-analysis-1.json[0m
+[0m2021.02.14 20:18:54 INFO  [success] Generated .bloop\covid-analysis-1-test.json[0m
+[0m2021.02.14 20:18:54 INFO  [success] Total time: 1 s, completed Feb 14, 2021 8:18:54 PM[0m
+[0m2021.02.14 20:18:54 INFO  sbt bloopInstall exit: 0[0m
+[0m2021.02.14 20:18:54 INFO  time: ran 'sbt bloopInstall' in 31s[0m
+[0m2021.02.14 20:18:54 INFO  Disconnecting from Bloop session...[0m
+[0m2021.02.14 20:18:54 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.14 20:18:54 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.14 20:18:54 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 41215'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop'...
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1.json'
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1-test.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'covid-analysis-1', 'covid-analysis-1-test'
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:41215...
+The server is listening for incoming connections at tcp://127.0.0.1:41215...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.14 20:18:55 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.14 20:18:55 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 23931'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:23931...
+The server is listening for incoming connections at tcp://127.0.0.1:23931...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.14 20:18:55 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.14 20:18:56 INFO  time: connected to build server in 1.83s[0m
+[0m2021.02.14 20:18:56 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.14 20:18:57 INFO  time: indexed workspace in 1.03s[0m
+[0m2021.02.14 20:18:57 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.14 20:18:57 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\Main.scala[0m
+[0m2021.02.14 20:23:41 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1' for client vscode 1.53.2.[0m
+[0m2021.02.14 20:23:42 INFO  time: initialize in 0.66s[0m
+[0m2021.02.14 20:23:42 INFO  Attempting to connect to the build server...[0m
+[0m2021.02.14 20:23:43 INFO  skipping build import with status 'Installed'[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 17303'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:17303...
+The server is listening for incoming connections at tcp://127.0.0.1:17303...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.14 20:23:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.14 20:23:45 INFO  shutting down Metals[0m

@@ -20,15 +20,15 @@ object TwitterCovidAnalysis {
   }
 
   /** Simple function to read Twitter COVID data from s3 bucket.
-    *
+    * 
     * @param spark
-    * @param path
+    * 
     */
   def readTwitterToDF(spark: SparkSession): DataFrame = {
     //Took 35 mins to execute
     // val path = "s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
     val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
-    
+
     spark.read
       .option("sep", "\t")
       .option("header", "true")
@@ -46,10 +46,12 @@ object TwitterCovidAnalysis {
   def groupByDate(df: DataFrame): DataFrame = {
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
+
     df.select("Specimen Collection Date", "New Confirmed Cases")
       .groupBy("Specimen Collection Date")
       .sum("New Confirmed Cases")
       .orderBy($"Specimen Collection Date".asc)
+
   }
 
   /** Groups dataframe by age groups.
@@ -71,27 +73,28 @@ object TwitterCovidAnalysis {
     * @param df
     */
   def twitterVolumeSpikes(twitterDF: DataFrame, usDF: DataFrame): DataFrame = {
-    // TO DO
-    // Pull the first couple of rows from AWS
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
 
-    // date, count from twitterDF
-    val twitter = twitterDF
+    // date, count columns from twitterDF
+    val tDF = twitterDF
       .select("date")
       .groupBy("date")
       .count()
       .orderBy($"date".asc)
+    val twitter = tDF.withColumn("date", to_date($"date"))
     // date, infection sums from usDF
     val us = groupByDate(usDF)
+      .withColumn("Specimen Collection Date", to_date($"Specimen Collection Date", "yyyy/MM/dd"))
 
-    // join not working
-    // twitter.join(us, twitter("date") === us("Specimen Collection Date"))
-    // twitter.join(us, twitter("date") === us("Specimen Collection Date"),"left")
+    // Join results
     val result = us
-      .join(twitter, us("Specimen Collection Date") === twitter("date"), "left")
+      .join(twitter, us("Specimen Collection Date") === twitter("date"), "inner")
       .select("Specimen Collection Date", "sum(New Confirmed Cases)", "count")
-    result.withColumnRenamed("count", "Twitter Volume")
-
+    result
+      .withColumnRenamed("count", "Twitter Volume")
+      .withColumnRenamed("sum(New Confirmed Cases)", "New Confirmed Cases")
+      .orderBy($"Specimen Collection Date".asc)
+    
   }
 }
