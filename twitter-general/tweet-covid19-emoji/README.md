@@ -37,7 +37,7 @@ AWS_SECRET_ACCESS_KEY=<secret_access_key>
 * for running locally
     * the tweetcovid19emoji function in Utilities.scala must be altered to use a local filepath.
 * for running on the EMR cluster
-    * the tweetcovid19emoji function in Utilities.scala must be altered to use an s3 filepath
-    * run `sbt assembly` and use AWS cli comands to copy the jar file to the S3 bucket at address `s3://covid-analysis-p3/datawarehouse/twitter-general/jars/emojiCount.jar` (subject to change)
+    * run `sbt assembly` and use AWS cli comands to copy the jar file to the S3 bucket at address
+    * run `aws s3 mv target/scala-2.12/TweetCovid19Emoji-assembly-1.jar s3://covid-analysis-p3/datawarehouse/twitter-general/jars/emojiCount.jar`
     * ssh into EMR cluster
     * run `spark-submit --class emojis.Main --master yarn s3a://covid-analysis-p3/datawarehouse/twitter-general/jars/emojiCount.jar [mode]` (subject to change)
