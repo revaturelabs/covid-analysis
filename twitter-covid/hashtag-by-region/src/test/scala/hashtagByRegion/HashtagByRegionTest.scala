@@ -18,7 +18,7 @@ class HashtagByRegionTest extends AnyFlatSpec {
     ))
    .replace()
   
-  val spark = SparkSession
+  lazy val spark = SparkSession
     .builder()
     .appName("Hashtag-By-Region")
     .master("local[4]")
