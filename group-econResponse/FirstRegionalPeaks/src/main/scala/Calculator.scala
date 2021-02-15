@@ -44,32 +44,6 @@ case class Calculator() {
     (-1, yArray(0))
   }
 
-  /**
-   * The correlation between two series of data ~1 = positive correlation,
-   * ~0 = no correlation, ~-1 = -negative correlationcovidAndGDP
-   * @param xArray the independent data series
-   * @param yArray the dependent data series
-   * @return the correlation number as a double
-   */
-  def correlation(xArray: Array[Double], yArray: Array[Double]):Double={
-    var r = 0.0
-    var x = 0.0
-    var y = 0.0
-    var x_2 = 0.0
-    var y_2 = 0.0
-    var xy = 0.0
-    val n = xArray.length
-    for(i <- xArray.indices){
-      x += xArray(i)
-      y += yArray(i)
-      x_2 += (xArray(i)*xArray(i))
-      y_2 += (yArray(i)*yArray(i))
-      xy += (xArray(i)*yArray(i))
-    }
-    r = (n*xy - (x*y))/(math.sqrt(n*x_2 - (x*x)) * math.sqrt(n*y_2 - (y*y)))
-    r
-  }
-
   def dayInYear(date: String, firstOfYear: Long = 1577865600000L): Int ={
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
     ((dateFormat.parse(date).getTime - firstOfYear)/86400000).toInt
