@@ -625,7 +625,7 @@ pipeline {
 
 
 
-        RelatedHashtags Compile
+        // RelatedHashtags Compile
         stage("Compile twitter-covid RelatedHashtags") {
             steps {
                 echo "Compile RelatedHashtags"
@@ -637,7 +637,7 @@ pipeline {
                 '''
             }
         }
-        RelatedHashtags Test
+        // RelatedHashtags Test
         stage("Test twitter-covid RelatedHashtags") {
             steps {
                 echo "Test RelatedHashtags"
@@ -649,7 +649,7 @@ pipeline {
                 '''
             }
         }
-        RelatedHashtags Package
+        // RelatedHashtags Package
         stage("Test twitter-covid RelatedHashtags") {
             steps {
                 echo "Test RelatedHashtags"
