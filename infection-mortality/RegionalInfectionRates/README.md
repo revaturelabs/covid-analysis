@@ -30,3 +30,8 @@ sbt run
 ```bash
 sbt test
 ```
+
+# Package
+```bash
+sbt package
+```

@@ -1,4 +1,4 @@
-package covid_live_update
+package covid_live_updates
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -8,7 +8,7 @@ import org.apache.spark.sql.functions._
 /**
   * 
   */
-object CovidLiveUpdate {
+object CovidLiveUpdates {
 
   /** Process regional data from files that are updated every 10 minutes.
     * Call regional_live_update.sh every 10 minutes to update the regional files.
@@ -44,7 +44,7 @@ object CovidLiveUpdate {
       datawarehouseFilePath = "s3a://covid-analysis-p3/datawarehouse/infection-mortality/"
 
       // Configured needed for AWS s3a
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+      //spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
       // Set up S3 with secret and access key with spark
       // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
