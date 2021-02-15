@@ -10,82 +10,82 @@ pipeline {
     // Define our pipeline into stages
     stages {
 
-        //Infection-mortality group
-        //infection-mortality/CovidLiveUpdateApp Compile
-        stage("Compile infection-mortality/CovidLiveUpdateApp") {
-            steps {
-                echo "Compile CovidLiveUpdateApp"
+        // //Infection-mortality group
+        // //infection-mortality/CovidLiveUpdateApp Compile
+        // stage("Compile infection-mortality/CovidLiveUpdateApp") {
+        //     steps {
+        //         echo "Compile CovidLiveUpdateApp"
 
-                sh '''
-                    cd infection-mortality/CovidLiveUpdateApp
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //infection-mortality/CovidLiveUpdateApp Test
-        stage("Test infection-mortality/CovidLiveUpdateApp") {
-            steps {
-                echo "Test CovidLiveUpdateApp"
+        //         sh '''
+        //             cd infection-mortality/CovidLiveUpdateApp
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //infection-mortality/CovidLiveUpdateApp Test
+        // stage("Test infection-mortality/CovidLiveUpdateApp") {
+        //     steps {
+        //         echo "Test CovidLiveUpdateApp"
 
-                sh '''
-                    cd infection-mortality/CovidLiveUpdateApp
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //infection-mortality/CovidLiveUpdateApp Package
-        stage("Package infection-mortality/CovidLiveUpdateApp") {
-            steps {
-                echo "Package CovidLiveUpdateApp"
+        //         sh '''
+        //             cd infection-mortality/CovidLiveUpdateApp
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //infection-mortality/CovidLiveUpdateApp Package
+        // stage("Package infection-mortality/CovidLiveUpdateApp") {
+        //     steps {
+        //         echo "Package CovidLiveUpdateApp"
 
-                sh '''
-                    cd infection-mortality/CovidLiveUpdateApp
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd infection-mortality/CovidLiveUpdateApp
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
-        //infection-mortality/RegionalInfectionRates Compile
-        stage("Compile infection-mortality/RegionalInfectionRates") {
-            steps {
-                echo "Compile RegionalInfectionRates"
+        // //infection-mortality/RegionalInfectionRates Compile
+        // stage("Compile infection-mortality/RegionalInfectionRates") {
+        //     steps {
+        //         echo "Compile RegionalInfectionRates"
 
-                sh '''
-                    cd infection-mortality/RegionalInfectionRates
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //infection-mortality/RegionalInfectionRates Test
-        stage("Test infection-mortality/RegionalInfectionRates") {
-            steps {
-                echo "Test RegionalInfectionRates"
+        //         sh '''
+        //             cd infection-mortality/RegionalInfectionRates
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //infection-mortality/RegionalInfectionRates Test
+        // stage("Test infection-mortality/RegionalInfectionRates") {
+        //     steps {
+        //         echo "Test RegionalInfectionRates"
 
-                sh '''
-                    cd infection-mortality/RegionalInfectionRates
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //infection-mortality/RegionalInfectionRates Package
-        stage("Package infection-mortality/RegionalInfectionRates") {
-            steps {
-                echo "Package RegionalInfectionRates"
+        //         sh '''
+        //             cd infection-mortality/RegionalInfectionRates
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //infection-mortality/RegionalInfectionRates Package
+        // stage("Package infection-mortality/RegionalInfectionRates") {
+        //     steps {
+        //         echo "Package RegionalInfectionRates"
 
-                sh '''
-                    cd infection-mortality/RegionalInfectionRates
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd infection-mortality/RegionalInfectionRates
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -332,7 +332,7 @@ pipeline {
                 echo "Test data-cleaner"
 
                 sh '''
-                    cd twitter-covid/data-cleaner
+                    cd twitter-general/data-cleaner
                     sbt test
                     cd ../..
                 '''
@@ -344,7 +344,7 @@ pipeline {
                 echo "Package data-cleaner"
 
                 sh '''
-                    cd twitter-covid/data-cleaner
+                    cd twitter-general/data-cleaner
                     sbt package
                     cd ../..
                 '''
@@ -371,7 +371,7 @@ pipeline {
                 echo "Test hashtag-count-comparison"
 
                 sh '''
-                    cd twitter-covid/hashtag-count-comparison
+                    cd twitter-general/hashtag-count-comparison
                     sbt test
                     cd ../..
                 '''
@@ -383,7 +383,7 @@ pipeline {
                 echo "Package hashtag-count-comparison"
 
                 sh '''
-                    cd twitter-covid/hashtag-count-comparison
+                    cd twitter-general/hashtag-count-comparison
                     sbt package
                     cd ../..
                 '''
@@ -548,6 +548,7 @@ pipeline {
 
 
 
+        //Stockmarket Group
         //stockmarket Compile
         stage("Compile stockmarket") {
             steps {
