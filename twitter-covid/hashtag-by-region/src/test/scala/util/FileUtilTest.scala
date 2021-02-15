@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 
 class FileUtilTest extends AnyFlatSpec {
 
-  val spark = SparkSession
+  lazy val spark = SparkSession
       .builder()
       .appName("Testing")
       .master("local[4]")
