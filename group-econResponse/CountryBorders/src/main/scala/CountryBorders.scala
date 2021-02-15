@@ -7,13 +7,12 @@ import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 import utilites.s3DAO
 
 
-/** Question: Is there a significant relationship between a Region’s cumulative GDP and Infection Rate per capita?
+/** Question: Find the top 5 pairs of countries that share a land border and have the highest discrepancy in covid-19
+ * infection rate per capita. Additionally find the top 5 landlocked countries that have the highest discrepancy in
+ * covid-19 infection rate per capita.
  * queries:
- * uses Spark SQL and Spark ML with S3 buckets partitioned by region to query datasets and calculate the Pearson
- * Correlation Coefficient.
- *
- * Uses Spark ML to preform hypothesis testing on any conclusion drawn from the coefficient value.
- *
+ * uses Spark SQL with AWS EMR partitioned by country to query datasets and determine the five discrepancies.
+ * associated with this question.
  */
 object CountryBorders {
 
@@ -23,7 +22,7 @@ object CountryBorders {
 
     val db = s3DAO()
     val covidSrcFile = "daily_covid_stats.tsv"
-    val countySrcFile = "countries_general_stats.tsv"
+    val countySrcFile = "owid-covid-data.csv"
     db.setDownloadPath("CountryBorders/src/main/resources")
 
     val spark = SparkSession.builder()
@@ -34,15 +33,15 @@ object CountryBorders {
     import spark.implicits._
     val callbackFn = (downloadPath: String) => {
       spark.read
-        .option("multiline", "true")
+        .format("csv")
+        .option("inferSchema", "true")
         .option("header", "true")
-        .option("sep", "\t")
         .csv(downloadPath)
     }
     val country_stats = db.loadDFFromBucket(countySrcFile, callbackFn)
     val country_data = db.loadDFFromBucket(covidSrcFile, callbackFn)
 
-    val country_pop = country_stats.select($"COUNTRY", col("POPULATION").cast(IntegerType))
+    val country_pop = country_stats.select($"location".as("COUNTRY"), col("POPULATION").cast(IntegerType))
     val country_cases = country_data
       .filter(col("TOTAL_CASES") =!= "NULL")
       .withColumn("Cases", col("TOTAL_CASES").cast("Int"))
