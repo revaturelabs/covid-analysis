@@ -1,6 +1,6 @@
 # Twitter-general Emoji-Count
 
-## (&#x1F534;)MUST UPDATE FILEPATH IN UTILITIES.SCALA @ line: 68 BEFORE RUNNING
+## &#x1F534;MUST UPDATE FILEPATH IN UTILITIES.SCALA @ line: 68 BEFORE RUNNING &#x1F534;
 
 ## Project Description
 
