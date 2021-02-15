@@ -11,17 +11,21 @@ object Main {
     
     // Original jsonPath = s3a://adam-king-848/data/twitter_data.json
     // jsonPath currently points to test data
-    val jsonPath = "twitter_data.json"
+    // val jsonPath = "twitter_data.json"
+
+
+    // val jsonPath = "s3a://covid-analysis-p3/datalake/twitter-general/dec_11-dec_25/*"
+    val jsonPath = "src/main/resources/test.json"
 
     val spark = SparkSession
-    .builder()
-    .appName("Related-Hashtags")
-    .master("local[4]")
-    .getOrCreate()
+      .builder()
+      .appName("Related-Hashtags")
+      .master("local[4]")
+      .getOrCreate()
 
     // twitterDF is the base DataFrame created from the contents of an input json file.
     val twitterDF = FileWriter.getDataFrameFromJson(spark, jsonPath)
 
     RelatedHashtags.getHashtagsWithCovid(spark, twitterDF)
-    }
   }
+}
