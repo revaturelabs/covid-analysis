@@ -17,12 +17,6 @@ class SetSpec extends AnyFlatSpec {
   //The Emoji Count function should be a Map populated with all emojis found in the data, and their respective counts.
   "Utilities" should "Return a non-empty map of emojis and counts" in {
     assert(mapToTest.isEmpty)
-
-    // assert(mapToTest.keys.isInstanceOf[String])
-    // assert(mapToTest.values.isInstanceOf[Int])
-
-    // Pretty sure these two tests are redundant 
-    // tweetcovid19emoji won't run in the first place if the key/values aren't the correct type.
   }
 
   //The Key values for the EmojiCount map should all be emojis.
