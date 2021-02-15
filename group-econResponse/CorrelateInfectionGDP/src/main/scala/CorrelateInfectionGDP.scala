@@ -12,28 +12,34 @@ import utilites.{DataFrameBuilder, s3DAO}
  * TODO: Uses Spark ML to preform hypothesis testing on any conclusion drawn from the coefficient value.
  */
 object CorrelateInfectionGDP {
-  def getCorrelation(df: DataFrame): Double = df.stat.corr("infection_rate", "cumulative_gdp")
+  def getPearsonCoefficient(df: DataFrame): Double = df.stat.corr("infection_rate", "cumulative_gdp")
 
 
   def main(args: Array[String]): Unit = {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.WARN)
 
-    val db = s3DAO()
+    //Class dependencies and app config.
+    val s3 = s3DAO()
     val dfb = new DataFrameBuilder
-    db.setDownloadPath("CorrelateInfectionGDP/src/main/resources")
+    s3.setDownloadPath("CorrelateInfectionGDP/src/main/resources")
     val fileNames = Map(
       "covidSrc" -> "daily_covid_stats.tsv",
       "regionSrc" -> "region_dictionary.json",
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
+
+    //Spark setup.
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
+    spark.sparkContext.setLogLevel("WARN")
 
-    val df = dfb.build(spark, fileNames, db)
+    //Build DF
+    val df = dfb.build(spark, fileNames, s3)
     df.createOrReplaceTempView("correlation")
 
+    //format proper table.
     val correlateDF = spark.sql(
       """
         |SELECT AVG(total_cases_per_million) as infection_rate,
@@ -49,11 +55,11 @@ object CorrelateInfectionGDP {
     correlateDF.show()
 
     println("\nPearson Correlation Coefficient:")
-    val pearsonCorrelation: Double = getCorrelation(correlateDF)
-    println(pearsonCorrelation)
+    val pearsonCorrelationCoefficient: Double = getPearsonCoefficient(correlateDF)
 
-    // TODO: call hypothesis test method when implemented
+    println(pearsonCorrelationCoefficient)
 
+    // TODO: Implement a method for hypo testing the correlation results.
     spark.catalog.dropTempView("correlation")
     spark.stop()
   }

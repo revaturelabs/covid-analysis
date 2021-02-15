@@ -33,6 +33,7 @@ object CovidResponse {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.WARN)
 
+    //Class dependencies and app config.
     val db = s3DAO()
     val dfb = new DataFrameBuilder
     db.setDownloadPath("CovidResponse/src/main/resources/")
@@ -42,24 +43,27 @@ object CovidResponse {
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
 
+    //Spark setup.
     val spark = SparkSession
       .builder()
       .master("local[*]")
       .getOrCreate()
     import spark.implicits._
+    spark.sparkContext.setLogLevel("WARN")
 
-    //Get full dataframe.
-    val data = dfb.build(spark, fileNames, db).cache()
+    //Build DF.
+    val data = dfb.build(spark, fileNames, db)
 
+    //format data for queries.
     data
       .withColumn("population", $"total_cases" / $"total_cases_per_million")
       .groupBy("region", "country")
       .agg(max($"population") as "population")
       .groupBy("region")
       .agg(sum($"population") as "population")
+      .cache()
 
-    db.downloadFile("datalake/infection-gdp/economic_data_2018-2021.tsv")
-
+    //Show all results.
     println("\nAverage New Cases per Day in Each Region")
     RankRegions.rankByMetricLow(spark, data, "new_cases").show()
 

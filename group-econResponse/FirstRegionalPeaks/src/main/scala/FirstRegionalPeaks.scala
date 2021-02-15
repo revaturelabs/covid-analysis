@@ -16,6 +16,7 @@ object FirstRegionalPeaks {
     // Set the log level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
+    //Class dependencies and app config.
     val db = s3DAO()
     val dfb = new DataFrameBuilder
     val calc = new Calculator
@@ -25,16 +26,19 @@ object FirstRegionalPeaks {
       "regionSrc" -> "region_dictionary.json",
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
+    //Spark setup
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
+    spark.sparkContext.setLogLevel("WARN")
 
-    val df = dfb.build(spark, fileNames, db).cache()
+    //Build df
+    val df = dfb.build(spark, fileNames, db)
 
+    //Show Results.
     println("\nRegional time elapsed in days before first major Covid-19 spikes:")
     calc.regionalFirstPeak(spark, df)
 
-    spark.catalog.dropTempView("correlation")
     spark.stop()
   }
 }

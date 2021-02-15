@@ -37,7 +37,7 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
       .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
       .toDF()
 
-    val response = CorrelateInfectionGDP.getCorrelation(testDF)
+    val response = CorrelateInfectionGDP.getPearsonCoefficient(testDF)
 
     //Columns have a negative correlation and should produce a -1 coefficient.
     assert(response == -1.0d)

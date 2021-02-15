@@ -29,17 +29,20 @@ object CountryBorders {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.WARN)
 
+    //Class dependencies and app config.
     val db = s3DAO()
     val covidSrcFile = "daily_covid_stats.tsv"
     val countrySrcFile = "owid-covid-data.csv"
     db.setDownloadPath("CountryBorders/src/main/resources")
 
+    //Spark Setup
     val spark = SparkSession.builder()
       .master("local[*]")
       .getOrCreate()
+    import spark.implicits._
     spark.sparkContext.setLogLevel("WARN")
 
-    import spark.implicits._
+    //Get callback function for building DFs.
     val countryCallbackFn = getCallbackFn(spark, countrySrcFile, delimiter = "\t")()
     val covidCallbackFn = getCallbackFn(spark, covidSrcFile)()
 
