@@ -1,9 +1,6 @@
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
-import org.scalatest.funspec.AnyFunSpec
-
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.col
 import firstRegionPeaks.Calculator
+import org.scalatest.funspec.AnyFunSpec
 
 class CalculatorSpecs extends AnyFunSpec with DatasetComparer {
 
@@ -34,6 +31,8 @@ class CalculatorSpecs extends AnyFunSpec with DatasetComparer {
       }
       it("should produce NumberFormatException when empty array is passed") {
         assertThrows[NumberFormatException] {}
+        // TODO: please complete.
+        assert(true)
       }
     }
 

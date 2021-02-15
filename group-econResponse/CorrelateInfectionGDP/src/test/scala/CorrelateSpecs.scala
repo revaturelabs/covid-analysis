@@ -14,16 +14,16 @@ trait SparkSessionTestWrapper {
       .config("spark.sql.shuffle.partitions", "1")
       .getOrCreate()
   }
-
 }
 
 class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
 
   it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read
+      .option("inferSchema", value = true)
       .option("header", value = true)
-      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
-      .toDF("name", "agg_gdp", "agg_cases")
+      .csv("CorrelateInfectionGDP/src/test/resources/test_dataset.csv")
+      .toDF()
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
@@ -39,9 +39,10 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
 
     val response = CorrelateInfectionGDP.getCorrelation(testDF)
 
-    //Columns have a negative correlation and should produce a -1 coeffection.
+    //Columns have a negative correlation and should produce a -1 coefficient.
     assert(response == -1.0d)
   }
+
   it("calculates the hypothesis testing for ") {
     // TODO: Test when implemented.
     assert(true)

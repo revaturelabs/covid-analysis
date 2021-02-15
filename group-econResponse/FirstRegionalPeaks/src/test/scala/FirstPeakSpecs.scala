@@ -21,9 +21,10 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
 
   it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read
+      .option("inferSchema", value = true)
       .option("header", value = true)
-      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
-      .toDF("name", "agg_gdp", "agg_cases")
+      .csv("FirstRegionalPeaks/src/test/resources/test_dataset.csv")
+      .toDF()
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
