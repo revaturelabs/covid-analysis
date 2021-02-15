@@ -33,7 +33,7 @@ object Utilities {
   def tweetcovid19emoji(range: String, sc: SparkContext): Map[String, Int] = {
 
     // // Grabs covid related terms from Terms.scala, which will be used to identify covid related Tweets.
-    // val covidTerms = Terms.getCovidTerms
+    val covidTerms = Terms.getCovidTerms
 
     // // Grabs set of meaningless words from Terms.scala, and then unions them with covidTerms
     // // to create a Set of words that will not be counted in our final results.
@@ -55,7 +55,7 @@ object Utilities {
 
     //Read input from text file, count emojis in it, and store as a Map in an RDD
     val map = sc
-      .textFile(path)
+      .textFile(path).filter(text => covidTerms.exists(word => {text.toLowerCase.contains(word)}))
       //Extract all emojis from each line of the file, and store in a Scala list instead of Java list.
       .flatMap(line => EmojiParser.extractEmojis(line).asScala)
       //map each emoji to a value of 1 per instance found.

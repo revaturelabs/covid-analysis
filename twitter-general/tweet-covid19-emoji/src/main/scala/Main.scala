@@ -9,7 +9,7 @@ object Main extends App {
   //Create Spark session and context for processing data.
     val spark = SparkSession.builder
       .appName("Twitter-Emoji-Analysis")
-      .master("local[4]")
+      .master("yarn")
       .getOrCreate()
     val sc = spark.sparkContext
     sc.setLogLevel("INFO")

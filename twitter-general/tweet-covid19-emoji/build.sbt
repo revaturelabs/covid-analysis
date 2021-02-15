@@ -12,3 +12,8 @@ libraryDependencies ++= Seq(
   "com.vdurmont" % "emoji-java" % "5.1.1",
   "org.apache.logging.log4j" % "log4j-core" % "2.13.0" % Runtime
 )
+
+assemblyMergeStrategy in assembly := {
+ case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+ case x => MergeStrategy.first
+}
