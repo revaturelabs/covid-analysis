@@ -234,110 +234,110 @@ pipeline {
 
 
 
-        //twitter-covid Group
-        //twitter-covid/age-spikes-discussion Compile
-        stage("Compile twitter-covid/age-spikes-discussion") {
-            steps {
-                echo "Compile age-spikes-discussion"
+        // //twitter-covid Group
+        // //twitter-covid/age-spikes-discussion Compile
+        // stage("Compile twitter-covid/age-spikes-discussion") {
+        //     steps {
+        //         echo "Compile age-spikes-discussion"
 
-                sh '''
-                    cd twitter-covid/age-spikes-discussion
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //twitter-covid/age-spikes-discussion Test
-        stage("Test twitter-covid/age-spikes-discussion") {
-            steps {
-                echo "Test age-spikes-discussion"
+        //         sh '''
+        //             cd twitter-covid/age-spikes-discussion
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //twitter-covid/age-spikes-discussion Test
+        // stage("Test twitter-covid/age-spikes-discussion") {
+        //     steps {
+        //         echo "Test age-spikes-discussion"
 
-                sh '''
-                    cd twitter-covid/age-spikes-discussion
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //twitter-covid/age-spikes-discussion Package
-        stage("Package twitter-covid/age-spikes-discussion") {
-            steps {
-                echo "Package age-spikes-discussion"
+        //         sh '''
+        //             cd twitter-covid/age-spikes-discussion
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //twitter-covid/age-spikes-discussion Package
+        // stage("Package twitter-covid/age-spikes-discussion") {
+        //     steps {
+        //         echo "Package age-spikes-discussion"
 
-                sh '''
-                    cd twitter-covid/age-spikes-discussion
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
-
-
-
-        //twitter-covid/HashtagByRegion Compile
-        stage("Compile twitter-covid/HashtagByRegion") {
-            steps {
-                echo "Compile HashtagByRegion"
-
-                sh '''
-                    cd twitter-covid/HashtagByRegion
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //twitter-covid/HashtagByRegion Test
-        stage("Test twitter-covid/HashtagByRegion") {
-            steps {
-                echo "Test HashtagByRegion"
-
-                sh '''
-                    cd twitter-covid/HashtagByRegion
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //twitter-covid/HashtagByRegion Package
-        stage("Package twitter-covid/HashtagByRegion") {
-            steps {
-                echo "Package HashtagByRegion"
-
-                sh '''
-                    cd twitter-covid/HashtagByRegion
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/age-spikes-discussion
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
-        //Group Twitter-General
-        //Twitter-General/data-cleaner Compile
-        stage("Compile Twitter-General/data-cleaner") {
-            steps {
-                echo "Compile data-cleaner"
+        // //twitter-covid/HashtagByRegion Compile
+        // stage("Compile twitter-covid/HashtagByRegion") {
+        //     steps {
+        //         echo "Compile HashtagByRegion"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/data-cleaner Test
-        stage("Test Twitter-General/data-cleaner") {
-            steps {
-                echo "Test data-cleaner"
+        //         sh '''
+        //             cd twitter-covid/HashtagByRegion
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //twitter-covid/HashtagByRegion Test
+        // stage("Test twitter-covid/HashtagByRegion") {
+        //     steps {
+        //         echo "Test HashtagByRegion"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/HashtagByRegion
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //twitter-covid/HashtagByRegion Package
+        // stage("Package twitter-covid/HashtagByRegion") {
+        //     steps {
+        //         echo "Package HashtagByRegion"
+
+        //         sh '''
+        //             cd twitter-covid/HashtagByRegion
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+
+
+
+        // //Group Twitter-General
+        // //Twitter-General/data-cleaner Compile
+        // stage("Compile Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Compile data-cleaner"
+
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/data-cleaner Test
+        // stage("Test Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Test data-cleaner"
+
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         //Twitter-General/data-cleaner Package
         stage("Package Twitter-General/data-cleaner") {
             steps {
