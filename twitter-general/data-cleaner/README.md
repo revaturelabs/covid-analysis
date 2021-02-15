@@ -13,7 +13,7 @@ This directory contains the methods used to format out twitter data, for both ar
 ## Folder Structure
 
 ### Empty Folders 
-- test-output - used by the ArchiveCleaner.clean method to store the intiial results of the file cleaning process
+- test-output - used by the ArchiveCleaner.clean method to store the initial results of the file cleaning process
 - test-output-rdd - used by the ArchiveCleaner.clean method to store the intermediary results of the file cleaning process
 - test-output-stream - used by the StreamCleaner.clean method to store the initial results of the file cleaning process
 
