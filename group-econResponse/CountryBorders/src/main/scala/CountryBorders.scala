@@ -43,11 +43,11 @@ object CountryBorders {
     val countryCallbackFn = getCallbackFn(spark, countrySrcFile, delimiter = "\t")()
     val covidCallbackFn = getCallbackFn(spark, covidSrcFile)()
 
-    val country_stats = db.loadDFFromBucket(countrySrcFile, covidCallbackFn)
-    val country_data = db.loadDFFromBucket(covidSrcFile, countryCallbackFn)
+    val countryStatsDF = db.loadDFFromBucket(countrySrcFile, covidCallbackFn)
+    val countryDataDF = db.loadDFFromBucket(covidSrcFile, countryCallbackFn)
 
-    val country_pop = country_stats.select($"location".as("COUNTRY"), col("POPULATION").cast(IntegerType))
-    val country_cases = country_data
+    val countryPopulationDF = countryStatsDF.select($"location".as("COUNTRY"), col("POPULATION").cast(IntegerType))
+    val countryCasesDF = countryDataDF
       .filter(col("TOTAL_CASES") =!= "NULL")
       .withColumn("Cases", col("TOTAL_CASES").cast("Int"))
       .select(col("COUNTRY"), col("Cases").as("Total Cases"))
@@ -59,9 +59,9 @@ object CountryBorders {
     val borders = joinCodesAndBorders(spark)
 
     //create "infection_rate" from covid data directory with daily covid data
-    val infection_rate = country_cases
-      .join(country_pop, country_cases("COUNTRY") === country_pop("COUNTRY"))
-      .select(country_cases("COUNTRY"), $"TOTAL CASES", $"POPULATION",
+    val infection_rate = countryCasesDF
+      .join(countryPopulationDF, countryCasesDF("COUNTRY") === countryPopulationDF("COUNTRY"))
+      .select(countryCasesDF("COUNTRY"), $"TOTAL CASES", $"POPULATION",
         ($"TOTAL CASES" * 100 / $"POPULATION").as("infection_rate_per_capita"))
       .sort(desc("infection_rate_per_capita"))
       .withColumn("infection_rate_per_capita",'infection_rate_per_capita.cast("Decimal(5,3)"))
@@ -172,7 +172,7 @@ object CountryBorders {
    * @param infectionFrame is the dataframe that has countries, their infection rate and a country they border
    * @return dataframe that has all countries with no countries bordering them by land
    */
-  def createWaterLocked(infectionFrame: DataFrame , spark:SparkSession): DataFrame ={
+  def createWaterLocked(infectionFrame: DataFrame , spark: SparkSession): DataFrame ={
     import spark.implicits._
     val waterLocked = infectionFrame.filter($"border_country".isNull)
       .select($"country_name")

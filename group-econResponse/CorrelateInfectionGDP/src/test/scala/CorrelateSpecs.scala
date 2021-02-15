@@ -1,6 +1,6 @@
 import com.github.mrpowers.spark.fast.tests.DatasetComparer
+import covidAndGDP.CorrelateInfectionGDP
 import org.scalatest.funspec.AnyFunSpec
-
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
 
@@ -19,7 +19,7 @@ trait SparkSessionTestWrapper {
 
 class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
 
-  it("aliases a DataFrame") {
+  it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read
       .option("header", value = true)
       .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
@@ -27,25 +27,23 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
-    val expectedDF = spark.read
-      .option("header", value = true)
-      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
-      .toDF("country", "agg_gdp", "agg_cases")
-      .drop("agg_gdp", "agg_cases")
-
-    assertSmallDatasetEquality(resultDF, expectedDF)
+   assert(resultDF.columns.contains("country"))
   }
 
   it("calculates the pearson correlation coefficient for two columns") {
-    val (arr1: Array[Double], arr2: Array[Double]) = (Array(2.4d, 1.62d), Array(2.4d, 1.62d))
-//    val res = StatFunc.correlation(arr1, arr2)
+    val testDF = spark.read
+      .option("header", value = true)
+      .option("inferSchema", value = true)
+      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
+      .toDF()
 
-//    assert(res == 1.0d)
+    val response = CorrelateInfectionGDP.getCorrelation(testDF)
 
+    //Columns have a negative correlation and should produce a -1 coeffection.
+    assert(response == -1.0d)
   }
   it("calculates the hypothesis testing for ") {
-//    val res = Calculator().hypoTest(1.1234d, 5.6789d)
-
-//    assert(res == 1.0d)
+    // TODO: Test when implemented.
+    assert(true)
   }
 }

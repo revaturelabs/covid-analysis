@@ -23,7 +23,6 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
     val srcDF = spark.read
       .option("header", value = true)
       .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
-      .toDF("name", "agg_gdp", "agg_cases")
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
@@ -34,18 +33,5 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
       .drop("agg_gdp", "agg_cases")
 
     assertSmallDatasetEquality(resultDF, expectedDF)
-  }
-
-  it("calculates the pearson correlation coefficient for two columns") {
-    val (arr1: Array[Double], arr2: Array[Double]) = (Array(2.4d, 1.62d), Array(2.4d, 1.62d))
-//    val res = StatFunc.correlation(arr1, arr2)
-
-//    assert(res == 1.0d)
-
-  }
-  it("calculates the hypothesis testing for ") {
-//    val res = Calculator().hypoTest(1.1234d, 5.6789d)
-
-//    assert(res == 1.0d)
   }
 }
