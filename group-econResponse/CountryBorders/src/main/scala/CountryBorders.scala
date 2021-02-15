@@ -31,15 +31,23 @@ object CountryBorders {
     spark.sparkContext.setLogLevel("WARN")
 
     import spark.implicits._
-    val callbackFn = (downloadPath: String) => {
+    val covidCallbackFn = (downloadPath: String) => {
       spark.read
         .format("csv")
         .option("inferSchema", "true")
         .option("header", "true")
         .csv(downloadPath)
     }
-    val country_stats = db.loadDFFromBucket(countySrcFile, callbackFn)
-    val country_data = db.loadDFFromBucket(covidSrcFile, callbackFn)
+    val countryCallbackFn = (downloadPath: String) => {
+      spark.read
+        .option("delimiter", "\t")
+        .option("inferSchema", "true")
+        .option("header", "true")
+        .format("csv")
+        .csv(downloadPath)
+    }
+    val country_stats = db.loadDFFromBucket(countySrcFile, covidCallbackFn)
+    val country_data = db.loadDFFromBucket(covidSrcFile, countryCallbackFn)
 
     val country_pop = country_stats.select($"location".as("COUNTRY"), col("POPULATION").cast(IntegerType))
     val country_cases = country_data

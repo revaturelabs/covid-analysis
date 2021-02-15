@@ -84,11 +84,7 @@ case class CountryStats(
    tests_units: String = null,
    stringency_index: Double = 0
 )
+ case class covidEconData (
 
-object util {
-  def recast(): Seq[String] = Seq(
-    "year",
-    "total_cases",
-    "new_cases"
-  )
-}
+                          
+                          )
