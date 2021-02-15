@@ -509,7 +509,7 @@ pipeline {
 
 
 
-        //tweet-positive-negative Compile
+        //twitter-general/tweet-positive-negative Compile
         stage("Compile twitter-general/tweet-positive-negative") {
             steps {
                 echo "Compile tweet-positive-negative"
@@ -521,7 +521,7 @@ pipeline {
                 '''
             }
         }
-        //tweet-positive-negative Test
+        //twitter-general/tweet-positive-negative Test
         stage("Test Twitter-General/tweet-positive-negative") {
             steps {
                 echo "Test tweet-positive-negative"
@@ -533,7 +533,7 @@ pipeline {
                 '''
             }
         }
-        //tweet-positive-negative Assembly
+        //twitter-general/tweet-positive-negative Assembly
         stage("Assembly Twitter-General/tweet-positive-negative") {
             steps {
                 echo "Assembly tweet-positive-negative"
@@ -651,9 +651,9 @@ pipeline {
             }
         }
         // RelatedHashtags Package
-        stage("Test twitter-covid RelatedHashtags") {
+        stage("Package twitter-covid RelatedHashtags") {
             steps {
-                echo "Test RelatedHashtags"
+                echo "Package RelatedHashtags"
 
                 sh '''
                     cd twitter-covid/RelatedHashtags
