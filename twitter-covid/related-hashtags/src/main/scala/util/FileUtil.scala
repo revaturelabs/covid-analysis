@@ -18,7 +18,7 @@ object FileUtil {
         .limit(maxRecords)
         .write
         .format("csv")
-        .save(s"s3a://covid-analysis-p3/datawarehouse/twitter-covid/$outputFilename")
+        .save(s"s3a://covid-analysis-p3/datawarehouse/twitter-covid/RelatedHashtags/$outputFilename")
   }
 
   /** Reads in a JSON file from the supplied path and returns its data
