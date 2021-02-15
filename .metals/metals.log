@@ -18678,3 +18678,5 @@ WARNING: Unmatched cancel notification for request id 1566
 [0m2021.02.14 19:48:31 INFO  time: compiled covid-analysis-1 in 2.23s[0m
 Feb 14, 2021 7:50:20 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTraceNotification
+Feb 14, 2021 8:01:05 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
