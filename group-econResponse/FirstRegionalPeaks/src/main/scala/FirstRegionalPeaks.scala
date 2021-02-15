@@ -13,7 +13,7 @@ import utilites.{DataFrameBuilder, s3DAO}
 object FirstRegionalPeaks {
 
   def main(args: Array[String]): Unit = {
-    // Set the log level.
+    // Set logging level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.
@@ -26,6 +26,7 @@ object FirstRegionalPeaks {
       "regionSrc" -> "region_dictionary.json",
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
+
     //Spark setup
     val spark = SparkSession.builder()
       .master("local[*]")

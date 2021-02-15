@@ -2,7 +2,7 @@ package countryBorders
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.{IntegerType, StructType}
+import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 import utilites.s3DAO
 
@@ -15,6 +15,14 @@ import utilites.s3DAO
  * associated with this question.
  */
 object CountryBorders {
+  /** returns a callback function that is to be used to build a Spark DF after files are downloaded from s3.
+   * This application uses both csv and tsv files. So the delimiter is passed as well as a file name.
+   *
+   * @param spark     spark session
+   * @param filePath  sets the filename for downloaded s3 material
+   * @param delimiter sets delimiter type for Spark csv reading.
+   * @return function
+   */
   def getCallbackFn(spark: SparkSession, filePath: String, delimiter: String = ","): () => String => DataFrame = () => {
     filePath: String => {
       spark.read
@@ -26,7 +34,7 @@ object CountryBorders {
   }
 
   def main(args: Array[String]): Unit = {
-    // Set the log level to only print errors
+    //Set logging level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.

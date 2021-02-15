@@ -16,7 +16,7 @@ object CorrelateInfectionGDP {
 
 
   def main(args: Array[String]): Unit = {
-    // Set the log level to only print errors
+    // Set logging level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.

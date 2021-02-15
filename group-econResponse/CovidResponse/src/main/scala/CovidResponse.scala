@@ -30,7 +30,7 @@ object CovidResponse {
     * This is used just prior to displaying results.
     */
   def main(args: Array[String]): Unit = {
-    // Set the log level to only print errors
+    // Set logging level.
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.
