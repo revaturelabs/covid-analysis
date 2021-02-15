@@ -27,7 +27,8 @@ AWS_SECRET_ACCESS_KEY=<secret_access_key>
 ## Usage
 
 * general Usage
-    * must be run with comandline argument `[mode]`
+    * must be run with command line argument `[mode]`
+        * Example: shell> sbt "run 3"
     * mode is a number between 0-3
         * 0 runs the application on tweet data in the date range `12/11/2020 - 12/25/2020`
         * 1 runs the application on tweet data in the date range `12/26/2020 - 01/05/2021`
