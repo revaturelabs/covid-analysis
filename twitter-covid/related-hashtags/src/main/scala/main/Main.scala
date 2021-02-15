@@ -19,8 +19,8 @@ object Main {
       ))
     .replace()
     
-    // jsonPath currently points to test data
-    val jsonPath = "s3://covid-analysis-p3/datalake/twitter-covid/test_twitter_data.json"
+    // jsonPath points to your data source
+    val jsonPath = "s3://covid-analysis-p3/datalake/twitter-covid/01-31-21-twitter_data.json"
 
     val spark = SparkSession
       .builder()
