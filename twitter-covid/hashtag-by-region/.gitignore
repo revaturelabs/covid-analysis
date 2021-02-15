@@ -95,7 +95,7 @@ sql/docs
 sql/site
 lint-r-report.log
 log/
-logs/
+#logs/
 out/
 project/build/target/
 project/plugins/lib_managed/
