@@ -19,7 +19,9 @@ This application reads in twitter data from the S3 bucket and analyses the frequ
 ## Getting Started
    
 * Create a .env file to set AWS access keys as environment variables in this format:
+
 AWS_ACCESS_KEY_ID=<access_key>
+
 AWS_SECRET_ACCESS_KEY=<secret_access_key>
 
 ## Usage
