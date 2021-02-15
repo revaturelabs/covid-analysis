@@ -27,8 +27,8 @@ object TwitterCovidAnalysis {
   def readTwitterToDF(spark: SparkSession): DataFrame = {
     //Took 35 mins to execute
     // val path = "s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
-
     val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
+    
     spark.read
       .option("sep", "\t")
       .option("header", "true")
@@ -70,12 +70,28 @@ object TwitterCovidAnalysis {
     * Returned columns: Date, infection rate (age 5-30), and Twitter Volume.
     * @param df
     */
-  def ageTwitterVolume(twitterDF: DataFrame): DataFrame = {
+  def twitterVolumeSpikes(twitterDF: DataFrame, usDF: DataFrame): DataFrame = {
     // TO DO
     // Pull the first couple of rows from AWS
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
 
-    twitterDF
+    // date, count from twitterDF
+    val twitter = twitterDF
+      .select("date")
+      .groupBy("date")
+      .count()
+      .orderBy($"date".asc)
+    // date, infection sums from usDF
+    val us = groupByDate(usDF)
+
+    // join not working
+    // twitter.join(us, twitter("date") === us("Specimen Collection Date"))
+    // twitter.join(us, twitter("date") === us("Specimen Collection Date"),"left")
+    val result = us
+      .join(twitter, us("Specimen Collection Date") === twitter("date"), "left")
+      .select("Specimen Collection Date", "sum(New Confirmed Cases)", "count")
+    result.withColumnRenamed("count", "Twitter Volume")
+
   }
 }

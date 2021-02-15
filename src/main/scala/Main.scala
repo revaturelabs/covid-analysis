@@ -11,12 +11,16 @@ object Main {
       .master("local[*]")
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
+    import spark.implicits._
 
     val path = setUpConnection(spark)
-
-    // TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
-    // TwitterCovidAnalysis.ageGroupsInfectionCount(TwitterCovidAnalysis.readToDF(spark, path)).show()
-    TwitterCovidAnalysis.readTwitterToDF(spark).show(20)
+    val twitterDF = TwitterCovidAnalysis.readTwitterToDF(spark)
+    val usDF = TwitterCovidAnalysis.readToDF(spark, path)
+    
+    // TwitterCovidAnalysis.groupByDate(usDF).show(335)
+    // TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
+    TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF).show(335)
+    
     spark.stop
   }
 

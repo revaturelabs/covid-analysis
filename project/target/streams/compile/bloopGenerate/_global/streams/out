@@ -1,4 +1,4 @@
-[debug] [covid-analysis-1-build] Classpath dependencies List()
-[debug] [covid-analysis-1-build] Dependencies from configurations List()
-[debug] Bloop wrote the configuration of project 'covid-analysis-1-build' to 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project\.bloop\covid-analysis-1-build.json'
-[success] Generated .bloop\covid-analysis-1-build.json
+[0m[[0m[0mdebug[0m] [0m[0m[covid-analysis-1-build] Classpath dependencies List()[0m
+[0m[[0m[0mdebug[0m] [0m[0m[covid-analysis-1-build] Dependencies from configurations List()[0m
+[0m[[0m[0mdebug[0m] [0m[0mBloop wrote the configuration of project 'covid-analysis-1-build' to 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project\.bloop\covid-analysis-1-build.json'[0m
+[0m[[0m[32msuccess[0m] [0m[0mGenerated .bloop\covid-analysis-1-build.json[0m

@@ -18021,3 +18021,313 @@ INFO: Unsupported notification method: $/setTraceNotification
 [0m2021.02.12 10:36:38 INFO  Shut down connection with build server.[0m
 No more data in the client stdin, exiting...
 No more data in the client stdin, exiting...
+[0m2021.02.12 10:54:40 INFO  Started: Metals version 0.9.10 in workspace 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1' for client vscode 1.53.2.[0m
+[0m2021.02.12 10:54:41 INFO  time: initialize in 0.66s[0m
+[0m2021.02.12 10:54:42 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 41918'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop'...
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1-test.json'
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'covid-analysis-1', 'covid-analysis-1-test'
+[0m[32m[D][0m Missing analysis file for project 'covid-analysis-1'
+[0m[32m[D][0m Missing analysis file for project 'covid-analysis-1-test'
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:41918...
+The server is listening for incoming connections at tcp://127.0.0.1:41918...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:54:45 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:54:45 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 27063'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:27063...
+The server is listening for incoming connections at tcp://127.0.0.1:27063...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:54:46 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:54:46 INFO  time: connected to build server in 4.38s[0m
+[0m2021.02.12 10:54:46 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.12 10:54:46 INFO  time: imported build in 0.57s[0m
+[0m2021.02.12 10:54:53 INFO  running 'C:\Program Files\Java\jdk1.8.0_271\bin\java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar C:\Users\Michael\AppData\Local\Temp\metals868284402842913562\sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.02.12 10:55:01 INFO  [info] welcome to sbt 1.4.4 (Oracle Corporation Java 1.8.0_271)[0m
+[0m2021.02.12 10:55:08 INFO  [info] loading global plugins from C:\Users\Michael\.sbt\1.0\plugins[0m
+[0m2021.02.12 10:55:18 INFO  [info] loading settings for project covid-analysis-1-build-build from metals.sbt ...[0m
+[0m2021.02.12 10:55:18 INFO  [info] loading project definition from C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project\project[0m
+[0m2021.02.12 10:55:20 INFO  time: indexed workspace in 33s[0m
+[0m2021.02.12 10:55:22 INFO  [info] loading settings for project covid-analysis-1-build from metals.sbt ...[0m
+[0m2021.02.12 10:55:22 INFO  [info] loading project definition from C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\project[0m
+[0m2021.02.12 10:55:31 INFO  [success] Generated .bloop\covid-analysis-1-build.json[0m
+[0m2021.02.12 10:55:31 INFO  [success] Total time: 9 s, completed Feb 12, 2021 10:55:31 AM[0m
+[0m2021.02.12 10:55:37 INFO  [info] loading settings for project covid-analysis-1 from build.sbt ...[0m
+[0m2021.02.12 10:55:37 INFO  [info] set current project to COVID-ANALYSIS-1 (in build file:/C:/Users/Michael/Documents/Revature/P3/us-spikes/covid-analysis-1/)[0m
+[0m2021.02.12 10:56:00 INFO  [success] Generated .bloop\covid-analysis-1.json[0m
+[0m2021.02.12 10:56:00 INFO  [success] Generated .bloop\covid-analysis-1-test.json[0m
+[0m2021.02.12 10:56:00 INFO  [success] Total time: 22 s, completed Feb 12, 2021 10:56:00 AM[0m
+[0m2021.02.12 10:56:00 INFO  sbt bloopInstall exit: 0[0m
+[0m2021.02.12 10:56:00 INFO  time: ran 'sbt bloopInstall' in 1m7s[0m
+[0m2021.02.12 10:56:00 INFO  Disconnecting from Bloop session...[0m
+[0m2021.02.12 10:56:00 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.12 10:56:00 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.02.12 10:56:00 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 34128'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop'...
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1.json'
+[0m[32m[D][0m Loading project from 'c:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1-test.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'covid-analysis-1', 'covid-analysis-1-test'
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:34128...
+The server is listening for incoming connections at tcp://127.0.0.1:34128...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:56:02 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:56:02 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol tcp --port 36317'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at 127.0.0.1:36317...
+The server is listening for incoming connections at tcp://127.0.0.1:36317...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.02.12 10:56:02 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\Michael\AppData\Local\scalameta\metals\cache\bsp.trace.json[0m
+[0m2021.02.12 10:56:02 INFO  time: connected to build server in 2.07s[0m
+[0m2021.02.12 10:56:02 INFO  Connected to Build server v1.4.6-21-464e4ec4[0m
+[0m2021.02.12 10:56:02 INFO  time: imported build in 0.3s[0m
+[0m2021.02.12 10:56:08 INFO  time: indexed workspace in 5s[0m
+Feb 12, 2021 10:57:22 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+[0m2021.02.12 14:15:13 INFO  compiling covid-analysis-1 (2 scala sources)[0m
+[0m2021.02.12 14:15:21 WARN  unexpected error processing the file C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-JQvzHJC3Rh6ihDZveTGphw==\META-INF\semanticdb\src\main\scala\Main.scala.semanticdb
+java.nio.file.FileSystemException: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\.bloop\covid-analysis-1\bloop-bsp-clients-classes\classes-Metals-JQvzHJC3Rh6ihDZveTGphw==\META-INF\semanticdb\src\main\scala\Main.scala.semanticdb: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:86)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.metals.SemanticdbIndexer.onChange(SemanticdbIndexer.scala:104)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChangeWatchedFiles$5(MetalsLanguageServer.scala:1159)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m
+[0m2021.02.12 14:15:21 INFO  time: compiled covid-analysis-1 in 8.81s[0m
+Feb 12, 2021 2:15:27 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 36
+Feb 12, 2021 2:15:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 41
+[0m2021.02.12 14:30:18 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 14:30:22 INFO  time: compiled covid-analysis-1 in 4.11s[0m
+[0m2021.02.12 14:47:08 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+Feb 12, 2021 2:47:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 137
+[0m2021.02.12 14:47:12 INFO  time: compiled covid-analysis-1-test in 4.25s[0m
+[0m2021.02.12 14:47:20 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 14:47:23 INFO  time: compiled covid-analysis-1 in 2.52s[0m
+[0m2021.02.12 15:13:21 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 15:13:23 INFO  time: compiled covid-analysis-1 in 1.73s[0m
+[0m2021.02.12 15:13:27 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 15:13:30 INFO  time: compiled covid-analysis-1 in 2.53s[0m
+[0m2021.02.12 16:01:00 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.12 16:01:02 INFO  time: compiled covid-analysis-1-test in 2.09s[0m
+[0m2021.02.12 16:02:00 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:00 INFO  time: compiled covid-analysis-1 in 0.75s[0m
+[0m2021.02.12 16:02:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:03 INFO  time: compiled covid-analysis-1 in 0.75s[0m
+[0m2021.02.12 16:02:06 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:06 INFO  time: compiled covid-analysis-1 in 0.71s[0m
+[0m2021.02.12 16:02:14 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:16 INFO  time: compiled covid-analysis-1 in 1.54s[0m
+[0m2021.02.12 16:02:18 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:20 INFO  time: compiled covid-analysis-1 in 1.65s[0m
+[0m2021.02.12 16:02:22 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:22 INFO  time: compiled covid-analysis-1 in 0.7s[0m
+[0m2021.02.12 16:02:25 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:26 INFO  time: compiled covid-analysis-1 in 1.62s[0m
+[0m2021.02.12 16:02:37 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:02:41 INFO  time: compiled covid-analysis-1 in 4.08s[0m
+[0m2021.02.12 16:04:30 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:04:30 INFO  time: compiled covid-analysis-1 in 0.6s[0m
+[0m2021.02.12 16:04:33 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:04:34 INFO  time: compiled covid-analysis-1 in 1.01s[0m
+[0m2021.02.12 16:04:36 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:04:36 INFO  time: compiled covid-analysis-1 in 0.61s[0m
+[0m2021.02.12 16:04:58 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:04:58 INFO  time: compiled covid-analysis-1 in 0.62s[0m
+[0m2021.02.12 16:06:02 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:06:04 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+Feb 12, 2021 4:08:48 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 510
+[0m2021.02.12 16:09:32 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:09:32 INFO  time: compiled covid-analysis-1 in 0.57s[0m
+[0m2021.02.12 16:09:34 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:09:34 INFO  time: compiled covid-analysis-1 in 0.53s[0m
+[0m2021.02.12 16:09:40 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:09:40 INFO  time: compiled covid-analysis-1 in 0.58s[0m
+[0m2021.02.12 16:09:55 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:09:55 INFO  time: compiled covid-analysis-1 in 0.56s[0m
+[0m2021.02.12 16:10:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:10:03 INFO  time: compiled covid-analysis-1 in 0.51s[0m
+Feb 12, 2021 4:10:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 626
+[0m2021.02.12 16:10:25 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:10:25 INFO  time: compiled covid-analysis-1 in 0.71s[0m
+[0m2021.02.12 16:10:34 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:10:34 INFO  time: compiled covid-analysis-1 in 0.69s[0m
+[0m2021.02.12 16:11:03 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:11:03 INFO  time: compiled covid-analysis-1 in 0.54s[0m
+Feb 12, 2021 4:11:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 672
+[0m2021.02.12 16:11:42 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:11:43 INFO  time: compiled covid-analysis-1 in 1.77s[0m
+Feb 12, 2021 4:12:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 716
+Feb 12, 2021 4:12:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 719
+[0m2021.02.12 16:12:19 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:12:20 INFO  time: compiled covid-analysis-1 in 1.58s[0m
+[0m2021.02.12 16:13:29 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:13:29 INFO  time: compiled covid-analysis-1 in 0.59s[0m
+[0m2021.02.12 16:13:34 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:13:35 INFO  time: compiled covid-analysis-1 in 1.5s[0m
+[0m2021.02.12 16:13:37 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:13:39 INFO  time: compiled covid-analysis-1 in 1.81s[0m
+[0m2021.02.12 16:13:43 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:13:43 INFO  time: compiled covid-analysis-1 in 0.56s[0m
+[0m2021.02.12 16:13:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:13:46 INFO  time: compiled covid-analysis-1 in 0.62s[0m
+[0m2021.02.12 16:14:14 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:14 INFO  time: compiled covid-analysis-1 in 0.57s[0m
+[0m2021.02.12 16:14:17 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:17 INFO  time: compiled covid-analysis-1 in 0.54s[0m
+[0m2021.02.12 16:14:20 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:20 INFO  time: compiled covid-analysis-1 in 0.64s[0m
+[0m2021.02.12 16:14:33 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:33 INFO  time: compiled covid-analysis-1 in 0.64s[0m
+[0m2021.02.12 16:14:36 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:36 INFO  time: compiled covid-analysis-1 in 0.65s[0m
+[0m2021.02.12 16:14:39 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:39 INFO  time: compiled covid-analysis-1 in 0.69s[0m
+[0m2021.02.12 16:14:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:14:47 INFO  time: compiled covid-analysis-1 in 1.54s[0m
+[0m2021.02.12 16:15:41 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:15:42 INFO  time: compiled covid-analysis-1 in 1.56s[0m
+[0m2021.02.12 16:15:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:15:48 INFO  time: compiled covid-analysis-1 in 1.49s[0m
+[0m2021.02.12 16:16:07 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:09 INFO  time: compiled covid-analysis-1 in 1.88s[0m
+[0m2021.02.12 16:16:28 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:28 INFO  time: compiled covid-analysis-1 in 0.56s[0m
+[0m2021.02.12 16:16:31 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:31 INFO  time: compiled covid-analysis-1 in 0.61s[0m
+[0m2021.02.12 16:16:36 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:36 INFO  time: compiled covid-analysis-1 in 0.77s[0m
+[0m2021.02.12 16:16:44 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:46 INFO  time: compiled covid-analysis-1 in 1.45s[0m
+[0m2021.02.12 16:16:53 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:53 INFO  time: compiled covid-analysis-1 in 0.61s[0m
+[0m2021.02.12 16:16:56 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:16:56 INFO  time: compiled covid-analysis-1 in 0.73s[0m
+[0m2021.02.12 16:17:00 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:17:03 INFO  time: compiled covid-analysis-1 in 3.25s[0m
+[0m2021.02.12 16:19:51 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:19:51 INFO  time: compiled covid-analysis-1 in 0.53s[0m
+[0m2021.02.12 16:19:56 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:19:56 INFO  time: compiled covid-analysis-1 in 0.71s[0m
+Feb 12, 2021 4:19:59 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1142
+[0m2021.02.12 16:20:06 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:06 INFO  time: compiled covid-analysis-1 in 0.54s[0m
+[0m2021.02.12 16:20:09 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:09 INFO  time: compiled covid-analysis-1 in 0.87s[0m
+[0m2021.02.12 16:20:12 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:12 INFO  time: compiled covid-analysis-1 in 0.59s[0m
+[0m2021.02.12 16:20:15 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:15 INFO  time: compiled covid-analysis-1 in 0.68s[0m
+Feb 12, 2021 4:20:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1193
+[0m2021.02.12 16:20:35 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:36 INFO  time: compiled covid-analysis-1 in 1.41s[0m
+[0m2021.02.12 16:20:46 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:46 INFO  time: compiled covid-analysis-1 in 0.55s[0m
+[0m2021.02.12 16:20:50 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:51 INFO  time: compiled covid-analysis-1 in 1.5s[0m
+[0m2021.02.12 16:20:53 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:20:55 INFO  time: compiled covid-analysis-1 in 1.52s[0m
+[0m2021.02.12 16:21:14 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:21:16 INFO  time: compiled covid-analysis-1 in 1.7s[0m
+[0m2021.02.12 16:21:23 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:21:24 INFO  time: compiled covid-analysis-1 in 1.4s[0m
+[0m2021.02.12 16:21:33 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.12 16:21:35 INFO  time: compiled covid-analysis-1-test in 1.98s[0m
+[0m2021.02.12 16:23:27 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:29 INFO  time: compiled covid-analysis-1 in 2.15s[0m
+[0m2021.02.12 16:23:29 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:29 INFO  time: compiled covid-analysis-1 in 0.43s[0m
+[0m2021.02.12 16:23:32 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:34 INFO  time: compiled covid-analysis-1 in 2.17s[0m
+[0m2021.02.12 16:23:34 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:34 INFO  time: compiled covid-analysis-1 in 0.36s[0m
+[0m2021.02.12 16:23:37 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:39 INFO  time: compiled covid-analysis-1 in 2.3s[0m
+[0m2021.02.12 16:23:39 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:23:39 INFO  time: compiled covid-analysis-1 in 0.64s[0m
+[0m2021.02.12 16:23:42 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.12 16:23:42 INFO  time: compiled covid-analysis-1-test in 0.88s[0m
+Feb 12, 2021 4:23:43 PM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+[0m2021.02.12 16:23:45 INFO  compiling covid-analysis-1-test (1 scala source)[0m
+[0m2021.02.12 16:23:47 INFO  time: compiled covid-analysis-1-test in 2s[0m
+[0m2021.02.12 16:24:05 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:24:07 INFO  time: compiled covid-analysis-1 in 1.37s[0m
+[0m2021.02.12 16:24:16 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:24:17 INFO  time: compiled covid-analysis-1 in 1.49s[0m
+[0m2021.02.12 16:24:19 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 16:24:21 INFO  time: compiled covid-analysis-1 in 1.55s[0m
+[0m2021.02.12 17:10:32 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 17:10:34 INFO  time: compiled covid-analysis-1 in 2.43s[0m
+[0m2021.02.12 17:10:38 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 17:10:40 INFO  time: compiled covid-analysis-1 in 1.61s[0m
+[0m2021.02.12 17:10:50 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 17:10:51 INFO  time: compiled covid-analysis-1 in 1.4s[0m
+[0m2021.02.12 17:10:57 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 17:10:58 INFO  time: compiled covid-analysis-1 in 1.48s[0m
+[0m2021.02.12 17:11:00 INFO  compiling covid-analysis-1 (1 scala source)[0m
+[0m2021.02.12 17:11:02 INFO  time: compiled covid-analysis-1 in 1.3s[0m
+[0m2021.02.12 22:01:47 INFO  shutting down Metals[0m
+[0m2021.02.12 22:01:47 INFO  Shut down connection with build server.[0m
+Unexpected exception when forwarding server stdin ---> client stdout
+java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.nio.channels.Channels$ReadableByteChannelImpl.read(Channels.java:385)
+	at bloop.launcher.bsp.BspBridge.copyContents(BspBridge.scala:289)
+	at bloop.launcher.bsp.BspBridge.forwardStreamContents(BspBridge.scala:275)
+	at bloop.launcher.bsp.BspBridge.$anonfun$wireBspConnectionStreams$2(BspBridge.scala:228)
+	at bloop.bloopgun.core.Shell$$anon$2.run(Shell.scala:155)
+No more data in the client stdin, exiting...
+[0m2021.02.12 22:01:47 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
