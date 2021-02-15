@@ -674,20 +674,22 @@ pipeline {
         success {
             echo "All test, build, and package has passed."
 
-            if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
+            script {
+                if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
 
-                //If aws cli works on jenkins
-                //sh "aws s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar"
-                //sh "aws s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-1.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-1.jar"
+                    //If aws cli works on jenkins
+                    //sh "aws s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar"
+                    //sh "aws s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-1.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-1.jar"
 
-                //AWS cli with github 3rd party library
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    AWS("s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar")
-                    AWS("s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-1.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-1.jar")
+                    //AWS cli with github 3rd party library
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        AWS("s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar")
+                        AWS("s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-1.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-1.jar")
+                    }
+
+                    // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
+
                 }
-
-                // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
-
             }
         }
 
