@@ -1,3 +1,4 @@
+package emojis
 // Contains terms that will be used to identify Covid Tweets
 // and then be omitted from the Word count results.
 object Terms {
@@ -12,7 +13,7 @@ object Terms {
 
   // Will be first used to identify Covid Tweets.
   // Then, once the non covid related Tweets have been filtered out,
-  // These words will also be omitted from our word count results.
+  // These words will also be omitted from or word count results.
   private val covidTerms = Set(
     "Coronavirusmexico",
     "新冠病毒",
