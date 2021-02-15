@@ -1,3 +1,4 @@
+@Library('github.com/releaseworks/jenkinslib') _
 // Declarative Pipeline
 
 // Top-most element in a scripted pipeline would be `node`
