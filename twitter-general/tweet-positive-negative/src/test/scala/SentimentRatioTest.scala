@@ -71,13 +71,13 @@ class SentimentRatioTest extends AnyFlatSpec {
   }
 
   "positiveRatio" should "return type double 1" in {
-    assert(SentimentRatio.positiveRatio(1, 0) === 1)
+    assert(SentimentRatio.positiveRatio(1, 0) === 100.0)
   }
   it should "return type double 0" in {
     assert(SentimentRatio.positiveRatio(0, 1) === 0)
   }
   it should "return type double .5" in {
-    assert(SentimentRatio.positiveRatio(2, 2) === .5)
+    assert(SentimentRatio.positiveRatio(2, 2) === 50.0)
   }
 
 }
