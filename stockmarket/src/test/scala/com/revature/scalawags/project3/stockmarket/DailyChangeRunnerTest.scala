@@ -10,16 +10,16 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions._
 
 class DailyChangeRunnerTest extends AnyFlatSpec {
-    //Setting the log level to Error
+    // Setting the log level to Error
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-    //Setting up a new SparkSession
-    //Comment out .master("local[4]") because AWS EMR uses master yarn 
+    // Setting up a new SparkSession
+    // Comment out .master("local[4]") because AWS EMR uses master yarn 
     val spark = SparkSession.builder()
             .appName("composite_test")
             //.master("local[4]")
             .getOrCreate()
-            
+
     import spark.implicits._
 
     // Tests if a specified data source contains data.

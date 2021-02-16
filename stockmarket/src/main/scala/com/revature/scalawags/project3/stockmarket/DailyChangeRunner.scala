@@ -11,16 +11,16 @@ import org.apache.spark.sql.{DataFrame, Dataset, Column}
 import org.apache.spark.sql.expressions._
 
 /**
-  * QUESTION: Which Regions handled COVID-19 the best, assuming our metrics are the percentage change in Stock Market Composite Index?
+  * QUESTION: Which regions handled COVID-19 the best, assuming our metrics are the percentage change in Stock Market Composite Index?
   */
 
 object DailyChangeRunner{
     def main(args: Array[String]): Unit = {
-        //Setting the log level to Error
+        // Setting the log level to Error
         Logger.getLogger("org").setLevel(Level.ERROR)
 
-        //Setting up a new SparkSession
-        //Comment out .master("local[4]") because AWS EMR uses master yarn
+        // Setting up a new SparkSession
+        // Comment out .master("local[4]") because AWS EMR uses master yarn
         val spark = SparkSession.builder()
             .appName("daily_change")
             //.master("local[4]")
@@ -28,7 +28,7 @@ object DailyChangeRunner{
 
         import spark.implicits._
 
-        //Calling dailyChangeRunnerByRegion
+        // Calling dailyChangeRunnerByRegion
         dailyChangeRunnerByRegion(spark, "Africa").show(800, false)
         dailyChangeRunnerByRegion(spark, "Asia").show(800, false)
         dailyChangeRunnerByRegion(spark, "Europe").show(800, false)
