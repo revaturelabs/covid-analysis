@@ -12,16 +12,15 @@ pipeline {
 
         //Infection-mortality group
         stage("CovidLiveUpdateApp"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*CovidLiveUpdate*'
-                    }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*CovidLiveUpdate*'
                 }
-                
+            }
+            stages{
                 //infection-mortality/CovidLiveUpdateApp Compile
                 stage("Compile infection-mortality/CovidLiveUpdateApp") {
                     steps {
@@ -62,15 +61,15 @@ pipeline {
         }
 
         stage("RegionalInfectionRates"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*RegionalInfectionRates*'
-                    }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*RegionalInfectionRates*'
                 }
+            }
+            stages{
                 //infection-mortality/RegionalInfectionRates Compile
                 stage("Compile infection-mortality/RegionalInfectionRates") {
                     steps {
@@ -114,15 +113,15 @@ pipeline {
 
         // Group group-econRepsponse 
         stage("CorrelateInfectionGDP"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*CorrelateInfectionGDP*'
-                    }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*CorrelateInfectionGDP*'
                 }
+            }
+            stages{
                 // group-econResponse/CorrelateInfectionGDP Compile
                 stage("Compile group-econResponse/CorrelateInfectionGDP") {
                     steps{
@@ -163,15 +162,15 @@ pipeline {
 
 
         stage("CountryBorders"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*CountryBorders*'
-                    }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*CountryBorders*'
                 }
+            }
+            stages{
                 //group-econResponse/CountryBorders Compile
                 stage("Compile group-econResponse/CountryBorders") {
                     steps{
@@ -211,48 +210,46 @@ pipeline {
         
 
         stage("CovidResponse"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*CovidResponse*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*CovidResponse*'
+                }
+            }
+            stages {
+                //group-econResponse/CovidResponse Compile
+                stage("Compile group-econResponse/CovidResponse") {
+                    steps{
+                        echo "Compile CovidResponse"
+                        sh '''
+                            cd group-econResponse/CovidResponse
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //group-econResponse/CovidResponse Compile
-                    stage("Compile group-econResponse/CovidResponse") {
-                        steps{
-                            echo "Compile CovidResponse"
-                            sh '''
-                                cd group-econResponse/CovidResponse
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                //group-econResponse/CovidResponse Test
+                stage("Test group-econResponse/CovidResponse") {
+                    steps{
+                        echo "Test CovidResponse"
+                        sh '''
+                            cd group-econResponse/CovidResponse
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //group-econResponse/CovidResponse Test
-                    stage("Test group-econResponse/CovidResponse") {
-                        steps{
-                            echo "Test CovidResponse"
-                            sh '''
-                                cd group-econResponse/CovidResponse
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //group-econResponse/CovidResponse Package
-                    stage("Package group-econResponse/CovidResponse") {
-                        steps{
-                            echo "Package CovidResponse"
-                            sh '''
-                                cd group-econResponse/CovidResponse
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                }
+                //group-econResponse/CovidResponse Package
+                stage("Package group-econResponse/CovidResponse") {
+                    steps{
+                        echo "Package CovidResponse"
+                        sh '''
+                            cd group-econResponse/CovidResponse
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -260,48 +257,46 @@ pipeline {
 
         
         stage("FirstRegionalPeaks"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*FirstRegionalPeaks*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*FirstRegionalPeaks*'
+                }
+            }
+            stages {
+                //group-econResponse/FirstRegionalPeaks Compile
+                stage("Compile group-econResponse/FirstRegionalPeaks") {
+                    steps{
+                        echo "Compile FirstRegionalPeaks"
+                        sh '''
+                            cd group-econResponse/FirstRegionalPeaks
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //group-econResponse/FirstRegionalPeaks Compile
-                    stage("Compile group-econResponse/FirstRegionalPeaks") {
-                        steps{
-                            echo "Compile FirstRegionalPeaks"
-                            sh '''
-                                cd group-econResponse/FirstRegionalPeaks
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                //group-econResponse/FirstRegionalPeaks Test
+                stage("Test group-econResponse/FirstRegionalPeaks") {
+                    steps{
+                        echo "Test FirstRegionalPeaks"
+                        sh '''
+                            cd group-econResponse/FirstRegionalPeaks
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //group-econResponse/FirstRegionalPeaks Test
-                    stage("Test group-econResponse/FirstRegionalPeaks") {
-                        steps{
-                            echo "Test FirstRegionalPeaks"
-                            sh '''
-                                cd group-econResponse/FirstRegionalPeaks
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //group-econResponse/FirstRegionalPeaks Package
-                    stage("Package group-econResponse/FirstRegionalPeaks") {
-                        steps{
-                            echo "Package FirstRegionalPeaks"
-                            sh '''
-                                cd group-econResponse/FirstRegionalPeaks
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                }
+                //group-econResponse/FirstRegionalPeaks Package
+                stage("Package group-econResponse/FirstRegionalPeaks") {
+                    steps{
+                        echo "Package FirstRegionalPeaks"
+                        sh '''
+                            cd group-econResponse/FirstRegionalPeaks
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -311,51 +306,49 @@ pipeline {
 
         //twitter-covid Group        
         stage("age-spikes-discussion"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*FirstRegionalPeaks*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*FirstRegionalPeaks*'
+                }
+            }
+            stages {
+                //twitter-covid/age-spikes-discussion Compile
+                stage("Compile twitter-covid/age-spikes-discussion") {
+                    steps {
+                        echo "Compile age-spikes-discussion"
+
+                        sh '''
+                            cd twitter-covid/age-spikes-discussion
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //twitter-covid/age-spikes-discussion Compile
-                    stage("Compile twitter-covid/age-spikes-discussion") {
-                        steps {
-                            echo "Compile age-spikes-discussion"
+                //twitter-covid/age-spikes-discussion Test
+                stage("Test twitter-covid/age-spikes-discussion") {
+                    steps {
+                        echo "Test age-spikes-discussion"
 
-                            sh '''
-                                cd twitter-covid/age-spikes-discussion
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/age-spikes-discussion
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //twitter-covid/age-spikes-discussion Test
-                    stage("Test twitter-covid/age-spikes-discussion") {
-                        steps {
-                            echo "Test age-spikes-discussion"
+                }
+                //twitter-covid/age-spikes-discussion Package
+                stage("Package twitter-covid/age-spikes-discussion") {
+                    steps {
+                        echo "Package age-spikes-discussion"
 
-                            sh '''
-                                cd twitter-covid/age-spikes-discussion
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //twitter-covid/age-spikes-discussion Package
-                    stage("Package twitter-covid/age-spikes-discussion") {
-                        steps {
-                            echo "Package age-spikes-discussion"
-
-                            sh '''
-                                cd twitter-covid/age-spikes-discussion
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/age-spikes-discussion
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -363,51 +356,49 @@ pipeline {
 
         
         stage("HashtagByRegion"){
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*HashtagByRegion*'
+                }
+            }
             stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*HashtagByRegion*'
+                //twitter-covid/HashtagByRegion Compile
+                stage("Compile twitter-covid/HashtagByRegion") {
+                    steps {
+                        echo "Compile HashtagByRegion"
+
+                        sh '''
+                            cd twitter-covid/HashtagByRegion
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //twitter-covid/HashtagByRegion Compile
-                    stage("Compile twitter-covid/HashtagByRegion") {
-                        steps {
-                            echo "Compile HashtagByRegion"
+                //twitter-covid/HashtagByRegion Test
+                stage("Test twitter-covid/HashtagByRegion") {
+                    steps {
+                        echo "Test HashtagByRegion"
 
-                            sh '''
-                                cd twitter-covid/HashtagByRegion
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/HashtagByRegion
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //twitter-covid/HashtagByRegion Test
-                    stage("Test twitter-covid/HashtagByRegion") {
-                        steps {
-                            echo "Test HashtagByRegion"
+                }
+                //twitter-covid/HashtagByRegion Package
+                stage("Package twitter-covid/HashtagByRegion") {
+                    steps {
+                        echo "Package HashtagByRegion"
 
-                            sh '''
-                                cd twitter-covid/HashtagByRegion
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //twitter-covid/HashtagByRegion Package
-                    stage("Package twitter-covid/HashtagByRegion") {
-                        steps {
-                            echo "Package HashtagByRegion"
-
-                            sh '''
-                                cd twitter-covid/HashtagByRegion
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/HashtagByRegion
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -417,7 +408,6 @@ pipeline {
 
         //Group Twitter-General
         stage("data-cleaner"){
-            stages{
                 when {
                     // If any of these branches then run the stages
                     anyOf{
@@ -470,104 +460,100 @@ pipeline {
         
         
         stage("hashtag-count-comparison"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*hashtag-count-comparison*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*hashtag-count-comparison*'
+                }
+            }
+            stages {
+                //Twitter-General/hashtag-count-comparison Compile
+                stage("Compile Twitter-General/hashtag-count-comparison") {
+                    steps {
+                        echo "Compile hashtag-count-comparison"
+
+                        sh '''
+                            cd twitter-general/hashtag-count-comparison
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //Twitter-General/hashtag-count-comparison Compile
-                    stage("Compile Twitter-General/hashtag-count-comparison") {
-                        steps {
-                            echo "Compile hashtag-count-comparison"
+                //Twitter-General/hashtag-count-comparison Test DIDNT PASS
+                stage("Test Twitter-General/hashtag-count-comparison") {
+                    steps {
+                        echo "Test hashtag-count-comparison"
 
-                            sh '''
-                                cd twitter-general/hashtag-count-comparison
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/hashtag-count-comparison
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //Twitter-General/hashtag-count-comparison Test DIDNT PASS
-                    stage("Test Twitter-General/hashtag-count-comparison") {
-                        steps {
-                            echo "Test hashtag-count-comparison"
+                }
+                //Twitter-General/hashtag-count-comparison Package
+                stage("Package Twitter-General/hashtag-count-comparison") {
+                    steps {
+                        echo "Package hashtag-count-comparison"
 
-                            sh '''
-                                cd twitter-general/hashtag-count-comparison
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //Twitter-General/hashtag-count-comparison Package
-                    stage("Package Twitter-General/hashtag-count-comparison") {
-                        steps {
-                            echo "Package hashtag-count-comparison"
-
-                            sh '''
-                                cd twitter-general/hashtag-count-comparison
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/hashtag-count-comparison
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
         }
 
 
-
         stage("FirstRegionalPeaks"){
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*FirstRegionalPeaks*'
+                }
+            }
             stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*FirstRegionalPeaks*'
+                //Twitter-General/tweet-covid19-words Compile
+                stage("Compile Twitter-General/tweet-covid19-words") {
+                    steps {
+                        echo "Compile tweet-covid19-words"
+
+                        sh '''
+                            cd twitter-general/tweet-covid19-words
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //Twitter-General/tweet-covid19-words Compile
-                    stage("Compile Twitter-General/tweet-covid19-words") {
-                        steps {
-                            echo "Compile tweet-covid19-words"
+                //Twitter-General/tweet-covid19-words Test DIDNT PASS
+                stage("Test Twitter-General/tweet-covid19-words") {
+                    steps {
+                        echo "Test tweet-covid19-words"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-words
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-words
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //Twitter-General/tweet-covid19-words Test DIDNT PASS
-                    stage("Test Twitter-General/tweet-covid19-words") {
-                        steps {
-                            echo "Test tweet-covid19-words"
+                }
+                //Twitter-General/tweet-covid19-words Package
+                stage("Package Twitter-General/tweet-covid19-words") {
+                    steps {
+                        echo "Package tweet-covid19-words"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-words
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //Twitter-General/tweet-covid19-words Package
-                    stage("Package Twitter-General/tweet-covid19-words") {
-                        steps {
-                            echo "Package tweet-covid19-words"
-
-                            sh '''
-                                cd twitter-general/tweet-covid19-words
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-words
+                            sbt package
+                            cd ../..
+                        '''
+                        
                     }
                 }
             }
@@ -576,51 +562,51 @@ pipeline {
 
 
         stage("tweet-covid19-emoji"){
-            stages{
-                when {
+            when {
                     // If any of these branches then run the stages
                     anyOf{
                         branch 'main';
                         branch 'develop'; //develop will be removed
                         branch '*tweet-covid19-emoji*'
                     }
+            }
+                
+            stages {
+                //Twitter-General/tweet-covid19-emoji Compile
+                stage("Compile Twitter-General/tweet-covid19-emoji") {
+                    steps {
+                        echo "Compile tweet-covid19-emoji"
+
+                        sh '''
+                            cd twitter-general/tweet-covid19-emoji
+                            sbt compile
+                            cd ../..
+                        '''
+                    }
                 }
-                stages {
-                    //Twitter-General/tweet-covid19-emoji Compile
-                    stage("Compile Twitter-General/tweet-covid19-emoji") {
-                        steps {
-                            echo "Compile tweet-covid19-emoji"
+                //Twitter-General/tweet-covid19-emoji Test
+                stage("Test Twitter-General/tweet-covid19-emoji") {
+                    steps {
+                        echo "Test tweet-covid19-emoji"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-emoji
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-emoji
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //Twitter-General/tweet-covid19-emoji Test
-                    stage("Test Twitter-General/tweet-covid19-emoji") {
-                        steps {
-                            echo "Test tweet-covid19-emoji"
+                }
+                //Twitter-General/tweet-covid19-emoji Assembly
+                stage("Assembly Twitter-General/tweet-covid19-emoji") {
+                    steps {
+                        echo "Assembly tweet-covid19-emoji"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-emoji
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //Twitter-General/tweet-covid19-emoji Assembly
-                    stage("Assembly Twitter-General/tweet-covid19-emoji") {
-                        steps {
-                            echo "Assembly tweet-covid19-emoji"
-
-                            sh '''
-                                cd twitter-general/tweet-covid19-emoji
-                                sbt assembly
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-emoji
+                            sbt assembly
+                            cd ../..
+                        '''
+                    
                     }
                 }
             }
@@ -629,51 +615,49 @@ pipeline {
         
 
         stage("tweet-covid19-percentage"){
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*tweet-covid19-percentage*'
+                }
+            }
             stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*tweet-covid19-percentage*'
+                //Twitter-General/tweet-covid19-percentage Compile
+                stage("Compile Twitter-General/tweet-covid19-percentage") {
+                    steps {
+                        echo "Compile tweet-covid19-percentage"
+
+                        sh '''
+                            cd twitter-general/tweet-covid19-percentage
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //Twitter-General/tweet-covid19-percentage Compile
-                    stage("Compile Twitter-General/tweet-covid19-percentage") {
-                        steps {
-                            echo "Compile tweet-covid19-percentage"
+                //Twitter-General/tweet-covid19-percentage Test
+                stage("Test Twitter-General/tweet-covid19-percentage") {
+                    steps {
+                        echo "Test tweet-covid19-percentage"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-percentage
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-percentage
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //Twitter-General/tweet-covid19-percentage Test
-                    stage("Test Twitter-General/tweet-covid19-percentage") {
-                        steps {
-                            echo "Test tweet-covid19-percentage"
+                }
+                //Twitter-General/tweet-covid19-percentage Package
+                stage("Package Twitter-General/tweet-covid19-percentage") {
+                    steps {
+                        echo "Package tweet-covid19-percentage"
 
-                            sh '''
-                                cd twitter-general/tweet-covid19-percentage
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //Twitter-General/tweet-covid19-percentage Package
-                    stage("Package Twitter-General/tweet-covid19-percentage") {
-                        steps {
-                            echo "Package tweet-covid19-percentage"
-
-                            sh '''
-                                cd twitter-general/tweet-covid19-percentage
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-covid19-percentage
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -682,51 +666,49 @@ pipeline {
 
 
         stage("FirstRegionalPeaks"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*tweet-positive-negative*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*tweet-positive-negative*'
+                }
+            }
+            stages {
+                //twitter-general/tweet-positive-negative Compile
+                stage("Compile twitter-general/tweet-positive-negative") {
+                    steps {
+                        echo "Compile tweet-positive-negative"
+
+                        sh '''
+                            cd twitter-general/tweet-positive-negative
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //twitter-general/tweet-positive-negative Compile
-                    stage("Compile twitter-general/tweet-positive-negative") {
-                        steps {
-                            echo "Compile tweet-positive-negative"
+                //twitter-general/tweet-positive-negative Test
+                stage("Test Twitter-General/tweet-positive-negative") {
+                    steps {
+                        echo "Test tweet-positive-negative"
 
-                            sh '''
-                                cd twitter-general/tweet-positive-negative
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-positive-negative
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //twitter-general/tweet-positive-negative Test
-                    stage("Test Twitter-General/tweet-positive-negative") {
-                        steps {
-                            echo "Test tweet-positive-negative"
+                }
+                //twitter-general/tweet-positive-negative Assembly
+                stage("Assembly Twitter-General/tweet-positive-negative") {
+                    steps {
+                        echo "Assembly tweet-positive-negative"
 
-                            sh '''
-                                cd twitter-general/tweet-positive-negative
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //twitter-general/tweet-positive-negative Assembly
-                    stage("Assembly Twitter-General/tweet-positive-negative") {
-                        steps {
-                            echo "Assembly tweet-positive-negative"
-
-                            sh '''
-                                cd twitter-general/tweet-positive-negative
-                                sbt assembly
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/tweet-positive-negative
+                            sbt assembly
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -736,51 +718,49 @@ pipeline {
 
         //Stockmarket Group
         stage("stockmarket"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*stockmarket*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*stockmarket*'
+                }
+            }
+            stages {
+                //stockmarket Compile
+                stage("Compile stockmarket") {
+                    steps {
+                        echo "Compile stockmarket"
+
+                        sh '''
+                            cd stockmarket
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //stockmarket Compile
-                    stage("Compile stockmarket") {
-                        steps {
-                            echo "Compile stockmarket"
+                //stockmarket Test
+                stage("Test stockmarket") {
+                    steps {
+                        echo "Test stockmarket"
 
-                            sh '''
-                                cd stockmarket
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd stockmarket
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //stockmarket Test
-                    stage("Test stockmarket") {
-                        steps {
-                            echo "Test stockmarket"
+                }
+                //stockmarket Package
+                stage("Package stockmarket") {
+                    steps {
+                        echo "Package stockmarket"
 
-                            sh '''
-                                cd stockmarket
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //stockmarket Package
-                    stage("Package stockmarket") {
-                        steps {
-                            echo "Package stockmarket"
-
-                            sh '''
-                                cd stockmarket
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd stockmarket
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -789,51 +769,49 @@ pipeline {
 
 
         stage("FirstRegionalPeaks"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*FirstRegionalPeaks*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*FirstRegionalPeaks*'
+                }
+            }
+            stages {
+                //stockmarket-data Compile
+                stage("Compile stockmarket-data") {
+                    steps {
+                        echo "Compile stockmarket-data"
+
+                        sh '''
+                            cd stockmarket-data
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //stockmarket-data Compile
-                    stage("Compile stockmarket-data") {
-                        steps {
-                            echo "Compile stockmarket-data"
+                //stockmarket-data Test
+                stage("Test stockmarket-data") {
+                    steps {
+                        echo "Test stockmarket-data"
 
-                            sh '''
-                                cd stockmarket-data
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd stockmarket-data
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //stockmarket-data Test
-                    stage("Test stockmarket-data") {
-                        steps {
-                            echo "Test stockmarket-data"
+                }
+                //stockmarket-data Package
+                stage("Package stockmarket-data") {
+                    steps {
+                        echo "Package stockmarket-data"
 
-                            sh '''
-                                cd stockmarket-data
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //stockmarket-data Package
-                    stage("Package stockmarket-data") {
-                        steps {
-                            echo "Package stockmarket-data"
-
-                            sh '''
-                                cd stockmarket-data
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd stockmarket-data
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -842,51 +820,49 @@ pipeline {
 
         
         stage("RelatedHashtags"){
-            stages{
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*RelatedHashtags*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*RelatedHashtags*'
+                }
+            }
+            stages {
+                // RelatedHashtags Compile
+                stage("Compile twitter-covid RelatedHashtags") {
+                    steps {
+                        echo "Compile RelatedHashtags"
+
+                        sh '''
+                            cd twitter-covid/RelatedHashtags
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    // RelatedHashtags Compile
-                    stage("Compile twitter-covid RelatedHashtags") {
-                        steps {
-                            echo "Compile RelatedHashtags"
+                // RelatedHashtags Test
+                stage("Test twitter-covid RelatedHashtags") {
+                    steps {
+                        echo "Test RelatedHashtags"
 
-                            sh '''
-                                cd twitter-covid/RelatedHashtags
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/RelatedHashtags
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    // RelatedHashtags Test
-                    stage("Test twitter-covid RelatedHashtags") {
-                        steps {
-                            echo "Test RelatedHashtags"
+                }
+                // RelatedHashtags Package
+                stage("Package twitter-covid RelatedHashtags") {
+                    steps {
+                        echo "Package RelatedHashtags"
 
-                            sh '''
-                                cd twitter-covid/RelatedHashtags
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    // RelatedHashtags Package
-                    stage("Package twitter-covid RelatedHashtags") {
-                        steps {
-                            echo "Package RelatedHashtags"
-
-                            sh '''
-                                cd twitter-covid/RelatedHashtags
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-covid/RelatedHashtags
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
