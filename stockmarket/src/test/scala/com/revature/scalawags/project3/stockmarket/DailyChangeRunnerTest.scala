@@ -10,58 +10,62 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions._
 
 class DailyChangeRunnerTest extends AnyFlatSpec {
+    // Setting the log level to Error
     Logger.getLogger("org").setLevel(Level.ERROR)
+
+    // Setting up a new SparkSession
+    // Comment out .master("local[4]") because AWS EMR uses master yarn 
     val spark = SparkSession.builder()
             .appName("composite_test")
-            .master("local[4]")
+            //.master("local[4]")
             .getOrCreate()
+
     import spark.implicits._
 
-    // We need our data source to contain data
+    // Tests if a specified data source contains data.
     "datalake" should "not be empty" in {
         val datalakeDir =  new File("../stockmarket-data/datalake")
         assert(datalakeDir.isDirectory() && datalakeDir.list().length > 0)
     }
 
-    // We need the dataframes to contain data to function as intended
+    // Tests if a dataframe created by the dataFrameByRegion method contains data as intended.
     "dataFrameByRegion" should "return a nonempty dataframe" in {
         assert(DailyChangeRunner.dataFrameByRegion(spark, "Europe").rdd.isEmpty == false)
     }
     
-    //brutal practice
-    // Make sure the dates are converted into date objects
+    // Tests if all dates in the Date column are converted into date objects.
     "dateColumnFormating" should "cause different date strings to end as a Date with africa data" in {
         DailyChangeRunner.dateColumnFormating(DummyData.africaDF).select($"Date").take(6).map((x) => assert(x(0).isInstanceOf[java.sql.Date]))
     }
 
-    // Make sure the dates are converted into date objects
+    // Tests if all dates in the Date column are converted into date objects.
     "dateColumnFormating" should "cause different date strings to end as a Date with all data" in {
         DailyChangeRunner.dateColumnFormating(DummyData.theRestRegionsDF).select($"Date").take(6).map((x) => assert(x(0).isInstanceOf[java.sql.Date]))
     }
 
-    // Make sure that the number of rows is as expected
+    // Tests if the number of rows has been reduced as the method sums all composite index prices of the same date.
     "sumOfOpenPrice" should "remove duplicate rows in the Date column" in {
         val df = DailyChangeRunner.sumOfOpenPrice(DailyChangeRunner.dateColumnFormating(DummyData.africaDF), "Africa")
         assert(DailyChangeRunner.dateColumnFormating(DummyData.africaDF).count() == 6 && df.count() == 3)
     }
 
-    // Ensure the percent is calculated as expected
+    // Tests if the function calculates daily percentage change in the Region Index column.
     "dailyChangeCalculator" should "calculate daily percentage change in a Region Index column" in {
         val df = DailyChangeRunner.sumOfOpenPrice(DailyChangeRunner.dateColumnFormating(DummyData.africaDF), "Africa")
         assert(DailyChangeRunner.dailyChangeCalculator(spark, df, "Africa").select($"Percentage_Change").take(3)(1)(0) == 0.96)
     }
     
-    // Runs the vast majority of the program
+    // Tests if the program runs without any crashes.
     "dailyChangeRunnerByRegion" should "not crash" in {
         DailyChangeRunner.dailyChangeRunnerByRegion(spark, "Europe")
     }
 }
 
-
+// Creates dummy data that contain dataframes and a SparkSession to be used only in the DailyChangeRunnerTest object.
 object DummyData {
   val spark = SparkSession.builder()
             .appName("composite_test")
-            .master("local[4]")
+            //.master("local[4]")
             .getOrCreate()
   import spark.implicits._
   val africaDF = Seq(

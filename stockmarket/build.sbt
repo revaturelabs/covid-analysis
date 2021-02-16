@@ -1,6 +1,6 @@
 scalaVersion := "2.12.10"
 
-name := "stock_market_composit_index_change_calculator"
+name := "stock_market_composite_index_change_calculator"
 organization := "com.revature"
 version := "1.0"
 
