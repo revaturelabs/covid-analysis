@@ -1,3 +1,4 @@
+import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 
 object EUSpikes {
@@ -12,14 +13,20 @@ object EUSpikes {
     import org.apache.spark.sql.functions._
     val twitter = processTwitterData(spark)
     val eu = processEUData(spark)
+      .withColumn("year", $"year".cast(IntegerType))
+      .withColumn("week", $"week".cast(IntegerType))
+    twitter.printSchema()
+    eu.printSchema()
     val joined = joinTables(spark, twitter, eu)
-      .withColumn("weeks since 2020 start",
-    when($"year" === 2020, $"week").otherwise($"week" + 52)).orderBy("week")
+    joined.printSchema()
+    val results = joined
+      .withColumn("weeks_since_2020_start",
+    when($"year" === 2020, $"week").otherwise($"week" + 52)).drop("week").orderBy("weeks_since_2020_start")
 
     twitter.show()
     eu.show()
-    joined.show()
-    joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
+    results.show()
+    results.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
   }
 
   /**
