@@ -110,6 +110,8 @@ object CovidResponse {
     val deltaGDPerCapita = RankRegions
       .changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false).cache()
 
+
+    println(s"Saving all results to s3 bucket: ${s3.BUCKET_NAME} \nand local directory ${s3.getLocalLakePath}...")
     //wraps last result in future to await its completion.
     val saveLastResult: Future[Unit] = Future {
       s3.localSaveAndUploadTos3(deltaGDPerCapita, "regional_change_gdp_percapita")
