@@ -313,43 +313,43 @@ pipeline {
 
 
 
-        //Group Twitter-General
-        //Twitter-General/data-cleaner Compile
-        stage("Compile Twitter-General/data-cleaner") {
-            steps {
-                echo "Compile data-cleaner"
+        // //Group Twitter-General
+        // //Twitter-General/data-cleaner Compile
+        // stage("Compile Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Compile data-cleaner"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/data-cleaner Test DIDNT PASS
-        stage("Test Twitter-General/data-cleaner") {
-            steps {
-                echo "Test data-cleaner"
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/data-cleaner Test DIDNT PASS
+        // stage("Test Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Test data-cleaner"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/data-cleaner Package
-        stage("Package Twitter-General/data-cleaner") {
-            steps {
-                echo "Package data-cleaner"
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/data-cleaner Package
+        // stage("Package Twitter-General/data-cleaner") {
+        //     steps {
+        //         echo "Package data-cleaner"
 
-                sh '''
-                    cd twitter-general/data-cleaner
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-general/data-cleaner
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -390,6 +390,8 @@ pipeline {
         //     }
         // }
 
+
+
         //Twitter-General/tweet-covid19-words Compile
         // stage("Compile Twitter-General/tweet-covid19-words") {
         //     steps {
@@ -427,81 +429,83 @@ pipeline {
         //     }
         // }
 
-        //Twitter-General/tweet-covid19-emoji Compile
-        stage("Compile Twitter-General/tweet-covid19-emoji") {
-            steps {
-                echo "Compile tweet-covid19-emoji"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-emoji
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-emoji Test
-        stage("Test Twitter-General/tweet-covid19-emoji") {
-            steps {
-                echo "Test tweet-covid19-emoji"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-emoji
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-emoji Assembly
-        stage("Assembly Twitter-General/tweet-covid19-emoji") {
-            steps {
-                echo "Assembly tweet-covid19-emoji"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-emoji
-                    sbt assembly
-                    cd ../..
-                '''
-            }
-        }
 
 
+        // //Twitter-General/tweet-covid19-emoji Compile
+        // stage("Compile Twitter-General/tweet-covid19-emoji") {
+        //     steps {
+        //         echo "Compile tweet-covid19-emoji"
 
-        //Twitter-General/tweet-covid19-percentage Compile
-        stage("Compile Twitter-General/tweet-covid19-percentage") {
-            steps {
-                echo "Compile tweet-covid19-percentage"
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-emoji
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-emoji Test
+        // stage("Test Twitter-General/tweet-covid19-emoji") {
+        //     steps {
+        //         echo "Test tweet-covid19-emoji"
 
-                sh '''
-                    cd twitter-general/tweet-covid19-percentage
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-percentage Test
-        stage("Test Twitter-General/tweet-covid19-percentage") {
-            steps {
-                echo "Test tweet-covid19-percentage"
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-emoji
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-emoji Assembly
+        // stage("Assembly Twitter-General/tweet-covid19-emoji") {
+        //     steps {
+        //         echo "Assembly tweet-covid19-emoji"
 
-                sh '''
-                    cd twitter-general/tweet-covid19-percentage
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-percentage Package
-        stage("Package Twitter-General/tweet-covid19-percentage") {
-            steps {
-                echo "Package tweet-covid19-percentage"
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-emoji
+        //             sbt assembly
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
-                sh '''
-                    cd twitter-general/tweet-covid19-percentage
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+
+
+        // //Twitter-General/tweet-covid19-percentage Compile
+        // stage("Compile Twitter-General/tweet-covid19-percentage") {
+        //     steps {
+        //         echo "Compile tweet-covid19-percentage"
+
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-percentage
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-percentage Test
+        // stage("Test Twitter-General/tweet-covid19-percentage") {
+        //     steps {
+        //         echo "Test tweet-covid19-percentage"
+
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-percentage
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-percentage Package
+        // stage("Package Twitter-General/tweet-covid19-percentage") {
+        //     steps {
+        //         echo "Package tweet-covid19-percentage"
+
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-percentage
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -510,58 +514,58 @@ pipeline {
 
 
 
-        //twitter-general/tweet-positive-negative Compile
-        stage("Compile twitter-general/tweet-positive-negative") {
-            steps {
-                echo "Compile tweet-positive-negative"
+        // //twitter-general/tweet-positive-negative Compile
+        // stage("Compile twitter-general/tweet-positive-negative") {
+        //     steps {
+        //         echo "Compile tweet-positive-negative"
 
-                sh '''
-                    cd twitter-general/tweet-positive-negative
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-general/tweet-positive-negative
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         //twitter-general/tweet-positive-negative Test
-        stage("Test Twitter-General/tweet-positive-negative") {
-            steps {
-                echo "Test tweet-positive-negative"
+        // stage("Test Twitter-General/tweet-positive-negative") {
+        //     steps {
+        //         echo "Test tweet-positive-negative"
 
-                sh '''
-                    cd twitter-general/tweet-positive-negative
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //twitter-general/tweet-positive-negative Assembly
-        stage("Assembly Twitter-General/tweet-positive-negative") {
-            steps {
-                echo "Assembly tweet-positive-negative"
+        //         sh '''
+        //             cd twitter-general/tweet-positive-negative
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //twitter-general/tweet-positive-negative Assembly
+        // stage("Assembly Twitter-General/tweet-positive-negative") {
+        //     steps {
+        //         echo "Assembly tweet-positive-negative"
 
-                sh '''
-                    cd twitter-general/tweet-positive-negative
-                    sbt assembly
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-general/tweet-positive-negative
+        //             sbt assembly
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
-        //Stockmarket Group
-        //stockmarket Compile
-        stage("Compile stockmarket") {
-            steps {
-                echo "Compile stockmarket"
+        // //Stockmarket Group
+        // //stockmarket Compile
+        // stage("Compile stockmarket") {
+        //     steps {
+        //         echo "Compile stockmarket"
 
-                sh '''
-                    cd stockmarket
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd stockmarket
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         //stockmarket Test
         stage("Test stockmarket") {
             steps {
@@ -589,18 +593,18 @@ pipeline {
 
 
 
-        //stockmarket Compile
-        stage("Compile stockmarket-data") {
-            steps {
-                echo "Compile stockmarket-data"
+        // //stockmarket Compile
+        // stage("Compile stockmarket-data") {
+        //     steps {
+        //         echo "Compile stockmarket-data"
 
-                sh '''
-                    cd stockmarket-data
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd stockmarket-data
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         //stockmarket Test
         stage("Test stockmarket-data") {
             steps {
@@ -628,18 +632,18 @@ pipeline {
 
 
 
-        // RelatedHashtags Compile
-        stage("Compile twitter-covid RelatedHashtags") {
-            steps {
-                echo "Compile RelatedHashtags"
+        // // RelatedHashtags Compile
+        // stage("Compile twitter-covid RelatedHashtags") {
+        //     steps {
+        //         echo "Compile RelatedHashtags"
 
-                sh '''
-                    cd twitter-covid/RelatedHashtags
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/RelatedHashtags
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
         // RelatedHashtags Test
         stage("Test twitter-covid RelatedHashtags") {
             steps {
