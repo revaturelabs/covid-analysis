@@ -1,19 +1,23 @@
-# PROJECT NAME
+# Europe Under 25yr Covid Cases vs Twitter Covid Discussion
 
 ## Project Description
 
-Here goes your awesome project description!
+This is a Spark Scala program to answer the questions: 
+
+Is the trend of the global COVID-19 discussion increasing or decreasing? 
+Do spikes in infection rates of the 25 and under age range in Europe affect the volume of discussion?
 
 ## Technologies Used
 
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Scala - version 2.12.10
+* Spark - version 3.0.1
+* Amazon S3
+* Amazon EMR
 
 ## Features
 
 List of features ready and TODOs for future development
-* Awesome feature 1
+* Pulls data sources (Twitter Covid Tweets and European Covid Cases) from S3 bucket
 * Awesome feature 2
 * Awesome feature 3
 
