@@ -1,10 +1,22 @@
 # CovidLiveUpdateApp
+
+## Project Description TODO
 Takes in data from somewhere and does calculations compairing today's data verses yesterday's data
 Live update by Region of current relevant totals from COVID-19 data.
 
-# Setup
+## Technologies Used
 
-You need to set the environment variables for the bucket S3 bucket
+* Scala - version 2.12.12
+* Spark - version 3.0.1
+* Spark SQL
+* AWS EMR
+* AWS S3
+
+## Features TODO
+
+## Setup
+
+After cloning this repository, you need to set the environment variables for the S3 bucket
 ```bash
 export AWS_ACCESS_KEY_ID=************
 export AWS_SECRET_ACCESS_KEY=************
@@ -21,12 +33,23 @@ download this to system32:
 [hadoop.dll]
 ```
 
-# Run
+## Run
 ```bash
 sh q3_data_update.sh
 ```
 
-# Test
+## Test
 ```bash
 sbt test
 ```
+
+## Package
+```bash
+sbt package
+```
+
+## Contributors
+Collin Breeding
+Trenton Serpas
+Trevor Spear
+Tristan Cates

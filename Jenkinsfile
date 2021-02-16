@@ -36,17 +36,17 @@ pipeline {
         //     }
         // }
         //infection-mortality/CovidLiveUpdateApp Package
-        // stage("Package infection-mortality/CovidLiveUpdateApp") {
-        //     steps {
-        //         echo "Package CovidLiveUpdateApp"
+        stage("Package infection-mortality/CovidLiveUpdateApp") {
+            steps {
+                echo "Package CovidLiveUpdateApp"
 
-        //         sh '''
-        //             cd infection-mortality/CovidLiveUpdateApp
-        //             sbt package
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd infection-mortality/CovidLiveUpdateApp
+                    sbt package
+                    cd ../..
+                '''
+            }
+        }
 
 
 
@@ -75,17 +75,17 @@ pipeline {
         //     }
         // }
         //infection-mortality/RegionalInfectionRates Package
-        // stage("Package infection-mortality/RegionalInfectionRates") {
-        //     steps {
-        //         echo "Package RegionalInfectionRates"
+        stage("Package infection-mortality/RegionalInfectionRates") {
+            steps {
+                echo "Package RegionalInfectionRates"
 
-        //         sh '''
-        //             cd infection-mortality/RegionalInfectionRates
-        //             sbt package
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd infection-mortality/RegionalInfectionRates
+                    sbt package
+                    cd ../..
+                '''
+            }
+        }
 
 
 
@@ -606,29 +606,29 @@ pipeline {
         //     }
         // }
         //stockmarket Test
-        stage("Test stockmarket-data") {
-            steps {
-                echo "Test stockmarket-data"
+        // stage("Test stockmarket-data") {
+        //     steps {
+        //         echo "Test stockmarket-data"
 
-                sh '''
-                    cd stockmarket-data
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //stockmarket Package
-        stage("Package stockmarket-data") {
-            steps {
-                echo "Package stockmarket-data"
+        //         sh '''
+        //             cd stockmarket-data
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //stockmarket Package
+        // stage("Package stockmarket-data") {
+        //     steps {
+        //         echo "Package stockmarket-data"
 
-                sh '''
-                    cd stockmarket-data
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd stockmarket-data
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -645,29 +645,29 @@ pipeline {
         //     }
         // }
         // RelatedHashtags Test
-        stage("Test twitter-covid RelatedHashtags") {
-            steps {
-                echo "Test RelatedHashtags"
+        // stage("Test twitter-covid RelatedHashtags") {
+        //     steps {
+        //         echo "Test RelatedHashtags"
 
-                sh '''
-                    cd twitter-covid/RelatedHashtags
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        // RelatedHashtags Package
-        stage("Package twitter-covid RelatedHashtags") {
-            steps {
-                echo "Package RelatedHashtags"
+        //         sh '''
+        //             cd twitter-covid/RelatedHashtags
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // // RelatedHashtags Package
+        // stage("Package twitter-covid RelatedHashtags") {
+        //     steps {
+        //         echo "Package RelatedHashtags"
 
-                sh '''
-                    cd twitter-covid/RelatedHashtags
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd twitter-covid/RelatedHashtags
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
     }
 
     // After action of testing
@@ -681,7 +681,7 @@ pipeline {
             echo "All test, build, and package has passed."
 
             script {
-                if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
+                //if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
 
                     //If aws cli works on jenkins
                     //sh "aws s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar"
@@ -695,7 +695,7 @@ pipeline {
 
                     // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
 
-                }
+                //}
             }
         }
 
