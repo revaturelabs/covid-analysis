@@ -419,15 +419,15 @@ pipeline {
 
         //Group Twitter-General
         stage("data-cleaner"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'data-cleaner';
-            //         branch '*/data-cleaner'
-            //     }
-            // }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'data-cleaner';
+                    branch '*/data-cleaner'
+                }
+            }
             stages {
                 //Twitter-General/data-cleaner Compile
                 stage("Compile Twitter-General/data-cleaner") {
@@ -471,15 +471,15 @@ pipeline {
         
         
         stage("hashtag-count-comparison"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'hashtag-count-comparison';
-            //         branch '*/hashtag-count-comparison'
-            //     }
-            // }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'hashtag-count-comparison';
+                    branch '*/hashtag-count-comparison'
+                }
+            }
             stages {
                 //Twitter-General/hashtag-count-comparison Compile
                 stage("Compile Twitter-General/hashtag-count-comparison") {
@@ -523,15 +523,15 @@ pipeline {
 
 
         stage("tweet-covid19-words"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'tweet-covid19-words';
-            //         branch '*/tweet-covid19-words'
-            //     }
-            // }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'tweet-covid19-words';
+                    branch '*/tweet-covid19-words'
+                }
+            }
             stages{
                 //Twitter-General/tweet-covid19-words Compile
                 stage("Compile Twitter-General/tweet-covid19-words") {
@@ -576,16 +576,15 @@ pipeline {
 
 
         stage("tweet-covid19-emoji"){
-            // when {
-            //         // If any of these branches then run the stages
-            //         anyOf{
-            //             branch 'main';
-            //             branch 'develop'; //develop will be removed
-            //             branch 'tweet-covid19-emoji';
-            //             branch '*/tweet-covid19-emoji'
-            //         }
-            // }
-                
+            when {
+                    // If any of these branches then run the stages
+                    anyOf{
+                        branch 'main';
+                        branch 'develop'; //develop will be removed
+                        branch 'tweet-covid19-emoji';
+                        branch '*/tweet-covid19-emoji'
+                    }
+            }
             stages {
                 //Twitter-General/tweet-covid19-emoji Compile
                 stage("Compile Twitter-General/tweet-covid19-emoji") {
@@ -630,15 +629,15 @@ pipeline {
         
 
         stage("tweet-covid19-percentage"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'tweet-covid19-percentage';
-            //         branch '*/tweet-covid19-percentage'
-            //     }
-            // }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'tweet-covid19-percentage';
+                    branch '*/tweet-covid19-percentage'
+                }
+            }
             stages{
                 //Twitter-General/tweet-covid19-percentage Compile
                 stage("Compile Twitter-General/tweet-covid19-percentage") {
@@ -682,15 +681,15 @@ pipeline {
 
 
         stage("tweet-positive-negative"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'tweet-positive-negative';
-            //         branch '*/tweet-positive-negative'
-            //     }
-            // }
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'tweet-positive-negative';
+                    branch '*/tweet-positive-negative'
+                }
+            }
             stages {
                 //twitter-general/tweet-positive-negative Compile
                 stage("Compile twitter-general/tweet-positive-negative") {
@@ -902,6 +901,7 @@ pipeline {
         success {
             echo "All test, build, and package has passed."
 
+            //THIS SHOULD BE MOVED TO EACH PACKAGE/ASSEMLY
             // script {
                 //if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
 
@@ -939,12 +939,15 @@ pipeline {
 
         unstable {
             echo "Unstable build."
-            emailext body: 'Code is unstable.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check your code and make sure you have added all the files.'
+            emailext body: 'Unstable in the commmit.', 
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: 'Please check your code and make sure you have added all the files.'
         }
 
         failure {
             echo "Something didn't pass."
-            emailext body: 'Failure in commit', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
+            emailext body: "Failure in commit: Job '${env.JOB_NAME}'", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
         }
 
         changed {
