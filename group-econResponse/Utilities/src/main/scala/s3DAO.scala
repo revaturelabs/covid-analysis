@@ -17,39 +17,35 @@ case class s3DAO(
         DATA_LAKE: String = "datalake/infection-gdp/",
         DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
         var localWarehouse: String = "",
-        var downloadPath: String = ""
+        var localLakePath: String = ""
 ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
   def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
-    val file = new FileOutputStream(s"$downloadPath/$filesName")
+    val file = new FileOutputStream(s"$localLakePath/$filesName")
     file.write(bytes)
 
-    cb(s"$downloadPath/$filesName")
+    cb(s"$localLakePath/$filesName")
   }
 
-  //copy files to s3.
-  def uploadFileTos3(file: File, prefix: String): Unit = {
-    val fileName = s"$prefix-${Calendar.getInstance().getTimeInMillis}.csv"
-    println(DATA_WAREHOUSE)
-    println(fileName)
-    try {
-      amazonS3Client.putObject(BUCKET_NAME, DATA_WAREHOUSE + fileName, file)
-    } catch {
-      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
-    }
-  }
-
-  //copy output directory to s3.
-  def uploadDirtTos3(file: File, prefix: String): Unit = {
+  //copy directory content to s3.
+  def uploadDirTos3(file: File, prefix: String): Unit = {
     val tm: TransferManager = new TransferManager(amazonS3Client)
-    tm.uploadDirectory(BUCKET_NAME, prefix, file, true)
+    tm.uploadDirectory(BUCKET_NAME, s"$DATA_WAREHOUSE/$prefix", file, true)
   }
 
-  def saveToLocalDir(df: DataFrame, direcotry: String): String = {
-    val path = s"$localWarehouse/$direcotry-${Calendar.getInstance().getTimeInMillis}"
+  //local save and upload to s3.
+  def localSaveAndUploadTos3(df: DataFrame, dirPath: String): Unit = {
+    val csv = this.saveToLocalDir(df, dirPath)
+    val file = new File(csv)
+    this.uploadDirTos3(file, dirPath)
+  }
+
+  //write csv file to local directory.
+  def saveToLocalDir(df: DataFrame, directory: String): String = {
+    val path = s"$localWarehouse/$directory-${Calendar.getInstance().getTimeInMillis}"
     df.coalesce(1)
       .write
       .format("csv")
@@ -58,7 +54,16 @@ case class s3DAO(
     path
   }
 
-  // download file and console out each line
+  //copy files to s3 (not in use).
+  def uploadFileTos3(file: File, prefix: String): Unit = {
+    try {
+      amazonS3Client.putObject(BUCKET_NAME, DATA_WAREHOUSE + prefix, file)
+    } catch {
+      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
+    }
+  }
+
+  // download file and console out each line (not in use).
   def downloadFile(fileName: String): Unit = {
     try {
       val obj = amazonS3Client.getObject(BUCKET_NAME, fileName)
@@ -75,7 +80,9 @@ case class s3DAO(
     }
   }
 
-  def setDownloadPath(path: String): Unit = this.downloadPath = path
+  def getLocalLakePath: String = localLakePath
+
+  def setLocalLakePath(path: String): Unit = this.localLakePath = path
 
   def setLocalWarehousePath(path: String): Unit = this.localWarehouse = path
 }

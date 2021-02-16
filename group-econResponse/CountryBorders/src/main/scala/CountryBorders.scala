@@ -1,12 +1,11 @@
 package countryBorders
 
-import java.util.Calendar
-
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 import utilites.s3DAO
-import java.io.File
 
 /** Question: Find the top 5 pairs of countries that share a land border and have the highest discrepancy in covid-19
  * infection rate per capita. Additionally find the top 5 landlocked countries that have the highest discrepancy in
@@ -22,11 +21,11 @@ object CountryBorders {
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.
-    val db = s3DAO()
+    val s3 = s3DAO()
     val statsSrcFile = "countries_general_stats.tsv"
     val dataSrcFile = "owid-covid-data.csv"
-    db.setDownloadPath("CountryBorders/src/main/resources/datalake")
-    db.setLocalWarehousePath("CountryBorders/src/main/resources/datawarehouse")
+    s3.setLocalLakePath("CountryBorders/src/main/resources/datalake")
+    s3.setLocalWarehousePath("CountryBorders/src/main/resources/datawarehouse")
 
     //Spark Setup
     val spark = SparkSession
@@ -39,8 +38,8 @@ object CountryBorders {
     val statsCallbackFn = getCallbackFn(spark, statsSrcFile, delimiter = "\t")()
     val countryCallbackFn = getCallbackFn(spark, dataSrcFile)()
 
-    val countryStatsDF = db.loadDFFromBucket(statsSrcFile, statsCallbackFn)
-    val countryDataDF = db.loadDFFromBucket(dataSrcFile, countryCallbackFn)
+    val countryStatsDF = s3.loadDFFromBucket(statsSrcFile, statsCallbackFn)
+    val countryDataDF = s3.loadDFFromBucket(dataSrcFile, countryCallbackFn)
 
     val country_pop = countryStatsDF.select($"COUNTRY", $"POPULATION".cast("Int"))
     val country_cases = countryDataDF
@@ -119,9 +118,7 @@ object CountryBorders {
       .orderBy(desc("delta")) //using desc here allows us to get the largest differences at the top, and smaller differences at the end
       .cache()
 
-    var csv = db.saveToLocalDir(discrepancy, "border_discrepancies")
-    var file = new File(csv)
-    db.uploadDirtTos3(file, "border_discrepancies")
+    s3.localSaveAndUploadTos3(discrepancy, "border_discrepancies")
 
     discrepancy.show(5)
 
@@ -133,10 +130,7 @@ object CountryBorders {
       .orderBy(desc("infection_rate_per_capita(%)"))
       .cache()
 
-    csv = db.saveToLocalDir(poorResponsesOnLand, "highest_land_infect_rates")
-    file = new File(csv)
-    db.uploadDirtTos3(file, "highest_land_infect_rates")
-
+      s3.localSaveAndUploadTos3(poorResponsesOnLand, "highest_land_infect_rates")
       poorResponsesOnLand.show(5)
 
     println("Highest Infection Rate in Water Locked Countries")
@@ -144,10 +138,7 @@ object CountryBorders {
       .orderBy(desc("infection_rate_per_capita(%)"))
       .cache()
 
-    csv = db.saveToLocalDir(poorResponseAtSea, "highest_land_infect_rates")
-    file = new File(csv)
-    db.uploadDirtTos3(file, "highest_land_infect_rates")
-
+      s3.localSaveAndUploadTos3(poorResponseAtSea, "highest_island_infect_rates")
       poorResponseAtSea.show(5)
 
     /*
@@ -156,23 +147,42 @@ object CountryBorders {
     Shows the country name, the country's development, and the infection rate per capita for the country.
  */
     println("Highest infection rate with the highest ranking countries by HDI (Human Development Index)")
-    rankingsWithRate.select("country_name", "infection_rate_per_capita")
+    val highRateAndHDI = rankingsWithRate.select("country_name", "infection_rate_per_capita")
       .where(rankingsWithRate("ranking") === "First")
       .orderBy(desc("infection_rate_per_capita"))
-      .show(5)
+      .cache()
+
+    //save to local dir and s3.
+    s3.localSaveAndUploadTos3(highRateAndHDI, "high_rate_high_hdi")
+    highRateAndHDI.show(5)
 
     println("Highest infection rate with the average ranking countries by HDI (Human Development Index)")
-    rankingsWithRate.select("country_name", "infection_rate_per_capita")
+    val highRateAvgHDI = rankingsWithRate.select("country_name", "infection_rate_per_capita")
       .where(rankingsWithRate("ranking") === "Second")
       .orderBy(desc("infection_rate_per_capita"))
-      .show(5)
+      .cache()
+
+      s3.localSaveAndUploadTos3(highRateAvgHDI, "high_rate_avg_hdi")
+      highRateAvgHDI.show(5)
 
     println("Highest infection rate with the lowest ranking countries by HDI (Human Development Index)")
-    rankingsWithRate.select("country_name", "infection_rate_per_capita")
+    val highRateLowHDI = rankingsWithRate.select("country_name", "infection_rate_per_capita")
       .where(rankingsWithRate("ranking") === "Third")
       .orderBy(desc("infection_rate_per_capita"))
-      .show(5)
+      .cache()
 
+      highRateLowHDI.show(5)
+
+    println(s"Saving all results to s3 bucket: ${s3.BUCKET_NAME} \nand local directory ${s3.getLocalLakePath}...")
+    //wraps last result in future to await its completion.
+    val saveLastResult: Future[Unit] = Future {
+      s3.localSaveAndUploadTos3(highRateLowHDI, "high_rate_low_hdi")
+    }
+    saveLastResult.onComplete(_ => {
+      println("Complete!")
+      spark.stop()
+      System.exit(0)
+    })
   }
 
   /** returns a callback function that is to be used to build a Spark DF after files are downloaded from s3.

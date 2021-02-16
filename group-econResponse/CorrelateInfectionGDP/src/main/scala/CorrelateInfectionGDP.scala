@@ -22,7 +22,7 @@ object CorrelateInfectionGDP {
     //Class dependencies and app config.
     val s3 = s3DAO()
     val dfb = new DataFrameBuilder
-    s3.setDownloadPath("CorrelateInfectionGDP/src/main/resources")
+    s3.setLocalLakePath("CorrelateInfectionGDP/src/main/resources/datalake")
     val fileNames = Map(
       "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",

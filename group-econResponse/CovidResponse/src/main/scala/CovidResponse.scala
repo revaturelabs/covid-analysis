@@ -4,6 +4,8 @@ import org.apache.log4j.{Level, Logger}
 import utilites.{DataFrameBuilder, s3DAO}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{max, sum}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 /** Question: Which Regions handled COVID-19 the best, assuming our metrics are change in GDP by percentage and COVID-19
   * infection rate per capita?
@@ -35,7 +37,8 @@ object CovidResponse {
     //Class dependencies and app config.
     val s3 = s3DAO()
     val dfb = new DataFrameBuilder
-    s3.setDownloadPath("CovidResponse/src/main/resources/")
+    s3.setLocalLakePath("CovidResponse/src/main/resources/datalake")
+    s3.setLocalWarehousePath("CovidResponse/src/main/resources/datawarehouse")
     val fileNames = Map(
       "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",
@@ -63,41 +66,62 @@ object CovidResponse {
 
     //Show all results.
     println("\nAverage New Cases per Day in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "new_cases").show()
+    val newRegionalCases = RankRegions.rankByMetricLow(spark, data, "new_cases").cache()
+    s3.localSaveAndUploadTos3(newRegionalCases, "new_regional_cases")
 
-    println(
-      "\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)"
-    )
-    RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").show()
+    newRegionalCases.show()
+
+
+    println("\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)")
+    val newRegionalCasesPerMil = RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").cache()
+    s3.localSaveAndUploadTos3(newRegionalCasesPerMil, "new_regional_cases_per_million")
+
+    newRegionalCasesPerMil.show()
 
     println("\nAverage New Cases per Million People per Day in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").show()
+    val newCasesDailyPerMil = RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").cache()
+    s3.localSaveAndUploadTos3(newCasesDailyPerMil, "new_cases_daily_per_mil")
+
+
 
     println("\nTotal Cases in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "total_cases", "max").show()
+    val totalRegionalCases =RankRegions.rankByMetricLow(spark, data, "total_cases", "max").cache()
+    s3.localSaveAndUploadTos3(totalRegionalCases, "total_regional_cases")
 
-    println(
-      "\nTotal Cases per Million People in Each Region (normalized before region grouping)"
-    )
+    println("\nTotal Cases per Million People in Each Region (normalized before region grouping)")
     RankRegions
       .rankByMetricLow(spark, data, "total_cases_per_million", "max")
       .show()
 
     println("\nTotal Cases per Million People in Each Region")
-    RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").show()
+    val totalRegionalCasesPerMil = RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").cache()
+    s3.localSaveAndUploadTos3(totalRegionalCasesPerMil, "total_regional_cases_per_mil")
+
+    totalRegionalCasesPerMil.show()
 
     println("\nAverage GDP Percent Change in Each Region")
-    RankRegions
-      .changeGDP(spark, data, "gdp_currentPrices_usd", percapita = false)
-      .show()
+    val deltaGDP = RankRegions
+      .changeGDP(spark, data, "gdp_currentPrices_usd", percapita = false).cache()
+      s3.localSaveAndUploadTos3(deltaGDP, "regional_change_gdp")
+
+    deltaGDP.show()
 
     println("\nAverage GDP per Capita Percent Change in Each Region")
-    RankRegions
-      .changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false)
-      .show()
+    val deltaGDPerCapita = RankRegions
+      .changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false).cache()
+
+    //wraps last result in future to await its completion.
+    val saveLastResult: Future[Unit] = Future {
+      s3.localSaveAndUploadTos3(deltaGDPerCapita, "regional_change_gdp_percapita")
+    }
+    saveLastResult.onComplete(_ => {
+      println("Complete!")
+      spark.stop()
+      System.exit(0)
+    })
+    deltaGDP.show()
 
 //    // TODO: Write file to some output folder.
-    spark.stop()
   }
 
 }
