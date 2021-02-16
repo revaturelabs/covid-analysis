@@ -49,7 +49,6 @@ object CountryBorders {
     //Spark Setup
     val spark = SparkSession
       .builder()
-      .master("local[*]")
       .getOrCreate()
     import spark.implicits._
     spark.sparkContext.setLogLevel("WARN")
