@@ -6,8 +6,10 @@ This application reads in twitter data from the S3 bucket and analyses the covid
 
 ## Technologies Used
 
-* Apache Spark
-  * Spark SQL	
+* Scala 2.12.12
+* Apache Spark 3.0.1
+  * Spark SQL	3.0.1
+* Scalatest 3.2.2
 * AWS S3
 * AWS EMR
 * sbt
