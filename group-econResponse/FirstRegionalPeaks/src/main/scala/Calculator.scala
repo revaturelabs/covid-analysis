@@ -107,9 +107,9 @@ case class Calculator() {
       .map(_.get(0).toString)
       .collect()
 
+    var tempFrame: DataFrame = spark.emptyDataFrame
     var tempDates: Array[Double] = null
     var tempCases: Array[Double] = null
-    var tempFrame: DataFrame = null
     val firstPeakTimeAvg: ArrayBuffer[Double] = ArrayBuffer()
     val firstPeakForCountry: ArrayBuffer[Double] = ArrayBuffer()
     var countryList: Array[String] = Array()
@@ -124,14 +124,14 @@ case class Calculator() {
         .map(_.get(0).asInstanceOf[String])
 
       for (country <- countryList) {
-        tempFrame = spark
-          .sql(s"""SELECT DISTINCT country, date, new_cases
+        tempFrame = spark.sql(
+          s"""SELECT DISTINCT country, date, new_cases
             |FROM $tableName
             |WHERE country = '$country'
-            |AND date != 'NULL'
             |""".stripMargin)
           .sort($"date")
           .cache()
+
         tempCases = tempFrame
           .select($"new_cases")
           .collect()
@@ -144,7 +144,6 @@ case class Calculator() {
         peakTime = firstMajorPeak(tempDates, tempCases, 7, 10, 5)._1
         if (peakTime != -1) {
           firstPeakForCountry.append(peakTime)
-          //          println(s"${country}, ${firstPeakForCountry.last}")
         }
       }
       firstPeakTimeAvg.append(

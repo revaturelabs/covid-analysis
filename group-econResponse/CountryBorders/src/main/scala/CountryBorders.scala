@@ -2,39 +2,17 @@ package countryBorders
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 import utilites.s3DAO
 
 /** Question: Find the top 5 pairs of countries that share a land border and have the highest discrepancy in covid-19
-  * infection rate per capita. Additionally find the top 5 landlocked countries that have the highest discrepancy in
-  * covid-19 infection rate per capita.
-  * queries:
-  * uses Spark SQL with AWS EMR partitioned by country to query datasets and determine the five discrepancies.
-  * associated with this question.
-  */
+ * infection rate per capita. Additionally find the top 5 landlocked countries that have the highest discrepancy in
+ * covid-19 infection rate per capita.
+ * queries:
+ * uses Spark SQL with AWS EMR partitioned by country to query datasets and determine the five discrepancies.
+ * associated with this question.
+ */
 object CountryBorders {
-
-  /** returns a callback function that is to be used to build a Spark DF after files are downloaded from s3.
-    * This application uses both csv and tsv files. So the delimiter is passed as well as a file name.
-    *
-    * @param spark     spark session
-    * @param filePath  sets the filename for downloaded s3 material
-    * @param delimiter sets delimiter type for Spark csv reading.
-    * @return function
-    */
-  def getCallbackFn(spark: SparkSession,
-                    filePath: String,
-                    delimiter: String = ","): () => String => DataFrame =
-    () => { filePath: String =>
-      {
-        spark.read
-          .format("csv")
-          .option("delimiter", delimiter)
-          .option("header", "true")
-          .csv(filePath) toDF ()
-      }
-    }
 
   def main(args: Array[String]): Unit = {
     //Set logging level.
@@ -77,14 +55,14 @@ object CountryBorders {
       .select(country_cases("COUNTRY"), $"TOTAL CASES", $"POPULATION",
         ($"TOTAL CASES" * 100 / $"POPULATION").as("infection_rate_per_capita"))
       .sort(desc("infection_rate_per_capita"))
-      .withColumn("infection_rate_per_capita",'infection_rate_per_capita.cast("Decimal(5,3)"))
+      .withColumn("infection_rate_per_capita", 'infection_rate_per_capita.cast("Decimal(5,3)"))
 
 
     /*
   bcountries have land borders
      */
     val bcountries = borders.join(infection_rate, borders("country_name") === infection_rate("COUNTRY"), "right")
-      .select(infection_rate("COUNTRY").as("country_name"),  borders("border_country"),
+      .select(infection_rate("COUNTRY").as("country_name"), borders("border_country"),
         infection_rate("infection_rate_per_capita").as("country_infection_rate"))
 
     /*
@@ -175,6 +153,23 @@ object CountryBorders {
 
   }
 
+  /** returns a callback function that is to be used to build a Spark DF after files are downloaded from s3.
+   * This application uses both csv and tsv files. So the delimiter is passed as well as a file name.
+   *
+   * @param spark     spark session
+   * @param filePath  sets the filename for downloaded s3 material
+   * @param delimiter sets delimiter type for Spark csv reading.
+   * @return function
+   */
+  def getCallbackFn(spark: SparkSession, filePath: String, delimiter: String = ","):
+    () => String => DataFrame = () => { filePath: String => {
+      spark.read
+        .format("csv")
+        .option("delimiter", delimiter)
+        .option("header", "true")
+        .csv(filePath) toDF()
+    }
+  }
 
 
   /**
@@ -184,7 +179,7 @@ object CountryBorders {
    * @param infectionFrame is the dataframe that has countries, their infection rate and a country they border
    * @return dataframe that has all countries with no countries bordering them by land
    */
-  def createWaterLocked(infectionFrame: DataFrame , spark:SparkSession): DataFrame ={
+  def createWaterLocked(infectionFrame: DataFrame, spark: SparkSession): DataFrame = {
     import spark.implicits._
     val waterLocked = infectionFrame.filter($"border_country".isNull)
       .select($"country_name")
@@ -193,10 +188,9 @@ object CountryBorders {
 
   /**
    * Takes the border dictionary and the country code dictionary from the dictionaries class and creates
-   *  dataframes using both of them.  Those dataframes are then joined to create a dataframe with the
-   *  following format:
-   *  country_name, country_code, border_country, and country_border_code
-   *
+   * dataframes using both of them.  Those dataframes are then joined to create a dataframe with the
+   * following format:
+   * country_name, country_code, border_country, and country_border_code
    *
    * @param spark is the spark session that is used in the method
    * @return is the final dataframe that is the combination of the two dictionaries.
