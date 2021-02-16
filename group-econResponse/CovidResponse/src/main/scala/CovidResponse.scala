@@ -48,7 +48,6 @@ object CovidResponse {
     //Spark setup.
     val spark = SparkSession
       .builder()
-      .master("local[*]")
       .getOrCreate()
     import spark.implicits._
 

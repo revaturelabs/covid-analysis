@@ -30,7 +30,6 @@ object FirstRegionalPeaks {
     //Spark setup
     val spark = SparkSession
       .builder()
-      .master("local[*]")
       .getOrCreate()
 
     //Build df
