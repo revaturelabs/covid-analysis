@@ -2,6 +2,11 @@ import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 
 object EUSpikes {
 
+  /**
+   * Pulls from s3 and analyzes EU young demographic cases and Twitter Covid discussion data.
+   * @param spark The spark session input
+   * @return Unit
+   */
   def processData(spark: SparkSession): Unit = {
     val twitter = processTwitterData(spark)
     val eu = processEUData(spark)
@@ -13,6 +18,11 @@ object EUSpikes {
     joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
   }
 
+  /**
+   * Alternative to processData that pulls smaller dataset for development purposes.
+   * @param spark The spark session input
+   * @return Unit
+   */
   def processDataDev(spark: SparkSession): Unit = {
     val twitter = processTwitterDataDevelopment(spark)
     val eu = processEUData(spark)
@@ -25,6 +35,11 @@ object EUSpikes {
     joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
   }
 
+  /**
+   * Configure AWS to enable Scala program to read from s3.
+   * @param spark The spark session input
+   * @return Unit
+   */
   def configureAWS(spark: SparkSession) = {
     spark.sparkContext.hadoopConfiguration.set("fs.s3a.endpoint", "s3.amazonaws.com")
     // Set up S3 with secret and access key in spark
@@ -32,6 +47,13 @@ object EUSpikes {
     spark.sparkContext.hadoopConfiguration.set("fs.s3a.secret.key", sys.env("AWS_SECRET_ACCESS_KEY"))
   }
 
+  /**
+   * Joins input dataframes on columns week and year.
+   * @param spark The spark session input
+   * @param df1 The first dataframe
+   * @param df2 The second dataframe
+   * @return Resulting joined dataframe
+   */
   def joinTables(spark: SparkSession, df1: DataFrame, df2: DataFrame): DataFrame = {
     df1.join(df2, Seq("week", "year"))
   }

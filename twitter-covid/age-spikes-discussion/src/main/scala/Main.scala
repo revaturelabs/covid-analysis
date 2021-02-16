@@ -9,5 +9,6 @@ object Main {
     spark.sparkContext.setLogLevel("WARN")
     configureAWS(spark)
     processData(spark)
+    spark.stop
   }
 }
