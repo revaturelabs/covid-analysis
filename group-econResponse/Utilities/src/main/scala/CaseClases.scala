@@ -50,11 +50,14 @@ case class EconomicsData(
     current_account_balance_percentGDP: Double = 0
 )
 
-case class CountryStats(
+case class CovidStats(
+    iso_code: String,
+    continent: String,
+    location: String,
     date: String,
-    country: String = null,
     total_cases: Double = 0,
     new_cases: Double = 0,
+    country: String = null,
     new_cases_smoothed: Double = 0,
     total_deaths: Double = 0,
     new_deaths: Double = 0,
@@ -81,7 +84,20 @@ case class CountryStats(
     tests_per_case: Double = 0,
     positive_rate: Double = 0,
     tests_units: String = null,
-    stringency_index: Double = 0
+    stringency_index: Double = 0,
+    population: Double = 0,
+    population_density: Double = 0,
+    median_age: Double = 0,
+    aged_65_older: Double = 0,
+    aged_70_older: Double = 0,
+    gdp_per_capita: Double = 0,
+    extreme_poverty: Double = 0,
+    cardiovasc_death_rate: Double = 0,
+    diabetes_prevalence: Double = 0,
+    female_smokers: Double = 0,
+    male_smokers: Double = 0,
+    handwashing_facilities: Double = 0,
+    hospital_beds_per_thousand: Double = 0,
+    life_expectancy: Double = 0,
+    human_development_index: Double = 0
 )
-case class covidEconData(
-    )
