@@ -8,9 +8,6 @@ object Main {
       .getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     configureAWS(spark)
-//    processEUData(spark)
-//    pullTwitterDataDevelopment(spark)
-//    makeTestFile(spark)
     processData(spark)
   }
 }
