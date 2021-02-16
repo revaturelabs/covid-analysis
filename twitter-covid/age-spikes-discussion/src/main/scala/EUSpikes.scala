@@ -18,7 +18,7 @@ object EUSpikes {
 
     twitter.show()
     eu.show()
-    joined.show();
+    joined.show()
     joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
   }
 
