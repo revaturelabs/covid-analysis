@@ -66,9 +66,9 @@ pipeline {
             when {
                 // If any of these branches then run the stages
                 anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch '*RegionalInfectionRates'
+                    expression { BRANCH == 'main'; }
+                    expression { BRANCH == 'develop'; } //develop will be removed
+                    expression { BRANCH == '*RegionalInfectionRates'; }
                 }
             }
             stages{
@@ -919,12 +919,12 @@ pipeline {
 
         unstable {
             echo "Unstable build."
-            echo "'Unstable' email has been sent to: Everyone"
+            emailext body: 'Code is unstable.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check your code and make sure you have added all the files.'
         }
 
         failure {
             echo "Something didn't pass."
-            echo "'Failure' email has been sent to: Everyone"
+            emailext body: 'Failure in commit', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
         }
 
         changed {
