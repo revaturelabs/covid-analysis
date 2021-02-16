@@ -882,7 +882,7 @@ pipeline {
         success {
             echo "All test, build, and package has passed."
 
-            script {
+            // script {
                 //if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
 
                     //AWS cli with github 3rd party library
@@ -914,7 +914,7 @@ pipeline {
                     // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
 
                 //}
-            }
+            // }
         }
 
         unstable {
