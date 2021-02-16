@@ -18,7 +18,6 @@ import org.apache.spark.sql.functions.{max, sum}
   * "Average GDP Percent Change in Each Region"
   * "Average GDP per Capita Percent Change in Each Region"
   */
-
 object CovidResponse {
 
   /** Main
