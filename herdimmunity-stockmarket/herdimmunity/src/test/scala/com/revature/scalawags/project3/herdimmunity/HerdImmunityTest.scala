@@ -14,7 +14,7 @@ class HerdImmunityTest extends AnyFlatSpec {
   )
 
   "Days Remaining" should "return 190" in {
-    assert(HerdImmunity.daysRemaining(data).getOrElse(0) == 190)
+    assert(HerdImmunity.daysRemaining(data).getOrElse(0) == 139)
   }
 
   "Exact Date" should "return August 10, 2021 (as DateTime object)" in {
