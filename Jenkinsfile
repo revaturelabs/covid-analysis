@@ -629,15 +629,15 @@ pipeline {
         
 
         stage("tweet-covid19-percentage"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'tweet-covid19-percentage';
-                    branch '*/tweet-covid19-percentage'
-                }
-            }
+            // when {
+            //     // If any of these branches then run the stages
+            //     anyOf{
+            //         branch 'main';
+            //         branch 'develop'; //develop will be removed
+            //         branch 'tweet-covid19-percentage';
+            //         branch '*/tweet-covid19-percentage'
+            //     }
+            // }
             stages{
                 //Twitter-General/tweet-covid19-percentage Compile
                 stage("Compile Twitter-General/tweet-covid19-percentage") {
