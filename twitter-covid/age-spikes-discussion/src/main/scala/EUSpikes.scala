@@ -109,10 +109,10 @@ object EUSpikes {
   }
 
   /**
-   * Filter input dataframe to only include age groups <15yr and 15-24yr.
+   * Split "year_week" field into "year" and "week" in dataframe.
    * @param spark The spark session input
    * @param df The input dataframe
-   * @return Dataframe filtered by <15yr and 15-24yr only
+   * @return Dataframe with separate columns for "year" and "week"
    */
   def splitYearWeek(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
