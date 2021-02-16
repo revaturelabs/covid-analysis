@@ -553,82 +553,82 @@ pipeline {
 
 
 
-        // //Stockmarket Group
-        // //stockmarket Compile
-        // stage("Compile stockmarket") {
-        //     steps {
-        //         echo "Compile stockmarket"
+        //Stockmarket Group
+        //stockmarket Compile
+        stage("Compile stockmarket") {
+            steps {
+                echo "Compile stockmarket"
 
-        //         sh '''
-        //             cd stockmarket
-        //             sbt compile
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //stockmarket Test FAILED
-        // stage("Test stockmarket") {
-        //     steps {
-        //         echo "Test stockmarket"
+                sh '''
+                    cd stockmarket
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+        //stockmarket Test FAILED
+        stage("Test stockmarket") {
+            steps {
+                echo "Test stockmarket"
 
-        //         sh '''
-        //             cd stockmarket
-        //             sbt test
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //stockmarket Package
-        // stage("Package stockmarket") {
-        //     steps {
-        //         echo "Package stockmarket"
+                sh '''
+                    cd stockmarket
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
+        //stockmarket Package
+        stage("Package stockmarket") {
+            steps {
+                echo "Package stockmarket"
 
-        //         sh '''
-        //             cd stockmarket
-        //             sbt package
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd stockmarket
+                    sbt package
+                    cd ../..
+                '''
+            }
+        }
 
 
 
-        // //stockmarket Compile
-        // stage("Compile stockmarket-data") {
-        //     steps {
-        //         echo "Compile stockmarket-data"
+        //stockmarket Compile
+        stage("Compile stockmarket-data") {
+            steps {
+                echo "Compile stockmarket-data"
 
-        //         sh '''
-        //             cd stockmarket-data
-        //             sbt compile
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd stockmarket-data
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
         //stockmarket Test
-        // stage("Test stockmarket-data") {
-        //     steps {
-        //         echo "Test stockmarket-data"
+        stage("Test stockmarket-data") {
+            steps {
+                echo "Test stockmarket-data"
 
-        //         sh '''
-        //             cd stockmarket-data
-        //             sbt test
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //stockmarket Package
-        // stage("Package stockmarket-data") {
-        //     steps {
-        //         echo "Package stockmarket-data"
+                sh '''
+                    cd stockmarket-data
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
+        //stockmarket Package
+        stage("Package stockmarket-data") {
+            steps {
+                echo "Package stockmarket-data"
 
-        //         sh '''
-        //             cd stockmarket-data
-        //             sbt package
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd stockmarket-data
+                    sbt package
+                    cd ../..
+                '''
+            }
+        }
 
 
 
