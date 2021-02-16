@@ -1,5 +1,7 @@
 import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
+//import $ivy.`org.vegas-viz:vegas_2.11:0.3.11`
+//import $ivy.`org.vegas-viz:vegas-spark_2.11:0.3.11`
 
 object EUSpikes {
 
@@ -11,20 +13,22 @@ object EUSpikes {
     twitter.show()
     eu.show()
     joined.show();
-
-    joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results.csv")
+//    display(joined)
+    joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
 
   }
 
-  def processDataTest(spark: SparkSession): Unit = {
-    val twitter = processTwitterData(spark)
+  def processDataDev(spark: SparkSession): Unit = {
+    val twitter = processTwitterDataDevelopment(spark)
     val eu = processEUData(spark)
     val joined = joinTables(spark, twitter, eu)
 
     twitter.show()
     eu.show()
     joined.show();
-//    twitter.join(eu, twitter("week") === eu(""))
+
+    joined.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/eu-twitter-results")
+
   }
 
   def configureAWS(spark: SparkSession) = {
@@ -99,7 +103,7 @@ object EUSpikes {
     import org.apache.spark.sql.types._
     import org.apache.spark.sql.functions._
     val intDF = df.withColumn("new_cases", $"new_cases".cast(IntegerType))
-    val grouped = intDF.groupBy($"week", $"year").sum("new_cases").as("new_cases")
+    val grouped = intDF.groupBy($"week", $"year").agg(sum("new_cases").as("new_cases"))
     grouped
   }
 
@@ -109,6 +113,13 @@ object EUSpikes {
   def processTwitterData(spark: SparkSession): DataFrame = {
 //    val df = pullTwitterDataDevelopment(spark)
     val df = pullTwitterData(spark)
+    val dfWeeks = splitYearWeekTwitter(spark, df)
+    val grouped = twitterGroupByWeekYear(spark, dfWeeks)
+    grouped
+  }
+
+  def processTwitterDataDevelopment(spark: SparkSession): DataFrame = {
+    val df = pullTwitterDataDevelopment(spark)
     val dfWeeks = splitYearWeekTwitter(spark, df)
     val grouped = twitterGroupByWeekYear(spark, dfWeeks)
     grouped
@@ -140,7 +151,7 @@ object EUSpikes {
 
   def twitterGroupByWeekYear(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
-    val grouped = df.groupBy($"week", $"year").count().as("covid_tweets")
+    val grouped = df.groupBy($"week", $"year").count().withColumnRenamed("count", "covid_tweets")
     grouped
   }
 }

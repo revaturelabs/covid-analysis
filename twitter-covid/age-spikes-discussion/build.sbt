@@ -14,3 +14,6 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.0.1"
 libraryDependencies += "org.apache.hadoop" % "hadoop-common" % "3.0.0"
 libraryDependencies += "org.apache.hadoop" % "hadoop-client" % "3.0.0"
 libraryDependencies += "org.apache.hadoop" % "hadoop-aws" % "3.0.0"
+
+libraryDependencies += "org.vegas-viz" %% "vegas" % "0.3.11"
+libraryDependencies += "org.vegas-viz" %% "vegas-spark" % "0.3.11"
