@@ -23,20 +23,20 @@ object CovidLiveUpdates {
 
     // Setting up spark
     val spark = SparkSession.builder()
-        .appName("CovidLiveUpdates")
+        .appName("CovidLiveUpdate")
         .master("local[4]")
         .getOrCreate()
 
     // Setting path to local 
     if( args.length == 1 && ( args(0) == "-l" || args(0) == "-local" ) ){
-      datalakeFilePath = "datalake/CovidLiveUpdates"
-      datawarehouseFilePath = "datawarehouse/CovidLiveUpdates"
+      datalakeFilePath = "datalake/"
+      datawarehouseFilePath = "datawarehouse/"
     
-    // AWS Access and secret key as environment variables
-    } else if(!sys.env.contains("AWS_ACCESS_KEY_ID") || !sys.env.contains("AWS_SECRET_ACCESS_KEY")){
-      System.err.println("EXPECTED 2 ENVIRONMENT VARIABLES: AWS Access Key and AWS Secret Key")
-      spark.close()
-      System.exit(1)
+    // Check AWS Access and secret key as environment variables
+    // } else if(!sys.env.contains("AWS_ACCESS_KEY_ID") || !sys.env.contains("AWS_SECRET_ACCESS_KEY")){
+    //   System.err.println("EXPECTED 2 ENVIRONMENT VARIABLES: AWS Access Key and AWS Secret Key")
+    //   spark.close()
+    //   System.exit(1)
     
     } else {
       // File path for datalake and datawarehouse to grab or put
@@ -44,11 +44,11 @@ object CovidLiveUpdates {
       datawarehouseFilePath = "s3a://covid-analysis-p3/datawarehouse/infection-mortality/"
 
       // Configured needed for AWS s3a
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+      //spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
       // Set up S3 with secret and access key with spark
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-      spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+      // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+      // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
     }
     
     // Set log level for sbt shell
@@ -67,14 +67,14 @@ object CovidLiveUpdates {
     println("==================================")
 
     // Grab data from path here
-    val africaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/africa.json" )
-    val asiaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/asia.json" )
-    val caribbeanTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/caribbean.json")
-    val centralAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/central_america.json")
-    val europeTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/europe.json")
-    val northAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/north_america.json")
-    val oceaniaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/oceania.json")
-    val southAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdates/south_america.json")
+    val africaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/africa.json" )
+    val asiaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/asia.json" )
+    val caribbeanTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/caribbean.json")
+    val centralAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/central_america.json")
+    val europeTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/europe.json")
+    val northAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/north_america.json")
+    val oceaniaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/oceania.json")
+    val southAmericaTemp = spark.read.json( datalakeFilePath + "CovidLiveUpdate/south_america.json")
 
     // Creates the DFs for the Regions
     val africaDF = regionalTotal(spark, africaTemp, "Africa")
@@ -103,7 +103,7 @@ object CovidLiveUpdates {
     regionTotalDF.show()
 
     // Write to path link using datawarehouse totals
-    regionTotalDF.coalesce(1).write.mode("overwrite").option("header","true").csv(datawarehouseFilePath + "/CovidLiveUpdateApp/total")
+    regionTotalDF.coalesce(1).write.mode("overwrite").option("header","true").csv(datawarehouseFilePath + "/CovidLiveUpdate/total")
 
     // Closes the spark session
     spark.close()

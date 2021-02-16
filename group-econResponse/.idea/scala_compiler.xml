@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="covid-resonse">
+      <option name="postfixOps" value="true" />
+    </profile>
+    <profile name="sbt 2" modules="covid-response,econ-response" />
+    <profile name="sbt 4" modules="CorrelateInfectionGDP,CountryBorders,CovidResponse,FirstRegionalPeaks,Utilities,econ-group,global">
+      <option name="postfixOps" value="true" />
+      <option name="implicitConversions" value="true" />
+      <option name="higherKinds" value="true" />
+      <option name="existentials" value="true" />
+      <option name="deprecationWarnings" value="true" />
+      <option name="uncheckedWarnings" value="true" />
+      <option name="featureWarnings" value="true" />
+      <parameters>
+        <parameter value="-encoding" />
+        <parameter value="utf8" />
+      </parameters>
+      <plugins>
+        <plugin path="target/compiler_plugins/wartremover_2.12.13-2.4.13.jar" />
+      </plugins>
+    </profile>
+  </component>
+</project>

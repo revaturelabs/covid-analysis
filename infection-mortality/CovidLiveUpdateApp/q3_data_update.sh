@@ -1,7 +1,7 @@
 #!/bin/sh
 #*S3PathRoot* must be replaced with the appropriate root for your S3 path to function
-S3aPathRoot="s3a://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdates"
-LocalPathRoot="datalake/CovidLiveUpdates"
+S3aPathRoot="s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate"
+LocalPathRoot="datalake/CovidLiveUpdate"
 
 #Dowloads files locally
 curl -X GET "https://disease.sh/v3/covid-19/countries/Algeria%2CAngola%2CBenin%2CBotswana%2CBurkinaFaso%2CBurundi%2CCameroon%2CCapeVerde%2CCentral%20African%20Republic%2CChad%2CComoros%2Congo%2CCote%20d'Ivoire%2CDRC%2CDjibouti%2CEgypt%2CEquatorial%20Guinea%2CEritrea%2CEthiopia%2CGabon%2CGambia%2CGhana%2CGuinea%2CGuinea-Bissau%2CKenya%2CLesotho%2CLiberia%2CLibya%2CMadagascar%2CMalawi%2CMali%2CMauritania%2CMauritius%2CMorocco%2CMozambique%2CNamibia%2CNiger%2CNigeria%2CRepublic%20of%20the%20Congo%2CReunion%2CRwanda%2CSaint%20Helena%2CSao%20Tome%20and%20Principe%2CSenegal%2CSeychelles%2CSierra%20Leone%2CSomalia%2CSouth%20Africa%2CSouth%20Sudan%2CSudan%2CSwaziland%2CTanzania%2CTogo%2CTunisia%2CUganda%2CWestern%20Sahara%2CZambia%2CZimbabwe" -H "accept: application/json" > $LocalPathRoot/africa.json
@@ -14,11 +14,11 @@ curl -X GET "https://disease.sh/v3/covid-19/countries/AmericanSamoa%2CAustralia%
 curl -X GET "https://disease.sh/v3/covid-19/countries/Argentina%2CBolivia%2CBrazil%2CChile%2CColombia%2CEcuador%2CFalkland%20Islands%2CFrench%20Guiana%2CGuyana%2CParaguay%2CPeru%2CSuriname%2CUruguay%2CVenezuela" -H "accept/json" > $LocalPathRoot/south_america.json
 
 #Uploads files to S3
-aws s3 cp $LocalPathRoot/africa.json $S3PathRoot/africa.json
-aws s3 cp $LocalPathRoot/asia.json $S3PathRoot/asia.json
-aws s3 cp $LocalPathRoot/caribbean.json $S3PathRoot/caribbean.json
-aws s3 cp $LocalPathRoot/central_america.json $S3PathRoot/central_america.json
-aws s3 cp $LocalPathRoot/europe.json $S3PathRoot/europe.json
-aws s3 cp $LocalPathRoot/north_america.json $S3PathRoot/north_america.json
-aws s3 cp $LocalPathRoot/south_america.json $S3PathRoot/south_america.json
-aws s3 cp $LocalPathRoot/oceania.json $S3PathRoot/oceania.json
+aws s3 cp datalake/CovidLiveUpdate/asia.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/asia.json
+aws s3 cp datalake/CovidLiveUpdate/africa.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/africa.json
+aws s3 cp datalake/CovidLiveUpdate/caribbean.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/caribbean.json
+aws s3 cp datalake/CovidLiveUpdate/central_america.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/central_america.json
+aws s3 cp datalake/CovidLiveUpdate/europe.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/europe.json
+aws s3 cp datalake/CovidLiveUpdate/north_america.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/north_america.json
+aws s3 cp datalake/CovidLiveUpdate/south_america.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/south_america.json
+aws s3 cp datalake/CovidLiveUpdate/oceania.json s3://covid-analysis-p3/datalake/infection-mortality/CovidLiveUpdate/oceania.json

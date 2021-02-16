@@ -12,4 +12,4 @@ curl -X GET "https://disease.sh/v3/covid-19/countries/Canada%2CGreenland%2CMexic
 curl -X GET "https://disease.sh/v3/covid-19/countries/AmericanSamoa%2CAustralia%2CChristmas%20Island%2CCocos%20(Keeling)%20Islands%2CCook%20Islands%2CFederated%20States%20of%20Micronesia%2CFiji%2CFrench%20Polynesia%2CGuam%2CKiribati%2CMarshall%20Islands%2CNauru%2CNew%20Caledonia%2CNew%20Zealand%2CNiue%2CNorthern%20Mariana%20Islands%2CPalau%2CPapua%20New%20Guinea%2CPitcairn%20Islands%2CSamoa%2CSolomon%20Islands%2CTokelau%2CTonga%2CTuvalu%2CVanuatu%2CWallis%20and%20Futuna" -H "accept/json" > $LocalPathRoot/oceania.json
 curl -X GET "https://disease.sh/v3/covid-19/countries/Argentina%2CBolivia%2CBrazil%2CChile%2CColombia%2CEcuador%2CFalkland%20Islands%2CFrench%20Guiana%2CGuyana%2CParaguay%2CPeru%2CSuriname%2CUruguay%2CVenezuela" -H "accept/json" > $LocalPathRoot/south_america.json
 
-sbt run
+sbt "run -l"
