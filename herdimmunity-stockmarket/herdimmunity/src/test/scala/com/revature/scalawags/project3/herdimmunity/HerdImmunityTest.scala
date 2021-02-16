@@ -13,15 +13,15 @@ class HerdImmunityTest extends AnyFlatSpec {
     population = 10000
   )
 
-  "Days Remaining" should "return 190" in {
+  "Days Remaining" should "return 139" in {
     assert(HerdImmunity.daysRemaining(data).getOrElse(0) == 139)
   }
 
-  "Exact Date" should "return August 10, 2021 (as DateTime object)" in {
-    assert(HerdImmunity.exactDate(190, data.date) == "2021-8-10".toDateTime)
+  "Exact Date" should "return Jun 20, 2021 (as DateTime object)" in {
+    assert(HerdImmunity.exactDate(139, data.date) == "2021-6-20".toDateTime)
   }
 
-  "Pretty Date" should "return 'Tuesday, August 10, 2021'" in {
-    assert(HerdImmunity.prettyDate("2021-8-10".toDateTime) == "Tuesday, August 10, 2021")
+  "Pretty Date" should "return 'Sunday, June 20, 2021'" in {
+    assert(HerdImmunity.prettyDate("2021-6-20".toDateTime) == "Sunday, June 20, 2021")
   }
 }

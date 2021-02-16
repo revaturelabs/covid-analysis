@@ -39,7 +39,7 @@ object DailyChangeRunner{
     }
 
   /** Takes in a current SparkSession and a region as parameters,
-    * reads datasets from an AWS s3 bucket by each region,
+    * reads sotck market composite index datasets from an AWS S3 bucket by each region,
     * converts each region's datasets into a dataframe,
     * and returns the dataframe.
     *
@@ -78,11 +78,12 @@ object DailyChangeRunner{
   /** Takes in a dateColumnFormatted dataframe and a region as parameters,
     * changes all elements in the Data column into a uniform date format,
     * removes a comma from all elements in the Open price column,
-    * casts the data type of the Open price column into Double Type,
-    * counts how many Open price rows exist on each day,
-    * uses the maximum number of Open price rows of each day as the total number of countries in each region,
-    * filters out dates that contain fewer counts of Open price rows than the total number of countries in each region,
-    * renames the Open column as [Region's name] Index
+    * casts the data type of the Open price column into a Double type,
+    * counts how many Open prices exist on each date,
+    * finds out the maximum number of the Open price column and uses it as the total number of countries in each region,
+    * filters out dates that contain fewer numbers than the total number of countries in each region,
+    * sums all Open prices of the same date,
+    * renames the Open price column as [Region's name] Index
     * and returns the dataframe.
     *
     * @param df DataFrame
@@ -123,7 +124,7 @@ object DailyChangeRunner{
 
   /** Takes in a current SparkSession, a dailyChangeCalculated dataframe, and a region as parameters,
     * writes the dataframe into a csv file
-    * and saves it into an AWS s3 bucket by each region.
+    * and saves it into an AWS S3 bucket by each region.
     *
     * @param spark current SparkSession
     * @param df DataFrame
