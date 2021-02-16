@@ -1,7 +1,7 @@
 package response
 
-import org.apache.spark.sql.{DataFrame, SparkSession, functions}
-import org.apache.spark.sql.functions.{max, sum, col, avg, round}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
 /** The RankRegions object uses methods to group and sort by some metric passed as an argument.
   */
@@ -33,7 +33,7 @@ object RankRegions {
     //fullDS.show()
     var oneTimeMetric: DataFrame = spark.emptyDataFrame
     op match {
-      case "avg" => {
+      case "avg" =>
         oneTimeMetric = fullDS
           .select(
             $"region",
@@ -45,10 +45,9 @@ object RankRegions {
           .groupBy("region")
           .agg(round(avg(s"$metric")).cast("integer") as s"$metric")
           .sort(col(metric) desc)
-      }
       // finds max 'metric' in each  country, region grouping
       // then groups on region and sums the 'max'
-      case "max" => {
+      case "max" =>
         oneTimeMetric = fullDS
           .select($"region", $"date", $"country", col(metric))
           .distinct()
@@ -57,8 +56,7 @@ object RankRegions {
           .groupBy("region")
           .agg(round(sum(s"$metric")).cast("integer") as s"$metric")
           .sort(col(metric) desc)
-      }
-      case "pop" => {
+      case "pop" =>
         //fullDS.select($"region", $"population").distinct().show()
         oneTimeMetric = fullDS
           .select(
@@ -71,9 +69,8 @@ object RankRegions {
           .dropDuplicates("country", "region", "date")
           .distinct()
           .groupBy($"region")
-          .agg(((avg(s"$metric") / (max($"population"))) as "avg_new_cases"))
-      }
-      case "maxpop" => {
+          .agg((avg(s"$metric") / max($"population")) as "avg_new_cases")
+      case "maxpop" =>
         oneTimeMetric = fullDS
           .select(
             $"region",
@@ -86,11 +83,10 @@ object RankRegions {
           .distinct()
           .groupBy($"region")
           .agg(
-            ((max(s"$metric")) / (max(
+            max(s"$metric") / max(
               $"population"
-            )) as s"${metric}_per_million")
+            ) as s"${metric}_per_million"
           )
-      }
     }
     oneTimeMetric
   }
@@ -135,11 +131,11 @@ object RankRegions {
     gdp_2020
       .join(gdp_2019, Seq("country", "region"))
       .withColumn(
-        s"$metric",
-        (($"gdp20" - $"gdp19") / ($"gdp20")) * 100
+        "Delta GDP (%)",
+        (($"gdp20" - $"gdp19") / $"gdp20") * 100
       )
       .groupBy("region")
-      .agg(avg(s"$metric"))
+      .agg(avg("Delta GDP (%)"))
 
     //rankByMetric(spark, gdpPercentChange, "delta_gdp_percentChange")
   }
