@@ -102,27 +102,27 @@ pipeline {
         //     }
         // }
         //group-econResponse/CorrelateInfectionGDP Test
-        stage("Test group-econResponse/CorrelateInfectionGDP") {
-            steps{
-                echo "Test CorrelateInfectionGDP"
-                sh '''
-                    cd group-econResponse/CorrelateInfectionGDP
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //group-econResponse/CorrelateInfectionGDP Package
-        stage("Package group-econResponse/CorrelateInfectionGDP") {
-            steps{
-                echo "Package CorrelateInfectionGDP"
-                sh '''
-                    cd group-econResponse/CorrelateInfectionGDP
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        // stage("Test group-econResponse/CorrelateInfectionGDP") {
+        //     steps{
+        //         echo "Test CorrelateInfectionGDP"
+        //         sh '''
+        //             cd group-econResponse/CorrelateInfectionGDP
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //group-econResponse/CorrelateInfectionGDP Package
+        // stage("Package group-econResponse/CorrelateInfectionGDP") {
+        //     steps{
+        //         echo "Package CorrelateInfectionGDP"
+        //         sh '''
+        //             cd group-econResponse/CorrelateInfectionGDP
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
