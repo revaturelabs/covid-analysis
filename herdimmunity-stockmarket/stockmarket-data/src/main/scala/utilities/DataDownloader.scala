@@ -1,7 +1,9 @@
+package utilities
+
 import sys.process._
 import scala.language.postfixOps
 import scala.io.Source
-import java.io.PrintWriter
+import java.io.{PrintWriter, File}
 import scala.collection.mutable.ArrayBuffer
 import java.time.LocalDate.now
 import java.time.format.DateTimeFormatter
@@ -10,7 +12,7 @@ import org.apache.spark.sql.functions._
 import org.apache.log4j._
 
 /**
-  * A simple data downloader that programmatically downloads stock market composite index data to local file system.
+  * A simple data downloader that programmatically downloads stock market composite index data to a local file system and uploads them to an AWS S3 bucket.
   */
 
 object DataDownloader{
@@ -21,20 +23,29 @@ object DataDownloader{
     val endDate = "02/14/2021"
 
     def main(args: Array[String]){
+        val log4jConfPath = "./src/main/resources/log4j.properties"
+        PropertyConfigurator.configure(log4jConfPath)
 
         // The program refers to the CompositeIndexList.csv file in order to get information about each country's name, region, an index name, a ticker symbol, a country code, and a data source.
         val pathToCompositeIndexList = "./CompositeIndexList.csv"
 
         for(i <- urlBuilder(pathToCompositeIndexList)){
-            // After a complete url is built, it curls an actual csv file from a web and assigns the content to "val file".
-            val file = s"curl ${i(2)}" !!
+            // After a complete url is built, it curls an actual csv file from a web and assigns the content to "csvFile".
+            val csvFile = s"curl ${i(2)}" !!
+
+            // File class is created as a placeholder.
+            val file = new File(s"./datalake/${i(0)}_${i(1)}_CompositeIndex.csv")
+            val fileName = s"${i(0)}_${i(1)}_CompositeIndex.csv"
 
             // Creates a new csv file under the datalake directory and names each file using a region name and a nation name.
-            val writer = new PrintWriter(s"./datalake/${i(0)}_${i(1)}_CompositeIndex.csv")
+            val writer = new PrintWriter(file)
 
-            // Writes the curled file to the newly created csv file under the datalake directory.
-            writer.print(file)
+            // Writes the curled csvFile to the newly created file under the datalake directory.
+            writer.print(csvFile)
             writer.close()
+
+            //Upload the newly file to an AWS S3 bucket programmatically.
+            s3DAO.apply().uploadFile(file, fileName)
         }
     }
 
