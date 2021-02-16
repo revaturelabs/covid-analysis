@@ -60,6 +60,8 @@ pipeline {
             }
         }
 
+
+
         stage("RegionalInfectionRates"){
             when {
                 // If any of these branches then run the stages
@@ -160,7 +162,6 @@ pipeline {
         
         
 
-
         stage("CountryBorders"){
             when {
                 // If any of these branches then run the stages
@@ -181,27 +182,27 @@ pipeline {
                             cd ../..
                         '''
                     }
-                    //group-econResponse/CountryBorders Test
-                    stage("Test group-econResponse/CountryBorders") {
-                        steps{
-                            echo "Test CountryBorders"
-                            sh '''
-                                cd group-econResponse/CountryBorders
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                        //group-econResponse/CountryBorders Package
-                        stage("Package group-econResponse/CountryBorders") {
-                            steps{
-                                echo "Package CountryBorders"
-                                sh '''
-                                    cd group-econResponse/CountryBorders
-                                    sbt package
-                                    cd ../..
-                                '''
-                            }
-                        }
+                }
+                //group-econResponse/CountryBorders Test
+                stage("Test group-econResponse/CountryBorders") {
+                    steps{
+                        echo "Test CountryBorders"
+                        sh '''
+                            cd group-econResponse/CountryBorders
+                            sbt test
+                            cd ../..
+                        '''
+                    }
+                }
+                //group-econResponse/CountryBorders Package
+                stage("Package group-econResponse/CountryBorders") {
+                    steps{
+                        echo "Package CountryBorders"
+                        sh '''
+                            cd group-econResponse/CountryBorders
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
@@ -408,50 +409,49 @@ pipeline {
 
         //Group Twitter-General
         stage("data-cleaner"){
-                when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch '*data-cleaner*'
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*data-cleaner*'
+                }
+            }
+            stages {
+                //Twitter-General/data-cleaner Compile
+                stage("Compile Twitter-General/data-cleaner") {
+                    steps {
+                        echo "Compile data-cleaner"
+
+                        sh '''
+                            cd twitter-general/data-cleaner
+                            sbt compile
+                            cd ../..
+                        '''
                     }
                 }
-                stages {
-                    //Twitter-General/data-cleaner Compile
-                    stage("Compile Twitter-General/data-cleaner") {
-                        steps {
-                            echo "Compile data-cleaner"
+                //Twitter-General/data-cleaner Test DIDNT PASS
+                stage("Test Twitter-General/data-cleaner") {
+                    steps {
+                        echo "Test data-cleaner"
 
-                            sh '''
-                                cd twitter-general/data-cleaner
-                                sbt compile
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/data-cleaner
+                            sbt test
+                            cd ../..
+                        '''
                     }
-                    //Twitter-General/data-cleaner Test DIDNT PASS
-                    stage("Test Twitter-General/data-cleaner") {
-                        steps {
-                            echo "Test data-cleaner"
+                }
+                //Twitter-General/data-cleaner Package
+                stage("Package Twitter-General/data-cleaner") {
+                    steps {
+                        echo "Package data-cleaner"
 
-                            sh '''
-                                cd twitter-general/data-cleaner
-                                sbt test
-                                cd ../..
-                            '''
-                        }
-                    }
-                    //Twitter-General/data-cleaner Package
-                    stage("Package Twitter-General/data-cleaner") {
-                        steps {
-                            echo "Package data-cleaner"
-
-                            sh '''
-                                cd twitter-general/data-cleaner
-                                sbt package
-                                cd ../..
-                            '''
-                        }
+                        sh '''
+                            cd twitter-general/data-cleaner
+                            sbt package
+                            cd ../..
+                        '''
                     }
                 }
             }
