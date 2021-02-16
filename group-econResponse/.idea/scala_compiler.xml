@@ -4,8 +4,8 @@
     <profile name="sbt 1" modules="covid-resonse">
       <option name="postfixOps" value="true" />
     </profile>
-    <profile name="sbt 2" modules="covid-response,econ-response,global" />
-    <profile name="sbt 3" modules="CorrelateInfectionGDP,CountryBorders,CovidResponse,FirstRegionalPeaks,Utilities,econ-group">
+    <profile name="sbt 2" modules="covid-response,econ-response" />
+    <profile name="sbt 4" modules="CorrelateInfectionGDP,CountryBorders,CovidResponse,FirstRegionalPeaks,Utilities,econ-group,global">
       <option name="postfixOps" value="true" />
       <option name="implicitConversions" value="true" />
       <option name="higherKinds" value="true" />
@@ -17,6 +17,9 @@
         <parameter value="-encoding" />
         <parameter value="utf8" />
       </parameters>
+      <plugins>
+        <plugin path="target/compiler_plugins/wartremover_2.12.13-2.4.13.jar" />
+      </plugins>
     </profile>
   </component>
 </project>

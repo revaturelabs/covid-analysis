@@ -7,8 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CovidResponse.iml" filepath="$PROJECT_DIR$/.idea/modules/CovidResponse.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FirstRegionalPeaks.iml" filepath="$PROJECT_DIR$/.idea/modules/FirstRegionalPeaks.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Utilities.iml" filepath="$PROJECT_DIR$/.idea/modules/Utilities.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/econ-group.iml" filepath="$PROJECT_DIR$/.idea/modules/econ-group.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/econ-group-build.iml" filepath="$PROJECT_DIR$/.idea/modules/econ-group-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/global.iml" filepath="$PROJECT_DIR$/.idea/modules/global.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/global-build.iml" filepath="$PROJECT_DIR$/.idea/modules/global-build.iml" />
     </modules>
   </component>
 </project>

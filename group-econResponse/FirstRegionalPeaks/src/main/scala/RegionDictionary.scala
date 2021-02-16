@@ -6,8 +6,7 @@ object RegionDictionary {
     regionMap.foreach(region =>
       if (region._2.contains(country)) {
         return region._1
-      }
-    )
+    })
     // Otherwise, return failure
     "Country Not Found"
   }

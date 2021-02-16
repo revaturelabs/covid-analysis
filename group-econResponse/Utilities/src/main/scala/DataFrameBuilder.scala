@@ -57,8 +57,8 @@ class DataFrameBuilder {
   def getCallbackFn(
       spark: SparkSession,
       schema: StructType
-  ): () => String => DataFrame = () => {
-    downloadPath: String => {
+  ): () => String => DataFrame = () => { downloadPath: String =>
+    {
       spark.read
         .option("delimiter", "\t")
         .option("header", "true")
@@ -162,8 +162,7 @@ class DataFrameBuilder {
         "gdp_perCap_currentPrices_usd",
         "population"
       )
-    )
-      .withColumnRenamed("name", "country") //rename 'name' field to 'country'
+    ).withColumnRenamed("name", "country") //rename 'name' field to 'country'
       .filter(
         col("year") === 2019 || col("year") === 2020
       ) //only include annual gdp data from 2020, 2019

@@ -18,7 +18,6 @@ import org.apache.spark.sql.functions.{max, sum}
   * "Average GDP Percent Change in Each Region"
   * "Average GDP per Capita Percent Change in Each Region"
   */
-
 object CovidResponse {
 
   /** Main
@@ -46,7 +45,6 @@ object CovidResponse {
     //Spark setup.
     val spark = SparkSession
       .builder()
-      .master("local[*]")
       .getOrCreate()
     import spark.implicits._
     spark.sparkContext.setLogLevel("WARN")
