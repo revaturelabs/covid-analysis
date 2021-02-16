@@ -689,8 +689,8 @@ pipeline {
 
                     //AWS cli with github 3rd party library
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-1.jar s3://covid-analysis-p3/covidliveupdate_2.12-1.jar")
-                        AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-1.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-1.jar")
+                        AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/covidliveupdate_2.12-2.jar")
+                        AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/regionalinfectionrates_2.12-2.jar")
                     }
 
                     // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
