@@ -313,43 +313,43 @@ pipeline {
 
 
 
-        // //Group Twitter-General
-        // //Twitter-General/data-cleaner Compile
-        // stage("Compile Twitter-General/data-cleaner") {
-        //     steps {
-        //         echo "Compile data-cleaner"
+        //Group Twitter-General
+        //Twitter-General/data-cleaner Compile
+        stage("Compile Twitter-General/data-cleaner") {
+            steps {
+                echo "Compile data-cleaner"
 
-        //         sh '''
-        //             cd twitter-general/data-cleaner
-        //             sbt compile
-        //             cd ../..
-        //         '''
-        //     }
-        // }
-        // //Twitter-General/data-cleaner Test
-        // stage("Test Twitter-General/data-cleaner") {
-        //     steps {
-        //         echo "Test data-cleaner"
+                sh '''
+                    cd twitter-general/data-cleaner
+                    sbt compile
+                    cd ../..
+                '''
+            }
+        }
+        //Twitter-General/data-cleaner Test DIDNT PASS
+        stage("Test Twitter-General/data-cleaner") {
+            steps {
+                echo "Test data-cleaner"
 
-        //         sh '''
-        //             cd twitter-general/data-cleaner
-        //             sbt test
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd twitter-general/data-cleaner
+                    sbt test
+                    cd ../..
+                '''
+            }
+        }
         //Twitter-General/data-cleaner Package
-        // stage("Package Twitter-General/data-cleaner") {
-        //     steps {
-        //         echo "Package data-cleaner"
+        stage("Package Twitter-General/data-cleaner") {
+            steps {
+                echo "Package data-cleaner"
 
-        //         sh '''
-        //             cd twitter-general/data-cleaner
-        //             sbt package
-        //             cd ../..
-        //         '''
-        //     }
-        // }
+                sh '''
+                    cd twitter-general/data-cleaner
+                    sbt package
+                    cd ../..
+                '''
+            }
+        }
 
 
 
@@ -365,7 +365,7 @@ pipeline {
         //         '''
         //     }
         // }
-        // //Twitter-General/hashtag-count-comparison Test
+        // //Twitter-General/hashtag-count-comparison Test DIDNT PASS
         // stage("Test Twitter-General/hashtag-count-comparison") {
         //     steps {
         //         echo "Test hashtag-count-comparison"
@@ -390,7 +390,42 @@ pipeline {
         //     }
         // }
 
+        //Twitter-General/tweet-covid19-words Compile
+        // stage("Compile Twitter-General/tweet-covid19-words") {
+        //     steps {
+        //         echo "Compile tweet-covid19-words"
 
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-words
+        //             sbt compile
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-words Test DIDNT PASS
+        // stage("Test Twitter-General/tweet-covid19-words") {
+        //     steps {
+        //         echo "Test tweet-covid19-words"
+
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-words
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //Twitter-General/tweet-covid19-words Package
+        // stage("Package Twitter-General/tweet-covid19-words") {
+        //     steps {
+        //         echo "Package tweet-covid19-words"
+
+        //         sh '''
+        //             cd twitter-general/tweet-covid19-words
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
         //Twitter-General/tweet-covid19-emoji Compile
         stage("Compile Twitter-General/tweet-covid19-emoji") {
@@ -470,42 +505,8 @@ pipeline {
 
 
 
-        //Twitter-General/tweet-covid19-words Compile
-        stage("Compile Twitter-General/tweet-covid19-words") {
-            steps {
-                echo "Compile tweet-covid19-words"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-words
-                    sbt compile
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-words Test
-        stage("Test Twitter-General/tweet-covid19-words") {
-            steps {
-                echo "Test tweet-covid19-words"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-words
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //Twitter-General/tweet-covid19-words Package
-        stage("Package Twitter-General/tweet-covid19-words") {
-            steps {
-                echo "Package tweet-covid19-words"
-
-                sh '''
-                    cd twitter-general/tweet-covid19-words
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        
+        
 
 
 
