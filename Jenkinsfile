@@ -48,6 +48,14 @@ pipeline {
                 }
                 //infection-mortality/CovidLiveUpdateApp Package
                 stage("Package infection-mortality/CovidLiveUpdateApp") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/CovidLiveUpdate'
+                        }
+                    }
                     steps {
                         echo "Package CovidLiveUpdateApp"
 
@@ -56,6 +64,13 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        script {
+                            // AWS cli with github 3rd party library
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                // infection-mortality
+                                AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
+                            }
+                        }
                     }
                 }
             }
@@ -100,6 +115,14 @@ pipeline {
                 }
                 //infection-mortality/RegionalInfectionRates Package
                 stage("Package infection-mortality/RegionalInfectionRates") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/RegionalInfectionRates'
+                        }
+                    }
                     steps {
                         echo "Package RegionalInfectionRates"
 
@@ -108,6 +131,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
+                        }
                     }
                 }
             }
@@ -152,6 +178,14 @@ pipeline {
                 }
                 //group-econResponse/CorrelateInfectionGDP Package
                 stage("Package group-econResponse/CorrelateInfectionGDP") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/CorrelateInfectionGDP'
+                        }
+                    }
                     steps{
                         echo "Package CorrelateInfectionGDP"
                         sh '''
@@ -159,6 +193,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -201,6 +238,14 @@ pipeline {
                 }
                 //group-econResponse/CountryBorders Package
                 stage("Package group-econResponse/CountryBorders") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/CountryBorders'
+                        }
+                    }
                     steps{
                         echo "Package CountryBorders"
                         sh '''
@@ -208,6 +253,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -250,6 +298,14 @@ pipeline {
                 }
                 //group-econResponse/CovidResponse Package
                 stage("Package group-econResponse/CovidResponse") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/CovidResponse'
+                        }
+                    }
                     steps{
                         echo "Package CovidResponse"
                         sh '''
@@ -257,6 +313,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -298,6 +357,14 @@ pipeline {
                 }
                 //group-econResponse/FirstRegionalPeaks Package
                 stage("Package group-econResponse/FirstRegionalPeaks") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps{
                         echo "Package FirstRegionalPeaks"
                         sh '''
@@ -305,6 +372,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -350,6 +420,14 @@ pipeline {
                 }
                 //twitter-covid/age-spikes-discussion Package
                 stage("Package twitter-covid/age-spikes-discussion") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package age-spikes-discussion"
 
@@ -358,6 +436,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -398,10 +479,21 @@ pipeline {
                             sbt test
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
                 //twitter-covid/HashtagByRegion Package
                 stage("Package twitter-covid/HashtagByRegion") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package HashtagByRegion"
 
@@ -415,7 +507,7 @@ pipeline {
             }
         }
         
-        
+
 
         //Group Twitter-General
         stage("data-cleaner"){
@@ -455,6 +547,14 @@ pipeline {
                 }
                 //Twitter-General/data-cleaner Package
                 stage("Package Twitter-General/data-cleaner") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package data-cleaner"
 
@@ -463,6 +563,10 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+
+                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                             AWS("--region=us-east-1 s3 cp twitter-general/data-cleaner/target/scala-2.12/data-cleaner_2.12-1.jar s3://covid-analysis-p3/modules/data-cleaner_2.12-1.jar")
+                         }
                     }
                 }
             }
@@ -507,6 +611,14 @@ pipeline {
                 }
                 //Twitter-General/hashtag-count-comparison Package
                 stage("Package Twitter-General/hashtag-count-comparison") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package hashtag-count-comparison"
 
@@ -515,6 +627,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp twitter-general/hashtag-count-comparison/target/scala-2.12/hashtag-count-comparison_2.12-1.jar s3://covid-analysis-p3/modules/hashtag-count-comparison_2.12-1.jar")
+                        }
                     }
                 }
             }
@@ -559,6 +674,14 @@ pipeline {
                 }
                 //Twitter-General/tweet-covid19-words Package
                 stage("Package Twitter-General/tweet-covid19-words") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package tweet-covid19-words"
 
@@ -567,7 +690,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-words/target/scala-2.12/tweet-covid19-words_2.12-1.jar s3://covid-analysis-p3/modules/tweet-covid19-words_2.12-1.jar")
+                        }
                     }
                 }
             }
@@ -612,6 +737,14 @@ pipeline {
                 }
                 //Twitter-General/tweet-covid19-emoji Assembly
                 stage("Assembly Twitter-General/tweet-covid19-emoji") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Assembly tweet-covid19-emoji"
 
@@ -620,7 +753,9 @@ pipeline {
                             sbt assembly
                             cd ../..
                         '''
-                    
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-emoji/target/scala-2.12/tweet-covid19-emoji_2.12-1.jar s3://covid-analysis-p3/modules/tweet-covid19-emoji_2.12-1.jar")
+                        }
                     }
                 }
             }
@@ -665,6 +800,14 @@ pipeline {
                 }
                 //Twitter-General/tweet-covid19-percentage Package
                 stage("Package Twitter-General/tweet-covid19-percentage") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package tweet-covid19-percentage"
 
@@ -673,6 +816,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/tweet-covid19-percentage_2.12-1.jar s3://covid-analysis-p3/modules/tweet-covid19-percentage_2.12-1.jar")
+                        }
                     }
                 }
             }
@@ -680,55 +826,43 @@ pipeline {
 
 
 
-        stage("tweet-positive-negative"){
-            // when {
-            //     // If any of these branches then run the stages
-            //     anyOf{
-            //         branch 'main';
-            //         branch 'develop'; //develop will be removed
-            //         branch 'tweet-positive-negative';
-            //         branch '*/tweet-positive-negative'
-            //     }
-            // }
-            stages {
-                //twitter-general/tweet-positive-negative Compile
-                stage("Compile twitter-general/tweet-positive-negative") {
-                    steps {
-                        echo "Compile tweet-positive-negative"
+        // stage("tweet-positive-negative"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop'; //develop will be removed
+        //             branch 'tweet-positive-negative';
+        //             branch '*/tweet-positive-negative'
+        //         }
+        //     }
+        //     stages {
+        //         //twitter-general/tweet-positive-negative Compile
+        //         stage("Compile twitter-general/tweet-positive-negative") {
+        //             steps {
+        //                 echo "Compile tweet-positive-negative"
 
-                        sh '''
-                            cd twitter-general/tweet-positive-negative
-                            sbt compile
-                            cd ../..
-                        '''
-                    }
-                }
-                //twitter-general/tweet-positive-negative Test
-                stage("Test Twitter-General/tweet-positive-negative") {
-                    steps {
-                        echo "Test tweet-positive-negative"
+        //                 sh '''
+        //                     cd twitter-general/tweet-positive-negative
+        //                     sbt compile
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //twitter-general/tweet-positive-negative Test
+        //         stage("Test Twitter-General/tweet-positive-negative") {
+        //             steps {
+        //                 echo "Test tweet-positive-negative"
 
-                        sh '''
-                            cd twitter-general/tweet-positive-negative
-                            sbt test
-                            cd ../..
-                        '''
-                    }
-                }
-                //twitter-general/tweet-positive-negative Assembly
-                stage("Assembly Twitter-General/tweet-positive-negative") {
-                    steps {
-                        echo "Assembly tweet-positive-negative"
-
-                        sh '''
-                            cd twitter-general/tweet-positive-negative
-                            sbt assembly
-                            cd ../..
-                        '''
-                    }
-                }
-            }
-        }
+        //                 sh '''
+        //                     cd twitter-general/tweet-positive-negative
+        //                     sbt test
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //     }
+        // }
 
 
 
@@ -750,7 +884,7 @@ pipeline {
                         echo "Compile stockmarket"
 
                         sh '''
-                            cd stockmarket
+                            cd herdimmunity-stockmarket/stockmarket
                             sbt compile
                             cd ../..
                         '''
@@ -762,7 +896,7 @@ pipeline {
                         echo "Test stockmarket"
 
                         sh '''
-                            cd stockmarket
+                            cd herdimmunity-stockmarket/stockmarket
                             sbt test
                             cd ../..
                         '''
@@ -770,14 +904,25 @@ pipeline {
                 }
                 //stockmarket Package
                 stage("Package stockmarket") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package stockmarket"
 
                         sh '''
-                            cd stockmarket
+                            cd herdimmunity-stockmarket/stockmarket
                             sbt package
                             cd ../..
                         '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -802,7 +947,7 @@ pipeline {
                         echo "Compile stockmarket-data"
 
                         sh '''
-                            cd stockmarket-data
+                            cd herdimmunity-stockmarket/stockmarket-data
                             sbt compile
                             cd ../..
                         '''
@@ -814,7 +959,7 @@ pipeline {
                         echo "Test stockmarket-data"
 
                         sh '''
-                            cd stockmarket-data
+                            cd herdimmunity-stockmarket/stockmarket-data
                             sbt test
                             cd ../..
                         '''
@@ -822,11 +967,85 @@ pipeline {
                 }
                 //stockmarket-data Package
                 stage("Package stockmarket-data") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package stockmarket-data"
 
                         sh '''
-                            cd stockmarket-data
+                            cd herdimmunity-stockmarket/stockmarket-data
+                            sbt package
+                            cd ../..
+                        '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        stage("herdimmunity"){
+            when {
+                // If any of these branches then run the stages
+                anyOf{
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch 'herdimmunity';
+                    branch '*/herdimmunity'
+                }
+            }
+            stages {
+                //herdimmunity Compile
+                stage("Compile herdimmunity") {
+                    steps {
+                        echo "Compile herdimmunity"
+
+                        sh '''
+                            cd herdimmunity-stockmarket/herdimmunity
+                            sbt compile
+                            cd ../..
+                        '''
+                    }
+                }
+                //herdimmunity Test
+                stage("Test herdimmunity") {
+                    steps {
+                        echo "Test herdimmunity"
+
+                        sh '''
+                            cd herdimmunity-stockmarket/herdimmunity
+                            sbt test
+                            cd ../..
+                        '''
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                        }
+                    }
+                }
+                //herdimmunity Package
+                stage("Package herdimmunity") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
+                    steps {
+                        echo "Package herdimmunity"
+
+                        sh '''
+                            cd herdimmunity-stockmarket/herdimmunity
                             sbt package
                             cd ../..
                         '''
@@ -874,6 +1093,14 @@ pipeline {
                 }
                 // RelatedHashtags Package
                 stage("Package twitter-covid RelatedHashtags") {
+                    when {
+                        // If any of these branches then run the stages
+                        anyOf{
+                            branch 'main';
+                            branch 'develop'; //develop will be removed
+                            branch 'deploy/FirstRegionalPeaks'
+                        }
+                    }
                     steps {
                         echo "Package RelatedHashtags"
 
@@ -901,40 +1128,8 @@ pipeline {
         success {
             echo "All test, build, and package has passed."
 
-            //THIS SHOULD BE MOVED TO EACH PACKAGE/ASSEMLY
-            // script {
-                //if( env.BRANCH == 'main' || env.BRANCH == 'develop' ){
+            // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
 
-                    //AWS cli with github 3rd party library
-                    // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        //infection-mortality
-                        // AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
-                        // AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
-
-                        //group-econResponse
-                        //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-
-                        //twitter-general
-                        //AWS("--region=us-east-1 s3 cp twitter-general/data-cleaner/target/scala-2.12/data-cleaner_2.12-2.jar s3://covid-analysis-p3/modules/")
-                        //AWS("--region=us-east-1 s3 cp twitter-general/hashtag-count-comparison/target/scala-2.12/hashtag-count-comparison_2.12-2.jar s3://covid-analysis-p3/modules/")
-                        //AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-words/target/scala-2.12/tweet-covid19-words_2.12-2.jar s3://covid-analysis-p3/modules/")
-                        //AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-emoji/target/scala-2.12/tweet-covid19-emoji_2.12-2.jar s3://covid-analysis-p3/modules/")
-                        //AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/tweet-covid19-percentage_2.12-2.jar s3://covid-analysis-p3/modules/")
-                        //AWS("--region=us-east-1 s3 cp twitter-general/tweet-positive-negative/target/scala-2.12/tweet-positive-negative_2.12-2.jar s3://covid-analysis-p3/modules/")
-
-                        //twitter-covid
-                        //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-
-                        //stockmarket
-                        //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-
-
-                    // }
-
-                    // Rebuild the react project here (only if the branch of the react project is changed): Strech Goal
-
-                //}
-            // }
         }
 
         unstable {
@@ -946,7 +1141,7 @@ pipeline {
         }
 
         failure {
-            echo "Something didn't pass."
+            echo "Something didn't pass. Email is being sent."
             emailext body: "Failure in commit: Job '${env.JOB_NAME}'", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
         }
 
