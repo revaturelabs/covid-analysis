@@ -64,7 +64,8 @@ object EUSpikes {
   /**
    * Pulls from s3 and analyzes EU young demographic weekly cases data.
    * @param spark The spark session input
-   * @return Dataframe grouped by... NOT DONE FINISH THIS
+   * @return Dataframe filtered by 24 and younger, grouped by "year_week" with corresponding sum of "new_cases" and split into separate
+   *         "year" and "week" columns
    */
   def processEUData(spark: SparkSession): DataFrame = {
     val df = pullEUData(spark)
@@ -123,6 +124,7 @@ object EUSpikes {
       $"_tmp".getItem(0)).withColumn("week", $"_tmp".getItem(1).cast(IntegerType).cast(StringType))
   }
 
+
   def EUGroupByWeekYear(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     import org.apache.spark.sql.types._
@@ -136,6 +138,12 @@ object EUSpikes {
 
 
 // Twitter Functions
+  /**
+   * Pulls from s3 and analyzes EU young demographic weekly cases data.
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe filtered by <15yr and 15-24yr only
+   */
   def processTwitterData(spark: SparkSession): DataFrame = {
     val df = pullTwitterData(spark)
     val dfWeeks = splitYearWeekTwitter(spark, df)
