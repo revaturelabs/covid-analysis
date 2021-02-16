@@ -183,8 +183,9 @@ object EUSpikes {
   }
 
   /**
-   * Same as pullTwitterData but pulls smaller dataset for development purposes.
+   * Split Year and Week into separate columns for input dataframe of Twitter data
    * @param spark The spark session input
+   * @param df The input dataframe
    * @return Dataframe with shortened Twitter Covid Tweet data.
    */
   def splitYearWeekTwitter(spark: SparkSession, df: DataFrame): DataFrame = {
@@ -198,6 +199,12 @@ object EUSpikes {
     dfWithWeek
   }
 
+  /**
+   * Group input dataframe by week, year and include count of tweets per week, year combination
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe with week, year, and covid_tweets per week, year combination.
+   */
   def twitterGroupByWeekYear(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     val grouped = df.groupBy($"week", $"year").count().withColumnRenamed("count", "covid_tweets")
