@@ -69,7 +69,7 @@ object EUSpikes {
   def processEUData(spark: SparkSession): DataFrame = {
     val df = pullEUData(spark)
     val grouped = groupData(spark, filterAgeGroups(spark, df))
-    val split = yearWeek(spark, grouped)
+    val split = splitYearWeek(spark, grouped)
     val groupYearWeek = EUGroupByWeekYear(spark, split)
     groupYearWeek
   }
@@ -96,8 +96,6 @@ object EUSpikes {
     df
   }
 
-  //group by year_week and sum(new_cases)
-  //result will have columns: year_week, sum(new_cases)
   /**
    * Group input dataframe by "year_week" and sum "new_cases" per "year_week", ordered by "year_week".
    * @param spark The spark session input
@@ -110,7 +108,13 @@ object EUSpikes {
     df
   }
 
-  def yearWeek(spark: SparkSession, df: DataFrame): DataFrame = {
+  /**
+   * Filter input dataframe to only include age groups <15yr and 15-24yr.
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe filtered by <15yr and 15-24yr only
+   */
+  def splitYearWeek(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     import org.apache.spark.sql.functions._
     import org.apache.spark.sql.types._
