@@ -216,5 +216,15 @@ spark-warehouse/
 # For SBT
 .jvmopts
 
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+.env
+
 
 # End of https://www.toptal.com/developers/gitignore/api/scala,sbt,intellij,spark
