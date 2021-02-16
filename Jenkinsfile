@@ -66,9 +66,9 @@ pipeline {
             when {
                 // If any of these branches then run the stages
                 anyOf{
-                    expression { BRANCH == 'main'; }
-                    expression { BRANCH == 'develop'; } //develop will be removed
-                    expression { BRANCH == '*RegionalInfectionRates'; }
+                    branch 'main';
+                    branch 'develop'; //develop will be removed
+                    branch '*RegionalInfectionRates'
                 }
             }
             stages{
