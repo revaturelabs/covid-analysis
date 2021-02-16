@@ -10,11 +10,16 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions._
 
 class DailyChangeRunnerTest extends AnyFlatSpec {
+    // Setting the log level to Error
     Logger.getLogger("org").setLevel(Level.ERROR)
+
+    // Setting up a new SparkSession
+    // Comment out .master("local[4]") because AWS EMR uses master yarn 
     val spark = SparkSession.builder()
             .appName("composite_test")
-            .master("local[4]")
+            //.master("local[4]")
             .getOrCreate()
+
     import spark.implicits._
 
     // // works localy but not on jenkins
@@ -30,24 +35,23 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
     //     assert(DailyChangeRunner.dataFrameByRegion(spark, "Europe").rdd.isEmpty == false)
     // }
     
-    //brutal practice
-    // Make sure the dates are converted into date objects
+    // Tests if all dates in the Date column are converted into date objects.
     "dateColumnFormating" should "cause different date strings to end as a Date with africa data" in {
         DailyChangeRunner.dateColumnFormating(DummyData.africaDF).select($"Date").take(6).map((x) => assert(x(0).isInstanceOf[java.sql.Date]))
     }
 
-    // Make sure the dates are converted into date objects
+    // Tests if all dates in the Date column are converted into date objects.
     "dateColumnFormating" should "cause different date strings to end as a Date with all data" in {
         DailyChangeRunner.dateColumnFormating(DummyData.theRestRegionsDF).select($"Date").take(6).map((x) => assert(x(0).isInstanceOf[java.sql.Date]))
     }
 
-    // Make sure that the number of rows is as expected
+    // Tests if the number of rows has been reduced as the method sums all composite index prices of the same date.
     "sumOfOpenPrice" should "remove duplicate rows in the Date column" in {
         val df = DailyChangeRunner.sumOfOpenPrice(DailyChangeRunner.dateColumnFormating(DummyData.africaDF), "Africa")
         assert(DailyChangeRunner.dateColumnFormating(DummyData.africaDF).count() == 6 && df.count() == 3)
     }
 
-    // Ensure the percent is calculated as expected
+    // Tests if the function calculates daily percentage change in the Region Index column.
     "dailyChangeCalculator" should "calculate daily percentage change in a Region Index column" in {
         val df = DailyChangeRunner.sumOfOpenPrice(DailyChangeRunner.dateColumnFormating(DummyData.africaDF), "Africa")
         assert(DailyChangeRunner.dailyChangeCalculator(spark, df, "Africa").select($"Percentage_Change").take(3)(1)(0) == 0.96)
@@ -60,11 +64,11 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
     // }
 }
 
-
+// Creates dummy data that contain dataframes and a SparkSession to be used only in the DailyChangeRunnerTest object.
 object DummyData {
   val spark = SparkSession.builder()
             .appName("composite_test")
-            .master("local[4]")
+            //.master("local[4]")
             .getOrCreate()
   import spark.implicits._
   val africaDF = Seq(

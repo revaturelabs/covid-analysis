@@ -13,7 +13,10 @@ trait SparkSessionTestWrapper {
       .getOrCreate()
   }
 }
-class CovidResponseSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
+class CovidResponseSpecs
+    extends AnyFunSpec
+    with SparkSessionTestWrapper
+    with DatasetComparer {
 
   it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read

@@ -16,7 +16,10 @@ trait SparkSessionTestWrapper {
   }
 }
 
-class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
+class CorrelateSpecs
+    extends AnyFunSpec
+    with SparkSessionTestWrapper
+    with DatasetComparer {
 
   it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read
@@ -27,7 +30,7 @@ class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with Datase
 
     val resultDF = srcDF.select(col("name").alias("country"))
 
-   assert(resultDF.columns.contains("country"))
+    assert(resultDF.columns.contains("country"))
   }
 
   it("calculates the pearson correlation coefficient for two columns") {

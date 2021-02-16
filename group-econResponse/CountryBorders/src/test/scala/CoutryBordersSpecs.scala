@@ -17,7 +17,10 @@ trait SparkSessionTestWrapper {
 
 }
 
-class CorrelateSpecs extends AnyFunSpec with SparkSessionTestWrapper with DatasetComparer {
+class CorrelateSpecs
+    extends AnyFunSpec
+    with SparkSessionTestWrapper
+    with DatasetComparer {
 
   it("aliases a DataFrame to test spark availability") {
     val srcDF = spark.read

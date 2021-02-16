@@ -8,16 +8,17 @@ import com.amazonaws.{AmazonClientException, AmazonServiceException}
 import org.apache.commons.io.IOUtils
 import org.apache.spark.sql.DataFrame
 
-case class s3DAO (
-   amazonS3Client: AmazonS3Client,
-   BUCKET_NAME: String = "covid-analysis-p3",
-   DATA_LAKE: String = "datalake/infection-gdp/",
-   DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
-   var downloadPath: String = ""
-   ) {
+case class s3DAO(
+    amazonS3Client: AmazonS3Client,
+    BUCKET_NAME: String = "covid-analysis-p3",
+    DATA_LAKE: String = "datalake/infection-gdp/",
+    DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
+    var downloadPath: String = ""
+) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
-  def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
+  def loadDFFromBucket(filesName: String,
+                       cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
     val file = new FileOutputStream(s"$downloadPath/$filesName")
@@ -31,7 +32,8 @@ case class s3DAO (
     try {
       amazonS3Client.putObject(BUCKET_NAME, fileName, file)
     } catch {
-      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
+      case e: AmazonClientException =>
+        System.err.println("Exception: " + e.toString)
     }
   }
 
@@ -39,14 +41,16 @@ case class s3DAO (
   def downloadFile(fileName: String): Unit = {
     try {
       val obj = amazonS3Client.getObject(BUCKET_NAME, fileName)
-      val reader = new BufferedReader(new InputStreamReader(obj.getObjectContent))
+      val reader = new BufferedReader(
+        new InputStreamReader(obj.getObjectContent))
       var line = reader.readLine
       while (reader.readLine != null) {
         println(line)
         line = reader.readLine
       }
     } catch {
-      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
+      case e: AmazonClientException =>
+        System.err.println("Exception: " + e.toString)
     }
   }
 
@@ -69,7 +73,8 @@ object s3DAO {
       Some(amazonS3Client)
     } catch {
       case _: AmazonServiceException | _: AmazonClientException =>
-        System.err.println("Connecting to AWS s3 failed. Confirm your credentials.")
+        System.err.println(
+          "Connecting to AWS s3 failed. Confirm your credentials.")
         None
     }
   }

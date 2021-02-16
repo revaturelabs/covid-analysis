@@ -5,11 +5,11 @@ import org.apache.spark.sql.SparkSession
 import utilites.{DataFrameBuilder, s3DAO}
 
 /** Question: What is the average amount of time it took for each region to reach its first peak in infection rate
- * per capita?
- * queries:
- * uses Spark SQL for analytics with S3 buckets partitioned by region to query datasets and calculate the time elapsed.
- *
- */
+  * per capita?
+  * queries:
+  * uses Spark SQL for analytics with S3 buckets partitioned by region to query datasets and calculate the time elapsed.
+  *
+  */
 object FirstRegionalPeaks {
 
   def main(args: Array[String]): Unit = {
@@ -28,8 +28,8 @@ object FirstRegionalPeaks {
     )
 
     //Spark setup
-    val spark = SparkSession.builder()
-      .master("local[*]")
+    val spark = SparkSession
+      .builder()
       .getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
 
@@ -37,7 +37,8 @@ object FirstRegionalPeaks {
     val df = dfb.build(spark, fileNames, db)
 
     //Show Results.
-    println("\nRegional time elapsed in days before first major Covid-19 spikes:")
+    println(
+      "\nRegional time elapsed in days before first major Covid-19 spikes:")
     calc.regionalFirstPeak(spark, df)
 
     spark.stop()
