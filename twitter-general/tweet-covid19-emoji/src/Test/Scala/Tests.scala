@@ -3,6 +3,8 @@ package emojis
 import org.scalatest.flatspec.AnyFlatSpec
 import com.vdurmont.emoji._
 
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
 
 /**
   * All tests are designed to fail as of now.
@@ -10,25 +12,35 @@ import com.vdurmont.emoji._
   */
 class SetSpec extends AnyFlatSpec {
 
+  val spark = SparkSession.builder
+      .appName("Tester")
+      .master("local[4]")
+      .getOrCreate()
+    val sc = spark.sparkContext
+    sc.setLogLevel("INFO")
+
+
+  val testPath = "asgdhjasdlaejf"
 
   //Store the computations to be tested beforehand so we're not re-computing for every single test case.
-  val mapToTest = Utilities.tweetcovid19emoji("test-data.txt")
+  val mapToTest = Utilities.tweetcovid19emoji(testPath, sc)
 
   //The Emoji Count function should be a Map populated with all emojis found in the data, and their respective counts.
   "Utilities" should "Return a non-empty map of emojis and counts" in {
-    assert(mapToTest.isEmpty)
-
-    // assert(mapToTest.keys.isInstanceOf[String])
-    // assert(mapToTest.values.isInstanceOf[Int])
-
-    // Pretty sure these two tests are redundant 
-    // tweetcovid19emoji won't run in the first place if the key/values aren't the correct type.
+    assert(!mapToTest.isEmpty)
   }
 
   //The Key values for the EmojiCount map should all be emojis.
-  //Update this with a regex or library function that tests each key as an emoji.
-  it should "Contain an emoji in the first element" in{
-    assert(mapToTest.contains("❤"))
+  it should "Only contain emojis as keys" in{
+    for ((key,value) <- mapToTest) {
+      assert(EmojiManager.isEmoji(key))
+    }
+  }
+
+  it should "Only contain integers as values" in{
+    for ((key,value) <- mapToTest) {
+      assert(value.isInstanceOf[Int])
+    }
   }
 
   //The EmojiCount Map shold not contain any non-Emoji characters in the Keys. 
