@@ -10,7 +10,9 @@ pipeline {
     // Define our pipeline into stages
     stages {
 
-        //Infection-mortality group
+        // //Infection-mortality group
+
+
         stage("CovidLiveUpdateApp"){
             when {
                 // If any of these branches then run the stages
@@ -141,244 +143,304 @@ pipeline {
 
 
 
-        // Group group-econRepsponse 
-        stage("CorrelateInfectionGDP"){
+        // // Group group-econRepsponse 
+        stage("Group-EconResponse"){
             when {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch 'CorrelateInfectionGDP';
-                    branch '*/CorrelateInfectionGDP'
+                    branch 'group-econResponse';
+                    branch '*/group-econResponse'
 
                 }
             }
             stages{
                 // group-econResponse/CorrelateInfectionGDP Compile
-                stage("Compile group-econResponse/CorrelateInfectionGDP") {
+                stage("Compile group-econResponse") {
                     steps{
-                        echo "Compile CorrelateInfectionGDP"
+                        echo "Compile group-econResponse"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt compile
-                            cd ../..
+                            cd ..
                         '''
                     }
                 }
                 //group-econResponse/CorrelateInfectionGDP Test
-                stage("Test group-econResponse/CorrelateInfectionGDP") {
+                stage("Test group-econResponse") {
                     steps{
-                        echo "Test CorrelateInfectionGDP"
+                        echo "Test group-econResponse"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt test
-                            cd ../..
+                            cd ..
                         '''
                     }
                 }
                 //group-econResponse/CorrelateInfectionGDP Package
-                stage("Package group-econResponse/CorrelateInfectionGDP") {
+                stage("Package group-econResponse") {
                     when {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
                             branch 'develop'; //develop will be removed
-                            branch 'deploy/CorrelateInfectionGDP'
+                            branch 'deploy/group-econResponse'
                         }
                     }
                     steps{
-                        echo "Package CorrelateInfectionGDP"
+                        echo "Package group-econResponse"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt package
-                            cd ../..
+                            cd ..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-
-        stage("CountryBorders"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'CountryBorders';
-                    branch '*/CountryBorders'
-                }
-            }
-            stages{
-                //group-econResponse/CountryBorders Compile
-                stage("Compile group-econResponse/CountryBorders") {
-                    steps{
-                        echo "Compile CountryBorders"
-                        sh '''
-                            cd group-econResponse/CountryBorders
-                            sbt compile
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/CountryBorders Test
-                stage("Test group-econResponse/CountryBorders") {
-                    steps{
-                        echo "Test CountryBorders"
-                        sh '''
-                            cd group-econResponse/CountryBorders
-                            sbt test
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/CountryBorders Package
-                stage("Package group-econResponse/CountryBorders") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/CountryBorders'
-                        }
-                    }
-                    steps{
-                        echo "Package CountryBorders"
-                        sh '''
-                            cd group-econResponse/CountryBorders
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-
-        stage("CovidResponse"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'CovidResponse';
-                    branch '*/CovidResponse'
-                }
-            }
-            stages {
-                //group-econResponse/CovidResponse Compile
-                stage("Compile group-econResponse/CovidResponse") {
-                    steps{
-                        echo "Compile CovidResponse"
-                        sh '''
-                            cd group-econResponse/CovidResponse
-                            sbt compile
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/CovidResponse Test
-                stage("Test group-econResponse/CovidResponse") {
-                    steps{
-                        echo "Test CovidResponse"
-                        sh '''
-                            cd group-econResponse/CovidResponse
-                            sbt test
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/CovidResponse Package
-                stage("Package group-econResponse/CovidResponse") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/CovidResponse'
-                        }
-                    }
-                    steps{
-                        echo "Package CovidResponse"
-                        sh '''
-                            cd group-econResponse/CovidResponse
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp group-econResponse/target/scala-2.12/covid-econ-grp_2.12-1.0.jar s3://covid-analysis-p3/modules/covid-econ-grp_2.12-1.0.jar")
                         }
                     }
                 }
             }
         }
 
+
+        // stage("CorrelateInfectionGDP"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop'; //develop will be removed
+        //             branch 'CorrelateInfectionGDP';
+        //             branch '*/CorrelateInfectionGDP'
+
+        //         }
+        //     }
+        //     stages{
+        //         // group-econResponse/CorrelateInfectionGDP Compile
+        //         stage("Compile group-econResponse/CorrelateInfectionGDP") {
+        //             steps{
+        //                 echo "Compile CorrelateInfectionGDP"
+        //                 sh '''
+        //                     cd group-econResponse/CorrelateInfectionGDP
+        //                     sbt compile
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CorrelateInfectionGDP Test
+        //         stage("Test group-econResponse/CorrelateInfectionGDP") {
+        //             steps{
+        //                 echo "Test CorrelateInfectionGDP"
+        //                 sh '''
+        //                     cd group-econResponse/CorrelateInfectionGDP
+        //                     sbt test
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CorrelateInfectionGDP Package
+        //         stage("Package group-econResponse/CorrelateInfectionGDP") {
+        //             when {
+        //                 // If any of these branches then run the stages
+        //                 anyOf{
+        //                     branch 'main';
+        //                     branch 'develop'; //develop will be removed
+        //                     branch 'deploy/CorrelateInfectionGDP'
+        //                 }
+        //             }
+        //             steps{
+        //                 echo "Package CorrelateInfectionGDP"
+        //                 sh '''
+        //                     cd group-econResponse/CorrelateInfectionGDP
+        //                     sbt package
+        //                     cd ../..
+        //                 '''
+        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //                     //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         
-        stage("FirstRegionalPeaks"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'FirstRegionalPeaks';
-                    branch '*/FirstRegionalPeaks'
-                }
-            }
-            stages {
-                //group-econResponse/FirstRegionalPeaks Compile
-                stage("Compile group-econResponse/FirstRegionalPeaks") {
-                    steps{
-                        echo "Compile FirstRegionalPeaks"
-                        sh '''
-                            cd group-econResponse/FirstRegionalPeaks
-                            sbt compile
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/FirstRegionalPeaks Test
-                stage("Test group-econResponse/FirstRegionalPeaks") {
-                    steps{
-                        echo "Test FirstRegionalPeaks"
-                        sh '''
-                            cd group-econResponse/FirstRegionalPeaks
-                            sbt test
-                            cd ../..
-                        '''
-                    }
-                }
-                //group-econResponse/FirstRegionalPeaks Package
-                stage("Package group-econResponse/FirstRegionalPeaks") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/FirstRegionalPeaks'
-                        }
-                    }
-                    steps{
-                        echo "Package FirstRegionalPeaks"
-                        sh '''
-                            cd group-econResponse/FirstRegionalPeaks
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
-                    }
-                }
-            }
-        }
+        
+
+        // stage("CountryBorders"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop'; //develop will be removed
+        //             branch 'CountryBorders';
+        //             branch '*/CountryBorders'
+        //         }
+        //     }
+        //     stages{
+        //         //group-econResponse/CountryBorders Compile
+        //         stage("Compile group-econResponse/CountryBorders") {
+        //             steps{
+        //                 echo "Compile CountryBorders"
+        //                 sh '''
+        //                     cd group-econResponse/CountryBorders
+        //                     sbt compile
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CountryBorders Test
+        //         stage("Test group-econResponse/CountryBorders") {
+        //             steps{
+        //                 echo "Test CountryBorders"
+        //                 sh '''
+        //                     cd group-econResponse/CountryBorders
+        //                     sbt test
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CountryBorders Package
+        //         stage("Package group-econResponse/CountryBorders") {
+        //             when {
+        //                 // If any of these branches then run the stages
+        //                 anyOf{
+        //                     branch 'main';
+        //                     branch 'develop'; //develop will be removed
+        //                     branch 'deploy/CountryBorders'
+        //                 }
+        //             }
+        //             steps{
+        //                 echo "Package CountryBorders"
+        //                 sh '''
+        //                     cd group-econResponse/CountryBorders
+        //                     sbt package
+        //                     cd ../..
+        //                 '''
+        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //                     //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        
+        
+
+        // stage("CovidResponse"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop'; //develop will be removed
+        //             branch 'CovidResponse';
+        //             branch '*/CovidResponse'
+        //         }
+        //     }
+        //     stages {
+        //         //group-econResponse/CovidResponse Compile
+        //         stage("Compile group-econResponse/CovidResponse") {
+        //             steps{
+        //                 echo "Compile CovidResponse"
+        //                 sh '''
+        //                     cd group-econResponse/CovidResponse
+        //                     sbt compile
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CovidResponse Test
+        //         stage("Test group-econResponse/CovidResponse") {
+        //             steps{
+        //                 echo "Test CovidResponse"
+        //                 sh '''
+        //                     cd group-econResponse/CovidResponse
+        //                     sbt test
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CovidResponse Package
+        //         stage("Package group-econResponse/CovidResponse") {
+        //             when {
+        //                 // If any of these branches then run the stages
+        //                 anyOf{
+        //                     branch 'main';
+        //                     branch 'develop'; //develop will be removed
+        //                     branch 'deploy/CovidResponse'
+        //                 }
+        //             }
+        //             steps{
+        //                 echo "Package CovidResponse"
+        //                 sh '''
+        //                     cd group-econResponse/CovidResponse
+        //                     sbt package
+        //                     cd ../..
+        //                 '''
+        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //                     //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        
+        // stage("FirstRegionalPeaks"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop'; //develop will be removed
+        //             branch 'FirstRegionalPeaks';
+        //             branch '*/FirstRegionalPeaks'
+        //         }
+        //     }
+        //     stages {
+        //         //group-econResponse/FirstRegionalPeaks Compile
+        //         stage("Compile group-econResponse/FirstRegionalPeaks") {
+        //             steps{
+        //                 echo "Compile FirstRegionalPeaks"
+        //                 sh '''
+        //                     cd group-econResponse/FirstRegionalPeaks
+        //                     sbt compile
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/FirstRegionalPeaks Test
+        //         stage("Test group-econResponse/FirstRegionalPeaks") {
+        //             steps{
+        //                 echo "Test FirstRegionalPeaks"
+        //                 sh '''
+        //                     cd group-econResponse/FirstRegionalPeaks
+        //                     sbt test
+        //                     cd ../..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/FirstRegionalPeaks Package
+        //         stage("Package group-econResponse/FirstRegionalPeaks") {
+        //             when {
+        //                 // If any of these branches then run the stages
+        //                 anyOf{
+        //                     branch 'main';
+        //                     branch 'develop'; //develop will be removed
+        //                     branch 'deploy/FirstRegionalPeaks'
+        //                 }
+        //             }
+        //             steps{
+        //                 echo "Package FirstRegionalPeaks"
+        //                 sh '''
+        //                     cd group-econResponse/FirstRegionalPeaks
+        //                     sbt package
+        //                     cd ../..
+        //                 '''
+        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //                     //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         
 
 
