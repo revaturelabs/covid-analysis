@@ -1,3 +1,4 @@
+name := "covid-econ-grp"
 ThisBuild / version := "1.0"
 ThisBuild / organization := "com.revatureData.econGroup"
 ThisBuild / scalaVersion := "2.12.13"
@@ -88,8 +89,8 @@ lazy val sharedDependencies = Seq(
 lazy val dependencies =
   new {
     val aws = "com.amazonaws" % "aws-java-sdk" % "1.3.32"
-    val sparkCore = "org.apache.spark" %% "spark-core" % "2.4.5" % Provided
-    val sparkSql = "org.apache.spark" %% "spark-sql" % "2.4.5" % Provided
+    val sparkCore = "org.apache.spark" %% "spark-core" % "2.4.5"
+    val sparkSql = "org.apache.spark" %% "spark-sql" % "2.4.5"
     val scalaTest = "org.scalatest" %% "scalatest-funspec" % "3.2.2" % "test"
     val mrPowers = "com.github.mrpowers" %% "spark-fast-tests" % "0.21.3" % "test"
     val logCore = "org.apache.logging.log4j" % "log4j-core" % "2.13.0" % Runtime

@@ -30,8 +30,8 @@ object FirstRegionalPeaks {
     //Spark setup
     val spark = SparkSession
       .builder()
+      .master("local[*]")
       .getOrCreate()
-    spark.sparkContext.setLogLevel("WARN")
 
     //Build df
     val df = dfb.build(spark, fileNames, db)

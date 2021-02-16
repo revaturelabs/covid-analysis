@@ -17,8 +17,7 @@ case class s3DAO(
 ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
-  def loadDFFromBucket(filesName: String,
-                       cb: String => DataFrame): DataFrame = {
+  def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
     val file = new FileOutputStream(s"$downloadPath/$filesName")
@@ -73,8 +72,7 @@ object s3DAO {
       Some(amazonS3Client)
     } catch {
       case _: AmazonServiceException | _: AmazonClientException =>
-        System.err.println(
-          "Connecting to AWS s3 failed. Confirm your credentials.")
+        System.err.println("Connecting to AWS s3 failed. Confirm your credentials.")
         None
     }
   }

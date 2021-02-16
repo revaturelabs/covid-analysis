@@ -32,8 +32,8 @@ object CorrelateInfectionGDP {
     //Spark setup.
     val spark = SparkSession
       .builder()
+      .master("local[*]")
       .getOrCreate()
-    spark.sparkContext.setLogLevel("WARN")
 
     //Build DF
     val df = dfb.build(spark, fileNames, s3)

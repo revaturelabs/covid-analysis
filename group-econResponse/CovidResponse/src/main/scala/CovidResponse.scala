@@ -45,9 +45,9 @@ object CovidResponse {
     //Spark setup.
     val spark = SparkSession
       .builder()
+      .master("local[*]")
       .getOrCreate()
     import spark.implicits._
-    spark.sparkContext.setLogLevel("WARN")
 
     //Build DF.
     val data = dfb.build(spark, fileNames, db)
