@@ -14,6 +14,7 @@ pipeline {
         stage("CovidLiveUpdateApp"){
             when {
                 // If any of these branches then run the stages
+                expression { echo "BRANCH_NAME is ${env.BRANCH_NAME}"}
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
@@ -68,7 +69,8 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*RegionalInfectionRates'
+                    branch '*RegionalInfectionRates';
+                    branch '*/RegionalInfectionRates'
                 }
             }
             stages{
