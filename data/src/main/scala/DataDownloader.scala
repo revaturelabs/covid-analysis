@@ -5,16 +5,13 @@ import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
 import java.time.LocalDate.now
 import java.time.format.DateTimeFormatter
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
-import org.apache.log4j._
 
 
 object DataDownloader{
     case class CompositeIndexOfCountry(region: String, nation: String, indexName: String, tickerSymbol: String, countryCode: String, dataSource: String)
 
     val startDate = "02/17/2020"
-    val endDate = "02/14/2021"
+    val endDate = "02/03/2021"
 
     def main(args: Array[String]){
         val compositeIndexListFile = "./CompositeIndexList.csv"
