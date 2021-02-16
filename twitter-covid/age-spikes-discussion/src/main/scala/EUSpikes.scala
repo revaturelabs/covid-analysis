@@ -8,9 +8,13 @@ object EUSpikes {
    * @return Unit
    */
   def processData(spark: SparkSession): Unit = {
+    import spark.implicits._
+    import org.apache.spark.sql.functions._
     val twitter = processTwitterData(spark)
     val eu = processEUData(spark)
     val joined = joinTables(spark, twitter, eu)
+      .withColumn("weeks since 2020 start",
+    when($"year" === 2020, $"week").otherwise($"week" + 52)).orderBy("week")
 
     twitter.show()
     eu.show()
@@ -105,7 +109,8 @@ object EUSpikes {
    */
   def groupData(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
-    df.groupBy($"year_week").sum("new_cases").orderBy($"year_week")
+    df.groupBy($"year_week").sum("new_cases")
+//    .orderBy($"year_week")
     df
   }
 
@@ -124,7 +129,12 @@ object EUSpikes {
       $"_tmp".getItem(0)).withColumn("week", $"_tmp".getItem(1).cast(IntegerType).cast(StringType))
   }
 
-
+  /**
+   * Group by year and week
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe grouped by "year" and "week" with sum of new_cases
+   */
   def EUGroupByWeekYear(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     import org.apache.spark.sql.types._
@@ -196,7 +206,7 @@ object EUSpikes {
 
     spark.conf.set("spark.sql.legacy.timeParserPolicy","LEGACY")
     val dfWithWeek = df.withColumn("input_date", to_date($"date")).withColumn("year", year($"date")).withColumn("week", date_format($"date", "w").cast(IntegerType))
-    dfWithWeek.orderBy(desc("date"))
+//    dfWithWeek.orderBy(desc("date"))
     dfWithWeek
   }
 
