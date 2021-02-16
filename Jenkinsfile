@@ -419,15 +419,15 @@ pipeline {
 
         //Group Twitter-General
         stage("data-cleaner"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'data-cleaner';
-                    branch '*/data-cleaner'
-                }
-            }
+            // when {
+            //     // If any of these branches then run the stages
+            //     anyOf{
+            //         branch 'main';
+            //         branch 'develop'; //develop will be removed
+            //         branch 'data-cleaner';
+            //         branch '*/data-cleaner'
+            //     }
+            // }
             stages {
                 //Twitter-General/data-cleaner Compile
                 stage("Compile Twitter-General/data-cleaner") {
@@ -471,15 +471,15 @@ pipeline {
         
         
         stage("hashtag-count-comparison"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'hashtag-count-comparison';
-                    branch '*/hashtag-count-comparison'
-                }
-            }
+            // when {
+            //     // If any of these branches then run the stages
+            //     anyOf{
+            //         branch 'main';
+            //         branch 'develop'; //develop will be removed
+            //         branch 'hashtag-count-comparison';
+            //         branch '*/hashtag-count-comparison'
+            //     }
+            // }
             stages {
                 //Twitter-General/hashtag-count-comparison Compile
                 stage("Compile Twitter-General/hashtag-count-comparison") {
@@ -521,16 +521,17 @@ pipeline {
         }
 
 
+
         stage("tweet-covid19-words"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'tweet-covid19-words';
-                    branch '*/tweet-covid19-words'
-                }
-            }
+            // when {
+            //     // If any of these branches then run the stages
+            //     anyOf{
+            //         branch 'main';
+            //         branch 'develop'; //develop will be removed
+            //         branch 'tweet-covid19-words';
+            //         branch '*/tweet-covid19-words'
+            //     }
+            // }
             stages{
                 //Twitter-General/tweet-covid19-words Compile
                 stage("Compile Twitter-General/tweet-covid19-words") {
@@ -575,15 +576,15 @@ pipeline {
 
 
         stage("tweet-covid19-emoji"){
-            when {
-                    // If any of these branches then run the stages
-                    anyOf{
-                        branch 'main';
-                        branch 'develop'; //develop will be removed
-                        branch 'tweet-covid19-emoji';
-                        branch '*/tweet-covid19-emoji'
-                    }
-            }
+            // when {
+            //         // If any of these branches then run the stages
+            //         anyOf{
+            //             branch 'main';
+            //             branch 'develop'; //develop will be removed
+            //             branch 'tweet-covid19-emoji';
+            //             branch '*/tweet-covid19-emoji'
+            //         }
+            // }
                 
             stages {
                 //Twitter-General/tweet-covid19-emoji Compile
@@ -681,15 +682,15 @@ pipeline {
 
 
         stage("tweet-positive-negative"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'tweet-positive-negative';
-                    branch '*/tweet-positive-negative'
-                }
-            }
+            // when {
+            //     // If any of these branches then run the stages
+            //     anyOf{
+            //         branch 'main';
+            //         branch 'develop'; //develop will be removed
+            //         branch 'tweet-positive-negative';
+            //         branch '*/tweet-positive-negative'
+            //     }
+            // }
             stages {
                 //twitter-general/tweet-positive-negative Compile
                 stage("Compile twitter-general/tweet-positive-negative") {
