@@ -20,7 +20,7 @@ object FirstRegionalPeaks {
     val db = s3DAO()
     val dfb = new DataFrameBuilder
     val calc = new Calculator
-    db.setLocalLakePath("FirstRegionalPeaks/src/main/resources")
+    db.setLocalLakePath("FirstRegionalPeaks/src/main/resources/datalake")
     val fileNames = Map(
       "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",
