@@ -17,7 +17,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*CovidLiveUpdate*'
+                    branch '*CovidLiveUpdate'
                 }
             }
             stages{
@@ -68,7 +68,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*RegionalInfectionRates*'
+                    branch '*RegionalInfectionRates'
                 }
             }
             stages{
@@ -120,7 +120,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*CorrelateInfectionGDP*'
+                    branch '*CorrelateInfectionGDP'
                 }
             }
             stages{
@@ -168,7 +168,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*CountryBorders*'
+                    branch '*CountryBorders'
                 }
             }
             stages{
@@ -216,7 +216,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*CovidResponse*'
+                    branch '*CovidResponse'
                 }
             }
             stages {
@@ -263,7 +263,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*FirstRegionalPeaks*'
+                    branch '*FirstRegionalPeaks'
                 }
             }
             stages {
@@ -312,7 +312,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*FirstRegionalPeaks*'
+                    branch '*age-spikes-discussion'
                 }
             }
             stages {
@@ -362,7 +362,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*HashtagByRegion*'
+                    branch '*HashtagByRegion'
                 }
             }
             stages{
@@ -414,7 +414,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*data-cleaner*'
+                    branch '*data-cleaner'
                 }
             }
             stages {
@@ -465,7 +465,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*hashtag-count-comparison*'
+                    branch '*hashtag-count-comparison'
                 }
             }
             stages {
@@ -509,13 +509,13 @@ pipeline {
         }
 
 
-        stage("FirstRegionalPeaks"){
+        stage("tweet-covid19-words"){
             when {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*FirstRegionalPeaks*'
+                    branch '*tweet-covid19-words'
                 }
             }
             stages{
@@ -567,7 +567,7 @@ pipeline {
                     anyOf{
                         branch 'main';
                         branch 'develop'; //develop will be removed
-                        branch '*tweet-covid19-emoji*'
+                        branch '*tweet-covid19-emoji'
                     }
             }
                 
@@ -620,7 +620,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*tweet-covid19-percentage*'
+                    branch '*tweet-covid19-percentage'
                 }
             }
             stages{
@@ -665,13 +665,13 @@ pipeline {
 
 
 
-        stage("FirstRegionalPeaks"){
+        stage("tweet-positive-negative"){
             when {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*tweet-positive-negative*'
+                    branch '*tweet-positive-negative'
                 }
             }
             stages {
@@ -723,7 +723,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*stockmarket*'
+                    branch '*stockmarket'
                 }
             }
             stages {
@@ -768,13 +768,13 @@ pipeline {
         
 
 
-        stage("FirstRegionalPeaks"){
+        stage("stockmarket-data"){
             when {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*FirstRegionalPeaks*'
+                    branch '*stockmarket-data'
                 }
             }
             stages {
@@ -825,7 +825,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*RelatedHashtags*'
+                    branch '*RelatedHashtags'
                 }
             }
             stages {
