@@ -141,7 +141,8 @@ object EUSpikes {
   /**
    * Pulls from s3 and analyzes Twitter Covid discussion data.
    * @param spark The spark session input
-   * @return  NOT DONE YET........
+   * @return Twitter data split by year and week, and grouped by year, week,
+   *         with counts of Covid Tweets per year, week
    */
   def processTwitterData(spark: SparkSession): DataFrame = {
     val df = pullTwitterData(spark)
@@ -153,7 +154,7 @@ object EUSpikes {
   /**
    * Same as processTwitterData but pulls smaller dataset for development purposes.
    * @param spark The spark session input
-   * @return  NOT DONE YET........
+   * @return Same as processTwitterData, but on shortened dataset
    */
   def processTwitterDataDevelopment(spark: SparkSession): DataFrame = {
     val df = pullTwitterDataDevelopment(spark)
@@ -165,7 +166,7 @@ object EUSpikes {
   /**
    * Pulls Twitter Covid tweets data from s3.
    * @param spark The spark session input
-   * @return Dataframe with Twitter Covid Tweet data.
+   * @return Dataframe with Twitter Covid Tweet data
    */
   def pullTwitterData(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").option("sep", "\t").csv("s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv").cache()
@@ -175,7 +176,7 @@ object EUSpikes {
   /**
    * Same as pullTwitterData but pulls smaller dataset for development purposes.
    * @param spark The spark session input
-   * @return Dataframe with shortened Twitter Covid Tweet data.
+   * @return Dataframe with shortened Twitter Covid Tweet data
    */
   def pullTwitterDataDevelopment(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").option("sep", "\t").csv("s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv")
@@ -186,7 +187,7 @@ object EUSpikes {
    * Split Year and Week into separate columns for input dataframe of Twitter data
    * @param spark The spark session input
    * @param df The input dataframe
-   * @return Dataframe with shortened Twitter Covid Tweet data.
+   * @return Dataframe with separate year and week columns
    */
   def splitYearWeekTwitter(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
@@ -203,7 +204,7 @@ object EUSpikes {
    * Group input dataframe by week, year and include count of tweets per week, year combination
    * @param spark The spark session input
    * @param df The input dataframe
-   * @return Dataframe with week, year, and covid_tweets per week, year combination.
+   * @return Dataframe with week, year, and covid_tweets per week, year combination
    */
   def twitterGroupByWeekYear(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
