@@ -1,9 +1,12 @@
 package countryBorders
 
+import java.util.Calendar
+
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 import utilites.s3DAO
+import java.io.File
 
 /** Question: Find the top 5 pairs of countries that share a land border and have the highest discrepancy in covid-19
  * infection rate per capita. Additionally find the top 5 landlocked countries that have the highest discrepancy in
@@ -22,7 +25,8 @@ object CountryBorders {
     val db = s3DAO()
     val statsSrcFile = "countries_general_stats.tsv"
     val dataSrcFile = "owid-covid-data.csv"
-    db.setDownloadPath("CountryBorders/src/main/resources")
+    db.setDownloadPath("CountryBorders/src/main/resources/datalake")
+    db.setLocalWarehousePath("CountryBorders/src/main/resources/datawarehouse")
 
     //Spark Setup
     val spark = SparkSession
@@ -109,24 +113,42 @@ object CountryBorders {
     query to give result to part 1. by using delta > 0, we can ensure no duplicates of countries in opposite directions, such as
     having both Israel-Lebanon and Lebanon-Israel.
      */
-    println("Largest Difference(Delta) in Bordering Countries")
-    res1.select("*")
+    println("Largest Discrepancies in Covid Caseload for Bordering Countries:")
+    val discrepancy = res1.select("*")
       .where($"delta" > 0)
       .orderBy(desc("delta")) //using desc here allows us to get the largest differences at the top, and smaller differences at the end
-      .show(5)
+      .cache()
+
+    var csv = db.saveToLocalDir(discrepancy, "border_discrepancies")
+    var file = new File(csv)
+    db.uploadDirtTos3(file, "border_discrepancies")
+
+    discrepancy.show(5)
 
     /* Queries to give us the answer to the second part of our question. Using the Dataframes for land and water locked countries, we can do simple
     queries to give the required answers
      */
-    println("Highest Infection Rate in Land Locked Countries")
-    landLockedInfRate.select("*")
+    println("Highest Infection Rate in Land Locked Countries:")
+    val poorResponsesOnLand = landLockedInfRate.select("*")
       .orderBy(desc("infection_rate_per_capita(%)"))
-      .show(5)
+      .cache()
+
+    csv = db.saveToLocalDir(poorResponsesOnLand, "highest_land_infect_rates")
+    file = new File(csv)
+    db.uploadDirtTos3(file, "highest_land_infect_rates")
+
+      poorResponsesOnLand.show(5)
 
     println("Highest Infection Rate in Water Locked Countries")
-    waterLockedInfRate.select("*")
+    val poorResponseAtSea = waterLockedInfRate.select("*")
       .orderBy(desc("infection_rate_per_capita(%)"))
-      .show(5)
+      .cache()
+
+    csv = db.saveToLocalDir(poorResponseAtSea, "highest_land_infect_rates")
+    file = new File(csv)
+    db.uploadDirtTos3(file, "highest_land_infect_rates")
+
+      poorResponseAtSea.show(5)
 
     /*
     query to find the countries with the highest infection rate per capita in each development category,
@@ -170,7 +192,6 @@ object CountryBorders {
         .csv(filePath) toDF()
     }
   }
-
 
   /**
    * Uses the dataframe of our border countries and looks for there to be a NULL for border country. This means

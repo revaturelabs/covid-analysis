@@ -88,7 +88,6 @@ case class Calculator() {
     * @param spark - the spark session
     * @param df - the dataframe that the data will be loaded into
     *
-    * FIXME: refactor this function to either not include resultpath as a parameter, or find a use for it
     */
   def regionalFirstPeak(spark: SparkSession, df: DataFrame): Unit = {
     import spark.implicits._

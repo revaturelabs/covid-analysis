@@ -7,13 +7,17 @@ import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.{AmazonClientException, AmazonServiceException}
 import org.apache.commons.io.IOUtils
 import org.apache.spark.sql.DataFrame
+import java.util.Calendar
+
+import com.amazonaws.services.s3.transfer.TransferManager
 
 case class s3DAO(
-    amazonS3Client: AmazonS3Client,
-    BUCKET_NAME: String = "covid-analysis-p3",
-    DATA_LAKE: String = "datalake/infection-gdp/",
-    DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
-    var downloadPath: String = ""
+        amazonS3Client: AmazonS3Client,
+        BUCKET_NAME: String = "covid-analysis-p3",
+        DATA_LAKE: String = "datalake/infection-gdp/",
+        DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
+        var localWarehouse: String = "",
+        var downloadPath: String = ""
 ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
@@ -27,13 +31,31 @@ case class s3DAO(
   }
 
   //copy files to s3.
-  def uploadFile(file: File, fileName: String): Unit = {
+  def uploadFileTos3(file: File, prefix: String): Unit = {
+    val fileName = s"$prefix-${Calendar.getInstance().getTimeInMillis}.csv"
+    println(DATA_WAREHOUSE)
+    println(fileName)
     try {
-      amazonS3Client.putObject(BUCKET_NAME, fileName, file)
+      amazonS3Client.putObject(BUCKET_NAME, DATA_WAREHOUSE + fileName, file)
     } catch {
-      case e: AmazonClientException =>
-        System.err.println("Exception: " + e.toString)
+      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
     }
+  }
+
+  //copy output directory to s3.
+  def uploadDirtTos3(file: File, prefix: String): Unit = {
+    val tm: TransferManager = new TransferManager(amazonS3Client)
+    tm.uploadDirectory(BUCKET_NAME, prefix, file, true)
+  }
+
+  def saveToLocalDir(df: DataFrame, direcotry: String): String = {
+    val path = s"$localWarehouse/$direcotry-${Calendar.getInstance().getTimeInMillis}"
+    df.coalesce(1)
+      .write
+      .format("csv")
+      .option("header", "true")
+      .save(path)
+    path
   }
 
   // download file and console out each line
@@ -53,7 +75,9 @@ case class s3DAO(
     }
   }
 
-  def setDownloadPath(dlPath: String): Unit = this.downloadPath = dlPath
+  def setDownloadPath(path: String): Unit = this.downloadPath = path
+
+  def setLocalWarehousePath(path: String): Unit = this.localWarehouse = path
 }
 
 object s3DAO {

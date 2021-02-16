@@ -33,9 +33,9 @@ object CovidResponse {
     Logger.getLogger("org").setLevel(Level.WARN)
 
     //Class dependencies and app config.
-    val db = s3DAO()
+    val s3 = s3DAO()
     val dfb = new DataFrameBuilder
-    db.setDownloadPath("CovidResponse/src/main/resources/")
+    s3.setDownloadPath("CovidResponse/src/main/resources/")
     val fileNames = Map(
       "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",
@@ -50,7 +50,7 @@ object CovidResponse {
     import spark.implicits._
 
     //Build DF.
-    val data = dfb.build(spark, fileNames, db)
+    val data = dfb.build(spark, fileNames, s3)
 
     //format data for queries.
     data
