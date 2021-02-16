@@ -301,3 +301,9 @@ spark-warehouse/
 ./stockmarket-data/datalake/South America_Peru_CompositeIndex.csv
 
 # End of https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
+group-econResponse/CountryBorders/src/main/resources/datawarehouse/border_discrepancies*
+group-econResponse/CountryBorders/src/main/resources/datawarehouse/highest_land_infect_rates*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/new_cases_daily*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/new_regional*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/regional*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/total*

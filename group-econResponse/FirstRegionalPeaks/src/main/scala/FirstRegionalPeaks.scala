@@ -20,9 +20,9 @@ object FirstRegionalPeaks {
     val db = s3DAO()
     val dfb = new DataFrameBuilder
     val calc = new Calculator
-    db.setDownloadPath("FirstRegionalPeaks/src/main/resources")
+    db.setLocalLakePath("FirstRegionalPeaks/src/main/resources/datalake")
     val fileNames = Map(
-      "covidSrc" -> "daily_covid_stats.tsv",
+      "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
@@ -31,7 +31,6 @@ object FirstRegionalPeaks {
     val spark = SparkSession
       .builder()
       .getOrCreate()
-    spark.sparkContext.setLogLevel("WARN")
 
     //Build df
     val df = dfb.build(spark, fileNames, db)

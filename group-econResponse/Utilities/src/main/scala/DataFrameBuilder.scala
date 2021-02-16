@@ -17,31 +17,25 @@ class DataFrameBuilder {
     *
     * @param spark   Spark Session
     * @param fileNames  Data object with key value pairs for needed file names on s3
-    * @param db   Data access object for interfacing with AWS s3
+    * @param s3   Data access object for interfacing with AWS s3
     * @return full dataframe
     */
-  def build(
-      spark: SparkSession,
-      fileNames: Map[String, String],
-      db: s3DAO
-  ): DataFrame = {
-    //Build structype schemas from case classes.
-    val covidSchema = Encoders.product[CountryStats].schema
-    val econSchema = Encoders.product[EconomicsData].schema
-
+  def build(spark: SparkSession,
+            fileNames: Map[String, String],
+            s3: s3DAO): DataFrame = {
     //Callback functions used here to create and return a spark dataframe after download from s3.
     val regionCB = (downloadPath: String) => spark.read.json(downloadPath)
-    val covidCB = getCallbackFn(spark, covidSchema)()
-    val econCB = getCallbackFn(spark, econSchema)()
+    val econCB = getCallbackFn(spark, delimiter = "\t")()
+    val covidCB = getCallbackFn(spark)()
 
     //Download dataframe from s3.
-    val regionDF = db.loadDFFromBucket(fileNames("regionSrc"), regionCB)
-    val rawCovidDF = db.loadDFFromBucket(fileNames("covidSrc"), covidCB)
-    val rawEconDF = db.loadDFFromBucket(fileNames("econSrc"), econCB)
+    val regionDF = s3.loadDFFromBucket(fileNames("regionSrc"), regionCB)
+    val rawEconDF = s3.loadDFFromBucket(fileNames("econSrc"), econCB)
+    val rawCovidDF = s3.loadDFFromBucket(fileNames("covidSrc"), covidCB)
 
     //Combine with regional df and process for application consumption.
+    val economicsData = initEconDF(spark, rawEconDF, regionDF)
     val dailyCases = initDailyCasesDF(spark, rawCovidDF, regionDF)
-    val economicsData = initEconDF(spark, rawEconDF, regionDF).cache()
     val fullDF = dailyCases.join(economicsData, Seq("country", "region"))
 
     castToInt(fullDF)
@@ -51,22 +45,21 @@ class DataFrameBuilder {
     * this callback fn will be used in the DAO to build a spark dataframe when tsv is loaded from s3
     *
     * @param spark    spark session
-    * @param schema    schema used in df construction
+    * @param delimiter    defines file delimiter type
     * @return callback function
     */
-  def getCallbackFn(
-      spark: SparkSession,
-      schema: StructType
-  ): () => String => DataFrame = () => { downloadPath: String =>
-    {
-      spark.read
-        .option("delimiter", "\t")
-        .option("header", "true")
-        .format("csv")
-        .schema(schema)
-        .csv(downloadPath) toDF ()
+  def getCallbackFn(spark: SparkSession,
+                    delimiter: String = ","): () => String => DataFrame =
+    () => { downloadPath: String =>
+      {
+        spark.read
+          .format("csv")
+          .option("inferSchema", "true")
+          .option("delimiter", delimiter)
+          .option("header", "true")
+          .csv(downloadPath) toDF ()
+      }
     }
-  }
 
   /** Recast a couple columns from double to int
     * Encoding for csv cast Int to Null so we read in as double
@@ -132,9 +125,10 @@ class DataFrameBuilder {
       rawCasesDF: DataFrame,
       regionDF: DataFrame
   ): DataFrame = {
+    val df = rawCasesDF.withColumnRenamed("location", "country")
     val tempDF = filterColumns(
       spark,
-      rawCasesDF,
+      df,
       Seq(
         "date",
         "country",
