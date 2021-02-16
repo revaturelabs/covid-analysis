@@ -671,7 +671,7 @@ pipeline {
                 anyOf{
                     branch 'main';
                     branch 'develop'; //develop will be removed
-                    branch '*tweet-positive-negative'l
+                    branch '*tweet-positive-negative'
                 }
             }
             stages {
