@@ -139,10 +139,9 @@ object EUSpikes {
 
 // Twitter Functions
   /**
-   * Pulls from s3 and analyzes EU young demographic weekly cases data.
+   * Pulls from s3 and analyzes Twitter Covid discussion data.
    * @param spark The spark session input
-   * @param df The input dataframe
-   * @return Dataframe filtered by <15yr and 15-24yr only
+   * @return  NOT DONE YET........
    */
   def processTwitterData(spark: SparkSession): DataFrame = {
     val df = pullTwitterData(spark)
@@ -151,6 +150,11 @@ object EUSpikes {
     grouped
   }
 
+  /**
+   * Same as processTwitterData but pulls smaller dataset for development purposes.
+   * @param spark The spark session input
+   * @return  NOT DONE YET........
+   */
   def processTwitterDataDevelopment(spark: SparkSession): DataFrame = {
     val df = pullTwitterDataDevelopment(spark)
     val dfWeeks = splitYearWeekTwitter(spark, df)
@@ -158,16 +162,31 @@ object EUSpikes {
     grouped
   }
 
+  /**
+   * Pulls Twitter Covid tweets data from s3.
+   * @param spark The spark session input
+   * @return Dataframe with Twitter Covid Tweet data.
+   */
   def pullTwitterData(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").option("sep", "\t").csv("s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv").cache()
     df
   }
 
+  /**
+   * Same as pullTwitterData but pulls smaller dataset for development purposes.
+   * @param spark The spark session input
+   * @return Dataframe with shortened Twitter Covid Tweet data.
+   */
   def pullTwitterDataDevelopment(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").option("sep", "\t").csv("s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv")
     df
   }
 
+  /**
+   * Same as pullTwitterData but pulls smaller dataset for development purposes.
+   * @param spark The spark session input
+   * @return Dataframe with shortened Twitter Covid Tweet data.
+   */
   def splitYearWeekTwitter(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     import org.apache.spark.sql.functions._
