@@ -36,17 +36,17 @@ pipeline {
         //     }
         // }
         //infection-mortality/CovidLiveUpdateApp Package
-        stage("Package infection-mortality/CovidLiveUpdateApp") {
-            steps {
-                echo "Package CovidLiveUpdateApp"
+        // stage("Package infection-mortality/CovidLiveUpdateApp") {
+        //     steps {
+        //         echo "Package CovidLiveUpdateApp"
 
-                sh '''
-                    cd infection-mortality/CovidLiveUpdateApp
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd infection-mortality/CovidLiveUpdateApp
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -75,17 +75,17 @@ pipeline {
         //     }
         // }
         //infection-mortality/RegionalInfectionRates Package
-        stage("Package infection-mortality/RegionalInfectionRates") {
-            steps {
-                echo "Package RegionalInfectionRates"
+        // stage("Package infection-mortality/RegionalInfectionRates") {
+        //     steps {
+        //         echo "Package RegionalInfectionRates"
 
-                sh '''
-                    cd infection-mortality/RegionalInfectionRates
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        //         sh '''
+        //             cd infection-mortality/RegionalInfectionRates
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -138,27 +138,27 @@ pipeline {
         //     }
         // }
         //group-econResponse/CountryBorders Test
-        stage("Test group-econResponse/CountryBorders") {
-            steps{
-                echo "Test CountryBorders"
-                sh '''
-                    cd group-econResponse/CountryBorders
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //group-econResponse/CountryBorders Package
-        stage("Package group-econResponse/CountryBorders") {
-            steps{
-                echo "Package CountryBorders"
-                sh '''
-                    cd group-econResponse/CountryBorders
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        // stage("Test group-econResponse/CountryBorders") {
+        //     steps{
+        //         echo "Test CountryBorders"
+        //         sh '''
+        //             cd group-econResponse/CountryBorders
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //group-econResponse/CountryBorders Package
+        // stage("Package group-econResponse/CountryBorders") {
+        //     steps{
+        //         echo "Package CountryBorders"
+        //         sh '''
+        //             cd group-econResponse/CountryBorders
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
         
@@ -174,27 +174,27 @@ pipeline {
         //     }
         // }
         //group-econResponse/CovidResponse Test
-        stage("Test group-econResponse/CovidResponse") {
-            steps{
-                echo "Test CovidResponse"
-                sh '''
-                    cd group-econResponse/CovidResponse
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //group-econResponse/CovidResponse Package
-        stage("Package group-econResponse/CovidResponse") {
-            steps{
-                echo "Package CovidResponse"
-                sh '''
-                    cd group-econResponse/CovidResponse
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        // stage("Test group-econResponse/CovidResponse") {
+        //     steps{
+        //         echo "Test CovidResponse"
+        //         sh '''
+        //             cd group-econResponse/CovidResponse
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //group-econResponse/CovidResponse Package
+        // stage("Package group-econResponse/CovidResponse") {
+        //     steps{
+        //         echo "Package CovidResponse"
+        //         sh '''
+        //             cd group-econResponse/CovidResponse
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
@@ -210,27 +210,27 @@ pipeline {
         //     }
         // }
         //group-econResponse/FirstRegionalPeaks Test
-        stage("Test group-econResponse/FirstRegionalPeaks") {
-            steps{
-                echo "Test FirstRegionalPeaks"
-                sh '''
-                    cd group-econResponse/FirstRegionalPeaks
-                    sbt test
-                    cd ../..
-                '''
-            }
-        }
-        //group-econResponse/FirstRegionalPeaks Package
-        stage("Package group-econResponse/FirstRegionalPeaks") {
-            steps{
-                echo "Package FirstRegionalPeaks"
-                sh '''
-                    cd group-econResponse/FirstRegionalPeaks
-                    sbt package
-                    cd ../..
-                '''
-            }
-        }
+        // stage("Test group-econResponse/FirstRegionalPeaks") {
+        //     steps{
+        //         echo "Test FirstRegionalPeaks"
+        //         sh '''
+        //             cd group-econResponse/FirstRegionalPeaks
+        //             sbt test
+        //             cd ../..
+        //         '''
+        //     }
+        // }
+        // //group-econResponse/FirstRegionalPeaks Package
+        // stage("Package group-econResponse/FirstRegionalPeaks") {
+        //     steps{
+        //         echo "Package FirstRegionalPeaks"
+        //         sh '''
+        //             cd group-econResponse/FirstRegionalPeaks
+        //             sbt package
+        //             cd ../..
+        //         '''
+        //     }
+        // }
 
 
 
