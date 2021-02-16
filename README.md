@@ -1,4 +1,4 @@
-# Related Hashtags
+# Twitter COVID US
 ## About
 This application is a single module of a much larger project related to the analysis of COVID-19 data. The full project can be found at https://github.com/891-MehrabRahman-CovidAnalysis/covid-analysis-1
 
