@@ -136,6 +136,7 @@ object RankRegions {
       )
       .groupBy("region")
       .agg(avg("Delta GDP (%)"))
+      .as("Delta GDP (%)")
 
     //rankByMetric(spark, gdpPercentChange, "delta_gdp_percentChange")
   }

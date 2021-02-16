@@ -24,7 +24,7 @@ object CorrelateInfectionGDP {
     val dfb = new DataFrameBuilder
     s3.setDownloadPath("CorrelateInfectionGDP/src/main/resources")
     val fileNames = Map(
-      "covidSrc" -> "daily_covid_stats.tsv",
+      "covidSrc" -> "owid-covid-data.csv",
       "regionSrc" -> "region_dictionary.json",
       "econSrc" -> "economic_data_2018-2021.tsv"
     )
