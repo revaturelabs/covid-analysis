@@ -3,7 +3,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession, functions}
 object EUSpikes {
 
   /**
-   * Pulls from s3 and analyzes EU young demographic cases and Twitter Covid discussion data.
+   * Pulls from s3 and analyzes EU young demographic weekly cases and Twitter Covid discussion data.
    * @param spark The spark session input
    * @return Unit
    */
@@ -60,8 +60,12 @@ object EUSpikes {
 
 
 
-
 // EU data functions
+  /**
+   * Pulls from s3 and analyzes EU young demographic weekly cases data.
+   * @param spark The spark session input
+   * @return Dataframe grouped by... NOT DONE FINISH THIS
+   */
   def processEUData(spark: SparkSession): DataFrame = {
     val df = pullEUData(spark)
     val grouped = groupData(spark, filterAgeGroups(spark, df))
@@ -70,13 +74,23 @@ object EUSpikes {
     groupYearWeek
   }
 
-  //read to dataframe from s3 bucket
+  /**
+   * Pulls EU data from s3.
+   * @param spark The spark session input
+   * @return Dataframe of EU data
+   */
   def pullEUData(spark: SparkSession): DataFrame = {
     val df = spark.read.option("header", "true").option("inferSchema", "true").csv("s3a://covid-analysis-p3/datalake/twitter-covid/eu_cases_age.csv")
     df
   }
 
   //filter to only include age groups <15 and 15-24
+  /**
+   * Filter input dataframe to only include age groups <15yr and 15-24yr.
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe filtered by <15yr and 15-24yr only
+   */
   def filterAgeGroups(spark: SparkSession, df: DataFrame ): DataFrame = {
     df.filter(df("age_group") === "<15yr" || df("age_group") === "15-24yr")
     df
@@ -84,6 +98,12 @@ object EUSpikes {
 
   //group by year_week and sum(new_cases)
   //result will have columns: year_week, sum(new_cases)
+  /**
+   * Group input dataframe by "year_week" and sum "new_cases" per "year_week", ordered by "year_week".
+   * @param spark The spark session input
+   * @param df The input dataframe
+   * @return Dataframe grouped by "year_week" with sum of "new_cases" per "year_week"
+   */
   def groupData(spark: SparkSession, df: DataFrame): DataFrame = {
     import spark.implicits._
     df.groupBy($"year_week").sum("new_cases").orderBy($"year_week")
