@@ -41,7 +41,7 @@ In the terminal, change your directory to the `stockmarket` directory inside the
 
 `cd ./herdimmunity-stockmarket/stockmarket`
 
-In order to create a jar file of each program, use the command below:
+In order to create a jar file, use the command below:
 
 `sbt package`
 
