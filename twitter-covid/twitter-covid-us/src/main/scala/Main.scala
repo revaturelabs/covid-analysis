@@ -8,15 +8,23 @@ object Main {
     val spark = SparkSession
       .builder()
       .appName("us-age-spikes")
-      .master("local[*]")
+      .master("yarn")               // Change "yarn" to "local[*]" if running the application locally.
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
+    import spark.implicits._
 
     val path = setUpConnection(spark)
+    val localPath = setUpConnection()
+    val twitterDF = TwitterCovidAnalysis.readTwitterToDF(spark)
+    val usDF = TwitterCovidAnalysis.readToDF(spark, path)
 
-    // TwitterCovidAnalysis.groupByDate(TwitterCovidAnalysis.readToDF(spark, path)).show()
-    // TwitterCovidAnalysis.ageGroupsInfectionCount(TwitterCovidAnalysis.readToDF(spark, path)).show()
-    TwitterCovidAnalysis.readTwitterToDF(spark).show(20)
+    //DUMMY DATA 
+    val dummyPath = "datalake/dummy_results.csv"
+    val resultDF = spark.read.csv(dummyPath)
+
+    TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
+    TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF).show(335)
+
     spark.stop
   }
 
@@ -25,7 +33,7 @@ object Main {
     * @return location of datalake directory
     */
   def setUpConnection(): String = {
-    return "/datalake/COVID-19_Cases_Summarized_by_Age_Group.csv"
+    "datalake/COVID-19_Cases_Summarized_by_Age_Group.csv"
   }
 
   /** Set up AWS connection
