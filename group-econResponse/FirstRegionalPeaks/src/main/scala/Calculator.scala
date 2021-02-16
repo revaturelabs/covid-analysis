@@ -123,8 +123,8 @@ case class Calculator() {
         .map(_.get(0).asInstanceOf[String])
 
       for (country <- countryList) {
-        tempFrame = spark.sql(
-          s"""SELECT DISTINCT country, date, new_cases
+        tempFrame = spark
+          .sql(s"""SELECT DISTINCT country, date, new_cases
             |FROM $tableName
             |WHERE country = '$country'
             |""".stripMargin)

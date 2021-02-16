@@ -66,55 +66,64 @@ object CovidResponse {
 
     //Show all results.
     println("\nAverage New Cases per Day in Each Region")
-    val newRegionalCases = RankRegions.rankByMetricLow(spark, data, "new_cases").cache()
+    val newRegionalCases =
+      RankRegions.rankByMetricLow(spark, data, "new_cases").cache()
     s3.localSaveAndUploadTos3(newRegionalCases, "new_regional_cases")
 
     newRegionalCases.show()
 
-
-    println("\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)")
-    val newRegionalCasesPerMil = RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").cache()
-    s3.localSaveAndUploadTos3(newRegionalCasesPerMil, "new_regional_cases_per_million")
+    println(
+      "\nAverage New Cases per Million People per Day in Each Region (normalized before region grouping)")
+    val newRegionalCasesPerMil =
+      RankRegions.rankByMetricLow(spark, data, "new_cases_per_million").cache()
+    s3.localSaveAndUploadTos3(newRegionalCasesPerMil,
+                              "new_regional_cases_per_million")
 
     newRegionalCasesPerMil.show()
 
     println("\nAverage New Cases per Million People per Day in Each Region")
-    val newCasesDailyPerMil = RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").cache()
+    val newCasesDailyPerMil =
+      RankRegions.rankByMetricLow(spark, data, "new_cases", "pop").cache()
     s3.localSaveAndUploadTos3(newCasesDailyPerMil, "new_cases_daily_per_mil")
 
-
-
     println("\nTotal Cases in Each Region")
-    val totalRegionalCases =RankRegions.rankByMetricLow(spark, data, "total_cases", "max").cache()
+    val totalRegionalCases =
+      RankRegions.rankByMetricLow(spark, data, "total_cases", "max").cache()
     s3.localSaveAndUploadTos3(totalRegionalCases, "total_regional_cases")
 
-    println("\nTotal Cases per Million People in Each Region (normalized before region grouping)")
+    println(
+      "\nTotal Cases per Million People in Each Region (normalized before region grouping)")
     RankRegions
       .rankByMetricLow(spark, data, "total_cases_per_million", "max")
       .show()
 
     println("\nTotal Cases per Million People in Each Region")
-    val totalRegionalCasesPerMil = RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").cache()
-    s3.localSaveAndUploadTos3(totalRegionalCasesPerMil, "total_regional_cases_per_mil")
+    val totalRegionalCasesPerMil =
+      RankRegions.rankByMetricLow(spark, data, "total_cases", "maxpop").cache()
+    s3.localSaveAndUploadTos3(totalRegionalCasesPerMil,
+                              "total_regional_cases_per_mil")
 
     totalRegionalCasesPerMil.show()
 
     println("\nAverage GDP Percent Change in Each Region")
     val deltaGDP = RankRegions
-      .changeGDP(spark, data, "gdp_currentPrices_usd", percapita = false).cache()
-      s3.localSaveAndUploadTos3(deltaGDP, "regional_change_gdp")
+      .changeGDP(spark, data, "gdp_currentPrices_usd", percapita = false)
+      .cache()
+    s3.localSaveAndUploadTos3(deltaGDP, "regional_change_gdp")
 
     deltaGDP.show()
 
     println("\nAverage GDP per Capita Percent Change in Each Region")
     val deltaGDPerCapita = RankRegions
-      .changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false).cache()
+      .changeGDP(spark, data, "gdp_perCap_currentPrices_usd", percapita = false)
+      .cache()
 
-
-    println(s"Saving all results to s3 bucket: ${s3.BUCKET_NAME} \nand local directory ${s3.getLocalLakePath}...")
+    println(
+      s"Saving all results to s3 bucket: ${s3.BUCKET_NAME} \nand local directory ${s3.getLocalLakePath}...")
     //wraps last result in future to await its completion.
     val saveLastResult: Future[Unit] = Future {
-      s3.localSaveAndUploadTos3(deltaGDPerCapita, "regional_change_gdp_percapita")
+      s3.localSaveAndUploadTos3(deltaGDPerCapita,
+                                "regional_change_gdp_percapita")
     }
     saveLastResult.onComplete(_ => {
       println("Complete!")

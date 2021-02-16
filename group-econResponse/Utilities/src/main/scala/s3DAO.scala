@@ -12,16 +12,17 @@ import java.util.Calendar
 import com.amazonaws.services.s3.transfer.TransferManager
 
 case class s3DAO(
-        amazonS3Client: AmazonS3Client,
-        BUCKET_NAME: String = "covid-analysis-p3",
-        DATA_LAKE: String = "datalake/infection-gdp/",
-        DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
-        var localWarehouse: String = "",
-        var localLakePath: String = ""
+    amazonS3Client: AmazonS3Client,
+    BUCKET_NAME: String = "covid-analysis-p3",
+    DATA_LAKE: String = "datalake/infection-gdp/",
+    DATA_WAREHOUSE: String = "datawarehouse/infection-gdp/",
+    var localWarehouse: String = "",
+    var localLakePath: String = ""
 ) {
 
   // Downloads file from s3 and writes to local fs.  Uses callback to create and return a spark dataframe.
-  def loadDFFromBucket(filesName: String, cb: String => DataFrame): DataFrame = {
+  def loadDFFromBucket(filesName: String,
+                       cb: String => DataFrame): DataFrame = {
     val s3Object = amazonS3Client.getObject(BUCKET_NAME, DATA_LAKE + filesName)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
     val file = new FileOutputStream(s"$localLakePath/$filesName")
@@ -45,7 +46,8 @@ case class s3DAO(
 
   //write csv file to local directory.
   def saveToLocalDir(df: DataFrame, directory: String): String = {
-    val path = s"$localWarehouse/$directory-${Calendar.getInstance().getTimeInMillis}"
+    val path =
+      s"$localWarehouse/$directory-${Calendar.getInstance().getTimeInMillis}"
     df.coalesce(1)
       .write
       .format("csv")
@@ -59,7 +61,8 @@ case class s3DAO(
     try {
       amazonS3Client.putObject(BUCKET_NAME, DATA_WAREHOUSE + prefix, file)
     } catch {
-      case e: AmazonClientException => System.err.println("Exception: " + e.toString)
+      case e: AmazonClientException =>
+        System.err.println("Exception: " + e.toString)
     }
   }
 
@@ -103,7 +106,8 @@ object s3DAO {
       Some(amazonS3Client)
     } catch {
       case _: AmazonServiceException | _: AmazonClientException =>
-        System.err.println("Connecting to AWS s3 failed. Confirm your credentials.")
+        System.err.println(
+          "Connecting to AWS s3 failed. Confirm your credentials.")
         None
     }
   }

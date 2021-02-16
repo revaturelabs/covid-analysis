@@ -20,7 +20,9 @@ class DataFrameBuilder {
     * @param s3   Data access object for interfacing with AWS s3
     * @return full dataframe
     */
-  def build(spark: SparkSession, fileNames: Map[String, String], s3: s3DAO): DataFrame = {
+  def build(spark: SparkSession,
+            fileNames: Map[String, String],
+            s3: s3DAO): DataFrame = {
     //Callback functions used here to create and return a spark dataframe after download from s3.
     val regionCB = (downloadPath: String) => spark.read.json(downloadPath)
     val econCB = getCallbackFn(spark, delimiter = "\t")()
@@ -46,17 +48,18 @@ class DataFrameBuilder {
     * @param delimiter    defines file delimiter type
     * @return callback function
     */
-  def getCallbackFn(spark: SparkSession, delimiter: String = ","):
-    () => String => DataFrame = () => { downloadPath: String =>
-    {
-      spark.read
-        .format("csv")
-        .option("inferSchema", "true")
-        .option("delimiter", delimiter)
-        .option("header", "true")
-        .csv(downloadPath) toDF ()
+  def getCallbackFn(spark: SparkSession,
+                    delimiter: String = ","): () => String => DataFrame =
+    () => { downloadPath: String =>
+      {
+        spark.read
+          .format("csv")
+          .option("inferSchema", "true")
+          .option("delimiter", delimiter)
+          .option("header", "true")
+          .csv(downloadPath) toDF ()
+      }
     }
-  }
 
   /** Recast a couple columns from double to int
     * Encoding for csv cast Int to Null so we read in as double
@@ -66,11 +69,14 @@ class DataFrameBuilder {
     * @return spark dataframe
     */
   def castToInt(df: DataFrame): DataFrame = {
-    df.withColumn("tmp", df("year").cast(IntegerType)).drop("year")
+    df.withColumn("tmp", df("year").cast(IntegerType))
+      .drop("year")
       .withColumnRenamed("tmp", "year")
-      .withColumn("tmp", df("new_cases").cast(IntegerType)).drop("new_cases")
+      .withColumn("tmp", df("new_cases").cast(IntegerType))
+      .drop("new_cases")
       .withColumnRenamed("tmp", "new_cases")
-      .withColumn("tmp", df("total_cases").cast(IntegerType)).drop("total_cases")
+      .withColumn("tmp", df("total_cases").cast(IntegerType))
+      .drop("total_cases")
       .withColumnRenamed("tmp", "total_cases")
   }
 
