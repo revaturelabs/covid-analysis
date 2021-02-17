@@ -250,7 +250,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp group-econResponse/CountryBorders/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CountryBorders/target/scala-*/CountryBorders*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -310,7 +310,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp group-econResponse/CovidResponse/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CovidResponse/target/scala-*/CovidResponse*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -369,7 +369,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp group-econResponse/FirstRegionalPeaks/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp group-econResponse/FirstRegionalPeaks/target/scala-*/FirstRegionalPeaks*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
