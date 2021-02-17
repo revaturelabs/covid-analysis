@@ -61,5 +61,5 @@ spark-submit \
 [S3 bucket path to your jar file] \
 [Input corresponding to your desired analysis ("1" for your first date range, "2" for your second date range, etc.)]
 ```
-Note: Your analysis options are defined by you on lines 56 and 57 of WordCount.scala.
+Note: Your analysis options are defined by you on lines 57-61 of WordCount.scala.
 
