@@ -130,7 +130,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/*.jar s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
