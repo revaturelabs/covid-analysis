@@ -1,0 +1,150 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "covid-analysis-1-test",
+        "directory": "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1",
+        "workspaceDir": "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1",
+        "sources": [
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\src\\test\\scala",
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\src\\test\\scala-2.12",
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\src\\test\\scala-2",
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\src\\test\\java",
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\target\\scala-2.12\\src_managed\\test"
+        ],
+        "dependencies": [
+            "covid-analysis-1"
+        ],
+        "classpath": [
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\.bloop\\covid-analysis-1\\scala-2.12\\classes",
+            "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-library.jar"
+        ],
+        "out": "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\.bloop\\covid-analysis-1",
+        "classesDir": "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\.bloop\\covid-analysis-1\\scala-2.12\\test-classes",
+        "resources": [
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\src\\test\\resources",
+            "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\target\\scala-2.12\\resource_managed\\test"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.12.12",
+            "options": [
+                
+            ],
+            "jars": [
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\jansi.jar",
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\jline.jar",
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-compiler.jar",
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-library.jar",
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-reflect.jar",
+                "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-xml_2.12.jar"
+            ],
+            "analysis": "C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1\\target\\streams\\test\\bloopAnalysisOut\\_global\\streams\\inc_compile_2.12.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "C:\\Program Files\\Java\\jdk1.8.0_271\\jre",
+                "options": [
+                    "-Duser.dir=C:\\Users\\Michael\\Documents\\Revature\\P3\\us-spikes\\covid-analysis-1"
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.12",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\Michael\\AppData\\Local\\Coursier\\cache\\v1\\https\\repo1.maven.org\\maven2\\org\\scala-lang\\scala-library\\2.12.12\\scala-library-2.12.12-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.12",
+                    "configurations": "optional",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "C:\\Users\\Michael\\.sbt\\boot\\scala-2.12.12\\lib\\scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\Michael\\AppData\\Local\\Coursier\\cache\\v1\\https\\repo1.maven.org\\maven2\\org\\scala-lang\\scala-library\\2.12.12\\scala-library-2.12.12-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "test"
+        ]
+    }
+}
