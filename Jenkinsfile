@@ -43,7 +43,7 @@ pipeline {
                             sbt test
                             cd ../..
                         '''
-                    }/
+                    }
                 }
                 //infection-mortality/CovidLiveUpdateApp Package
                 stage("Package infection-mortality/CovidLiveUpdateApp") {
