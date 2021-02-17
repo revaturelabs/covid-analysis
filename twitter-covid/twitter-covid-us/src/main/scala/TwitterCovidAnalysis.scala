@@ -104,7 +104,11 @@ object TwitterCovidAnalysis {
   }
 
   /** Helper method for twitterVolumeSpikes()
-    * Uses Spark ML to perform linear regression
+    * Uses Spark ML to perform linear regression.
+	  * 
+	  * This method is currently not in used in the project, but may prove
+	  * useful for analysis in the future.  It is intended to be used on
+	  * the DataFrame that is returned by the twitterCovidAnalysis method.
     *
     * @param df
     */
