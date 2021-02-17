@@ -44,9 +44,9 @@ object peakDiscussion {
     hourlyCounts.show()
 
     //Save DF's to s3.
-    dailyCounts.write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/dailyCounts")
-    monthlyCounts.write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/monthlyCounts")
-    hourlyCounts.write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/hourlyCounts")
+    dailyCounts.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/dailyCounts")
+    monthlyCounts.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/monthlyCounts")
+    hourlyCounts.coalesce(1).write.mode("overwrite").option("header", "true").csv("s3a://covid-analysis-p3/datawarehouse/twitter-covid/period-most-discussed-results/hourlyCounts")
   }
 
     /**
