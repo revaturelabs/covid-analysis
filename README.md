@@ -1,5 +1,4 @@
 # COVID-19 Analysis
-
 ## Project Description
 
 Big Data Capstone Project examining the effects of COVID-19 on society.
