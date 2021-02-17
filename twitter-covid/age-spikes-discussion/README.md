@@ -49,3 +49,9 @@ Do spikes in infection rates of the 25 and under age range in Europe affect the 
     --class Runner \
     --master yarn \
    [Path to your jar in your s3 bucket here]
+
+## Contributors
+* Chris Johnson
+* Nick Rau
+* Josh Rubin
+* Michael Tsoumpariotis
