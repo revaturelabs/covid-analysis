@@ -8,7 +8,7 @@ object Main {
     val spark = SparkSession
       .builder()
       .appName("us-age-spikes")
-      .master("local[*]")               // Change "yarn" to "local[*]" if running the application locally.
+      .master("yarn")               // Change "yarn" to "local[*]" if running the application locally.
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     import spark.implicits._
@@ -19,13 +19,15 @@ object Main {
     val usDF = TwitterCovidAnalysis.readToDF(spark, path)
 
     //DUMMY DATA 
-    val dummyPath = "datalake/dummy_results.csv"
-    val resultDF = spark.read.option("header","true").csv(dummyPath)
-    // resultDF.show(50)
+    // val dummyPath = "datalake/dummy_results.csv"
+    // val resultDF = spark.read.option("header","true").csv(dummyPath)
+    // TwitterCovidAnalysis.analysis(resultDF)
 
     // TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
     // TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF).show(335)
-    TwitterCovidAnalysis.analysis(resultDF)
+    val result = TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF)
+    TwitterCovidAnalysis.analysis(result)
+    result.show(335)
 
     spark.stop
   }

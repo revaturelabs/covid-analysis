@@ -32,9 +32,9 @@ object TwitterCovidAnalysis {
     * @param spark
     */
   def readTwitterToDF(spark: SparkSession): DataFrame = {
-    // val path ="s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
+    val path ="s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
     // Shorter dataset for testing methods
-    val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
+    // val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
 
     spark.read
       .option("sep", "\t")
@@ -76,7 +76,7 @@ object TwitterCovidAnalysis {
   }
 
   /** Groups by day with highest spike.
-    * Returned columns: Date, infection rate (age 5-30), and Twitter Volume.
+    * Returned columns: Date, infection, and Twitter Volume.
     * @param df
     */
   def twitterVolumeSpikes(twitterDF: DataFrame, usDF: DataFrame): DataFrame = {
@@ -103,12 +103,11 @@ object TwitterCovidAnalysis {
       .withColumnRenamed("sum(New Confirmed Cases)", "New Confirmed Cases")
       .orderBy($"Specimen Collection Date".asc)
 
-    analysis(result)
-    return result
   }
 
   /** Helper method for twitterVolumeSpikes()
     * Uses Spark ML to perform linear regression
+    * High RMSE and low r2 indicates bad fit
     *
     * @param df
     */
