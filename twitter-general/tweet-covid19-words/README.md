@@ -1,4 +1,4 @@
-# TWEET-COVID19-RESULTS
+# TWEET-COVID19-WORDS
 ## Project Description
 
 This directory contains the Spark sbt project that was used to answer the question:
@@ -7,6 +7,7 @@ For each date range below, what were the most popular meaningful non-Covid19 rel
 
 * 12/11/2020 - 12/25/2020
 * 12/26/2020 - 01/05/2021
+* 02/03/2021 - 02/14/2021
 
 ## Technologies Used
 - Spark version 3.0.1
@@ -60,5 +61,5 @@ spark-submit \
 [S3 bucket path to your jar file] \
 [Input corresponding to your desired analysis ("1" for your first date range, "2" for your second date range, etc.)]
 ```
-Note: Your analysis options are defined by you on lines 56 and 57 of WordCount.scala.
+Note: Your analysis options are defined by you on lines 57-61 of WordCount.scala.
 

@@ -37,7 +37,7 @@ class CorrelateSpecs
     val testDF = spark.read
       .option("header", value = true)
       .option("inferSchema", value = true)
-      .csv(getClass.getClassLoader.getResource("test_dataset.csv").getPath)
+      .csv("CorrelateInfectionGDP/src/test/resources/test_dataset.csv")
       .toDF()
 
     val response = CorrelateInfectionGDP.getPearsonCoefficient(testDF)

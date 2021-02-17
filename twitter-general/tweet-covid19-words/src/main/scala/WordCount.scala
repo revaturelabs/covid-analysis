@@ -107,15 +107,20 @@ object WordCount {
         val file = fs.globStatus(new Path("Results/part*"))(0).getPath().getName()
         fs.rename(new Path("Results/" + file), new Path(s"Results/$fileName.csv"))
 
-        // // Sends our renamed results file to S3 (for local use).
-        // val sendToS3 = s"aws s3 mv Results/$fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
-        // sendToS3.!
+        if (fileName.equals("WordCountResults-TestData")) {
+            // Sends our renamed results file to S3 (for local use).
+            val sendToS3Local = s"aws s3 mv Results/$fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+            sendToS3Local.!
+        } else {
+            // Sends our renamed results file to S3 from Hadoop.
+            val sendToLocal = s"hdfs dfs -get Results/$fileName.csv $fileName.csv"
+            val sendToS3 = s"aws s3 mv $fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
+            sendToLocal.!
+            sendToS3.!
+        }
+        
 
-        // Sends our renamed results file to S3 from Hadoop.
-        val sendToLocal = s"hdfs dfs -get Results/$fileName.csv $fileName.csv"
-        val sendToS3 = s"aws s3 mv $fileName.csv s3://covid-analysis-p3/datawarehouse/twitter-general/word-count/$fileName.csv"
-        sendToLocal.!
-        sendToS3.!
+        
 
         // Returns our results array for unit testing.
         results

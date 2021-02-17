@@ -125,6 +125,5 @@ spark-warehouse/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/metals,sbt,scala,spark
-test-data.txt
 Results/*
 .vscode/
