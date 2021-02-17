@@ -45421,3 +45421,34 @@ Feb 17, 2021 3:31:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellat
 WARNING: Unmatched cancel notification for request id 1744
 Feb 17, 2021 3:32:08 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 1754
+Feb 17, 2021 3:45:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1782
+Feb 17, 2021 3:47:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1790
+[0m2021.02.17 15:48:08 WARN  code navigation does not work for the file 'C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt' because it doesn't belong to a build target.[0m
+[0m2021.02.17 15:48:12 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:48:12 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:48:52 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:48:52 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:48:53 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:48:53 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:02 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+[0m2021.02.17 15:49:03 WARN  Unable to produce semanticdb for C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\build.sbt[0m
+Feb 17, 2021 3:49:07 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1851
+[0m2021.02.17 15:49:49 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:49:56 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:49:59 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:04 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:07 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:09 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:09 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:23 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:28 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
+[0m2021.02.17 15:50:51 WARN  no build target for: C:\Users\Michael\Documents\Revature\P3\us-spikes\covid-analysis-1\twitter-covid\twitter-covid-us\src\main\scala\TwitterCovidAnalysis.scala[0m
