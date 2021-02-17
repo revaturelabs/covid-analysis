@@ -9,6 +9,10 @@ pipeline {
     // Define our pipeline into stages
     stages {
 
+        sh '''
+        rm */*/target/*/*.jar
+        '''
+
         //Infection-mortality group
         stage("CovidLiveUpdateApp"){
             when {
