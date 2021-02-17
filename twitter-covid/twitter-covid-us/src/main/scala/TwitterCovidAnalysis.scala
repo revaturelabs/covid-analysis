@@ -2,6 +2,8 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import org.apache.spark.sql.types.NumericType
+import org.apache.spark.sql.types
 import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.feature.VectorAssembler
@@ -30,9 +32,9 @@ object TwitterCovidAnalysis {
     * @param spark
     */
   def readTwitterToDF(spark: SparkSession): DataFrame = {
-    val path ="s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
+    // val path ="s3a://covid-analysis-p3/datalake/twitter-covid/full_dataset_clean.tsv"
     // Shorter dataset for testing methods
-    // val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
+    val path = "s3a://covid-analysis-p3/datalake/twitter-covid/twitter-1000.tsv"
 
     spark.read
       .option("sep", "\t")
@@ -101,6 +103,8 @@ object TwitterCovidAnalysis {
       .withColumnRenamed("sum(New Confirmed Cases)", "New Confirmed Cases")
       .orderBy($"Specimen Collection Date".asc)
 
+    analysis(result)
+    return result
   }
 
   /** Helper method for twitterVolumeSpikes()
@@ -113,27 +117,30 @@ object TwitterCovidAnalysis {
     import spark.implicits._
 
     // Prepare DataFrame
-    df.withColumn("_c1", col("_c1").cast(IntegerType))
-    df.withColumn("_c2", col("_c2").cast(IntegerType))
+    val result = df
+      .withColumn("New Confirmed Cases", col("New Confirmed Cases").cast(IntegerType))
+      .withColumn("Twitter Volume", col("Twitter Volume").cast(IntegerType))
     
-    // Defining analysis
-    val analysis = new VectorAssembler()
-      .setInputCols(Array("_c1"))
-      .setOutputCol("analysis")
+    // Defining features 
+    val features = new VectorAssembler()
+      .setInputCols(Array("New Confirmed Cases"))
+      .setOutputCol("features")
+      .setHandleInvalid("skip")
 
     // Define model to use
-    val lr = new LinearRegression().setLabelCol("_c2")
+    val lr = new LinearRegression().setLabelCol("Twitter Volume")
 
     // Create a pipeline that associates the model with the data processing sequence
-    val pipeline = new Pipeline().setStages(Array(analysis, lr))
+    val pipeline = new Pipeline().setStages(Array(features, lr))
 
     // Run the model
-    val model = pipeline.fit(df)
+    val model = pipeline.fit(result)
 
     // Show model results
     val linRegModel = model.stages(1).asInstanceOf[LinearRegressionModel]
     println(s"RMSE:  ${linRegModel.summary.rootMeanSquaredError}")
     println(s"r2:    ${linRegModel.summary.r2}")
     println(s"Model: Y = ${linRegModel.coefficients(0)} * X + ${linRegModel.intercept}")
+  
   }
 }
