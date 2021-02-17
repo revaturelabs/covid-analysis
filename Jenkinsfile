@@ -135,7 +135,7 @@ pipeline {
             }
         }
 
-
+        //aws s3 rm --recursive s3://covid-analysis-p3/datawarehouse/infection-mortality/
 
         // // Group group-econRepsponse 
         // stage("Group-EconResponse"){
@@ -275,7 +275,7 @@ pipeline {
                     steps{
                         echo "Compile CountryBorders"
                         sh '''
-                            cd group-econResponse/CountryBorders
+                            cd group-econResponse
                             sbt "project CountryBorders; compile"
                             cd ../..
                         '''
