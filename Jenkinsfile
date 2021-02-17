@@ -20,7 +20,8 @@ pipeline {
                     branch 'main';
                     branch 'develop'; //develop will be removed
                     branch 'CovidLiveUpdate';
-                    branch '*/CovidLiveUpdate'
+                    branch '*/CovidLiveUpdate';
+                    branch '*/RegionalInfectionRates' // remove this
                 }
             }
             stages{
@@ -50,14 +51,14 @@ pipeline {
                 }
                 //infection-mortality/CovidLiveUpdateApp Package
                 stage("Package infection-mortality/CovidLiveUpdateApp") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/CovidLiveUpdate'
-                        }
-                    }
+                    // when {
+                    //     // If any of these branches then run the stages
+                    //     anyOf{
+                    //         branch 'main';
+                    //         branch 'develop'; //develop will be removed
+                    //         branch 'deploy/CovidLiveUpdate'
+                    //     }
+                    // }
                     steps {
                         echo "Package CovidLiveUpdateApp"
 
@@ -69,7 +70,6 @@ pipeline {
                         script {
                             // AWS cli with github 3rd party library
                             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                                // infection-mortality
                                 AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
                             }
                         }
@@ -117,14 +117,14 @@ pipeline {
                 }
                 //infection-mortality/RegionalInfectionRates Package
                 stage("Package infection-mortality/RegionalInfectionRates") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/RegionalInfectionRates'
-                        }
-                    }
+                    // when {
+                    //     // If any of these branches then run the stages
+                    //     anyOf{
+                    //         branch 'main';
+                    //         branch 'develop'; //develop will be removed
+                    //         branch 'deploy/RegionalInfectionRates'
+                    //     }
+                    // }
                     steps {
                         echo "Package RegionalInfectionRates"
 
