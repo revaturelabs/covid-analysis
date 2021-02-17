@@ -137,67 +137,7 @@ pipeline {
 
 
 
-        // // Group group-econRepsponse 
-        // stage("Group-EconResponse"){
-        //     when {
-        //         // If any of these branches then run the stages
-        //         anyOf{
-        //             branch 'main';
-        //             branch 'develop';
-        //             branch 'group-econResponse';
-        //             branch '*/group-econResponse'
-
-        //         }
-        //     }
-        //     stages{
-        //         // group-econResponse/CorrelateInfectionGDP Compile
-        //         stage("Compile group-econResponse") {
-        //             steps{
-        //                 echo "Compile group-econResponse"
-        //                 sh '''
-        //                     cd group-econResponse
-        //                     sbt compile
-        //                     cd ..
-        //                 '''
-        //             }
-        //         }
-        //         //group-econResponse/CorrelateInfectionGDP Test
-        //         stage("Test group-econResponse") {
-        //             steps{
-        //                 echo "Test group-econResponse"
-        //                 sh '''
-        //                     cd group-econResponse
-        //                     sbt test
-        //                     cd ..
-        //                 '''
-        //             }
-        //         }
-        //         //group-econResponse/CorrelateInfectionGDP Package
-        //         stage("Package group-econResponse") {
-        //             when {
-        //                 // If any of these branches then run the stages
-        //                 anyOf{
-        //                     branch 'main';
-        //                     branch 'develop';
-        //                     branch 'deploy/group-econResponse'
-        //                 }
-        //             }
-        //             steps{
-        //                 echo "Package group-econResponse"
-        //                 sh '''
-        //                     cd group-econResponse
-        //                     sbt package
-        //                     cd ..
-        //                 '''
-        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        //                     AWS("--region=us-east-1 s3 cp group-econResponse/target/scala-2.12/covid-econ-grp_2.12-1.0.jar s3://covid-analysis-p3/modules/covid-econ-grp_2.12-1.0.jar")
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-
+        // Group group-econRepsponse 
         stage("CorrelateInfectionGDP"){
             when {
                 // If any of these branches then run the stages
@@ -250,7 +190,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp group-econResponse/CorrelateInfectionGDP/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CorrelateInfectionGDP/target/scala-*/CorrelateInfectionGDP*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
