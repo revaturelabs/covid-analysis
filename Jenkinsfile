@@ -65,7 +65,7 @@ pipeline {
                         '''
                         // AWS cli with github 3rd party library
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
+                            AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -116,7 +116,7 @@ pipeline {
                         anyOf{
                             branch 'main';
                             branch 'develop';
-                            branch 'deploy/RegionalInfectionRates'
+                            branch 'deploy/RegionalInfectionRates';
                         }
                     }
                     steps {
@@ -128,14 +128,14 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
+                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
             }
         }
 
-        //aws s3 rm --recursive s3://covid-analysis-p3/datawarehouse/infection-mortality/
+
 
         // // Group group-econRepsponse 
         // stage("Group-EconResponse"){
@@ -249,9 +249,9 @@ pipeline {
                             sbt "project CorrelateInfectionGDP; assembly"
                             cd ../..
                         '''
-                        //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        //}
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CorrelateInfectionGDP/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -309,9 +309,9 @@ pipeline {
                             sbt "project CountryBorders; assembly"
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CountryBorders/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -369,9 +369,9 @@ pipeline {
                             sbt "project CovidResponse; assembly"
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp group-econResponse/CovidResponse/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -428,9 +428,9 @@ pipeline {
                             sbt "project FirstRegionalPeaks; assembly"
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp group-econResponse/FirstRegionalPeaks/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -682,7 +682,7 @@ pipeline {
                         '''
 
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/data-cleaner/target/scala-2.12/datacleaner_2.12-1.jar s3://covid-analysis-p3/modules/datacleaner_2.12-1.jar")
+                            AWS("--region=us-east-1 s3 cp twitter-general/data-cleaner/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -745,7 +745,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/hashtag-count-comparison/target/scala-2.12/hashtagcountcomparison_2.12-1.jar s3://covid-analysis-p3/modules/hashtagcountcomparison_2.12-1.jar")
+                            AWS("--region=us-east-1 s3 cp twitter-general/hashtag-count-comparison/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -808,7 +808,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-words/target/scala-2.12/twitter-general-word-count.jar s3://covid-analysis-p3/modules/twitter-general-word-count.jar")
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-words/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -871,7 +871,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-emoji/target/scala-2.12/TweetCovid19Emoji-assembly-1.jar s3://covid-analysis-p3/modules/TweetCovid19Emoji-assembly-1.jar")
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-emoji/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
@@ -933,9 +933,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        //     AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/twittercovid19percentageanalysis_2.12-1.jar s3://covid-analysis-p3/modules/twittercovid19percentageanalysis_2.12-1.jar")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -1039,9 +1039,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        //     AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-2.12/stock_market_composite_index_change_calculator_2.12-1.jar s3://covid-analysis-p3/modules/stock_market_composite_index_change_calculator_2.12-1.jar")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
+                        }
                     }
                 }
             }
@@ -1104,7 +1104,7 @@ pipeline {
                 //             cd ../..
                 //         '''
                 //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
+                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                 //         }
                 //     }
                 // }
@@ -1168,7 +1168,7 @@ pipeline {
                 //             cd ../..
                 //         '''
                 //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/herdimmunity/target/scala-2.12/herdimmunity_2.12-1.0.jar s3://covid-analysis-p3/modules/herdimmunity_2.12-1.0.jar")
+                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/herdimmunity/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                 //         }
                 //     }
                 // }
