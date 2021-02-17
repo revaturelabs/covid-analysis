@@ -8,5 +8,6 @@ libraryDependencies  ++= Seq(
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
   "org.scalatest" %% "scalatest" % "3.2.2" % Test,
   "org.apache.spark" %% "spark-sql" % "3.0.1",
+  "com.github.tototoshi" %% "scala-csv" % "1.3.6",
   "com.github.nscala-time" %% "nscala-time" % "2.26.0"
 )
