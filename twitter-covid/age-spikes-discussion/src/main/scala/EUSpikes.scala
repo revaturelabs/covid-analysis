@@ -104,8 +104,8 @@ object EUSpikes {
    * @return Dataframe filtered by <15yr and 15-24yr only
    */
   def filterAgeGroups(spark: SparkSession, df: DataFrame ): DataFrame = {
-    df.filter(df("age_group") === "<15yr" || df("age_group") === "15-24yr")
-    df
+    val filtered = df.filter(df("age_group") === "<15yr" || df("age_group") === "15-24yr")
+    filtered
   }
 
   /**
