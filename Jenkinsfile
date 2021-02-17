@@ -67,12 +67,12 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        script {
-                            // AWS cli with github 3rd party library
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                                AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
-                            }
-                        }
+                        // script {
+                        //     // AWS cli with github 3rd party library
+                        //     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //         AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
+                        //     }
+                        // }
                     }
                 }
             }
@@ -1184,7 +1184,6 @@ pipeline {
     post {
         always {
             echo "This will always be invoked."
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
 
         // If the build passes
@@ -1197,15 +1196,22 @@ pipeline {
 
         unstable {
             echo "Unstable build."
+
             emailext body: 'Unstable in the commmit.', 
             recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
             [$class: 'RequesterRecipientProvider']], 
             subject: 'Please check your code and make sure you have added all the files.'
+
         }
 
         failure {
             echo "Something didn't pass. Email is being sent."
-            emailext body: "Failure in commit: Job '${env.JOB_NAME}'", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
+
+            emailext body: "Failure in commit: Job '${env.JOB_NAME}'", 
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
+
         }
 
         changed {
