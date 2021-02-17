@@ -1084,30 +1084,30 @@ pipeline {
                         '''
                     }
                 }
-                //stockmarket-data Package
-                stage("Package stockmarket-data") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop';
-                            branch 'deploy/FirstRegionalPeaks'
-                        }
-                    }
-                    //This project isn't spark-submitted at any point.
-                    // steps {
-                    //     echo "Package stockmarket-data"
+                //This project isn't spark-submitted at any point.
+                // //stockmarket-data Package
+                // stage("Package stockmarket-data") {
+                //     when {
+                //         // If any of these branches then run the stages
+                //         anyOf{
+                //             branch 'main';
+                //             branch 'develop';
+                //             branch 'deploy/FirstRegionalPeaks'
+                //         }
+                //     }
+                //     steps {
+                //         echo "Package stockmarket-data"
 
-                    //     sh '''
-                    //         cd herdimmunity-stockmarket/stockmarket-data
-                    //         sbt package
-                    //         cd ../..
-                    //     '''
-                    //     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    //         AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
-                    //     }
-                    // }
-                }
+                //         sh '''
+                //             cd herdimmunity-stockmarket/stockmarket-data
+                //             sbt package
+                //             cd ../..
+                //         '''
+                //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
+                //         }
+                //     }
+                // }
             }
         }
 
