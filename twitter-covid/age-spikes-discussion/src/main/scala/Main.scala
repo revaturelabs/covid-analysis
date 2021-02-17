@@ -4,7 +4,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("EUSpikes")
-      .master("yarn")
+      .master("yarn")           // Change "yarn" to "local[*] if running locally"
       .getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     configureAWS(spark)
