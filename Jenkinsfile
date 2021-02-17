@@ -116,7 +116,9 @@ pipeline {
                         anyOf{
                             branch 'main';
                             branch 'develop';
-                            branch 'deploy/RegionalInfectionRates'
+                            branch 'deploy/RegionalInfectionRates';
+                            branch '*/RegionalInfectionRates'
+
                         }
                     }
                     steps {
@@ -128,14 +130,14 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
+                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/*.jar s3://covid-analysis-p3/modules/")
                         }
                     }
                 }
             }
         }
 
-        //aws s3 rm --recursive s3://covid-analysis-p3/datawarehouse/infection-mortality/
+
 
         // // Group group-econRepsponse 
         // stage("Group-EconResponse"){
