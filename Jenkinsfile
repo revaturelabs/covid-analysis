@@ -1,24 +1,21 @@
 @Library('github.com/releaseworks/jenkinslib') _
+
 // Declarative Pipeline
-
 // Top-most element in a scripted pipeline would be `node`
-
 pipeline {
     // Required, tells us what machine should be running this build.
     agent any
-
+    //check
     // Define our pipeline into stages
     stages {
 
-        // //Infection-mortality group
-
-
+        //Infection-mortality group
         stage("CovidLiveUpdateApp"){
             when {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'CovidLiveUpdate';
                     branch '*/CovidLiveUpdate'
                 }
@@ -54,7 +51,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/CovidLiveUpdate'
                         }
                     }
@@ -66,12 +63,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        script {
-                            // AWS cli with github 3rd party library
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                                // infection-mortality
-                                AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
-                            }
+                        // AWS cli with github 3rd party library
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-2.12/covidliveupdate_2.12-2.jar s3://covid-analysis-p3/modules/covidliveupdate_2.12-2.jar")
                         }
                     }
                 }
@@ -85,7 +79,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'RegionalInfectionRates';
                     branch '*/RegionalInfectionRates'
                 }
@@ -121,7 +115,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/RegionalInfectionRates'
                         }
                     }
@@ -144,64 +138,64 @@ pipeline {
 
 
         // // Group group-econRepsponse 
-        stage("Group-EconResponse"){
-            when {
-                // If any of these branches then run the stages
-                anyOf{
-                    branch 'main';
-                    branch 'develop'; //develop will be removed
-                    branch 'group-econResponse';
-                    branch '*/group-econResponse'
+        // stage("Group-EconResponse"){
+        //     when {
+        //         // If any of these branches then run the stages
+        //         anyOf{
+        //             branch 'main';
+        //             branch 'develop';
+        //             branch 'group-econResponse';
+        //             branch '*/group-econResponse'
 
-                }
-            }
-            stages{
-                // group-econResponse/CorrelateInfectionGDP Compile
-                stage("Compile group-econResponse") {
-                    steps{
-                        echo "Compile group-econResponse"
-                        sh '''
-                            cd group-econResponse
-                            sbt compile
-                            cd ..
-                        '''
-                    }
-                }
-                //group-econResponse/CorrelateInfectionGDP Test
-                stage("Test group-econResponse") {
-                    steps{
-                        echo "Test group-econResponse"
-                        sh '''
-                            cd group-econResponse
-                            sbt test
-                            cd ..
-                        '''
-                    }
-                }
-                //group-econResponse/CorrelateInfectionGDP Package
-                stage("Package group-econResponse") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/group-econResponse'
-                        }
-                    }
-                    steps{
-                        echo "Package group-econResponse"
-                        sh '''
-                            cd group-econResponse
-                            sbt package
-                            cd ..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp group-econResponse/target/scala-2.12/covid-econ-grp_2.12-1.0.jar s3://covid-analysis-p3/modules/covid-econ-grp_2.12-1.0.jar")
-                        }
-                    }
-                }
-            }
-        }
+        //         }
+        //     }
+        //     stages{
+        //         // group-econResponse/CorrelateInfectionGDP Compile
+        //         stage("Compile group-econResponse") {
+        //             steps{
+        //                 echo "Compile group-econResponse"
+        //                 sh '''
+        //                     cd group-econResponse
+        //                     sbt compile
+        //                     cd ..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CorrelateInfectionGDP Test
+        //         stage("Test group-econResponse") {
+        //             steps{
+        //                 echo "Test group-econResponse"
+        //                 sh '''
+        //                     cd group-econResponse
+        //                     sbt test
+        //                     cd ..
+        //                 '''
+        //             }
+        //         }
+        //         //group-econResponse/CorrelateInfectionGDP Package
+        //         stage("Package group-econResponse") {
+        //             when {
+        //                 // If any of these branches then run the stages
+        //                 anyOf{
+        //                     branch 'main';
+        //                     branch 'develop';
+        //                     branch 'deploy/group-econResponse'
+        //                 }
+        //             }
+        //             steps{
+        //                 echo "Package group-econResponse"
+        //                 sh '''
+        //                     cd group-econResponse
+        //                     sbt package
+        //                     cd ..
+        //                 '''
+        //                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //                     AWS("--region=us-east-1 s3 cp group-econResponse/target/scala-2.12/covid-econ-grp_2.12-1.0.jar s3://covid-analysis-p3/modules/covid-econ-grp_2.12-1.0.jar")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
 
         stage("CorrelateInfectionGDP"){
@@ -209,7 +203,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'CorrelateInfectionGDP';
                     branch '*/CorrelateInfectionGDP'
 
@@ -221,7 +215,7 @@ pipeline {
                     steps{
                         echo "Compile CorrelateInfectionGDP"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt "project CorrelateInfectionGDP; compile"
                             cd ../..
                         '''
@@ -232,7 +226,7 @@ pipeline {
                     steps{
                         echo "Test CorrelateInfectionGDP"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt "project CorrelateInfectionGDP; test"
                             cd ../..
                         '''
@@ -244,20 +238,20 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/CorrelateInfectionGDP'
                         }
                     }
                     steps{
                         echo "Package CorrelateInfectionGDP"
                         sh '''
-                            cd group-econResponse/CorrelateInfectionGDP
+                            cd group-econResponse
                             sbt "project CorrelateInfectionGDP; assembly"
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                             //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
+                        //}
                     }
                 }
             }
@@ -270,7 +264,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'CountryBorders';
                     branch '*/CountryBorders'
                 }
@@ -292,7 +286,7 @@ pipeline {
                     steps{
                         echo "Test CountryBorders"
                         sh '''
-                            cd group-econResponse/CountryBorders
+                            cd group-econResponse
                             sbt "project CountryBorders; test"
                             cd ../..
                         '''
@@ -304,20 +298,20 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/CountryBorders'
                         }
                     }
                     steps{
                         echo "Assembly of CountryBorders"
                         sh '''
-                            cd group-econResponse/CountryBorders
+                            cd group-econResponse
                             sbt "project CountryBorders; assembly"
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                             //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
+                        // }
                     }
                 }
             }
@@ -330,7 +324,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'CovidResponse';
                     branch '*/CovidResponse'
                 }
@@ -341,7 +335,7 @@ pipeline {
                     steps{
                         echo "Compile CovidResponse"
                         sh '''
-                            cd group-econResponse/CovidResponse
+                            cd group-econResponse
                             sbt "project CovidResponse; compile"
                             cd ../..
                         '''
@@ -352,7 +346,7 @@ pipeline {
                     steps{
                         echo "Test CovidResponse"
                         sh '''
-                            cd group-econResponse/CovidResponse
+                            cd group-econResponse
                             sbt "project CovidResponse; test"
                             cd ../..
                         '''
@@ -364,20 +358,20 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/CovidResponse'
                         }
                     }
                     steps{
                         echo "Assembly of CovidResponse"
                         sh '''
-                            cd group-econResponse/CovidResponse
+                            cd group-econResponse
                             sbt "project CovidResponse; assembly"
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                             //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
+                        // }
                     }
                 }
             }
@@ -389,7 +383,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'FirstRegionalPeaks';
                     branch '*/FirstRegionalPeaks'
                 }
@@ -400,7 +394,7 @@ pipeline {
                     steps{
                         echo "Compile FirstRegionalPeaks"
                         sh '''
-                            cd group-econResponse/FirstRegionalPeaks
+                            cd group-econResponse
                             sbt "project FirstRegionalPeaks; compile"
                             cd ../..
                         '''
@@ -411,7 +405,7 @@ pipeline {
                     steps{
                         echo "Test FirstRegionalPeaks"
                         sh '''
-                            cd group-econResponse/FirstRegionalPeaks
+                            cd group-econResponse
                             sbt "project FirstRegionalPeaks; test"
                             cd ../..
                         '''
@@ -423,20 +417,20 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
                     steps{
                         echo "Assembly of FirstRegionalPeaks"
                         sh '''
-                            cd group-econResponse/FirstRegionalPeaks
+                            cd group-econResponse
                             sbt "project FirstRegionalPeaks; assembly"
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                             //AWS("--region=us-east-1 s3 cp JARFILE s3://covid-analysis-p3/modules/")
-                        }
+                        // }
                     }
                 }
             }
@@ -450,7 +444,7 @@ pipeline {
         //         // If any of these branches then run the stages
         //         anyOf{
         //             branch 'main';
-        //             branch 'develop'; //develop will be removed
+        //             branch 'develop';
         //             branch 'age-spikes-discussion';
         //             branch '*/age-spikes-discussion'
         //         }
@@ -486,7 +480,7 @@ pipeline {
         //                 // If any of these branches then run the stages
         //                 anyOf{
         //                     branch 'main';
-        //                     branch 'develop'; //develop will be removed
+        //                     branch 'develop';
         //                     branch 'deploy/FirstRegionalPeaks'
         //                 }
         //             }
@@ -512,7 +506,7 @@ pipeline {
         //         // If any of these branches then run the stages
         //         anyOf{
         //             branch 'main';
-        //             branch 'develop'; //develop will be removed
+        //             branch 'develop';
         //             branch 'HashtagByRegion';
         //             branch '*/HashtagByRegion'
 
@@ -552,7 +546,7 @@ pipeline {
         //                 // If any of these branches then run the stages
         //                 anyOf{
         //                     branch 'main';
-        //                     branch 'develop'; //develop will be removed
+        //                     branch 'develop';
         //                     branch 'deploy/FirstRegionalPeaks'
         //                 }
         //             }
@@ -574,7 +568,7 @@ pipeline {
         //         // If any of these branches then run the stages
         //         anyOf{
         //             branch 'main';
-        //             branch 'develop'; //develop will be removed
+        //             branch 'develop';
         //             branch 'RelatedHashtags';
         //             branch '*/RelatedHashtags'
         //         }
@@ -610,7 +604,7 @@ pipeline {
         //                 // If any of these branches then run the stages
         //                 anyOf{
         //                     branch 'main';
-        //                     branch 'develop'; //develop will be removed
+        //                     branch 'develop';
         //                     branch 'deploy/FirstRegionalPeaks'
         //                 }
         //             }
@@ -638,7 +632,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'data-cleaner';
                     branch '*/data-cleaner'
                 }
@@ -674,7 +668,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -702,7 +696,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'hashtag-count-comparison';
                     branch '*/hashtag-count-comparison'
                 }
@@ -738,7 +732,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -765,7 +759,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'tweet-covid19-words';
                     branch '*/tweet-covid19-words'
                 }
@@ -801,7 +795,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -828,7 +822,7 @@ pipeline {
                     // If any of these branches then run the stages
                     anyOf{
                         branch 'main';
-                        branch 'develop'; //develop will be removed
+                        branch 'develop';
                         branch 'tweet-covid19-emoji';
                         branch '*/tweet-covid19-emoji'
                     }
@@ -864,7 +858,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -891,7 +885,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'tweet-covid19-percentage';
                     branch '*/tweet-covid19-percentage'
                 }
@@ -927,7 +921,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -939,9 +933,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/twittercovid19percentageanalysis_2.12-1.jar s3://covid-analysis-p3/modules/twittercovid19percentageanalysis_2.12-1.jar")
-                        }
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //     AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/twittercovid19percentageanalysis_2.12-1.jar s3://covid-analysis-p3/modules/twittercovid19percentageanalysis_2.12-1.jar")
+                        // }
                     }
                 }
             }
@@ -949,12 +943,14 @@ pipeline {
 
 
 
+        //This project uses Tensorflow - Jenkins doesn't have the ability to load and run tensorflow 
+        //User seems to only be capable of running this locally.
         // stage("tweet-positive-negative"){
         //     when {
         //         // If any of these branches then run the stages
         //         anyOf{
         //             branch 'main';
-        //             branch 'develop'; //develop will be removed
+        //             branch 'develop';
         //             branch 'tweet-positive-negative';
         //             branch '*/tweet-positive-negative'
         //         }
@@ -995,7 +991,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'stockmarket';
                     branch '*/stockmarket'
                 }
@@ -1031,7 +1027,7 @@ pipeline {
                         // If any of these branches then run the stages
                         anyOf{
                             branch 'main';
-                            branch 'develop'; //develop will be removed
+                            branch 'develop';
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
@@ -1043,9 +1039,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-2.12/stock_market_composite_index_change_calculator_2.12-1.jar s3://covid-analysis-p3/modules/stock_market_composite_index_change_calculator_2.12-1.jar")
-                        }
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //     AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-2.12/stock_market_composite_index_change_calculator_2.12-1.jar s3://covid-analysis-p3/modules/stock_market_composite_index_change_calculator_2.12-1.jar")
+                        // }
                     }
                 }
             }
@@ -1058,7 +1054,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'stockmarket-data';
                     branch '*/stockmarket-data'
                 }
@@ -1088,29 +1084,30 @@ pipeline {
                         '''
                     }
                 }
-                //stockmarket-data Package
-                stage("Package stockmarket-data") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/FirstRegionalPeaks'
-                        }
-                    }
-                    steps {
-                        echo "Package stockmarket-data"
+                //This project isn't spark-submitted at any point.
+                // //stockmarket-data Package
+                // stage("Package stockmarket-data") {
+                //     when {
+                //         // If any of these branches then run the stages
+                //         anyOf{
+                //             branch 'main';
+                //             branch 'develop';
+                //             branch 'deploy/FirstRegionalPeaks'
+                //         }
+                //     }
+                //     steps {
+                //         echo "Package stockmarket-data"
 
-                        sh '''
-                            cd herdimmunity-stockmarket/stockmarket-data
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
-                        }
-                    }
-                }
+                //         sh '''
+                //             cd herdimmunity-stockmarket/stockmarket-data
+                //             sbt package
+                //             cd ../..
+                //         '''
+                //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
+                //         }
+                //     }
+                // }
             }
         }
 
@@ -1121,7 +1118,7 @@ pipeline {
                 // If any of these branches then run the stages
                 anyOf{
                     branch 'main';
-                    branch 'develop'; //develop will be removed
+                    branch 'develop';
                     branch 'herdimmunity';
                     branch '*/herdimmunity'
                 }
@@ -1151,29 +1148,30 @@ pipeline {
                         '''
                     }
                 }
+                //This project isn't spark-submitted at any point.
                 //herdimmunity Package
-                stage("Package herdimmunity") {
-                    when {
-                        // If any of these branches then run the stages
-                        anyOf{
-                            branch 'main';
-                            branch 'develop'; //develop will be removed
-                            branch 'deploy/FirstRegionalPeaks'
-                        }
-                    }
-                    steps {
-                        echo "Package herdimmunity"
+                // stage("Package herdimmunity") {
+                //     when {
+                //         // If any of these branches then run the stages
+                //         anyOf{
+                //             branch 'main';
+                //             branch 'develop';
+                //             branch 'deploy/FirstRegionalPeaks'
+                //         }
+                //     }
+                //     steps {
+                //         echo "Package herdimmunity"
 
-                        sh '''
-                            cd herdimmunity-stockmarket/herdimmunity
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/herdimmunity/target/scala-2.12/herdimmunity_2.12-1.0.jar s3://covid-analysis-p3/modules/herdimmunity_2.12-1.0.jar")
-                        }
-                    }
-                }
+                //         sh '''
+                //             cd herdimmunity-stockmarket/herdimmunity
+                //             sbt package
+                //             cd ../..
+                //         '''
+                //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/herdimmunity/target/scala-2.12/herdimmunity_2.12-1.0.jar s3://covid-analysis-p3/modules/herdimmunity_2.12-1.0.jar")
+                //         }
+                //     }
+                // }
             }
         }
     }
@@ -1184,7 +1182,6 @@ pipeline {
     post {
         always {
             echo "This will always be invoked."
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
 
         // If the build passes
@@ -1197,15 +1194,22 @@ pipeline {
 
         unstable {
             echo "Unstable build."
+
             emailext body: 'Unstable in the commmit.', 
             recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
             [$class: 'RequesterRecipientProvider']], 
             subject: 'Please check your code and make sure you have added all the files.'
+
         }
 
         failure {
             echo "Something didn't pass. Email is being sent."
-            emailext body: "Failure in commit: Job '${env.JOB_NAME}'", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
+
+            emailext body: "Failure in commit: Job '${env.JOB_NAME}'", 
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: 'Please check that your code can compile, test, and package/assemble. If it can and still getting it to not pass please contact CI_CD Team.'
+
         }
 
         changed {
