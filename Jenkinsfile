@@ -1,8 +1,7 @@
 @Library('github.com/releaseworks/jenkinslib') _
+
 // Declarative Pipeline
-
 // Top-most element in a scripted pipeline would be `node`
-
 pipeline {
     // Required, tells us what machine should be running this build.
     agent any
@@ -10,9 +9,7 @@ pipeline {
     // Define our pipeline into stages
     stages {
 
-        // //Infection-mortality group
-
-
+        //Infection-mortality group
         stage("CovidLiveUpdateApp"){
             when {
                 // If any of these branches then run the stages
@@ -130,9 +127,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        //     AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
-                        // }
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-2.12/regionalinfectionrates_2.12-2.jar s3://covid-analysis-p3/modules/regionalinfectionrates_2.12-2.jar")
+                        }
                     }
                 }
             }
@@ -936,9 +933,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/twittercovid19percentageanalysis_2.12-1.jar s3://covid-analysis-p3/modules/twittercovid19percentageanalysis_2.12-1.jar")
-                        }
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //     AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-2.12/twittercovid19percentageanalysis_2.12-1.jar s3://covid-analysis-p3/modules/twittercovid19percentageanalysis_2.12-1.jar")
+                        // }
                     }
                 }
             }
@@ -946,6 +943,8 @@ pipeline {
 
 
 
+        //This project uses Tensorflow - Jenkins doesn't have the ability to load and run tensorflow 
+        //User seems to only be capable of running this locally.
         // stage("tweet-positive-negative"){
         //     when {
         //         // If any of these branches then run the stages
@@ -1040,9 +1039,9 @@ pipeline {
                             sbt package
                             cd ../..
                         '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-2.12/stock_market_composite_index_change_calculator_2.12-1.jar s3://covid-analysis-p3/modules/stock_market_composite_index_change_calculator_2.12-1.jar")
-                        }
+                        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        //     AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-2.12/stock_market_composite_index_change_calculator_2.12-1.jar s3://covid-analysis-p3/modules/stock_market_composite_index_change_calculator_2.12-1.jar")
+                        // }
                     }
                 }
             }
@@ -1095,18 +1094,19 @@ pipeline {
                             branch 'deploy/FirstRegionalPeaks'
                         }
                     }
-                    steps {
-                        echo "Package stockmarket-data"
+                    //This project isn't spark-submitted at any point.
+                    // steps {
+                    //     echo "Package stockmarket-data"
 
-                        sh '''
-                            cd herdimmunity-stockmarket/stockmarket-data
-                            sbt package
-                            cd ../..
-                        '''
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
-                        }
-                    }
+                    //     sh '''
+                    //         cd herdimmunity-stockmarket/stockmarket-data
+                    //         sbt package
+                    //         cd ../..
+                    //     '''
+                    //     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    //         AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
+                    //     }
+                    // }
                 }
             }
         }
