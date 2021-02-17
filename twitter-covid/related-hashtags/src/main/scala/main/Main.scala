@@ -28,10 +28,10 @@ object Main {
       .master("yarn")               // Change "yarn" to "local[*]" if running the application locally.
       .getOrCreate()
 
-    // Load in AWS credientials from environment, uncomment these lines if running locally
-    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
-    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
-    // spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+    // Load in AWS credientials from environment
+    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", sys.env("AWS_ACCESS_KEY_ID"))
+    spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", sys.env("AWS_SECRET_ACCESS_KEY"))
+    spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 
     // twitterDF is the base DataFrame created from the contents of an input json file.
     val twitterDF = FileUtil.getDataFrameFromJson(spark, jsonPath)
