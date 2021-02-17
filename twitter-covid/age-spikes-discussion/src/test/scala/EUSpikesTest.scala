@@ -18,6 +18,7 @@ class EUSpikesTest extends AnyFlatSpec {
   "Dataframe" should "not have age_groups 80+" in {
     val df = pullEUData(spark)
     val filteredDf = filterAgeGroups(spark, df)
+//    filteredDf.where(filteredDf("age_group") === "80+yr").show()
     assert(filteredDf.filter(filteredDf("age_group") === "80+yr").count() == 0)
   }
 
