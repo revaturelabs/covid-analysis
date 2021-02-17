@@ -16,7 +16,7 @@ This application makes use of these technologies:
 * AWS EMR
 
 ## Features
-* Determines trends in discussion about CVOID-19 on Twitter by analyzing hashtag content.
+* Determines trends in discussion about COVID-19 on Twitter by analyzing hashtag content.
 * Outputs global, as well as region-specific, result sets.
 * Results are sorted in descending order by hashtag frequency.
 * Writes output to Amazon S3.
