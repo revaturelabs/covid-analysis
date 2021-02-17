@@ -1,4 +1,4 @@
-# Twitter-COVID-19
+# Twitter - COVID-19
 ## Project Description
 Here you will find a collection of modules that are part of a much larger project related to the analysis of COVID-19 data.  The full project can be found at https://github.com/891-MehrabRahmen-CovidAnalysis/covid-analysis-1
 
