@@ -361,7 +361,7 @@ object InfectionRates {
 				INNER JOIN yesterday
 				ON today.country=yesterday.country
 				$orderByArg
-				LIMIT 1
+				LIMIT 10
 			"""
 		)
 
@@ -411,7 +411,7 @@ object InfectionRates {
 
 		// Most increase in fatality rate per capita
 		println("Country with the LARGEST increase in Fatality Rate")
-		buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change DESC", "largestIncreseFatalityRate")
+		buildAndShowQuery(spark, "todayDeaths", "Fatality_Rate_Change", "ORDER BY Fatality_Rate_Change DESC", "largestIncreaseFatalityRate")
 
 		// Least increase in fatality rate per capita
 		println("Country with the SMALLEST increase and/or LARGEST decrease in Fatality Rate")
