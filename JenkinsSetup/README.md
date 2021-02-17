@@ -4,11 +4,7 @@ Jenkins is our tool for CI/CD similair to github actions or travis. It allows us
 We do this by having Jenkins run `stages` where it attempts to compile our code, run our tests, or attempt to package our code into jars and deploy them. We can do many things in our `stages` but the ones we used were the ones mentioned above.
 
 ## Setup
-This is reccomended to be setup on an ec2 linux distribution with this script file
-
-LINK HERE
-
-You can then connect to it with a URL based on your ec2 instance for configuration, the url should look something like
+This is reccomended to be setup on an ec2 linux distribution with this script file in the directory. You can then connect to it with a URL based on your ec2 instance for configuration, the url should look something like
 
 `http://ec2-12-34-56-789.compute-1.amazonaws.com:8080/jenkins/`
 
