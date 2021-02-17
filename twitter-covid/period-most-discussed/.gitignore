@@ -32,6 +32,7 @@ project/plugins/project/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+null
 
 ### Windows ###
 # Windows thumbnail cache files

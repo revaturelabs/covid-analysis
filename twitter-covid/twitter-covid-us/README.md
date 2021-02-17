@@ -22,3 +22,9 @@ This application makes use of these technologies:
 * Update the spark variable in src/main/scala/main/Main.scala to your desired configuration settings, if necessary.
 * Assuming your credentials and paths are correct, you can use `sbt run` to run the program locally, or you can use `sbt assembly` to create a jar file in target/scala-2.12, which can then be uploaded to a remote cluster to be executed.
 * Use `sbt test` to execute the unit tests.  Test results will be printed to console, as well as stored in logs/test/test_results.log
+
+## Contributors
+* Chris Johnson
+* Nick Rau
+* Josh Rubin
+* Michael Tsoumpariotis

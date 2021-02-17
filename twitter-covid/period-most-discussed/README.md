@@ -48,3 +48,9 @@ This is a Spark Scala program to answer the questions:
     --class Runner \
     --master yarn \
    [Path to your jar in your s3 bucket here]
+
+## Contributors
+* Chris Johnson
+* Nick Rau
+* Josh Rubin
+* Michael Tsoumpariotis

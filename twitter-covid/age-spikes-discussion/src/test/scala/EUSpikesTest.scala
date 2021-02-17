@@ -3,7 +3,7 @@ import org.apache.spark.sql.SparkSession
 import org.scalatest.flatspec.AnyFlatSpec
 
 class EUSpikesTest extends AnyFlatSpec {
-//  val df = pullData()
+
   val spark = SparkSession.builder()
     .appName("EUSpikes")
     .master("local[4]")
@@ -26,8 +26,6 @@ class EUSpikesTest extends AnyFlatSpec {
     val df = pullEUData(spark)
     val filteredDf = filterAgeGroups(spark, df)
     val groupedDf = groupData(spark, filteredDf)
-//    println(groupedDf.columns)
-//    assert(groupedDf.columns.size == 2)
     assert(groupedDf.count() == groupedDf.distinct().count())
   }
 
