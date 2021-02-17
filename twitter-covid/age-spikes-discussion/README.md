@@ -15,6 +15,7 @@ Do spikes in infection rates of the 25 and under age range in Europe affect the 
 * Amazon EMR
 
 ## Data Sources
+
 * https://zenodo.org/record/3738018#.YCxeipNKiu4
     * Download full_dataset_clean.tsv
 * https://www.ecdc.europa.eu/en/publications-data/covid-19-data-14-day-age-notification-rate-new-cases
@@ -36,9 +37,9 @@ Do spikes in infection rates of the 25 and under age range in Europe affect the 
    >export AWS_SECRET_ACCESS_KEY=[Your AWS secret access key]
 3. Upload data to S3 and modify all S3 read and write paths to your own S3 paths
 4. Produce jar to location target/scala-2.12/age-spikes-discussion_2.12-0.1.jar by running: 
-> sbt package
+    > sbt package
 5. Copy jar to S3 by running:
-> cp target/scala-2.12/age-spikes-discussion_2.12-0.1.jar [Path to your s3 bucket]
+    > cp target/scala-2.12/age-spikes-discussion_2.12-0.1.jar [Path to your s3 bucket]
 6. SSH into EMR cluster
 7. Add Amazon keys as environment variables to EMR:
     >export AWS_ACCESS_KEY_ID=[Your AWS access key id]
