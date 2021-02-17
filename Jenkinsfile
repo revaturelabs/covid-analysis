@@ -5,7 +5,7 @@
 pipeline {
     // Required, tells us what machine should be running this build.
     agent any
-
+    //check
     // Define our pipeline into stages
     stages {
 
