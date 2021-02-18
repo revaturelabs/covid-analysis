@@ -5,9 +5,9 @@ organization := "com.revature"
 
 
 libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-core" % "3.0.1",
   "org.apache.spark" %% "spark-sql" % "3.0.1",
   "org.apache.spark" %% "spark-mllib" % "3.0.1",
-  "org.apache.spark" %% "spark-core" % "3.0.1",
   "com.amazonaws" % "aws-java-sdk" % "1.11.948",
   "org.apache.hadoop" % "hadoop-aws" % "2.8.5",
   "org.scalatest" %% "scalatest" % "3.2.2" % Test,
