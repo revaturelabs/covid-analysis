@@ -1,8 +1,8 @@
-scalaVersion := "2.12.10"
+name := "age-spikes-US"
+scalaVersion := "2.12.13"
+version := "0.1"
+organization := "com.revature"
 
-name := "COVID-ANALYSIS-1"
-organization := "com.revature.michael"
-version := "1.0"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "3.0.1",
