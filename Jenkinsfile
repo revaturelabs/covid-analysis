@@ -68,7 +68,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp infection-mortality/CovidLiveUpdateApp/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm infection-mortality/CovidLiveUpdateApp/target/scala-*/*.jar'
+                        sh 'rm -rf infection-mortality/CovidLiveUpdateApp/target'
 
                     }
                 }
@@ -134,7 +134,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp infection-mortality/RegionalInfectionRates/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm infection-mortality/RegionalInfectionRates/target/scala-*/*.jar'
+                        sh 'rm -rf infection-mortality/RegionalInfectionRates/target'
 
                     }
                 }
@@ -199,7 +199,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp group-econResponse/CorrelateInfectionGDP/target/scala-*/CorrelateInfectionGDP*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm group-econResponse/CorrelateInfectionGDP/target/scala-*/*.jar'
+                        sh 'rm -rf group-econResponse/CorrelateInfectionGDP/target'
 
                     }
                 }
@@ -262,7 +262,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp group-econResponse/CountryBorders/target/scala-*/CountryBorders*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm group-econResponse/CountryBorders/target/scala-*/*.jar'
+                        sh 'rm -rf group-econResponse/CountryBorders/target'
 
                     }
                 }
@@ -325,7 +325,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp group-econResponse/CovidResponse/target/scala-*/CovidResponse*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm group-econResponse/CovidResponse/target/scala-*/CovidResponse*.jar'
+                        sh 'rm -rf group-econResponse/CovidResponse/target'
 
                     }
                 }
@@ -387,7 +387,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp group-econResponse/FirstRegionalPeaks/target/scala-*/FirstRegionalPeaks*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm group-econResponse/FirstRegionalPeaks/target/scala-*/FirstRegionalPeaks*.jar'
+                        sh 'rm -rf group-econResponse/FirstRegionalPeaks/target'
 
                     }
                 }
@@ -453,7 +453,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-covid/age-spikes-discussion/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-covid/age-spikes-discussion/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-covid/age-spikes-discussion/target'
 
                     }
                 }
@@ -520,7 +520,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-covid/hashtag-by-region/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-covid/hashtag-by-region/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-covid/hashtag-by-region/target'
 
                     }
                 }
@@ -587,7 +587,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-covid/period-most-discussed/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-covid/period-most-discussed/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-covid/period-most-discussed/target'
 
                     }
                 }
@@ -654,7 +654,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-covid/related-hashtags/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
                         
-                        sh 'rm twitter-covid/related-hashtags/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-covid/related-hashtags/target'
 
                     }
                 }
@@ -720,7 +720,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-covid/twitter-covid-us/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
                         }
 
-                        sh 'rm twitter-covid/twitter-covid-us/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-covid/twitter-covid-us/target'
 
                     }
                 }
@@ -788,7 +788,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-general/data-cleaner/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-general/data-cleaner/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-general/data-cleaner/target'
 
                     }
                 }
@@ -854,7 +854,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-general/hashtag-count-comparison/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-general/hashtag-count-comparison/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-general/hashtag-count-comparison/target'
 
                     }
                 }
@@ -920,7 +920,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-words/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-general/tweet-covid19-words/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-general/tweet-covid19-words/target'
 
                     }
                 }
@@ -986,7 +986,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-emoji/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-general/tweet-covid19-emoji/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-general/tweet-covid19-emoji/target'
 
                     }
                 }
@@ -1052,7 +1052,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp twitter-general/tweet-covid19-percentage/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm twitter-general/tweet-covid19-percentage/target/scala-*/*.jar'
+                        sh 'rm -rf twitter-general/tweet-covid19-percentage/target'
 
                     }
                 }
@@ -1161,7 +1161,7 @@ pipeline {
                             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
-                        sh 'rm herdimmunity-stockmarket/stockmarket/target/scala-*/*.jar'
+                        sh 'rm -rf herdimmunity-stockmarket/stockmarket/target'
 
                     }
                 }
@@ -1227,7 +1227,7 @@ pipeline {
                 //         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                 //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/stockmarket-data/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                 //         }
-                //         sh 'rm herdimmunity-stockmarket/stockmarket-data/target/scala-*/*.jar'
+                //         sh 'rm -rf herdimmunity-stockmarket/stockmarket-data/target'
                 //
                 //     }
                 // }
@@ -1294,7 +1294,7 @@ pipeline {
                 //             AWS("--region=us-east-1 s3 cp herdimmunity-stockmarket/herdimmunity/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                 //         }
                 //
-                //         sh 'rm herdimmunity-stockmarket/herdimmunity/target/scala-*/*.jar'
+                //         sh 'rm -rf herdimmunity-stockmarket/herdimmunity/target'
                 //     }
                 // }
             }
@@ -1307,6 +1307,7 @@ pipeline {
     post {
         always {
             echo "This will always be invoked."
+            cleanWs() //Cleans the workspace afterwards
         }
 
         // If the build passes
