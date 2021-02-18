@@ -8,7 +8,7 @@ object Main {
     val spark = SparkSession
       .builder()
       .appName("us-age-spikes")
-      .master("yarn")               // Change "yarn" to "local[*]" if running the application locally.
+      .master("local[*]")               // Change "yarn" to "local[*]" if running the application locally.
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     import spark.implicits._
