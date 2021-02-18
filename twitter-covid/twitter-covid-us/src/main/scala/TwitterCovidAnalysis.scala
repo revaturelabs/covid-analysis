@@ -2,6 +2,8 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import org.apache.spark.sql.types.NumericType
+import org.apache.spark.sql.types
 import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.feature.VectorAssembler
@@ -74,7 +76,7 @@ object TwitterCovidAnalysis {
   }
 
   /** Groups by day with highest spike.
-    * Returned columns: Date, infection rate (age 5-30), and Twitter Volume.
+    * Returned columns: Date, infection, and Twitter Volume.
     * @param df
     */
   def twitterVolumeSpikes(twitterDF: DataFrame, usDF: DataFrame): DataFrame = {
@@ -104,11 +106,13 @@ object TwitterCovidAnalysis {
   }
 
   /** Helper method for twitterVolumeSpikes()
+    * Uses Spark ML to perform linear regression
+    * High RMSE and low r2 indicates bad fit
     * Uses Spark ML to perform linear regression.
     * 
     * This method is currently not in used in the project, but may prove
     * useful for analysis in the future.  It is intended to be used on
-    * the DataFrame that is returned by the twitterCovidAnalysis method. 
+    * the DataFrame that is returned by the twitterCovidAnalysis method.
     *
     * @param df
     */
@@ -118,12 +122,12 @@ object TwitterCovidAnalysis {
 
     // Prepare DataFrame
     val result = df
-      .withColumn("New  Confirmed Cases", col("New  Confirmed Cases").cast(IntegerType))
+      .withColumn("New Confirmed Cases", col("New Confirmed Cases").cast(IntegerType))
       .withColumn("Twitter Volume", col("Twitter Volume").cast(IntegerType))
     
-    // Defining analysis
+    // Defining features 
     val features = new VectorAssembler()
-      .setInputCols(Array("New  Confirmed Cases"))
+      .setInputCols(Array("New Confirmed Cases"))
       .setOutputCol("features")
       .setHandleInvalid("skip")
 
@@ -141,5 +145,6 @@ object TwitterCovidAnalysis {
     println(s"RMSE:  ${linRegModel.summary.rootMeanSquaredError}")
     println(s"r2:    ${linRegModel.summary.r2}")
     println(s"Model: Y = ${linRegModel.coefficients(0)} * X + ${linRegModel.intercept}")
+  
   }
 }

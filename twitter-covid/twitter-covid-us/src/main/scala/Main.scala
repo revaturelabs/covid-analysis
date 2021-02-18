@@ -19,11 +19,12 @@ object Main {
     val usDF = TwitterCovidAnalysis.readToDF(spark, path)
 
     //DUMMY DATA 
-    val dummyPath = "datalake/dummy_results.csv"
-    val resultDF = spark.read.csv(dummyPath)
+    // val dummyPath = "datalake/dummy_results.csv"
+    // val resultDF = spark.read.option("header","true").csv(dummyPath)
+    // TwitterCovidAnalysis.analysis(resultDF)
 
-    TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
-    
+    // TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
+    // TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF).show(335)
     val result = TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF)
     TwitterCovidAnalysis.analysis(result)
     result.show(335)
