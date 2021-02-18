@@ -1048,7 +1048,7 @@ pipeline {
         }
         
 
-
+        //jenkins
         stage("stockmarket-data"){
             when {
                 // If any of these branches then run the stages
