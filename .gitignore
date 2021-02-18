@@ -262,6 +262,9 @@ spark-warehouse/
 !.vscode/extensions.json
 *.code-workspace
 
+# End of https://www.toptal.com/developers/gitignore/api/scala,java,sbt,metals,vscode,intellij,maven,macos,windows,bloop
+.vscode/settings.json
+.env
 ### DataLake ###
 ./stockmarket-data/datalake/Africa_CoteD’Ivoire_CompositeIndex.csv
 ./stockmarket-data/datalake/Africa_Egypt_CompositeIndex.csv
