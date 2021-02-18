@@ -1,10 +1,10 @@
 # CovidLiveUpdateApp
 
 ## Project Description
-    Covid Live Update App takes in data from https://disease.sh/v3/covid-19/countries/ 
+Covid Live Update App takes in data from https://disease.sh/v3/covid-19/countries/ 
 and performs calculations compairing today's data verses yesterday's data. 
 
-    This program gives a live update by Region of current relevant totals from COVID-19 data, 
+This program gives a live update by Region of current relevant totals from COVID-19 data, 
 including the rate of change of infection rate, mortality rate, and recovery rate for each 
 region. The program additionally calcualtes the rate of change of these variables as a combined 
 whole (the rate of change of these values for the whole world). Region data is computed using 
