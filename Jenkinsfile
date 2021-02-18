@@ -717,7 +717,7 @@ pipeline {
                             cd ../..
                         '''
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            AWS("--region=us-east-1 s3 cp twitter-covid/twitter-covid-us/target/scala-2.12/stock_market_data_downloader_2.12-1.0.jar s3://covid-analysis-p3/modules/stock_market_data_downloader_2.12-1.0.jar")
+                            AWS("--region=us-east-1 s3 cp twitter-covid/twitter-covid-us/target/scala-*/*.jar s3://covid-analysis-p3/modules/")
                         }
 
                         sh 'rm -rf twitter-covid/twitter-covid-us/target'
