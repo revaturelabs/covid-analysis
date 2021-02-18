@@ -1182,6 +1182,7 @@ pipeline {
     post {
         always {
             echo "This will always be invoked."
+            cleanWs()
         }
 
         // If the build passes
