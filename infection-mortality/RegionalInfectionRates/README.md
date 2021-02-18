@@ -1,13 +1,13 @@
 # Regional Infection Rates
 
 ## Project Description
-    Regional infection rates analyzes the trend in COVID infection rates, mortality
+Regional infection rates analyzes the trend in COVID infection rates, mortality
 rates, and recovery rates for different countries, by using data on COVID cases 
 and deaths for "today" and "yesterday", gathering data with HTTP calls to 
 https://disease.sh/v3/covid-19/countries?yesterday=false&allowNull=false and
 https://disease.sh/v3/covid-19/countries?yesterday=true&allowNull=false
 
-    Country data is converted into the regions Asia, Africa, Europe, North America,
+Country data is converted into the regions Asia, Africa, Europe, North America,
 South America, Central America, The Caribbean, and Oceania in order to perform our region analysis, 
 calculating the percent change in infection rate across regions. This program additionally 
 performs an analysis of the rate of change of particular countries in infection rate, 

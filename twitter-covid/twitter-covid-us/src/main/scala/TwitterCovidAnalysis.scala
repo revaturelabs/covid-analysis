@@ -117,22 +117,24 @@ object TwitterCovidAnalysis {
     import spark.implicits._
 
     // Prepare DataFrame
-    df.withColumn("_c1", col("_c1").cast(IntegerType))
-    df.withColumn("_c2", col("_c2").cast(IntegerType))
+    val result = df
+      .withColumn("New  Confirmed Cases", col("New  Confirmed Cases").cast(IntegerType))
+      .withColumn("Twitter Volume", col("Twitter Volume").cast(IntegerType))
     
     // Defining analysis
-    val analysis = new VectorAssembler()
-      .setInputCols(Array("_c1"))
-      .setOutputCol("analysis")
+    val features = new VectorAssembler()
+      .setInputCols(Array("New  Confirmed Cases"))
+      .setOutputCol("features")
+      .setHandleInvalid("skip")
 
     // Define model to use
-    val lr = new LinearRegression().setLabelCol("_c2")
+    val lr = new LinearRegression().setLabelCol("Twitter Volume")
 
     // Create a pipeline that associates the model with the data processing sequence
-    val pipeline = new Pipeline().setStages(Array(analysis, lr))
+    val pipeline = new Pipeline().setStages(Array(features, lr))
 
     // Run the model
-    val model = pipeline.fit(df)
+    val model = pipeline.fit(result)
 
     // Show model results
     val linRegModel = model.stages(1).asInstanceOf[LinearRegressionModel]

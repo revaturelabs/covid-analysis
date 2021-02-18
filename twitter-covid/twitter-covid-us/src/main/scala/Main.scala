@@ -23,7 +23,10 @@ object Main {
     val resultDF = spark.read.csv(dummyPath)
 
     TwitterCovidAnalysis.ageGroupsInfectionCount(usDF).show()
-    TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF).show(335)
+    
+    val result = TwitterCovidAnalysis.twitterVolumeSpikes(twitterDF, usDF)
+    TwitterCovidAnalysis.analysis(result)
+    result.show(335)
 
     spark.stop
   }

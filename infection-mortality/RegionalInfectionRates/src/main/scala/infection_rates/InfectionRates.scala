@@ -106,15 +106,15 @@ object InfectionRates {
 	)
 
 	private val Oceania = Array(
-    "American Samoa", "Australia", "Christmas Island", 
-    "Cocos (Keeling) Islands", "Cook Islands", 
-    "Federated States of Micronesia", "Fiji", "French Polynesia", 
-    "Guam", "Kiribati", "Marshall Islands",
+    	"American Samoa", "Australia", "Christmas Island", 
+    	"Cocos (Keeling) Islands", "Cook Islands", 
+    	"Federated States of Micronesia", "Fiji", "French Polynesia", 
+    	"Guam", "Kiribati", "Marshall Islands",
 		"Nauru", "New Caledonia", "New Zealand", "Niue", "Northern Mariana Islands", 
-    "Palau", "Papua New Guinea", "Pitcairn Islands",
+    	"Palau", "Papua New Guinea", "Pitcairn Islands",
 		"Samoa", "Solomon Islands", 
-    "Tokelau", "Tonga", "Tuvalu", 
-    "Vanuatu", "Wallis and Futuna"
+    	"Tokelau", "Tonga", "Tuvalu", 
+    	"Vanuatu", "Wallis and Futuna"
 	)
 
 	/** Sets up the spark session, json data, and runs the analysis.
