@@ -9,7 +9,7 @@ class practice_test extends AnyFlatSpec {
   //Create spark session
   val spark = SparkSession
     .builder()
-    .appName("Infection-Rates")
+    .appName("RegionalInfectionRatesTest")
     .master("local[4]")
     .getOrCreate()
 
