@@ -10,13 +10,18 @@ object HerdImmunity {
     * population, population already vaccinated, vaccination administration rate, 
     * and target vaccinated percentage for the pandemic.
     * 
-    * @return `None` if `data.newVaccinationsSmoothed == 0`
+    * @return `None` if `data.newVaccinationsSmoothed <= 0`
     */
   def daysRemaining(data: AnalysisData, herdImmunityPercent: Double = .75): Option[Int] = {
-    val remaining = (data.population * herdImmunityPercent) - data.peopleFullyVaccinated
-    val effectiveDaily = data.newVaccinationsSmoothed * VaccinationEfficacy
-    
-    Option(math.ceil(remaining / effectiveDaily).toInt)
+    // Handle it this way to avoid divide by zero exceptions or returning infinity
+    if (data.newVaccinationsSmoothed <= 0) {
+      None
+    } else {
+      val remaining = (data.population * herdImmunityPercent) - data.peopleFullyVaccinated
+      val effectiveDaily = data.newVaccinationsSmoothed * VaccinationEfficacy
+      
+      Some(math.ceil(remaining / effectiveDaily).toInt)
+    }
   }
 
   /** Returns the date achieving herd immunity based on the number of days from
