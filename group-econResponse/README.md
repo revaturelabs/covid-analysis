@@ -1,5 +1,5 @@
 # The Economic Response Group
-A multi application project built to utilize Spark SQL and Amazon Elastic MapReduce to leverage cluster computing to run analytics on the regional responses to Covid-19 throughout the world. 
+A multi application project built to utilize Spark SQL and Amazon Elastic MapReduce to leverage cluster computing to run analytics on the regional, economic responses to Covid-19 throughout the world. 
 
 - - - -
 
