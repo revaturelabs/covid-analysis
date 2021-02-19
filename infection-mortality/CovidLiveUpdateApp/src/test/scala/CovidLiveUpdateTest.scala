@@ -35,4 +35,12 @@ class CovidLiveUpdateTest extends AnyFlatSpec {
 
     assert(africaDF.first().toSeq == Seq("Africa", 20, 20, 100.0, 20, 20, 100.0, 20, 20, 100.0))
   }
+
+  "dataProcessing" should "sum the entire dataframe" in {
+    val africaTemp = spark.read.option("multiLine", true).json("src/test/resources/africaTest.json")
+    val africaDF = CovidLiveUpdates.regionalTotal(spark, africaTemp, "Africa")
+    val totalledDF = CovidLiveUpdates.dataProcessing(spark, africaDF.union(africaDF))
+
+    assert(totalledDF.filter($"Region" === "Total").first.toSeq == Seq("Total", 40, 40, 100.0, 40, 40, 100.0, 40, 40, 100.0))
+  }
 }
