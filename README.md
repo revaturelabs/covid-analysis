@@ -9,6 +9,7 @@ Big Data Capstone Project examining the effects of COVID-19 on society.
 * Scala - versions 2.12, 2.13
 * sbt - version 1.4.x
 * ScalaTest - version 3.2.x
+* Spark - version 3.0.1
 
 ### DevOps
 * git / GitHub
@@ -31,7 +32,8 @@ Big Data Capstone Project examining the effects of COVID-19 on society.
   * TODO: [stockmarket directory](actual link)
 
 To-do list:
-* allow the S3 bucket to be specified dynamically (instead of needing to change all code in the event of an S3 migration)
+* Allow the S3 bucket to be specified dynamically (instead of needing to change all code in the event of an S3 migration): Currently all projects use `s3://covid-analysis-p3/`
+* Automate the generation of compile, test, and package/assembly checking for Jenkins
 
 ## Getting Started
 
@@ -55,7 +57,7 @@ to download the project as a whole into your working directory.
 
 ### Jenkins
 
-Set up a [Jenkins](https://www.jenkins.io/) instance on an [Amazon EC2](https://www.jenkins.io/) Cluster and integrate Jenkins with GitHub repository, having it ensure that all tests pass before branches are integrated with `main`. (TODO: actually give instructions for this)
+Set up a [Jenkins](https://www.jenkins.io/) instance on an [Amazon EC2](https://aws.amazon.com/ec2/) Cluster and integrate Jenkins with GitHub repository, having it ensure that all tests pass before branches are integrated with `main`. (TODO: actually give instructions for this)
 
 ### Amazon S3
 
