@@ -27,7 +27,8 @@ Big Data Capstone Project examining the effects of COVID-19 on society.
   * TODO: [gdp directory](actual link)
 * Assesses countries' and regions' COVID-19 infection and mortality rates.
   * TODO: [infection rates directory](actual link)
-* Predicts when a country's population is expected to reach herd immunity towards COVID-19 and assesses how the pandemic has affected stock market composite indices.
+* Predicts when a country's population is expected to reach herd immunity towards COVID-19 and assesses how the pandemic has affected stock market composite indices.     
+* Web based [dashboard](https://covid-data-dashbrd.herokuapp.com/) to shwocase the results for several application findings.
   * TODO: [herdimmunity directory](actual link)
   * TODO: [stockmarket directory](actual link)
 
@@ -66,6 +67,13 @@ To store input and output data for the modules, you'll need access to an [Amazon
 ### Amazon EMR
 
 To run the `jar` files, you'll need to set up an [Amazon EMR](https://aws.amazon.com/emr/) Cluster. (TODO: actually give instructions for this)
+
+### Covid-19 Dashboard
+Web Application built with ReactJS.   
+Features the finding for many of this project's applications:
+
+[Deployed Website](https://covid-data-dashbrd.herokuapp.com/).       
+[Github Repo for this dashboard](https://github.com/891-MehrabRahman-CovidAnalysis/covid-dashboard) 
 
 ## Usage
 
