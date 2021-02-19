@@ -4,13 +4,14 @@ import java.io.ByteArrayOutputStream
 import org.scalatest.flatspec.AnyFlatSpec
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{SparkSession, Column}
+import covid_live_updates.CovidLiveUpdates
 
 
 class CovidLiveUpdateTest extends AnyFlatSpec {
   //Create spark session
   val spark = SparkSession
     .builder()
-    .appName("Infection-Rates")
+    .appName("CovidLiveUpdateTest")
     .master("local[4]")
     .getOrCreate()
 
@@ -18,25 +19,28 @@ class CovidLiveUpdateTest extends AnyFlatSpec {
   spark.sparkContext.setLogLevel("ERROR")
   import spark.implicits._
 
-  //Create data resources
-
   "africaTemp" should "read a json" in {
-    val africaTemp = spark.read.json("src/test/resources/africaTest.json")
+    val africaTemp = spark.read.option("multiLine", true).json("src/test/resources/africaTest.json")
   }
 
-  "africaTemp" should "be queryable" in {
-    val africaTemp = spark.read.json("src/test/resources/africaTest.json")
-    val africa = africaTemp.select(
-            lit("Africa").as("Region"),
-            sum("cases") as "Total Cases",
-            sum("todayCases") as "Today's Cases",
-            bround(sum("todayCases") / sum("cases") * 100, 2) as "Cases Percent Change",
-            sum("deaths") as "Total Deaths",
-            sum("todayDeaths") as "Today's Deaths",
-            bround(sum("todayDeaths") / sum("deaths") * 100, 2) as "Death Percent Change",
-            sum("recovered") as "Total Recoveries",
-            sum("todayRecovered") as "Today's Recoveries",
-            bround(sum("todayRecovered") / sum("recovered") * 100, 2) as "Recoveries Percent Change"
-        )
+  "regionalTotal" should "have a length of 10" in {
+    val africaTemp = spark.read.option("multiLine", true).json("src/test/resources/africaTest.json")
+    val africaDF = CovidLiveUpdates.regionalTotal(spark, africaTemp, "Africa")
+
+    assert(africaDF.first().length == 10)
+  }
+  it should "sum the entire dataframe" in {
+    val africaTemp = spark.read.option("multiLine", true).json("src/test/resources/africaTest.json")
+    val africaDF = CovidLiveUpdates.regionalTotal(spark, africaTemp, "Africa")
+
+    assert(africaDF.first().toSeq == Seq("Africa", 20, 20, 100.0, 20, 20, 100.0, 20, 20, 100.0))
+  }
+
+  "dataProcessing" should "sum the entire dataframe" in {
+    val africaTemp = spark.read.option("multiLine", true).json("src/test/resources/africaTest.json")
+    val africaDF = CovidLiveUpdates.regionalTotal(spark, africaTemp, "Africa")
+    val totalledDF = CovidLiveUpdates.dataProcessing(spark, africaDF.union(africaDF))
+
+    assert(totalledDF.filter($"Region" === "Total").first.toSeq == Seq("Total", 40, 40, 100.0, 40, 40, 100.0, 40, 40, 100.0))
   }
 }
