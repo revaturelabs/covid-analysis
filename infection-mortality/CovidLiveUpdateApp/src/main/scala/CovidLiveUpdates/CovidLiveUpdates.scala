@@ -5,13 +5,15 @@ import java.time.format.DateTimeFormatter
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions._
 
-/**
-  * 
+/** Gets data grabbed from an api on each region (use one of the script files to download the data).
+  * Totals all this data grabbed from the files.
+  * Saves and displays the data either locally or to s3.
   */
 object CovidLiveUpdates {
 
   /** Process regional data from files that are updated every 10 minutes.
-    * Call regional_live_update.sh every 10 minutes to update the regional files.
+    * Call regional_live_update.sh every 10 minutes to update the regional files locally.
+    * Call q3_data_update.sh every 10 mins to update the regional files on s3.
     *
     * @param args If s3 bucket is needed then: AccessKey SecretKey
     */
