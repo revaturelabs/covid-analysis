@@ -361,7 +361,7 @@ object InfectionRates {
 				INNER JOIN yesterday
 				ON today.country=yesterday.country
 				$orderByArg
-				LIMIT 1
+				LIMIT 10
 			"""
 		)
 
