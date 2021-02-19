@@ -14,23 +14,23 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     // Setting up a new SparkSession
-    // Comment out .master("local[4]") because AWS EMR uses master yarn 
+    // Comment out .master("local[4]") because AWS EMR uses master yarn - these test are run locally
     val spark = SparkSession.builder()
             .appName("composite_test")
-            //.master("local[4]")
+            .master("local[4]")
             .getOrCreate()
 
     import spark.implicits._
 
-    // // works localy but not on jenkins
-    // // We need our data source to contain data
-    // "datalake" should "not be empty" in {
-    //     val datalakeDir =  new File("../stockmarket-data/datalake")
-    //     assert(datalakeDir.isDirectory() && datalakeDir.list().length > 0)
-    // }
+    // We need our data source to contain data
+    "datalake" should "not be empty" in {
+        val datalakeDir =  new File("../stockmarket-data/datalake")
+        assert(datalakeDir.isDirectory() && datalakeDir.list().length > 0)
+    }
 
-    // // works localy but not on jenkins
-    // // We need the dataframes to contain data to function as intended
+    // This test uses regex with s3 causing an error. 
+    // This will always throw an error unless running this on aws.
+    // We need the dataframes to contain data to function as intended
     // "dataFrameByRegion" should "return a nonempty dataframe" in {
     //     assert(DailyChangeRunner.dataFrameByRegion(spark, "Europe").rdd.isEmpty == false)
     // }
@@ -57,8 +57,9 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
         assert(DailyChangeRunner.dailyChangeCalculator(spark, df, "Africa").select($"Percentage_Change").take(3)(1)(0) == 0.96)
     }
     
-    // // works localy but not on jenkins
-    // // Runs the vast majority of the program
+    // This test uses regex with s3 causing an error. 
+    // This will always throw an error unless running this on aws.
+    // Runs the vast majority of the program
     // "dailyChangeRunnerByRegion" should "not crash" in {
     //     DailyChangeRunner.dailyChangeRunnerByRegion(spark, "Europe")
     // }
@@ -68,7 +69,7 @@ class DailyChangeRunnerTest extends AnyFlatSpec {
 object DummyData {
   val spark = SparkSession.builder()
             .appName("composite_test")
-            //.master("local[4]")
+            .master("local[4]")
             .getOrCreate()
   import spark.implicits._
   val africaDF = Seq(
