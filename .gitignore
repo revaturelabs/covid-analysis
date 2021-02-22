@@ -1,6 +1,9 @@
+# Created by https://www.toptal.com/developers/gitignore?templates=sbt,metals,scala,windows,bloop,intellij,vscode
+# Edit at https://www.toptal.com/developers/gitignore?templates=sbt,metals,scala,windows,bloop,intellij,vscode
 
-# Created by https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
-# Edit at https://www.toptal.com/developers/gitignore?templates=metals,scala,spark,sbt,bloop,intellij,vscode
+
+### Metals ###
+.metals/
 
 ### Bloop ###
 .bloop/
@@ -126,11 +129,37 @@ project/plugins/project/
 .cache
 .lib/
 .bsp
+data/datalake/*
 
 ### Scala ###
 *.class
 *.log
 
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
 ### Spark ###
 *#*#
 *.#*
@@ -233,4 +262,51 @@ spark-warehouse/
 !.vscode/extensions.json
 *.code-workspace
 
+# End of https://www.toptal.com/developers/gitignore/api/scala,java,sbt,metals,vscode,intellij,maven,macos,windows,bloop
+.vscode/settings.json
+.env
+### DataLake ###
+./stockmarket-data/datalake/Africa_CoteD’Ivoire_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_Egypt_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_Kenya_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_Morocco_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_Nigeria_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_South Africa_CompositeIndex.csv
+./stockmarket-data/datalake/Africa_Tunis_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_China_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Hong Kong_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_India_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Indonesia_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Israel_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Japan_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Korea_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_Malaysia_CompositeIndex.csv
+./stockmarket-data/datalake/Asia_The Philippines_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Czech Republic_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_France_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Germany_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Italy_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Netherlands_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Norway_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Portugal_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Russia_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_Turkey_CompositeIndex.csv
+./stockmarket-data/datalake/Europe_UK_CompositeIndex.csv
+./stockmarket-data/datalake/North America_Canada_CompositeIndex.csv
+./stockmarket-data/datalake/North America_Mexico_CompositeIndex.csv
+./stockmarket-data/datalake/North America_US_CompositeIndex.csv
+./stockmarket-data/datalake/Oceania_Australia_CompositeIndex.csv
+./stockmarket-data/datalake/Oceania_New Zealand_CompositeIndex.csv
+./stockmarket-data/datalake/South America_Argentina_CompositeIndex.csv
+./stockmarket-data/datalake/South America_Brazil_CompositeIndex.csv
+./stockmarket-data/datalake/South America_Chile_CompositeIndex.csv
+./stockmarket-data/datalake/South America_Colombia_CompositeIndex.csv
+./stockmarket-data/datalake/South America_Peru_CompositeIndex.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/metals,scala,spark,sbt,bloop,intellij,vscode
+group-econResponse/CountryBorders/src/main/resources/datawarehouse/border_discrepancies*
+group-econResponse/CountryBorders/src/main/resources/datawarehouse/highest_land_infect_rates*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/new_cases_daily*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/new_regional*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/regional*
+group-econResponse/CovidResponse/src/main/resources/datawarehouse/total*
