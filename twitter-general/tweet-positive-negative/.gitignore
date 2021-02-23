@@ -1,0 +1,10 @@
+project/project/
+target/
+.bloop/
+project/metals.sbt
+.metals/
+.vscode/
+lib/
+# .jvmopts
+/resultsTesting
+/sentimentResults
